@@ -25,6 +25,8 @@
 		a = temp;				\
 	} while (0)
 
+#define RESIZE_PIXMAP 0
+
 
 Window main_win;
 
@@ -34,15 +36,28 @@ void run(void)
 	int holding = 0, prev_x = 0, prev_y = 0, erase = 0;
 	enum IND_COLORS curr = DEFAULT_INITIAL_COLOR;
 	enum IND_COLORS swap = DEFAULT_SWAP_COLOR;
+	
 	assert(dp != NULL && "Need a display to run the app");
 	assert(src != -1 && "Need a display to run the app");
+	
 	KeySym keysym;
+#if RESIZE_PIXMAP
+	Pixmap pixm;
+	int first = 0;
+#else
+	
+#endif
 	
 	while (XNextEvent(dp, &ev) == 0) {
+		int width, height;
+		win_size(main_win, &width, &height);
+		
 		switch (ev.type) {
 		case ButtonPress:
-			if (ev.xbutton.button == Button1)
+			if (ev.xbutton.button == Button1) {
+				LOG("Drawing %i - %i", ev.xbutton.x, ev.xbutton.y);
 				XDrawPoint(dp, ev.xbutton.window, gc, ev.xbutton.x, ev.xbutton.y);
+			}
 			holding = 1;
 			break;
 			
@@ -57,13 +72,33 @@ void run(void)
 			prev_x = ev.xbutton.x;
 			prev_y = ev.xbutton.y;
 			break;
-			
-		case ConfigureNotify:
-			do {
-				XConfigureEvent xce = ev.xconfigure;
-				LOG("Resizing %i - %i", xce.width, xce.height);
-			} while (0);
+
+		case LeaveNotify:
+			LOG("User leave for the moment...");
 			break;
+
+#if RESIZE_PIXMAP
+		case ConfigureNotify:
+			LOG("Resizing %i - %i", width, height);
+			if (!first)
+				XCopyArea(dp, pixm, main_win, gc, 0, 0, width, height, 0, 0);
+			XSetBackground(dp, gc, WhitePixel(dp, src));
+			break;
+#else
+		case ResizeRequest:
+			if (width != ev.xresizerequest.width || height != ev.xresizerequest.height) {
+				LOG("Resizing %i - %i", ev.xresizerequest.width, ev.xresizerequest.height);
+				// XResizeWindow(dp, main_win, ev.xresizerequest.width, ev.xresizerequest.height);
+				XWindowChanges changes = {
+					.width= ev.xresizerequest.width,
+					.height = ev.xresizerequest.height
+				};
+				XConfigureWindow(dp, main_win, CWWidth | CWHeight, &changes);
+				win_size(main_win, &width, &height);
+				LOG("Updated size %i - %i", width, height);
+			}
+			break;
+#endif
 			
 		case KeyPress:
 			/* TODO: Create a switch here */
@@ -82,10 +117,13 @@ void run(void)
 					create_graphics_contex(&COLORS[curr], lw - 1);
 					LOG("Decreasing pincel size %i", gc_vals.line_width);
 				}
+			} else if (keysym == XK_c) {
+				XClearWindow(dp, main_win);
+				LOG("Cleaing the screen");
 			} else if (keysym == XK_s) {
 				LOG("Saving draw");
 				
-			}else if (keysym == XK_x) {
+			} else if (keysym == XK_x) {
 				LOG("Toglecolor color to %s", color_name(swap));
 				XSetForeground(dp, gc, COLORS[swap].pixel);
 				SWAP(curr, swap);
@@ -106,6 +144,16 @@ void run(void)
 			} else if (keysym == XK_q)
 				return;
 		}
+
+#if RESIZE_PIXMAP
+		if (!first)
+			XFreePixmap(dp, pixm); /* Drop the prev */
+		/* Catch the new */
+		pixm = XCreatePixmap(dp, main_win, width, height, DefaultDepth(dp, src));
+		XCopyArea(dp, main_win, pixm, gc, 0, 0, width, height, 0, 0);
+		first = 0;
+#endif
+	
 	}
 }
 
@@ -117,6 +165,7 @@ int main(void)
 	LOG("Display opened");
 	main_win = create_window(DEFAULT_POSX, DEFAULT_POSY, DEFAULT_MIN_WIDTH,
 				 DEFAULT_MIN_HEIGHT, DEFAULT_BORDER_WIDTH, PROG_NAME);
+	LOG("Window id %lu", (unsigned long)  main_win);
 	LOG("Window created");
 	create_colors();
 

@@ -15,6 +15,13 @@ int src = -1;
 Window root = {0};
 Visual *vis = NULL;
 
+void win_size(Window win, int *w, int *h)
+{
+	int x, y;
+	unsigned int bw, d;
+	XGetGeometry(dp, win, &root, &x, &y, (unsigned int *) w, (unsigned int *) h, &bw, &d);
+}
+
 Window create_window(int x, int y, int w, int h, int bw, const char *win_name)
 {
 	Window win;
@@ -25,17 +32,17 @@ Window create_window(int x, int y, int w, int h, int bw, const char *win_name)
 	watt.background_pixel = WhitePixel(dp, src);
 	watt.border_pixel = BlackPixel(dp, src);
 
-	#if 1
+#if 0
 	watt.event_mask = Button1MotionMask | ButtonPressMask | ButtonReleaseMask
-		  | KeyPressMask | PointerMotionMask | StructureNotifyMask;
-	#else
+		| KeyPressMask | PointerMotionMask | StructureNotifyMask;
+#else
 	watt.event_mask = Button1MotionMask | ButtonPressMask | ButtonReleaseMask
-		| KeyPressMask | PointerMotionMask;
-	#endif
+		| KeyPressMask | PointerMotionMask | ResizeRedirectMask | StructureNotifyMask | LeaveWindowMask;
+#endif
 	
 	win = XCreateWindow(dp, root, x, y, w, h, bw,
 			    DefaultDepth(dp, src), InputOutput,  vis,
-			    CWBackPixel | CWBorderPixel | CWEventMask, &watt);
+			    CWBackPixel | CWBorderPixel | CWEventMask | CWWidth | CWHeight, &watt);
 
 	XSizeHints xsh = {
 		.min_width = DEFAULT_MIN_WIDTH,

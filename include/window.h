@@ -18,6 +18,7 @@ extern Display *dp;
 extern int src;
 extern Window root;
 extern Visual *vis;
+extern void win_size(Window win, int *w, int *h);
 extern Window create_window(int x, int y, int w, int h, int bw, const char *name);
 extern void open_display(void);
 extern void close_display(Window win);
