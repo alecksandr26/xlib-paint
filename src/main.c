@@ -19,14 +19,14 @@
 		fprintf(stdout, "[INFO] %s\n", str);			\
 	} while (0)
 
-#define SWAP(a, b) do {\
+#define SWAP(a, b) do {					\
 		typeof(a) temp = b;			\
 		b = a;					\
 		a = temp;				\
 	} while (0)
 
 #define RESIZE_PIXMAP 0
-
+#define RESIZE_REQUEST 0
 
 Window main_win;
 
@@ -39,24 +39,24 @@ void run(void)
 	
 	assert(dp != NULL && "Need a display to run the app");
 	assert(src != -1 && "Need a display to run the app");
+
+	Atom wm_delete_window = XInternAtom(dp, "WM_DELETE_WINDOW", False);
+	XSetWMProtocols(dp, main_win, &wm_delete_window, 1);
+	
+	int width, height;
+	win_size(main_win, &width, &height);
 	
 	KeySym keysym;
-#if RESIZE_PIXMAP
-	Pixmap pixm;
-	int first = 0;
-#else
-	
-#endif
-	
+	Pixmap pixm = XCreatePixmap(dp, main_win, width, height, DefaultDepth(dp, src));
+	XSetForeground(dp, gc, COLORS[WHITE].pixel);
+	XFillRectangle(dp, pixm, gc, 0, 0, width, height);
+	XSetForeground(dp, gc, COLORS[curr].pixel);
 	while (XNextEvent(dp, &ev) == 0) {
-		int width, height;
-		win_size(main_win, &width, &height);
-		
 		switch (ev.type) {
 		case ButtonPress:
 			if (ev.xbutton.button == Button1) {
 				LOG("Drawing %i - %i", ev.xbutton.x, ev.xbutton.y);
-				XDrawPoint(dp, ev.xbutton.window, gc, ev.xbutton.x, ev.xbutton.y);
+				XDrawPoint(dp, pixm, gc, ev.xbutton.x, ev.xbutton.y);
 			}
 			holding = 1;
 			break;
@@ -67,67 +67,77 @@ void run(void)
 			
 		case MotionNotify:
 			if (holding)
-				XDrawLine(dp, ev.xbutton.window, gc, prev_x, prev_y,
+				XDrawLine(dp, pixm, gc, prev_x, prev_y,
 					  ev.xbutton.x, ev.xbutton.y);
 			prev_x = ev.xbutton.x;
 			prev_y = ev.xbutton.y;
 			break;
 
 		case LeaveNotify:
-			LOG("User leave for the moment...");
+			LOG("User leave for the moment");
 			break;
 
-#if RESIZE_PIXMAP
 		case ConfigureNotify:
-			LOG("Resizing %i - %i", width, height);
-			if (!first)
-				XCopyArea(dp, pixm, main_win, gc, 0, 0, width, height, 0, 0);
-			XSetBackground(dp, gc, WhitePixel(dp, src));
-			break;
-#else
-		case ResizeRequest:
-			if (width != ev.xresizerequest.width || height != ev.xresizerequest.height) {
-				LOG("Resizing %i - %i", ev.xresizerequest.width, ev.xresizerequest.height);
-				// XResizeWindow(dp, main_win, ev.xresizerequest.width, ev.xresizerequest.height);
-				XWindowChanges changes = {
-					.width= ev.xresizerequest.width,
-					.height = ev.xresizerequest.height
-				};
-				XConfigureWindow(dp, main_win, CWWidth | CWHeight, &changes);
-				win_size(main_win, &width, &height);
-				LOG("Updated size %i - %i", width, height);
+			if (ev.xconfigure.width != width || ev.xconfigure.height != height) {
+				LOG("Resizing %i - %i", ev.xconfigure.width, ev.xconfigure.height);
+				Pixmap temp = XCreatePixmap(dp, main_win,
+							    ev.xconfigure.width,
+							    ev.xconfigure.height, DefaultDepth(dp, src));
+				
+				XSetForeground(dp, gc, COLORS[WHITE].pixel);
+				XFillRectangle(dp, temp, gc, 0, 0, ev.xconfigure.width, ev.xconfigure.height);
+				XSetForeground(dp, gc, COLORS[curr].pixel);
+				
+				XCopyArea(dp, pixm, temp, gc, 0, 0, width, height, 0, 0);
+				XFreePixmap(dp, pixm);
+				
+				pixm = temp;
+				width = ev.xconfigure.width;
+				height = ev.xconfigure.height;
 			}
 			break;
-#endif
+
+		case ClientMessage:
+			if ((Atom) ev.xclient.data.l[0] == wm_delete_window)
+				return;
+			break;
 			
 		case KeyPress:
 			/* TODO: Create a switch here */
 			keysym = XkbKeycodeToKeysym(dp, ev.xkey.keycode, 0, 0);
-			if (keysym == XK_equal) {
+			switch (keysym) {
+			case XK_equal:
 				if (gc_vals.line_width < 100) {
 					int lw = gc_vals.line_width;
 					XFreeGC(dp, gc);
 					create_graphics_contex(&COLORS[curr], lw + 1);
 					LOG("Increasing pincel size %i", gc_vals.line_width);
 				}
-			} else if (keysym == XK_minus) {
-				if (gc_vals.line_width > 0) {
+				break;
+			case XK_minus:
+				if (gc_vals.line_width > 2) {
 					int lw = gc_vals.line_width;
 					XFreeGC(dp, gc);
 					create_graphics_contex(&COLORS[curr], lw - 1);
 					LOG("Decreasing pincel size %i", gc_vals.line_width);
 				}
-			} else if (keysym == XK_c) {
-				XClearWindow(dp, main_win);
+				break;
+			case XK_c:
+				XSetForeground(dp, gc, COLORS[WHITE].pixel);
+				XFillRectangle(dp, pixm, gc, 0, 0, width, height);
+				XSetForeground(dp, gc, COLORS[curr].pixel);
 				LOG("Cleaing the screen");
-			} else if (keysym == XK_s) {
-				LOG("Saving draw");
-				
-			} else if (keysym == XK_x) {
+				break;
+			case XK_x:
 				LOG("Toglecolor color to %s", color_name(swap));
 				XSetForeground(dp, gc, COLORS[swap].pixel);
 				SWAP(curr, swap);
-			} else if (keysym == XK_e) {
+				break;
+
+			case XK_s:
+				LOG("Saving draw");
+				break;
+			case XK_e: {
 				int lw = gc_vals.line_width;
 				if (erase) {
 					LOG("Erase mode deactive");
@@ -141,20 +151,102 @@ void run(void)
 				}
 				
 				erase = !erase;
-			} else if (keysym == XK_q)
+				}
+				break;
+
+			case XK_q:
 				return;
+
+				/* Swap colors */
+			case XK_1: /* TODO: Put this code into a function */
+				{
+					int lw = gc_vals.line_width;
+					swap = curr;
+					curr = BLACK;
+					LOG("Changing color %s", color_name(curr));
+					XFreeGC(dp, gc);
+					create_graphics_contex(&COLORS[curr], lw);
+				}
+				break;
+				
+			case XK_2:
+				{
+					int lw = gc_vals.line_width;
+					swap = curr;
+					curr = WHITE;
+					LOG("Changing color %s", color_name(curr));
+					XFreeGC(dp, gc);
+					create_graphics_contex(&COLORS[curr], lw);
+				}
+				break;
+
+			case XK_3:
+				{
+					int lw = gc_vals.line_width;
+					swap = curr;
+					curr = RED;
+					LOG("Changing color %s", color_name(curr));
+					XFreeGC(dp, gc);
+					create_graphics_contex(&COLORS[curr], lw);
+				}
+				break;
+				
+			case XK_4:
+				{
+					int lw = gc_vals.line_width;
+					swap = curr;
+					curr = BLUE;
+					LOG("Changing color %s", color_name(curr));
+					XFreeGC(dp, gc);
+					create_graphics_contex(&COLORS[curr], lw);
+				}
+				break;
+
+			case XK_5:
+				{
+					int lw = gc_vals.line_width;
+					swap = curr;
+					curr = GREEN;
+					LOG("Changing color %s", color_name(curr));
+					XFreeGC(dp, gc);
+					create_graphics_contex(&COLORS[curr], lw);
+				}
+				break;
+
+			case XK_6:
+				{
+					int lw = gc_vals.line_width;
+					swap = curr;
+					curr = YELLOW;
+					LOG("Changing color %s", color_name(curr));
+					XFreeGC(dp, gc);
+					create_graphics_contex(&COLORS[curr], lw);
+				}
+				break;
+				
+			case XK_7:
+				{
+					int lw = gc_vals.line_width;
+					swap = curr;
+					curr = ORANGE;
+					LOG("Changing color %s", color_name(curr));
+					XFreeGC(dp, gc);
+					create_graphics_contex(&COLORS[curr], lw);
+				}
+				break;
+			}
 		}
 
-#if RESIZE_PIXMAP
-		if (!first)
-			XFreePixmap(dp, pixm); /* Drop the prev */
-		/* Catch the new */
-		pixm = XCreatePixmap(dp, main_win, width, height, DefaultDepth(dp, src));
-		XCopyArea(dp, main_win, pixm, gc, 0, 0, width, height, 0, 0);
-		first = 0;
-#endif
-	
+		/* Draw pixmap */
+		if (holding || ev.type == ConfigureNotify
+		    || (ev.type == KeyPress && keysym == XK_c)) {
+			XClearWindow(dp, main_win);
+			XCopyArea(dp, pixm, main_win, gc, 0, 0, width, height, 0, 0);
+			XFlush(dp);
+		}
+		
 	}
+	XFreePixmap(dp, pixm);
 }
 
 
