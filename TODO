@@ -1,9 +1,13 @@
 --- [2023-06-07] ---
-- Refactor all the run code, idea create another component [ ]
+- Refactor all the run code, idea create another component [X]
 - Find the way of doing key combinations [ ]
 - Find how to download the draws [ ]
 - Create better pincel [ ]
 - Add the ability to make zoom in and zoom out [ ]
 - Put a few tex boxes as a messages [ ]
 - Find an optimal way of doing the copies of the screen [ ]
-- Rewrite the main.c [ ]
+- Rewrite the main.c [X]
+--- [2023-06-10] ---
+- Create an array of tools instead of each one at time will make easy the manipulation [ ]
+
+

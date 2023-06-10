@@ -3,9 +3,10 @@
 
 #include <X11/Xft/Xft.h>
 
-#define AMOUNT_COLORS 7
+#define AMOUNT_COLORS 8
 
-enum IND_COLORS {
+typedef enum {
+	NONE_COLOR = -1,
 	BLACK = 0,
 	WHITE,
 	RED,
@@ -13,7 +14,8 @@ enum IND_COLORS {
 	GREEN,
 	YELLOW,
 	ORANGE,
-};
+	PURPULE,
+} COLOR;
 
 #define DEFAULT_INITIAL_COLOR BLACK
 #define DEFAULT_SWAP_COLOR WHITE
@@ -23,7 +25,7 @@ extern XftColor COLORS[AMOUNT_COLORS];
 
 extern void create_colors(void);
 extern void free_colors(void);
-extern const char *color_name(enum IND_COLORS ind_color);
+extern const char *color_name(COLOR color);
 
 #endif
 

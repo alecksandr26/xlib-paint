@@ -17,6 +17,7 @@ static const char COLOR_NAME[AMOUNT_COLORS][COLOR_NAME_LEN] = {
 	"Green",
 	"Yellow",
 	"Orange",
+	"Purpule",
 };
 
 const char HEX_COLORS[AMOUNT_COLORS][8] = {
@@ -27,6 +28,7 @@ const char HEX_COLORS[AMOUNT_COLORS][8] = {
 	"#00FF00\0", 		/* Green */
 	"#FFFF00\0",		/* Yellow */
 	"#FFA500\0", 		/* Orange */
+	"#800080\0",		/* Purpule */
 };
 
 XftColor COLORS[AMOUNT_COLORS] = {0};
@@ -47,8 +49,8 @@ void free_colors(void)
 		XftColorFree(dp, vis, XDefaultColormap(dp, src), &COLORS[i]);
 }
 
-const char *color_name(enum IND_COLORS ind_color)
+const char *color_name(COLOR color)
 {
-	return (const char *)  COLOR_NAME[ind_color];
+	return (const char *)  COLOR_NAME[color];
 }
 

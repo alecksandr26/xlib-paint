@@ -1,6 +1,23 @@
+# For binaries
+bin/*
 
-# Binaries
-main
+# For uploading to AUR
+upload/
+
+# For makepkg
+build/*
+*.pkg.tar.zst
+*.tar
+*.tar.gz
+
+
+# For testing
+example/test
+
+
+vgcore.*
+*/vgcore.*
+*.bin
 
 # Prerequisites
 *.d
@@ -54,4 +71,3 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-
