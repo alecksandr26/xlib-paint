@@ -6,4 +6,7 @@ This is just a simple xlib painting program, in the`example-xlib` directory ther
 3. Qiu, C. (n.d.). Xlib-demo: Xlib demo, from https://github.com/QMonkey/Xlib-demo
 4. (N.d.). Tronche.com. Retrieved June 8, 2023, from https://tronche.com/gui/x/xlib/
 5. mspaint, from https://svn.reactos.org/reactos/trunk/reactos/base/applications/mspaint/
+6. 5695 – XCloseDisplay doesn’t free() all memory allocated by XOpenDisplay. (n.d.). Freedesktop.org. Retrieved June 10, 2023, from https://bugs.freedesktop.org/show_bug.cgi?id=5695
+
+
 
