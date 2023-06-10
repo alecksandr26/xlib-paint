@@ -6,6 +6,7 @@
 #include "../include/utils.h"
 
 int canv_width, canv_height;
+Atom wm_delete_window;
 static Window window;
 static Pixmap pixm;
 static GC canv_gc;
@@ -15,13 +16,16 @@ void init_canvas(void)
 	LOG("Initializing canvas");
 	create_colors();
 	window = create_window(DEFAULT_POSX, DEFAULT_POSY, DEFAULT_MIN_WIDTH,
-			       DEFAULT_MIN_HEIGHT, "Canvas");
+			       DEFAULT_MIN_HEIGHT, PROGNAME);
 
 	canv_gc = create_graphics_contex(WHITE, DEFAULT_MIN_WIDTH);
 
 	win_size(window, &canv_width, &canv_height);
 	pixm = XCreatePixmap(dp, window, canv_width, canv_height, DefaultDepth(dp, src));
 	XFillRectangle(dp, pixm, canv_gc, 0, 0, canv_width, canv_height);
+
+	wm_delete_window = XInternAtom(dp, "WM_DELETE_WINDOW", False);
+	XSetWMProtocols(dp, window, &wm_delete_window, 1);
 
 	LOG("Canvas initialized");
 }

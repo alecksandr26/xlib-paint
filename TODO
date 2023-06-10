@@ -9,5 +9,7 @@
 - Rewrite the main.c [X]
 --- [2023-06-10] ---
 - Create an array of tools instead of each one at time will make easy the manipulation [ ]
-
-
+- Write correct  tests [ ]
+- Write a swap color fuction for the brush [ ]
+- Add a feature to write lines with the brush [ ]
+- Implement an control Z [ ]

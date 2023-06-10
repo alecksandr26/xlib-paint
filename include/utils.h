@@ -1,6 +1,8 @@
 #ifndef UTILS_INCLUDED
 #define UTILS_INCLUDED
 
+#define PROGNAME "paint"
+
 #define LOG(msg, ...) do {						\
 		char str[1024];						\
 		sprintf(str, msg __VA_OPT__(,) __VA_ARGS__);		\

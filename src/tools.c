@@ -50,7 +50,8 @@ void mod_tool(Tool *tool, int width, COLOR color)
 		if (color != NONE_COLOR) {
 			tool->pbrush.swap = tool->pbrush.curr;
 			tool->pbrush.curr = color;
-		}
+		} else
+			color = tool->pbrush.curr;
 
 		STATE(tool)->width = width;
 		mod_graphics_contex(STATE(tool)->graphics_contex,
@@ -59,6 +60,10 @@ void mod_tool(Tool *tool, int width, COLOR color)
 		
 	case ERASER:
 		STATE(tool)->width = width;
+		if (color != NONE_COLOR)
+			tool->eraser.erase_color = color;
+		else
+			color = tool->eraser.erase_color;
 		mod_graphics_contex(STATE(tool)->graphics_contex,
 				    color, width);
 

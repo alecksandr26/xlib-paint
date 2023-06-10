@@ -14,8 +14,6 @@
 #include "../include/utils.h"
 #include "../include/kbinds.h"
 
-#define PROGNAME "paint"
-
 void loop(void)
 {
 	XEvent event;
@@ -26,9 +24,6 @@ void loop(void)
 	
 	init_tool(&tool);
 	sel_tool(&tool, DEFAULT_INITIAL_TOOL);
-	
-	Atom wm_delete_window = XInternAtom(dp, "WM_DELETE_WINDOW", False);
-	XSetWMProtocols(dp, root, &wm_delete_window, 1);
 	
 	KeySym keysym;
 	int quit = 0;
@@ -68,12 +63,13 @@ void loop(void)
 
 		case ClientMessage:
 			if ((Atom) event.xclient.data.l[0] == wm_delete_window)
-				return;
+				quit = 1;
 			break;
 			
 		case KeyPress:
 			keysym = XkbKeycodeToKeysym(dp, event.xkey.keycode, 0, 0);
 			handle_keypress(keysym, &tool, &quit);
+			break;
 		}
 
 		/* Refresh the canvas */
@@ -90,7 +86,6 @@ void loop(void)
 int main(void)
 {
 	open_display();
-	XStoreName(dp, root, PROGNAME);
 	init_canvas();
 	
 	LOG("Running the app");

@@ -24,14 +24,16 @@ void handle_keypress(KeySym key, Tool *tool, int *quit)
 		}
 		break;
 	case XK_c:
+		LOG("Clearing the window");
 		clear_canvas();
 		break;
 
 	case XK_x:
 		if (STATE(tool)->curr == PAINT_BRUSH) {
 			LOG("Changnig brush color to  %s", color_name(tool->pbrush.swap));
-			SWAP_PAINT_BRUSH_COLOR(tool->pbrush);
-		}
+			mod_tool(tool, STATE(tool)->width, tool->pbrush.swap);
+		} else
+			LOG("Can't switch if erasing mode is active");
 		break;
 
 	case XK_s:
@@ -48,8 +50,7 @@ void handle_keypress(KeySym key, Tool *tool, int *quit)
 		} else {
 			LOG("Switching tool to paint brush");
 			sel_tool(tool, PAINT_BRUSH);
-			tool->pbrush.curr = prev_curr;
-			tool->pbrush.swap = prev_swap;
+			tool->pbrush.curr = prev_swap;
 			mod_tool(tool, prev_width, prev_curr);
 		}
 		break;
@@ -66,7 +67,10 @@ void handle_keypress(KeySym key, Tool *tool, int *quit)
 	case XK_6:
 	case XK_7:
 	case XK_8:
-		mod_tool(tool, STATE(tool)->width, (COLOR) key - XK_0 - 1);
+		if (STATE(tool)->curr == PAINT_BRUSH)
+			mod_tool(tool, STATE(tool)->width, (COLOR) key - XK_0 - 1);
+		else
+			LOG("Can't switch if erasing mode is active");
 		break;
 	}
 }

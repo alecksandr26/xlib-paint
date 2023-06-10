@@ -11,6 +11,7 @@ V_FLAGS = --leak-check=full --track-origins=yes -s  --show-leak-kinds=all
 CF = clang-format -i
 
 PF = gprof
+PF_FLAGS = --line --brief -B
 
 M = makepkg
 M_FLAGS = -f --config .makepkg.conf --skipinteg --noextract
@@ -20,6 +21,8 @@ INLCUDE_DIR = include
 OBJ_DIR = obj
 TEST_DIR = test
 BIN_DIR = bin
+BUILD_DIR = build
+PROGNAME = panit
 TEST_BIN_DIR = $(addprefix $(TEST_DIR)/, bin)
 MAIN = $(addprefix $(BIN_DIR)/, main)
 
@@ -54,7 +57,7 @@ prof: $(MAIN)
 	@echo Generate the gmon.out
 	./$<
 	@echo Profiling
-	$(PF) ./$<
+	$(PF) $(PF_FLAGS) ./$<
 
 $(TEST_BIN_DIR)/%.out: $(TEST_DIR)/%.c $(OBJS)
 	$(C) $(C_TEST_FLAGS) $(filter-out $(OBJ_DIR)/main.o, $^) -o $@ $(C_LIB_FLAGS)
@@ -74,15 +77,19 @@ ifneq ("$(wildcard $(OBJ_DIR))", "")
 endif
 
 ifneq ("$(wildcard $(MAIN))", "")
-	rm -r $(MAIN)
+	rm $(MAIN)
 endif
 
 ifneq ("$(wildcard $(BIN_DIR))", "")
 	rmdir $(BIN_DIR)
 endif
 
+ifneq ("$(wildcard $(PROGNAME)*)", "")
+	rm $(PROGNAME)*
+endif
+
 compile: C_FLAGS = $(C_COMPILE_FLAGS)
 compile: clean $(OBJ_DIR) $(OBJS) $(BIN_DIR) $(MAIN)
 
 pkg:
-	@$(M) $(M_FLAGS)	
+	$(M) $(M_FLAGS)	

@@ -32,22 +32,23 @@ basedir=$(pwd)
 # Compile the source code 
 build() {
     if [ -f "$basedir/$pkgname-$pkgver.tar.gz" ]; then
-	echo "==> Compiling package..."
+	echo "[1m[32m==>[0m[1m Compiling package..."
         tar -xf "$basedir/$pkgname-$pkgver.tar.gz"
         cd "$srcdir/$pkgname-$pkgver"
         make compile
     else
-        echo "==> Compiling package locally..."
-	echo "==> Trying to find the local source code path..."
+        echo "[1m[32m==>[0m[1m Compiling package locally..."
+	echo "[1m[32m==>[0m[1m Trying to find the local source code path..."
 	if [ -d "../../../../$pkgname" ]; then
-	    echo "==> Source code $pkgname found..."
+	    echo "[1m[32m==>[0m[1m Source code $pkgname found..."
 	    cd ../../../../$pkgname
+	    echo "[1m[32m==>[0m[1m Compiling package..."
 	    make compile
 	    mkdir -p $srcdir/$pkgname-$pkgver
 	    mkdir -p $srcdir/$pkgname-$pkgver/bin
 	    cp bin/main $srcdir/$pkgname-$pkgver/bin/paint
 	else
-	    echo "==> Error source code $pkgname not found..."
+	    echo "[1m[32m==>[0m[1m Error source code $pkgname not found..."
 	    exit 1
 	fi
     fi

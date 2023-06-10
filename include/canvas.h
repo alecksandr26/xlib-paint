@@ -4,6 +4,7 @@
 #include <X11/Xlib.h>
 
 extern int canv_width, canv_height;
+extern Atom wm_delete_window;
 extern void draw_canvas(GC gc, int x, int y);
 extern void draw_line_canvas(GC gc, int src_x, int src_y, int des_x, int des_y);
 extern void init_canvas(void);

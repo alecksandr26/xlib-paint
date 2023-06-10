@@ -9,12 +9,6 @@
 #define DEFAULT_INITIAL_ERASE_WIDTH 25
 #define DEFAULT_INITIALIZED_BOOL 1
 #define STATE(tool) ((struct __st_tool_state *) (tool))
-#define SWAP_PAINT_BRUSH_COLOR(pbrush)				\
-	do {						\
-		COLOR temp = (pbrush).curr;		\
-		(pbrush).curr = (pbrush).swap;		\
-		(pbrush).swap = temp;			\
-	} while (0)
 
 typedef enum {
 	PAINT_BRUSH,
