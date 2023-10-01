@@ -1,0 +1,205 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XDrawArcs</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XDrawArcs</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XDrawArcs" "" "@DEF@">
+
+<CODE><PRE>
+XDrawArcs(<B>display</B>, <B>d</B>, <B>gc</B>, <B>arcs</B>, <B>narcs</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Drawable <B>d</B>;
+      <A HREF="../../GC/manipulating.html">GC</A> <B>gc</B>;
+      <A HREF="./#XArc">XArc</A> *<B>arcs</B>;
+      int <B>narcs</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>d</B>
+<TD> Specifies the drawable. 
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>arcs</B>
+<TD> Specifies an array of arcs.
+
+<TR><TD> <B>narcs</B>
+<TD> Specifies the number of arcs in the array.
+
+</TABLE>
+
+<H2>Description</H2>
+
+<B>XDrawArcs()</B>
+draws multiple circular or elliptical arcs.
+Each arc is specified by a rectangle and two angles.  
+The center of the circle or ellipse is the center of the
+rectangle, and the major and minor axes are specified by the width and height.
+Positive angles indicate counterclockwise motion, 
+and negative angles indicate clockwise motion.  
+If the magnitude of angle2 is greater than 360 degrees, 
+<B>XDrawArcs()</B>
+truncates it to 360 degrees.
+
+<P>
+
+For an arc specified as
+<I>[ x, y, width, height, angle1, angle2 ]</I>,
+the origin of the major and minor axes is at 
+<I>[ x + width / 2 , y + height / 2 ]</I>, 
+and the infinitely thin path describing the entire circle or ellipse 
+intersects the horizontal axis at 
+<I>[ x, y + height / 2 ]</I> and 
+<I> [ x + width , y + height / 2 ]</I>
+and intersects the vertical axis at 
+<I>[ x + width / 2, y ]</I> and 
+<I>[ x + width / 2, y + height ]</I>.
+These coordinates can be fractional
+and so are not truncated to discrete coordinates.
+The path should be defined by the ideal mathematical path.  
+For a wide line with line-width lw, 
+the bounding outlines for filling are given        
+by the two infinitely thin paths consisting of all points whose perpendicular
+distance from the path of the circle/ellipse is equal to lw/2
+(which may be a fractional value).
+The cap-style and join-style are applied the same as for a line
+corresponding to the tangent of the circle/ellipse at the endpoint.
+
+<P>
+
+For an arc specified as 
+<I>[ x, y, width, height, angle1, angle2 ]</I>,
+the angles must be specified
+in the effectively skewed coordinate system of the ellipse (for a
+circle, the angles and coordinate systems are identical).  The
+relationship between these angles and angles expressed in the normal
+coordinate system of the screen (as measured with a protractor) is as
+follows:
+
+<P>
+
+skewed-angle <I>= atan ( tan ( </I>normal-angle<I> ) * width / height ) + adjust</I>
+
+<P>
+
+The skewed-angle and normal-angle are expressed in radians (rather
+than in degrees scaled by 64) in the range 
+<I>[ 0, 2 pi ]</I> and where atan
+returns a value in the range <I>[ -pi / 2 , pi / 2  ]</I>
+and adjust is:
+
+<P>
+<TABLE>
+<TR><TD><I>0	<TD>for normal-angle in the range <I>[ 0, pi / 2 ]
+<TR><TD>pi	<TD>for normal-angle in the range <I>[ pi / 2 , 3 pi / 2  ]
+<TR><TD>2 pi	<TD>for normal-angle in the range <I>[ 3 pi / 2 , 2 pi ]
+</TABLE>
+
+<P>
+
+For any given arc, 
+<B>XDrawArcs()</B>
+does not draw a pixel more than once.  
+If two arcs join correctly and if the line-width is greater than zero 
+and the arcs intersect, 
+<B>XDrawArc()</B>
+does not draw a pixel more than once.
+Otherwise, 
+the intersecting pixels of intersecting arcs are drawn multiple times.
+Specifying an arc with one endpoint and a clockwise extent draws the same pixels
+as specifying the other endpoint and an equivalent counterclockwise extent,
+except as it affects joins.
+
+<P>
+
+If the last point in one arc coincides with the first point in the following 
+arc, the two arcs will join correctly.  
+If the first point in the first arc coincides with the last point in the last 
+arc, the two arcs will join correctly.
+By specifying one axis to be zero, a horizontal or vertical line can be
+drawn.
+Angles are computed based solely on the coordinate system and ignore the
+aspect ratio.
+
+<P>
+
+This function uses these GC components: 
+<A HREF="../../GC/manipulating.html#function">function</A>, 
+<A HREF="../../GC/manipulating.html#plane-mask">plane-mask</A>,
+<A HREF="../../GC/manipulating.html#line-width">line-width</A>,
+<A HREF="../../GC/manipulating.html#line-style">line-style</A>,
+<A HREF="../../GC/manipulating.html#cap-style">cap-style</A>,
+<A HREF="../../GC/manipulating.html#join-style">join-style</A>,
+<A HREF="../../GC/manipulating.html#fill-style">fill-style</A>,
+<A HREF="../../GC/manipulating.html#subwindow-mode">subwindow-mode</A>,
+<A HREF="../../GC/manipulating.html#clip-mask">clip-x-origin</A>,
+<A HREF="../../GC/manipulating.html#clip-mask">clip-y-origin</A>, and
+<A HREF="../../GC/manipulating.html#clip-mask">clip-mask</A>.
+
+It also uses these GC mode-dependent components: 
+<A HREF="../../GC/manipulating.html#foreground">foreground</A>, 
+<A HREF="../../GC/manipulating.html#background">background</A>,
+<A HREF="../../GC/manipulating.html#tile">tile</A>,
+<A HREF="../../GC/manipulating.html#stipple">stipple</A>,
+<A HREF="../../GC/manipulating.html#tile">tile-stipple-x-origin</A>,
+<A HREF="../../GC/manipulating.html#tile">tile-stipple-y-origin</A>,
+<A HREF="../../GC/manipulating.html#dashes">dash-offset</A>,
+and
+<A HREF="../../GC/manipulating.html#dashes">dash-list</A>.
+
+<P>
+
+<B>XDrawArcs()</B>
+can generate
+<B>BadDrawable</B> ,
+<B>BadGC</B> ,
+and
+<B>BadMatch</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../../my-own/gcontext.html">GContext</A></B> 
+	argument does not name a defined
+	<B><A HREF="../../my-own/gcontext.html">GContext</A></B>.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+      
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XDrawArcs.html">XDrawArc()</A></B>,
+<B><A HREF="XDrawRectangle.html">XDrawRectangle()</A></B>,
+<B><A HREF="XDrawPoint.html">XDrawPoint()</A></B>,
+"<A HREF="arcs.html">Drawing Single and Multiple Arcs</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

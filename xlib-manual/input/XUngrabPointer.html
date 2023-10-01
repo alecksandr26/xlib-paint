@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XUngrabPointer</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XUngrabPointer</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Ungrabbing" "pointer">
+<!.IN "Pointer" "ungrabbing">
+<!.IN "XUngrabPointer" "" "@DEF@">
+
+<CODE><PRE>
+XUngrabPointer(<B>display</B>, <B>time</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="pointer-grabbing.html#Time">Time</A> <B>time</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>time</B>
+<TD> Specifies the time.
+You can pass either a timestamp or
+<B>CurrentTime</B>.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XUngrabPointer()</B>
+function releases the pointer and any queued events
+if this client has actively grabbed the pointer from
+<B><A HREF="XGrabPointer.html">XGrabPointer()</A></B>,
+<B><A HREF="XGrabButton.html">XGrabButton()</A></B>,
+or from a normal button press.
+<B>XUngrabPointer()</B>
+does not release the pointer if the specified
+time is earlier than the last-pointer-grab time or is later than the
+current X server time.
+It also generates 
+<B><A HREF="../events/window-entry-exit/">EnterNotify</A></B> 
+and 
+<B><A HREF="../events/window-entry-exit/">LeaveNotify</A></B> 
+events.
+The X server performs an 
+<B>UngrabPointer</B>
+request automatically if the event window or confine_to window 
+for an active pointer grab becomes not viewable
+or if window reconfiguration causes the confine_to window to lie completely
+outside the boundaries of the root window.
+
+<H2>See also</H2>
+
+<B><A HREF="XAllowEvents.html">XAllowEvents()</A></B>,
+<B><A HREF="XChangeActivePointerGrab.html">XChangeActivePointerGrab()</A></B>,
+<B><A HREF="XGrabButton.html">XGrabButton()</A></B>,
+<B><A HREF="XGrabKey.html">XGrabKey()</A></B>,
+<B><A HREF="XGrabKeyboard.html">XGrabKeyboard()</A></B>,
+<B><A HREF="XGrabPointer.html">XGrabPointer()</A></B>,
+"<A HREF="pointer-grabbing.html">Pointer Grabbing</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

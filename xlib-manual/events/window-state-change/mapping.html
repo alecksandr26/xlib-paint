@@ -1,0 +1,90 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: MappingNotify Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.10.7 MappingNotify Events</H1>
+
+<!.IN "Events" "MappingNotify">
+<!.IN "MappingNotify" "" "@DEF@">
+The X server reports
+<B>MappingNotify</B>
+events to all clients.
+There is no mechanism to express disinterest in this event.
+The X server generates this event type whenever a client application 
+successfully calls:
+
+<UL>
+
+<P><LI>
+<B><A HREF="../../input/XSetModifierMapping.html">XSetModifierMapping()</A></B>
+to indicate which KeyCodes are to be used as modifiers
+
+<P><LI>
+<B><A HREF="../../input/XChangeKeyboardMapping.html">XChangeKeyboardMapping()</A></B>
+to change the keyboard mapping
+
+<P><LI>
+<B><A HREF="../../input/XSetPointerMapping.html">XSetPointerMapping()</A></B>
+to set the pointer mapping
+
+</UL>
+
+<A NAME="XMappingEvent"></A>
+<P>
+
+The structure for this event type contains:
+
+<P>
+
+<!.IN "XMappingEvent" "" "@DEF@">
+
+<PRE><CODE>
+typedef struct {
+	int type;		/* MappingNotify */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Window window;		/* unused */
+	int request;		/* one of MappingModifier, MappingKeyboard, MappingPointer */
+	int first_keycode;	/* first keycode */
+	int count;		/* defines range of change w. first_keycode*/
+} XMappingEvent;
+
+</PRE></CODE>
+
+<P>
+
+The <B>request</B> member is set to indicate the kind of mapping change that occurred
+and can be
+<B>MappingModifier</B>,
+<B>MappingKeyboard</B>,
+<B>MappingPointer</B>.
+If it is
+<B>MappingModifier</B>,
+the modifier mapping was changed.
+If it is
+<B>MappingKeyboard</B>,
+the keyboard mapping was changed.
+If it is
+<B>MappingPointer</B>,
+the pointer button mapping was changed. 
+The <B>first_keycode</B> and <B>count</B> members are set only 
+if the <B>request</B> member was set to
+<B>MappingKeyboard</B> .
+The number in <B>first_keycode</B> represents the first number in the range 
+of the altered mapping, 
+and <B>count</B> represents the number of keycodes altered.
+
+<P>
+
+To update the client application's knowledge of the keyboard,
+you should call
+<B><A HREF="../../utilities/keyboard/XRefreshKeyboardMapping.html">XRefreshKeyboardMapping()</A></B>. 
+
+<H5 ALIGN=right><I>Next: <A HREF="reparent.html">ReparentNotify Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XRectInRegion</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XRectInRegion</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XRectInRegion" "" "@DEF@">
+
+<CODE><PRE>
+int XRectInRegion(<B>r</B>, <B>x</B>, <B>y</B>, <B>width</B>, <B>height</B>)
+      <A HREF="./">Region</A> <B>r</B>;
+      int <B>x</B>, <B>y</B>; 
+      unsigned int <B>width</B>, <B>height</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>r</B>
+<TD> Specifies the region.
+
+<TR><TD> <B>x</B><BR>
+	<B>y</B>
+<TD> Specify the x and y coordinates, which define the coordinates of the upper-left corner of the rectangle.
+
+<TR><TD> <B>width</B><BR>
+	<B>height</B>
+<TD> Specify the width and height, which define the rectangle .
+
+</TABLE>
+
+<H2>Description</H2>
+ 
+The
+<B>XRectInRegion()</B>
+function returns
+<B>RectangleIn</B>
+if the rectangle is entirely in the specified region,
+<B>RectangleOut</B>
+if the rectangle is entirely out of the specified region,
+and
+<B>RectanglePart</B>
+if the rectangle is partially in the specified region.
+
+<H2>See also</H2>
+
+<B><A HREF="XCreateRegion.html">XCreateRegion()</A></B>,
+<B><A HREF="XEqualRegion.html">XEqualRegion()</A></B>,
+<B><A HREF="XEmptyRegion.html">XEmptyRegion()</A></B>,
+<B><A HREF="XIntersectRegion.html">XIntersectRegion()</A></B>,
+<B><A HREF="XPointInRegion.html">XPointInRegion()</A></B>,
+"<A HREF="locating.html">Locating a Point or a Rectangle in a Region</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

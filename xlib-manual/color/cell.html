@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Allocating and Freeing Color Cells</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.6 Allocating and Freeing Color Cells</H1>
+
+There are two ways of allocating color cells: 
+explicitly as read-only entries, one pixel value at a time,
+or read/write,
+where you can allocate a number of color cells and planes simultaneously.
+<!.IN "Read-only colormap cells">
+A read-only cell has its RGB value set by the server.
+<!.IN "Read/write colormap cells">
+Read/write cells do not have defined colors initially;
+functions described in the next section must be used to store values into them.
+Although it is possible for any client to store values into a read/write
+cell allocated by another client,
+read/write cells normally should be considered private to the client
+that allocated them.
+
+<P>
+
+Read-only colormap cells are shared among clients.
+The server counts each allocation and free of the cell by clients.
+When the last client frees a shared cell, the cell is finally deallocated.
+If a single client allocates the same read-only cell multiple
+times, the server counts each such allocation, not just the first one.
+
+<P>
+
+To allocate a read-only color cell with an RGB value, use
+<B><A HREF="XAllocColor.html">XAllocColor()</A></B>.
+
+<P>
+
+To allocate a read-only color cell with a color in arbitrary format, use
+<B><A HREF="XcmsAllocColor.html">XcmsAllocColor()</A></B>.
+
+<P>
+
+To allocate a read-only color cell using a color name and return the closest
+color supported by the hardware in RGB format, use
+<B><A HREF="XAllocNamedColor.html">XAllocNamedColor()</A></B>.
+
+<P>
+
+To allocate a read-only color cell using a color name and return the closest
+color supported by the hardware in an arbitrary format, use
+<B><A HREF="XcmsAllocNamedColor.html">XcmsAllocNamedColor()</A></B>.
+
+<P>
+
+To allocate read/write color cell and color plane combinations for a
+<B><A HREF="../window/visual-types.html">PseudoColor</A></B>
+model, use
+<B><A HREF="XAllocColorCells.html">XAllocColorCells()</A></B>.
+
+<P>
+
+To allocate read/write color resources for a
+<B><A HREF="../window/visual-types.html">DirectColor</A></B>
+model, use
+<B><A HREF="XAllocColorPlanes.html">XAllocColorPlanes()</A></B>.
+
+<P>
+
+<!.IN "Freeing" "colors">
+To free colormap cells, use
+<B><A HREF="XFreeColors.html">XFreeColors()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="modifying-and-querying-cells.html">Modifying and Querying Colormap Cells</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

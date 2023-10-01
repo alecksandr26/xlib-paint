@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmCombineFileDatabase</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmCombineFileDatabase</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XrmCombineFileDatabase" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../introduction/errors.html#Status">Status</A></B> XrmCombineFileDatabase(<B>filename</B>, <B>target_db</B>, <B>override</B>)
+      char *<B>filename</B>;
+      <B><A HREF="creating-and-storing-databases.html">XrmDatabase</A></B> *<B>target_db</B>;
+      Bool <B>override</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>filename</B>
+<TD> Specifies the resource database file name.
+
+<TR><TD> <B>target_db</B>
+<TD> Specifies the resource database into which the source 
+database is to be merged.
+
+</TABLE>
+
+<H2>Description</H2>
+ 
+The
+<B>XrmCombineFileDatabase()</B>
+function merges the contents of a resource file into a database.
+If the same specifier is used for an entry in both the file and
+the database,
+the entry in the file will replace the entry in the database
+if override is
+<B>True</B>;
+otherwise, the entry in the file is discarded.
+The file is parsed in the current locale.
+If the file cannot be read,
+a zero status is returned;
+otherwise, a nonzero status is returned.
+If target_db contains NULL,
+<B>XrmCombineFileDatabase()</B>
+creates and returns a new database to it.
+Otherwise, the database pointed to by target_db is not destroyed by the merge.
+The database entries are merged without changing values or types,
+regardless of the locale of the database.
+The locale of the target database is not modified.
+
+<H2>See also</H2>
+
+<B><A HREF="XrmCombineDatabase.html">XrmCombineDatabase()</A></B>,
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>,
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmMergeDatabases.html">XrmMergeDatabases()</A></B>,
+<B><A HREF="XrmPutResource.html">XrmPutResource()</A></B>,
+"<A HREF="merging-databases.html">Merging Resource Databases</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

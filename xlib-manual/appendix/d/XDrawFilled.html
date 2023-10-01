@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XDrawFilled</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XDrawFilled</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XDrawFilled" "" "@DEF@">
+
+<CODE><PRE>
+#include &lt;X11/X10.h&gt;
+
+Status XDrawFilled(<B>display</B>, <B>d</B>, <B>gc</B>, <B>vlist</B>, <B>vcount</B>)
+	<A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+	Drawable <B>d</B>;
+	GC <B>gc</B>;
+	<A HREF="XDraw.html#Vertex">Vertex</A> *<B>vlist</B>;
+	int <B>vcount</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>d</B>
+<TD> Specifies the drawable. 
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>vlist</B>
+<TD> Specifies a pointer to the list of vertices that indicate what to draw.
+
+<TR><TD> <B>vcount</B>
+<TD> Specifies how many vertices are in vlist.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XDrawFilled()</B>
+function draws arbitrary polygons or curves and then fills them.
+
+
+<P>
+
+This function uses these GC components:
+function, plane-mask, line-width, line-style, cap-style, join-style,
+fill-style, subwindow-mode, clip-x-origin, clip-y-origin, and
+clip-mask.
+It also uses these GC mode-dependent components: 
+foreground, background, tile, stipple,
+tile-stipple-x-origin, tile-stipple-y-origin, 
+dash-offset, dash-list, fill-style, and fill-rule.
+
+
+<H2>See also</H2>
+
+<B><A HREF="XDraw.html">XDraw()</A></B>,
+"<A HREF="d.html">Compatibility Functions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

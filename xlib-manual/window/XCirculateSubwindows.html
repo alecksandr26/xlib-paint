@@ -1,0 +1,105 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XCirculateSubwindows</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XCirculateSubwindows</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XCirculateSubwindows" "" "@DEF@">
+
+<CODE><PRE>
+XCirculateSubwindows(<B>display</B>, <B>w</B>, <B>direction</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      int <B>direction</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>direction</B>
+<TD> Specifies the direction (up or down) that you want to circulate
+the window. 
+You can pass 
+<B>RaiseLowest</B>
+or
+<B>LowerHighest</B>.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XCirculateSubwindows()</B>
+function circulates children of the specified window in the specified 
+direction.
+If you specify
+<B>RaiseLowest</B>,
+<B>XCirculateSubwindows()</B>
+raises the lowest mapped child (if any) that is occluded 
+by another child to the top of the stack.
+If you specify
+<B>LowerHighest</B>,
+<B>XCirculateSubwindows()</B>
+lowers the highest mapped child (if any) that occludes another child
+to the bottom of the stack.
+Exposure processing is then performed on formerly obscured windows.
+If some other client has selected 
+<B><A HREF="../events/processing-overview.html#SubstructureRedirectMask">SubstructureRedirectMask</A></B> 
+on the window, the X server generates a 
+<B><A HREF="../events/structure-control/circulate.html">CirculateRequest</A></B> 
+event, and no further processing is performed.
+If a child is actually restacked,
+the X server generates a
+<B><A HREF="../events/window-state-change/circulate.html">CirculateNotify</A></B>
+event. 
+
+<P>
+
+<B>XCirculateSubwindows()</B>
+can generate
+<B>BadValue</B>
+and
+<B>BadWindow</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadValue</B>
+<TD>Some numeric value falls outside the range of values accepted by the request.
+Unless a specific range is specified for an argument, the full range defined
+by the argument's type is accepted.  Any argument defined as a set of
+alternatives can generate this error.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>,
+<B><A HREF="XCirculateSubwindowsDown.html">XCirculateSubwindowsDown()</A></B>,
+<B><A HREF="XCirculateSubwindowsUp.html">XCirculateSubwindowsUp()</A></B>,
+<B><A HREF="XConfigureWindow.html">XConfigureWindow()</A></B>,
+<B><A HREF="XCreateWindow.html">XCreateWindow()</A></B>,
+<B><A HREF="XDestroyWindow.html">XDestroyWindow()</A></B>,
+<B><A HREF="XLowerWindow.html">XLowerWindow()</A></B>,
+<B><A HREF="XMapWindow.html">XMapWindow()</A></B>,
+<B><A HREF="XRaiseWindow.html">XRaiseWindow()</A></B>,
+<B><A HREF="XRestackWindows.html">XRestackWindows()</A></B>,
+"<A HREF="stacking-order.html">Changing Window Stacking Order</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

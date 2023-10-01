@@ -1,0 +1,105 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Manipulating Images</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>16.8 Manipulating Images</H1>
+
+Xlib provides several functions that perform basic operations on images.
+All operations on images are defined using an 
+<A HREF="../graphics/images.html#XImage">XImage</A> 
+structure, 
+as defined in
+<B><TT>X11/Xlib.h.</TT></B>
+Because the number of different types of image formats can be very large,
+this hides details of image storage properly from applications.
+
+<P>
+
+This section describes the functions for generic operations on images.
+Manufacturers can provide very fast implementations of these for the
+formats frequently encountered on their hardware.
+These functions are neither sufficient nor desirable to use for general image
+processing.
+Rather, they are here to provide minimal functions on screen format
+images.
+The basic operations for getting and putting images are
+<B><A HREF="../graphics/XGetImage.html">XGetImage()</A></B>
+and 
+<B><A HREF="../graphics/XPutImage.html">XPutImage()</A></B>.
+
+<P>
+
+Note that no functions have been defined, as yet, to read and write images 
+to and from disk files.
+
+<P>
+
+The
+<A HREF="../graphics/images.html#XImage">XImage</A> 
+structure describes an image as it exists in the client's memory.  
+The user can request that some of the members such as height, width, 
+and xoffset be changed when the image is sent to the server.
+Note that bytes_per_line in concert with offset can be used to
+extract a subset of the image.
+Other members (for example, byte order, bitmap_unit, and so forth)
+are characteristics of both the image and the server.  
+If these members
+differ between the image and the server, 
+<B><A HREF="../graphics/XPutImage.html">XPutImage()</A></B>
+makes the appropriate conversions.
+The first byte of the first line of
+plane n must be located at the address (data + (n * height * bytes_per_line)).
+For a description of the 
+<A HREF="../graphics/images.html#XImage">XImage</A> 
+structure,
+see "<A HREF="../graphics/images.html">Transferring Images between Client and Server</A>".
+
+<P>
+
+To allocate an 
+<A HREF="../graphics/images.html#XImage">XImage</A> 
+structure and initialize it with image format values from a display, use
+<B><A HREF="XCreateImage.html">XCreateImage()</A></B>.
+
+<P>
+
+The basic functions used to get a pixel, set a pixel, create a subimage,
+and add a constant value to an image are defined in the image object.
+The functions in this section are really macro invocations of the functions
+in the image object and are defined in
+<B><TT>X11/Xutil.h.</TT></B>
+
+<P>
+
+To obtain a pixel value in an image, use
+<B><A HREF="XGetPixel.html">XGetPixel()</A></B>.
+
+<P>
+
+To set a pixel value in an image, use
+<B><A HREF="XPutPixel.html">XPutPixel()</A></B>.
+
+<P>
+
+To create a subimage, use
+<B><A HREF="XSubImage.html">XSubImage()</A></B>.
+
+<P>
+
+To increment each pixel in an image by a constant value, use
+<B><A HREF="XAddPixel.html">XAddPixel()</A></B>.
+
+<P>
+
+To deallocate the memory allocated in a previous call to
+<B><A HREF="XCreateImage.html">XCreateImage()</A></B>,
+use
+<B><A HREF="XDestroyImage.html">XDestroyImage()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="manipulating-bitmaps.html">Manipulating Bitmaps</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

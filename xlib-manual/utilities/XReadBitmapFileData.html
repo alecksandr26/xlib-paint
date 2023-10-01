@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XReadBitmapFileData</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XReadBitmapFileData</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XReadBitmapFileData" "" "@DEF@">
+
+<CODE><PRE>
+int XReadBitmapFileData(<B>filename</B>, <B>width_return</B>, <B>height_return</B>, <B>data_return</B>, <B>x_hot_return</B>, <B>y_hot_return</B>)
+      char *<B>filename</B>;
+      unsigned int *<B>width_return</B>, *<B>height_return</B>;
+      unsigned char *<B>data_return</B>;
+      int *<B>x_hot_return</B>, *<B>y_hot_return</B>;	
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>filename</B>
+<TD> Specifies the file name to use.
+The format of the file name is operating-system dependent.
+
+<TR><TD> <B>width_return</B><BR>
+	<B>height_return</B>
+<TD> Return the width and height values of the read in bitmap file.
+
+<TR><TD> <B>data_return</B>
+<TD> Returns the bitmap data.
+
+<TR><TD> <B>x_hot_return</B><BR>
+	<B>y_hot_return</B>
+<TD> Return the hotspot coordinates.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XReadBitmapFileData()</B>
+function reads in a file containing a bitmap, in the same manner as
+<B><A HREF="XReadBitmapFile.html">XReadBitmapFile()</A></B>,
+but returns the data directly rather than creating a pixmap in the server.
+The bitmap data is returned in data_return; the client must free this
+storage when finished with it by calling
+<B><A HREF="../display/XFree.html">XFree()</A></B>.
+The status and other return values are the same as for
+<B><A HREF="XReadBitmapFile.html">XReadBitmapFile()</A></B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XCreateBitmapFromData.html">XCreateBitmapFromData()</A></B>,
+<B><A HREF="../pixmap-and-cursor/XCreatePixmap.html">XCreatePixmap()</A></B>,
+<B><A HREF="XCreatePixmapFromBitmapData.html">XCreatePixmapFromBitmapData()</A></B>,
+<B><A HREF="../graphics/XPutImage.html">XPutImage()</A></B>,
+<B><A HREF="XWriteBitmapFile.html">XWriteBitmapFile()</A></B>,
+"<A HREF="manipulating-bitmaps.html">Manipulating Bitmaps</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

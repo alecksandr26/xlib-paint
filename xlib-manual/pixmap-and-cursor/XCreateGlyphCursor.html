@@ -1,0 +1,127 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XCreateGlyphCursor</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XCreateGlyphCursor</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XCreateGlyphCursor" "" "@DEF@">
+
+<CODE><PRE>
+Cursor XCreateGlyphCursor(<B>display</B>, <B>source_font</B>, <B>mask_font</B>, <B>source_char</B>, <B>mask_char</B>,
+                           <B>foreground_color</B>, <B>background_color</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="../graphics/font-metrics/">Font</A> <B>source_font</B>, <B>mask_font</B>;
+      unsigned int <B>source_char</B>, <B>mask_char</B>;
+      <A HREF="../color/structures.html">XColor</A> *<B>foreground_color</B>;
+      <A HREF="../color/structures.html">XColor</A> *<B>background_color</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>source_font</B>
+<TD> Specifies the font for the source glyph.
+
+<TR><TD> <B>mask_font</B>
+<TD> Specifies the font for the mask glyph or
+<B>None</B> .
+
+<TR><TD> <B>source_char</B>
+<TD> Specifies the character glyph for the source.
+
+<TR><TD> <B>mask_char</B>
+<TD> Specifies the glyph character for the mask. 
+
+<TR><TD> <B>foreground_color</B>
+<TD> Specifies the RGB values for the foreground of the source. 
+
+<TR><TD> <B>background_color</B>
+<TD> Specifies the RGB values for the background of the source.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XCreateGlyphCursor()</B>
+function is similar to
+<B><A HREF="XCreatePixmapCursor.html">XCreatePixmapCursor()</A></B>
+except that the source and mask bitmaps are obtained from the specified 
+font glyphs.
+The source_char must be a defined glyph in source_font, 
+or a
+<B>BadValue</B>
+error results.
+If mask_font is given, 
+mask_char must be a defined glyph in mask_font,
+or a
+<B>BadValue</B>
+error results.
+The mask_font and character are optional.
+The origins of the source_char and mask_char (if defined) glyphs are
+positioned coincidently and define the hotspot. 
+The source_char and mask_char need not have the same bounding box metrics, 
+and there is no restriction on the placement of the hotspot relative to the bounding
+boxes. 
+If no mask_char is given, all pixels of the source are displayed.
+You can free the fonts immediately by calling
+<B><A HREF="../graphics/font-metrics/XFreeFont.html">XFreeFont()</A></B>
+if no further explicit references to them are to be made. 
+
+<P>
+
+For 2-byte matrix fonts, 
+the 16-bit value should be formed with the byte1
+member in the most-significant byte and the byte2 member in the 
+least-significant byte.
+
+<P>
+
+<B>XCreateGlyphCursor()</B>
+can generate
+<B>BadAlloc</B> ,
+<B>BadFont</B> ,
+and
+<B>BadValue</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadFont</B>
+<TD>A value for a font argument does not name a defined font (or, in some cases, 
+    <B><A HREF="../my-own/gcontext.html">GContext</A></B>).
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XCreateFontCursor.html">XCreateFontCursor()</A></B>,
+<B><A HREF="XCreatePixmapCursor.html">XCreatePixmapCursor()</A></B>,
+<B><A HREF="../window/XDefineCursor.html">XDefineCursor()</A></B>,
+<B><A HREF="../graphics/font-metrics/XLoadFont.html">XLoadFont()</A></B>,
+<B><A HREF="XRecolorCursor.html">XRecolorCursor()</A></B>,
+"<A HREF="cursor.html">Creating, Recoloring, and Freeing Cursors</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XcmsSetWhitePoint</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XcmsSetWhitePoint</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XcmsSetWhitePoint" "" "@DEF@">
+<!.IN "Client White Point" "of Color Conversion Context">
+
+<CODE><PRE>
+<B><A HREF="../conversion-contexts-and-gamut-mapping.html#cmsStatus">Status</A></B> XcmsSetWhitePoint(<B>ccc</B>, <B>color</B>)
+      <A HREF="macros.html">XcmsCCC</A> <B>ccc</B>;
+      <A HREF="../structures.html#XcmsColor">XcmsColor</A> *<B>color</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>ccc</B>
+<TD> Specifies the CCC.
+
+<TR><TD> <B>color</B>
+<TD> Specifies the new Client White Point.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B><A HREF="XcmsSetWhitePoint.html">XcmsSetWhitePoint()</A></B>
+function changes the Client White Point in the specified <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>.
+Note that the pixel member is ignored 
+and that the color specification is left unchanged upon return.
+The format for the new white point must be
+<B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIEXYZFormat</A></B>,
+<B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIEuvYFormat</A></B>,
+<B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIExyYFormat</A></B>,
+or
+<B><A HREF="../structures.html#XcmsUndefinedFormat">XcmsUndefinedFormat</A></B>.
+If the color argument is NULL, this function sets the format component of the
+Client White Point specification to
+<B><A HREF="../structures.html#XcmsUndefinedFormat">XcmsUndefinedFormat</A></B>,
+indicating that the Client White Point is assumed to be the same as the
+Screen White Point.
+
+<P>
+
+This function returns nonzero status
+if the format for the new white point is valid;
+otherwise, it returns zero.
+
+<H2>See also</H2>
+
+<B><A HREF="macros.html#DisplayOfCCC">DisplayOfCCC()</A></B>,
+<B><A HREF="XcmsCCCOfColormap.html">XcmsCCCOfColormap()</A></B>,
+<B><A HREF="../XcmsConvertColors.html">XcmsConvertColors()</A></B>,
+<B><A HREF="XcmsCreateCCC.html">XcmsCreateCCC()</A></B>,
+<B><A HREF="XcmsDefaultCCC.html">XcmsDefaultCCC()</A></B>,
+"<A HREF="modifying-attributes.html">Modifying Attributes of a Color Conversion Context</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

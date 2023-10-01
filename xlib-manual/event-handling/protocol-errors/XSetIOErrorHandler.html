@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetIOErrorHandler</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetIOErrorHandler</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XSetIOErrorHandler" "" "@DEF@">
+
+<CODE><PRE>
+int (*XSetIOErrorHandler(<B>handler</B>))()
+      int (*<B>handler</B>)(<A HREF="../../display/opening.html#Display">Display</A> *);
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>handler</B>
+<TD> Specifies the program's supplied error handler.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XSetIOErrorHandler()</B>
+sets the fatal I/O error handler.
+Xlib calls the program's supplied error handler if any sort of system call
+error occurs (for example, the connection to the server was lost).
+This is assumed to be a fatal condition,
+and the called routine should not return.
+If the I/O error handler does return,
+the client process exits.
+
+<P>
+
+Note that the previous error handler is returned.
+
+<H2>See also</H2>
+
+<B><A HREF="XDisplayName.html">XDisplayName()</A></B>,
+<B><A HREF="XGetErrorDatabaseText.html">XGetErrorDatabaseText()</A></B>,
+<B><A HREF="XGetErrorText.html">XGetErrorText()</A></B>,
+<B><A HREF="../../display/opening.html">XOpenDisplay()</A></B>,
+<B><A HREF="XSetErrorHandler.html">XSetErrorHandler()</A></B>,
+<B><A HREF="XSynchronize.html">XSynchronize()</A></B>,
+"<A HREF="default-handlers.html">Using the Default Error Handlers</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

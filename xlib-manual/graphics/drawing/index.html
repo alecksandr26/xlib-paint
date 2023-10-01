@@ -1,0 +1,86 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Drawing Points, Lines, Rectangles, and Arcs</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>8.3 Drawing Points, Lines, Rectangles, and Arcs</H1>
+
+Xlib provides functions that you can use to draw:
+
+<UL>
+<P><LI>
+<A HREF="points.html">A single point or multiple points</A>
+
+<P><LI>
+<A HREF="lines.html">A single line or multiple lines</A>
+
+<P><LI>
+<A HREF="rectangles.html">A single rectangle or multiple rectangles</A>
+
+<P><LI>
+<A HREF="arcs.html">A single arc or multiple arcs</A>
+</UL>
+
+<P>
+
+Some of the functions described in the following sections
+use these structures:
+
+<A NAME="XSegment"></A>
+<P>
+
+<!.IN "XSegment" "" "@DEF@">
+<PRE><CODE>
+typedef struct {
+	short x1, y1, x2, y2;
+} XSegment;
+</PRE></CODE>
+
+<A NAME="XPoint"></A>
+<P>
+
+
+<!.IN "XPoint" "" "@DEF@">
+<PRE><CODE>
+typedef struct {
+	short x, y;
+} XPoint;
+</PRE></CODE>
+
+<A NAME="XRectangle"></A>
+<P>
+
+<!.IN "XRectangle" "" "@DEF@">
+<PRE><CODE>
+typedef struct {
+	short x, y;
+	unsigned short width, height;
+} XRectangle;
+</PRE></CODE>
+
+<A NAME="XArc"></A>
+<P>
+
+<!.IN "XArc" "" "@DEF@">
+<PRE><CODE>
+typedef struct {
+	short x, y;
+	unsigned short width, height;
+	short angle1, angle2;             /* Degrees * 64 */
+} XArc;
+</PRE></CODE>
+
+<P>
+
+All x and y members are signed integers.
+The width and height members are 16-bit unsigned integers.
+You should be careful not to generate coordinates and sizes
+out of the 16-bit ranges, because the protocol only has 16-bit fields
+for these values.
+
+<H5 ALIGN=right><I>Next: <A HREF="points.html">Drawing Single and Multiple Points</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

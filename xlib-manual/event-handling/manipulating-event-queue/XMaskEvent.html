@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XMaskEvent</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XMaskEvent</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XMaskEvent" "" "@DEF@">
+
+<CODE><PRE>
+XMaskEvent(<B>display</B>, <B>event_mask</B>, <B>event_return</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      long <B>event_mask</B>;
+      <A HREF="../../events/structures.html#XEvent">XEvent</A> *<B>event_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>event_mask</B>
+<TD> Specifies the event mask.
+
+<TR><TD> <B>event_return</B>
+<TD> Returns the matched event's associated structure.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XMaskEvent()</B>
+function searches the event queue for the events associated with the 
+specified mask.
+When it finds a match,
+<B>XMaskEvent()</B>
+removes that event and copies it into the specified
+<A HREF="../../events/structures.html#XEvent">XEvent</A>
+structure.
+The other events stored in the queue are not discarded.
+If the event you requested is not in the queue,
+<B>XMaskEvent()</B>
+flushes the output buffer and blocks until one is received.
+
+<H2>See also</H2>
+
+<B><A HREF="XCheckMaskEvent.html">XCheckMaskEvent()</A></B>,
+<B><A HREF="XCheckTypedEvent.html">XCheckTypedEvent()</A></B>,
+<B><A HREF="XCheckTypedWindowEvent.html">XCheckTypedWindowEvent()</A></B>,
+<B><A HREF="XCheckWindowEvent.html">XCheckWindowEvent()</A></B>,
+<B><A HREF="../XIfEvent.html">XIfEvent()</A></B>,
+<B><A HREF="../manipulating-event-queue/XNextEvent.html">XNextEvent()</A></B>,
+<B><A HREF="../manipulating-event-queue/XPeekEvent.html">XPeekEvent()</A></B>,
+<B><A HREF="XPutBackEvent.html">XPutBackEvent()</A></B>,
+<B><A HREF="../XSendEvent.html">XSendEvent()</A></B>,
+<B><A HREF="XWindowEvent.html">XWindowEvent()</A></B>,
+"<A HREF="../manipulating-event-queue/selecting-using-window-or-event-mask.html">Selecting Events Using a Window or Event Mask</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

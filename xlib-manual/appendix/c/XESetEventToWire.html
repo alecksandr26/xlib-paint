@@ -1,0 +1,104 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Extensions: XESetEventToWire</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XESetEventToWire</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XESetEventToWire" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../../introduction/errors.html#Status">Status</A></B> (*XESetEventToWire(<B>display</B>, <B>event_number</B>, <B>proc</B>))()
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      int <B>event_number</B>;
+      int (*<B>proc</B>)();
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>event_number</B>
+<TD> Specifies the event code.
+
+<TR><TD> <B>proc</B>
+<TD> Specifies the procedure to call when converting an event.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XESetEventToWire()</B>
+function defines a procedure to be called when an event
+needs to be converted from host format
+(<A HREF="../../events/structures.html#XEvent">XEvent</A>) 
+to wire format
+(<A HREF="hooks-into-the-library.html#xEvent">xEvent</A>)
+form.  
+The event number defines which protocol event number to install a
+conversion procedure for.
+<B>XESetEventToWire()</B>
+returns any previously defined procedure.
+It returns zero if the conversion fails or nonzero otherwise.
+
+<P ALIGN=center><B>Note</B>
+<BLOCKQUOTE>
+You can replace a core event conversion function with one
+of your own, although this is not encouraged.  
+It would, however, allow you to intercept a core event 
+and modify it before being sent to another client.
+</BLOCKQUOTE>
+
+When Xlib needs to convert an event from host format to wire format, 
+your procedure is called with these arguments:
+
+<P>
+
+<PRE><CODE>
+(*<B>proc</B>)(<B>display</B>, <B>re</B>, <B>event</B>)
+	<A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+	<A HREF="../../events/structures.html#XEvent">XEvent</A> *<B>re</B>;
+	<A HREF="hooks-into-the-library.html#xEvent">xEvent</A> *<B>event</B>;
+</PRE></CODE>
+
+<P>
+
+The re argument is a pointer to the host format event,
+and the event argument is a pointer to where the 32-byte wire event 
+structure should be stored.
+You should fill in the type with the type from the 
+<A HREF="../../events/structures.html#XEvent">XEvent</A> 
+structure.
+All other members then should be copied from the host format to the 
+<A HREF="hooks-into-the-library.html#xEvent">xEvent</A> 
+structure.
+
+<H2>See also</H2>
+
+<B><A HREF="XESetBeforeFlush.html">XESetBeforeFlush()</A></B>,
+<B><A HREF="XESetCloseDisplay.html">XESetCloseDisplay()</A></B>,
+<B><A HREF="XESetCopyGC.html">XESetCopyGC()</A></B>,
+<B><A HREF="XESetCreateFont.html">XESetCreateFont()</A></B>,
+<B><A HREF="XESetCreateGC.html">XESetCreateGC()</A></B>,
+<B><A HREF="XESetError.html">XESetError()</A></B>,
+<B><A HREF="XESetErrorString.html">XESetErrorString()</A></B>,
+<B><A HREF="XESetFlushGC.html">XESetFlushGC()</A></B>,
+<B><A HREF="XESetFreeFont.html">XESetFreeFont()</A></B>,
+<B><A HREF="XESetFreeGC.html">XESetFreeGC()</A></B>,
+<B><A HREF="XESetPrintErrorValues.html">XESetPrintErrorValues()</A></B>,
+<B><A HREF="XESetWireToError.html">XESetWireToError()</A></B>,
+<B><A HREF="XESetWireToEvent.html">XESetWireToEvent()</A></B>,
+<B><A HREF="_XSetLastRequestRead.html">_XSetLastRequestRead()</A></B>,
+"<A HREF="hooks-into-the-library.html">Hooks into the Library</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

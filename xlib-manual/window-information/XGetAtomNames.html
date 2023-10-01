@@ -1,0 +1,84 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetAtomNames</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetAtomNames</H1>
+
+<!.IN "Atom" "getting name">
+<!.IN "XGetAtomNames" "" "@DEF@">
+
+<H2>Syntax</H2>
+
+<CODE><PRE>
+sStatus XGetAtomNames(<B>display</B>, <B>atoms</B>, <B>count</B>, <B>names_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="../glossary/#atom">Atom</A> *<B>atoms</B>;
+      int <B>count</B>;
+      char **<B>names_return</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>atoms</B>
+<TD> Specifies the array of atoms.
+
+<TR><TD> <B>count</B>
+<TD> Specifies the number of atoms in the array.
+
+<TR><TD> <B>names_return</B>
+<TD> Returns the atom names.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetAtomNames()</B>
+function returns the names associated with the specified atoms.
+The names are stored in the names_return array supplied by the caller.
+Calling this function is equivalent to calling
+<B><A HREF="XGetAtomName.html">XGetAtomName()</A></B>
+for each of the atoms in turn,
+but this function minimizes the number of round trip protocol exchanges
+between the client and the X server.
+
+<P>
+
+This function returns a nonzero status if names are returned for
+all of the atoms;
+otherwise, it returns zero.
+
+<P>
+
+<B>XGetAtomNames()</B>
+can generate a
+<B>BadAtom</B>
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadAtom</B>
+<TD> A value for an Atom argument does not name a
+     defined Atom.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XGetAtomName.html">XGetAtomName()</A></B>,
+<B><A HREF="XGetWindowProperty.html">XGetWindowProperty()</A></B>,
+<B><A HREF="XInternAtom.html">XInternAtom()</A></B>,
+<B><A HREF="XInternAtoms.html">XInternAtoms()</A></B>,
+"<A HREF="properties-and-atoms.html">Properties and Atoms</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

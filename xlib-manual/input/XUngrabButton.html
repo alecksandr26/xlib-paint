@@ -1,0 +1,100 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XUngrabButton</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XUngrabButton</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Ungrabbing" "buttons">
+<!.IN "Button" "ungrabbing">
+<!.IN "XUngrabButton" "" "@DEF@">
+
+<CODE><PRE>
+XUngrabButton(<B>display</B>, <B>button</B>, <B>modifiers</B>, <B>grab_window</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      unsigned int <B>button</B>;
+      unsigned int <B>modifiers</B>;
+      Window <B>grab_window</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>button</B>
+<TD> Specifies the pointer button that is to be released or
+<B>AnyButton</B>.
+
+<TR><TD> <B>modifiers</B>
+<TD> Specifies the set of keymasks or
+<B>AnyModifier</B>.
+The mask is the bitwise inclusive OR of the valid keymask bits.
+
+<TR><TD> <B>grab_window</B>
+<TD> Specifies the grab window.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XUngrabButton()</B>
+function releases the passive button/key combination on the specified window if
+it was grabbed by this client.
+A modifiers of 
+<B>AnyModifier</B> 
+is
+equivalent to issuing 
+the ungrab request for all possible modifier combinations, including 
+the combination of no modifiers.
+A button of 
+<B>AnyButton</B> 
+is equivalent to issuing the
+request for all possible buttons.
+<B>XUngrabButton()</B>
+has no effect on an active grab.
+
+<P>
+
+<B>XUngrabButton()</B>
+can generate
+<B>BadValue</B>
+and
+<B>BadWindow</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllowEvents.html">XAllowEvents()</A></B>,
+<B><A HREF="XChangeActivePointerGrab.html">XChangeActivePointerGrab()</A></B>,
+<B><A HREF="XGrabButton.html">XGrabButton()</A></B>,
+<B><A HREF="XGrabKey.html">XGrabKey()</A></B>,
+<B><A HREF="XGrabKeyboard.html">XGrabKeyboard()</A></B>,
+<B><A HREF="XGrabPointer.html">XGrabPointer()</A></B>,
+<B><A HREF="XUngrabPointer.html">XUngrabPointer()</A></B>,
+"<A HREF="pointer-grabbing.html">Pointer Grabbing</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

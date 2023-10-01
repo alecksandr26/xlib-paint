@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XLockDisplay</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XLockDisplay</H1>
+
+<H2>Syntax</H2>
+<!.IN "XLockDisplay" "" "@DEF@">
+<CODE><PRE>
+void XLockDisplay(<B>display</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XLockDisplay()</B>
+function locks out all other threads from using the specified display.
+Other threads attempting to use the display will block until
+the display is unlocked by this thread.
+Nested calls to
+<B>XLockDisplay()</B>
+work correctly; the display will not actually be unlocked until
+<A HREF="XUnlockDisplay.html">XUnlockDisplay()</A>
+has been called the same number of times as
+<B>XLockDisplay()</B>.
+This function has no effect unless Xlib was successfully initialized
+for threads using
+<A HREF="XInitThreads.html">XInitThreads()</A>.
+
+
+<H2>See also</H2>
+
+<A HREF="XInitThreads.html">XInitThreads()</A>,
+<A HREF="XUnlockDisplay.html">XUnlockDisplay()</A>,
+"<A HREF="threads.html">Using Xlib With Threads</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

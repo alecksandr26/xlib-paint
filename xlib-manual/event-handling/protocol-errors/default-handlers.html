@@ -1,0 +1,270 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Using the Default Error Handlers</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>11.8.2 Using the Default Error Handlers</H1>
+
+<!.IN "Debugging" "error handlers">
+<!.IN "Error" "handlers">
+There are two default error handlers in Xlib: 
+one to handle typically fatal conditions (for example, 
+the connection to a display server dying because a machine crashed) 
+and one to handle protocol errors from the X server.
+These error handlers can be changed to user-supplied routines if you
+prefer your own error handling and can be changed as often as you like.
+If either function is passed a NULL pointer, it will
+reinvoke the default handler.
+The action of the default handlers is to print an explanatory
+message and exit.
+
+<P>
+
+To set the error handler, use
+<B><A HREF="XSetErrorHandler.html">XSetErrorHandler()</A></B>.
+
+<A NAME="XErrorEvent"></A>
+<P>
+
+The 
+<B>XErrorEvent</B>
+structure contains:
+<!.IN "Debugging" "error event">
+
+<P>
+
+<!.IN "XErrorEvent" "" "@DEF">
+<PRE><CODE>
+typedef struct {
+	int type;
+	<A HREF="../../display/opening.html#Display">Display</A> *display;		/* Display the event was read from */
+	unsigned long serial;		/* serial number of failed request */
+	unsigned char error_code;	/* error code of failed request */
+	unsigned char request_code;	/* Major op-code of failed request */
+	unsigned char minor_code;	/* Minor op-code of failed request */
+	XID resourceid;			/* resource id */
+} XErrorEvent;
+</PRE></CODE>
+
+<P>
+
+<!.IN "Serial Number">
+The <B>serial</B> member is the number of requests, starting from one, 
+sent over the network connection since it was opened. 
+It is the number that was the value of 
+<B><A HREF="../../display/display-macros.html#NextRequest">NextRequest()</A></B>
+immediately before the failing call was made.  
+The <B>request_code</B> member is a protocol request
+of the procedure that failed, as defined in 
+<B><TT>X11/Xproto.h .</TT></B>
+The following error codes can be returned by the functions described in this
+chapter:
+<!.IN "Debugging" "error numbers">
+<!.IN "Error" "codes">
+
+<!.IN "BadAccess" "" "@DEF@">
+<!.IN "BadAlloc" "" "@DEF@">
+<!.IN "BadAtom" "" "@DEF@">
+<!.IN "BadColor" "" "@DEF@">
+<!.IN "BadCursor" "" "@DEF@">
+<!.IN "BadDrawable" "" "@DEF@">
+<!.IN "BadFont" "" "@DEF@">
+<!.IN "BadGC" "" "@DEF@">
+<!.IN "BadIDChoice" "" "@DEF@">
+<TABLE>
+<TR><TD COLSPAN=2><HR>
+<TR><TD><B>Error Code	<TH>Description
+<TR><TD COLSPAN=2><HR>
+<TR><TD VALIGN=top><B>BadAccess
+<TD>A client attempts to grab a key/button combination already grabbed 
+by another client.
+
+<P>
+
+A client attempts to free a colormap entry that it had not already allocated
+or to free an entry in a colormap that was created with all entries writable.
+
+<P>
+
+A client attempts to store into a read-only or unallocated colormap entry.
+
+<P>
+
+A client attempts to modify the access control list from other than the local 
+(or otherwise authorized) host.
+
+<P>
+
+A client attempts to select an event type that another client 
+has already selected.
+
+<TR><TD VALIGN=top><B>BadAlloc
+<TD>
+The server fails to allocate the requested resource.
+Note that the explicit listing of
+<B>BadAlloc</B>
+errors in requests only covers allocation errors at a very coarse level
+and is not intended to (nor can it in practice hope to) cover all cases of
+a server running out of allocation space in the middle of service.
+The semantics when a server runs out of allocation space are left unspecified,
+but a server may generate a
+<B>BadAlloc</B>
+error on any request for this reason,
+and clients should be prepared to receive such errors and handle or discard
+them.
+
+<TR><TD VALIGN=top><B>BadAtom
+<TD>
+A value for an atom argument does not name a defined atom.
+
+<TR><TD VALIGN=top><B>BadColor
+<TD>
+A value for a colormap argument does not name a defined colormap.
+
+<TR><TD VALIGN=top><B>BadCursor
+<TD>
+A value for a cursor argument does not name a defined cursor.
+
+<TR><TD VALIGN=top><B>BadDrawable
+<TD>
+A value for a drawable argument does not name a defined window or pixmap.
+
+<TR><TD VALIGN=top><B>BadFont
+<TD>
+A value for a font argument does not name a defined font (or, in some cases, 
+<B><A HREF="/toto/GContext.html">GContext</A></B>).
+
+<TR><TD VALIGN=top><B>BadGC
+<TD>
+A value for a 
+<B><A HREF="/toto/GContext.html">GContext</A></B> 
+argument does not name a defined 
+<B><A HREF="/toto/GContext.html">GContext</A></B> .
+
+<TR><TD VALIGN=top><B>BadIDChoice
+<TD>
+The value chosen for a resource identifier either is not included in the 
+range assigned to the client or is already in use.
+Under normal circumstances,
+this cannot occur and should be considered a server or Xlib error.
+
+<TR><TD VALIGN=top><B>BadImplementation
+<TD>
+The server does not implement some aspect of the request.
+A server that generates this error for a core request is deficient.
+As such, this error is not listed for any of the requests,
+but clients should be prepared to receive such errors 
+and handle or discard them.
+
+<TR><TD VALIGN=top><B>BadLength
+<TD>
+The length of a request is shorter or longer than that required to 
+contain the arguments.
+This is an internal Xlib or server error.
+
+<P>
+
+The length of a request exceeds the maximum length accepted by the server.
+
+<TR><TD VALIGN=top><B>BadMatch
+<TD>
+In a graphics request,
+the root and depth of the graphics context does not match that of the drawable.
+
+<P>
+
+An 
+<B><A HREF="../../window/create.html#InputClass">InputOnly</A></B> 
+window is used as a drawable.
+
+<P>
+
+Some argument or pair of arguments has the correct type and range,
+but it fails to match in some other way required by the request.
+
+<P>
+
+An 
+<B><A HREF="../../window/create.html#InputClass">InputOnly</A></B> 
+window lacks this attribute.
+
+<TR><TD VALIGN=top><B>BadName
+<TD>
+A font or color of the specified name does not exist.
+
+<TR><TD VALIGN=top><B>BadPixmap
+<TD>
+A value for a pixmap argument does not name a defined pixmap.
+
+<TR><TD VALIGN=top><B>BadRequest
+<TD>
+The major or minor opcode does not specify a valid request.
+This usually is an Xlib or server error.
+
+<TR><TD VALIGN=top><B>BadValue
+<TD>
+Some numeric value falls outside of the range of values accepted 
+by the request.  
+Unless a specific range is specified for an argument,
+the full range defined by the argument's type is accepted.
+Any argument defined as a set of alternatives typically can generate
+this error (due to the encoding).
+
+<TR><TD VALIGN=top><B>BadWindow
+<TD>
+A value for a window argument does not name a defined window.
+<TR><TD COLSPAN=2><HR>
+</TABLE>
+
+<!.IN "BadImplementation" "" "@DEF@">
+<!.IN "BadLength" "" "@DEF@">
+<!.IN "BadMatch" "" "@DEF@">
+<!.IN "BadName" "" "@DEF@">
+<!.IN "BadPixmap" "" "@DEF@">
+<!.IN "BadRequest" "" "@DEF@">
+<!.IN "BadValue" "" "@DEF@">
+<!.IN "BadWindow" "" "@DEF@">
+
+<BLOCKQUOTE>
+<P ALIGN=center>Note
+<P>
+The 
+<B>BadAtom</B>, 
+<B>BadColor</B>, 
+<B>BadCursor</B>, 
+<B>BadDrawable</B>, 
+<B>BadFont</B>, 
+<B>BadGC</B>, 
+<B>BadPixmap</B>, 
+and 
+<B>BadWindow</B>
+errors are also used when the argument type is extended by a set of
+fixed alternatives.
+</BLOCKQUOTE>
+
+<P>
+
+To obtain textual descriptions of the specified error code, use 
+<B><A HREF="XGetErrorText.html">XGetErrorText()</A></B>.
+
+<P>
+
+To obtain error messages from the error database, use
+<B><A HREF="XGetErrorDatabaseText.html">XGetErrorDatabaseText()</A></B>.
+
+<P>
+
+To report an error to the user when the requested display does not exist, use
+<B><A HREF="XDisplayName.html">XDisplayName()</A></B>.
+
+<P>
+
+To handle fatal I/O errors, use
+<B><A HREF="XSetIOErrorHandler.html">XSetIOErrorHandler()</A></B>.
+
+<H5 ALIGN=right><I>Next Chapter: <A HREF="../../input/">Input Device Functions</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

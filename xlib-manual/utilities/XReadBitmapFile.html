@@ -1,0 +1,129 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XReadBitmapFile</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XReadBitmapFile</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XReadBitmapFile" "" "@DEF@">
+
+<CODE><PRE>
+int XReadBitmapFile(<B>display</B>, <B>d</B>, <B>filename</B>, <B>width_return</B>, <B>height_return</B>, <B>bitmap_return</B>, <B>x_hot_return</B>, 
+                       <B>y_hot_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Drawable <B>d</B>;
+      char *<B>filename</B>;
+      unsigned int *<B>width_return</B>, *<B>height_return</B>;
+      <A HREF="../pixmap-and-cursor/pixmap.html">Pixmap</A> *<B>bitmap_return</B>;
+      int *<B>x_hot_return</B>, *<B>y_hot_return</B>;	
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>d</B>
+<TD> Specifies the drawable that indicates the screen. 
+
+<TR><TD> <B>filename</B>
+<TD> Specifies the file name to use.
+The format of the file name is operating-system dependent.
+
+<TR><TD> <B>width_return</B><BR>
+	<B>height_return</B>
+<TD> Return the width and height values of the read in bitmap file.
+
+<TR><TD> <B>bitmap_return</B>
+<TD> Returns the bitmap that is created.
+
+<TR><TD> <B>x_hot_return</B><BR>
+	<B>y_hot_return</B>
+<TD> Return the hotspot coordinates.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XReadBitmapFile()</B>
+function reads in a file containing a bitmap.
+The file is parsed in the encoding of the current locale.
+The ability to read other than the standard format 
+is implementation dependent.
+If the file cannot be opened, 
+<B>XReadBitmapFile()</B>
+returns 
+<B>BitmapOpenFailed</B>.  
+If the file can be opened but does not contain valid bitmap data, 
+it returns 
+<B>BitmapFileInvalid</B>.  
+If insufficient working storage is allocated,
+it returns
+<B>BitmapNoMemory</B>.  
+If the file is readable and valid,
+it returns 
+<B>BitmapSuccess</B>.
+
+<P>
+
+<B>XReadBitmapFile()</B>
+returns the bitmap's height and width, as read
+from the file, to width_return and height_return.
+It then creates a pixmap of the appropriate size, 
+reads the bitmap data from the file into the pixmap,
+and assigns the pixmap to the caller's variable bitmap.  
+The caller must free the bitmap using 
+<B><A HREF="../pixmap-and-cursor/XFreePixmap.html">XFreePixmap()</A></B>
+when finished.
+If <B>name</B>_x_hot and <B>name</B>_y_hot exist,
+<B>XReadBitmapFile()</B>
+returns them to x_hot_return and y_hot_return;
+otherwise, it returns -1,-1.
+
+<P>
+
+<B>XReadBitmapFile()</B>
+can generate
+<B>BadAlloc</B> ,
+<B>BadDrawable</B> ,
+and
+<B>BadGC</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../GContext.html">GContext</A></B> 
+	argument does not name a defined 
+	<B><A HREF="../GContext.html">GContext</A></B>.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XCreateBitmapFromData.html">XCreateBitmapFromData()</A></B>,
+<B><A HREF="../pixmap-and-cursor/XCreatePixmap.html">XCreatePixmap()</A></B>,
+<B><A HREF="XCreatePixmapFromBitmapData.html">XCreatePixmapFromBitmapData()</A></B>,
+<B><A HREF="../graphics/XPutImage.html">XPutImage()</A></B>,
+<B><A HREF="XWriteBitmapFile.html">XWriteBitmapFile()</A></B>,
+"<A HREF="manipulating-bitmaps.html">Manipulating Bitmaps</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

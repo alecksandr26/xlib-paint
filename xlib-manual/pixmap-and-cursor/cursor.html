@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Creating, Recoloring, and Freeing Cursors</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>5.2 Creating, Recoloring, and Freeing Cursors</H1>
+
+Each window can have a different cursor defined for it.
+Whenever the pointer is in a visible window, 
+it is set to the cursor defined for that window.
+If no cursor was defined for that window, 
+the cursor is the one defined for the parent window.
+
+<P>
+
+From X's perspective, 
+a cursor consists of a cursor source, mask, colors, and a hotspot. 
+The mask pixmap determines the shape of the cursor and must be a depth
+of one.
+The source pixmap must have a depth of one,
+and the colors determine the colors of the source.
+The hotspot defines the point on the cursor that is reported
+when a pointer event occurs.
+There may be limitations imposed by the hardware on
+cursors as to size and whether a mask is implemented. 
+<!.IN "XQueryBestCursor">
+<B><A HREF="XQueryBestCursor.html">XQueryBestCursor()</A></B>
+can be used to find out what sizes are possible.
+There is a standard font for creating cursors, but
+Xlib provides functions that you can use to create cursors
+from an arbitrary font or from bitmaps.
+
+<P>
+
+To create a cursor from the standard cursor font, use
+<B><A HREF="XCreateFontCursor.html">XCreateFontCursor()</A></B>.
+
+<P>
+
+To create a cursor from font glyphs, use
+<B><A HREF="XCreateGlyphCursor.html">XCreateGlyphCursor()</A></B>.
+
+<P>
+
+To create a cursor from two bitmaps,
+use
+<B><A HREF="XCreatePixmapCursor.html">XCreatePixmapCursor()</A></B>.
+
+<P>
+
+To determine useful cursor sizes, use
+<B><A HREF="XQueryBestCursor.html">XQueryBestCursor()</A></B>.
+
+<P>
+
+To change the color of a given cursor, use
+<B><A HREF="XRecolorCursor.html">XRecolorCursor()</A></B>.
+
+<P>
+
+To free (destroy) a given cursor, use
+<B><A HREF="XFreeCursor.html">XFreeCursor()</A></B>.
+
+<H5 ALIGN=right><I>Next Chapter: <A HREF="../color/">Color Management Functions</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

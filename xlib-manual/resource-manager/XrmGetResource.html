@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmGetResource</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmGetResource</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XrmGetResource" "" "@DEF@">
+
+<CODE><PRE>
+Bool XrmGetResource(<B>database</B>, <B>str_name</B>, <B>str_class</B>, <B>str_type_return</B>, <B>value_return</B>)
+     <B><A HREF="creating-and-storing-databases.html">XrmDatabase</A></B> <B>database</B>;
+     char *<B>str_name</B>;
+     char *<B>str_class</B>;
+     char **<B>str_type_return</B>;
+     <B><A HREF="creating-and-storing-databases.html">XrmValue</A></B> *<B>value_return</B>; 
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>database</B>
+<TD> Specifies the database that is to be used.
+
+<TR><TD> <B>str_name</B>
+<TD> Specifies the fully qualified name of the value being retrieved (as a string).
+
+<TR><TD> <B>str_class</B>
+<TD> Specifies the fully qualified class of the value being retrieved (as a string).
+
+<TR><TD> <B>str_type_return</B>
+<TD> Returns the representation type of the destination (as a string).
+
+<TR><TD> <B>value_return</B>
+<TD> Returns the value in the database.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The 
+<B>XrmGetResource()</B>
+function retrieves a resource from the specified database.
+It takes a fully qualified name/class pair, a destination
+resource representation, and the address of a value
+(size/address pair).  
+The value and returned type point into database memory;
+therefore, you must not modify the data.
+
+<H2>See also</H2>
+
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmMergeDatabases.html">XrmMergeDatabases()</A></B>,
+<B><A HREF="XrmPutResource.html">XrmPutResource()</A></B>,
+<B><A HREF="XrmQGetResource.html">XrmQGetResource()</A></B>,
+<B><A HREF="XrmQGetSearchList.html">XrmQGetSearchList()</A></B>,
+<B><A HREF="XrmQGetSearchResource.html">XrmQGetSearchResource()</A></B>,
+<B><A HREF="XrmUniqueQuark.html">XrmUniqueQuark()</A></B>,
+"<A HREF="looking-up.html">Looking Up Resources</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,193 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XChangeProperty</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XChangeProperty</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Property" "changing">
+<!.IN "Property" "appending">
+<!.IN "Property" "prepending">
+<!.IN "Property" "replacing">
+<!.IN "Property" "format">
+<!.IN "Property" "type">
+<!.IN "XChangeProperty" "" "@DEF@">
+
+<CODE><PRE>
+XChangeProperty(<B>display</B>, <B>w</B>, <B>property</B>, <B>type</B>, <B>format</B>, <B>mode</B>, <B>data</B>, <B>nelements</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      <A HREF="properties-and-atoms.html">Atom</A> <B>property</B>, <B>type</B>;
+      int <B>format</B>;
+      int <B>mode</B>;
+      unsigned char *<B>data</B>;
+      int <B>nelements</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window whose property you want to change.
+
+<TR><TD> <B>property</B>
+<TD> Specifies the property name.
+
+<TR><TD> <B>type</B>
+<TD> Specifies the type of the property.
+The X server does not interpret the type but simply
+passes it back to an application that later calls 
+<B><A HREF="XGetWindowProperty.html">XGetWindowProperty()</A></B>.
+
+<TR><TD> <B>format</B>
+<TD> Specifies whether the data should be viewed as a list
+of 8-bit, 16-bit, or 32-bit quantities.
+Possible values are 8, 16, and 32.
+This information allows the X server to correctly perform
+byte-swap operations as necessary.
+If the format is 16-bit or 32-bit,
+you must explicitly cast your data pointer to an (unsigned char *) in the call
+to 
+<B><A HREF="XChangeProperty.html">XChangeProperty()</A></B>.
+
+<TR><TD> <B>mode</B>
+<TD> Specifies the mode of the operation.
+You can pass
+<B>PropModeReplace</B>,
+<B>PropModePrepend</B>,
+or
+<B>PropModeAppend</B>.
+
+<TR><TD> <B>data</B>
+<TD> Specifies the property data.
+
+<TR><TD> <B>nelements</B>
+<TD> Specifies the number of elements of the specified data format.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B><A HREF="XChangeProperty.html">XChangeProperty()</A></B>
+function alters the property for the specified window and
+causes the X server to generate a
+<B><A HREF="../events/client-communication/property-notify.html">PropertyNotify</A></B>
+event on that window.
+<B>XChangeProperty()</B>
+performs the following:
+
+<UL>
+
+<P><LI>
+If mode is
+<B>PropModeReplace</B>,
+<B>XChangeProperty()</B>
+discards the previous property value and stores the new data.
+
+<P><LI>
+If mode is
+<B>PropModePrepend</B>
+or
+<B>PropModeAppend</B>,
+<B>XChangeProperty()</B>
+inserts the specified data before the beginning of the existing data
+or onto the end of the existing data, respectively.
+The type and format must match the existing property value,
+or a
+<B>BadMatch</B>
+error results.
+If the property is undefined, 
+it is treated as defined with the correct type and
+format with zero-length data.
+
+</UL>
+
+If the specified format is 8, the property data must be a
+<B>char</B>
+array.
+If the specified format is 16, the property data must be a
+<B>short</B>
+array.
+If the specified format is 32, the property data must be a
+<B>long</B>
+array.
+
+<P>
+
+The lifetime of a property is not tied to the storing client.
+Properties remain until explicitly deleted, until the window is destroyed,
+or until the server resets.
+For a discussion of what happens when the connection to the X server is closed,
+see section "<A HREF="../display/close-operation.html">X Server Connection Close Operations</A>".
+The maximum size of a property is server dependent and can vary dynamically
+depending on the amount of memory the server has available.
+(If there is insufficient space, a
+<B>BadAlloc</B>
+error results.)
+
+<P>
+
+<B>XChangeProperty()</B>
+can generate
+<B>BadAlloc</B> ,
+<B>BadAtom</B> ,
+<B>BadMatch</B> ,
+<B>BadValue</B> ,
+and
+<B>BadWindow</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadAtom</B>
+<TD> A value for an Atom argument does not name a
+     defined Atom.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+      
+<TR><TD><B>BadPixmap</B>
+<TD> A value for a Pixmap argument does not name a
+     defined Pixmap.
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XDeleteProperty.html">XDeleteProperty()</A></B>,
+<B><A HREF="XGetWindowProperty.html">XGetWindowProperty()</A></B>,
+<B><A HREF="XListProperties.html">XListProperties()</A></B>,
+<B><A HREF="XRotateWindowProperties.html">XRotateWindowProperties()</A></B>,
+"<A HREF="obtain-properties.html">Obtaining and Changing Window Properties</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

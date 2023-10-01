@@ -1,0 +1,79 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Adding, Getting, or Removing Hosts</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>9.8.1 Adding, Getting, or Removing Hosts</H1>
+
+<P>
+
+Xlib provides functions that you can use to add, get, or remove hosts
+from the access control list.
+All the host access control functions use the 
+<B>XHostAddress</B>
+structure, which contains:
+
+<P>
+
+<!.IN "XHostAddress" "" "@DEF@">
+<CODE><PRE>
+typedef struct {
+	int family;	/* for example FamilyInternet */
+	int length;	/* length of address, in bytes */
+	char *address;	/* pointer to where to find the address */
+} XHostAddress;
+</PRE></CODE>
+
+<P>
+
+The family member specifies which protocol address family to use 
+(for example, TCP/IP or DECnet) and can be
+<B>FamilyInternet</B>,
+<B>FamilyDECnet</B>,
+or
+<B>FamilyChaos</B>.
+The length member specifies the length of the address in bytes.
+The address member specifies a pointer to the address.
+
+<P>
+
+For TCP/IP, the address should be in network byte order.
+For the DECnet family, 
+the server performs no automatic swapping on the address bytes.
+A Phase IV address is two bytes long.
+The first byte contains the least-significant eight bits of the node number.
+The second byte contains the most-significant two bits of the
+node number in the least-significant two bits of the byte
+and the area in the most-significant six bits of the byte.
+
+<P>
+
+To add a single host, use
+<B><A HREF="XAddHost.html">XAddHost()</A></B>.
+
+<P>
+
+To add multiple hosts at one time, use
+<B><A HREF="XAddHosts.html">XAddHosts()</A></B>.
+
+<P>
+
+To obtain a host list, use
+<B><A HREF="XListHosts.html">XListHosts()</A></B>.
+
+<P>
+
+To remove a single host, use
+<B><A HREF="XRemoveHost.html">XRemoveHost()</A></B>.
+
+<P>
+
+To remove multiple hosts at one time, use
+<B><A HREF="XRemoveHosts.html">XRemoveHosts()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="access.html">Changing, Enabling, or Disabling Access Control</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,94 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetIconSizes</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetIconSizes</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetIconSizes" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../../introduction/errors.html#Status">Status</A></B> XGetIconSizes(<B>display</B>, <B>w</B>, <B>size_list_return</B>, <B>count_return</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      <B><A HREF="wm-icon-size.html#XIconSize">XIconSize</A></B> **<B>size_list_return</B>;
+      int *<B>count_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>size_list_return</B>
+<TD> Returns the size list.
+
+<TR><TD> <B>count_return</B>
+<TD> Returns the number of items in the size list.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetIconSizes()</B>
+function returns zero if a window manager has not set icon sizes;
+otherwise, it return nonzero.
+<B>XGetIconSizes()</B>
+should be called by an application that
+wants to find out what icon sizes would be most appreciated by the
+window manager under which the application is running.
+The application
+should then use
+<B><A HREF="XSetWMHints.html">XSetWMHints()</A></B>
+to supply the window manager with an icon pixmap or window in one of the
+supported sizes.
+To free the data allocated in size_list_return, use
+<B><A HREF="../../display/XFree.html">XFree()</A></B>.
+
+<P>
+
+<B>XGetIconSizes()</B>
+can generate a
+<B>BadWindow</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocClassHint.html">XAllocClassHint()</A></B>,
+<B><A HREF="XAllocIconSize.html">XAllocIconSize()</A></B>,
+<B><A HREF="XAllocSizeHints.html">XAllocSizeHints()</A></B>,
+<B><A HREF="XAllocWMHints.html">XAllocWMHints()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetCommand.html">XSetCommand()</A></B>,
+<B><A HREF="XSetIconSizes.html">XSetIconSizes()</A></B>s,
+<B><A HREF="XSetTextProperty.html">XSetTextProperty()</A></B>,
+<B><A HREF="XSetTransientForHint.html">XSetTransientForHint()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetWMClientMachine.html">XSetWMClientMachine()</A></B>,
+<B><A HREF="XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B>,
+<B><A HREF="XSetWMIconName.html">XSetWMIconName()</A></B>,
+<B><A HREF="XSetWMName.html">XSetWMName()</A></B>,
+<B><A HREF="XSetWMProperties.html">XSetWMProperties()</A></B>,
+<B><A HREF="XSetWMProtocols.html">XSetWMProtocols()</A></B>,
+<B><A HREF="XStringListToTextProperty.html">XStringListToTextProperty()</A></B>,
+"<A HREF="wm-protocols.html">Setting and Reading the WM_TRANSIENT_FOR Property</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

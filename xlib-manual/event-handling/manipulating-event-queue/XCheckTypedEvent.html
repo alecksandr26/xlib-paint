@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XCheckTypedEvent</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XCheckTypedEvent</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XCheckTypedEvent" "" "@DEF@">
+
+<CODE><PRE>
+Bool XCheckTypedEvent(<B>display</B>, <B>event_type</B>, <B>event_return</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      int <B>event_type</B>;
+      <A HREF="../../events/structures.html#XEvent">XEvent</A> *<B>event_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>event_type</B>
+<TD> Specifies the event type to be compared.
+
+
+<TR><TD> <B>event_return</B>
+<TD> Returns the matched event's associated structure.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XCheckTypedEvent()</B>
+function searches the event queue and then any events available  
+on the server connection for the first event that matches the specified type.
+If it finds a match,
+<B>XCheckTypedEvent()</B>
+removes that event, copies it into the specified
+<A HREF="../../events/structures.html#XEvent">XEvent</A>
+structure, and returns
+<B>True</B> .
+The other events in the queue are not discarded.
+If the event is not available,
+<B>XCheckTypedEvent()</B>
+returns
+<B>False</B> ,
+and the output buffer will have been flushed.
+
+<H2>See also</H2>
+
+<B><A HREF="XCheckMaskEvent.html">XCheckMaskEvent()</A></B>,
+<B><A HREF="XCheckTypedWindowEvent.html">XCheckTypedWindowEvent()</A></B>,
+<B><A HREF="XCheckWindowEvent.html">XCheckWindowEvent()</A></B>,
+<B><A HREF="../XIfEvent.html">XIfEvent()</A></B>,
+<B><A HREF="XMaskEvent.html">XMaskEvent()</A></B>,
+<B><A HREF="../manipulating-event-queue/XNextEvent.html">XNextEvent()</A></B>,
+<B><A HREF="../manipulating-event-queue/XPeekEvent.html">XPeekEvent()</A></B>,
+<B><A HREF="XPutBackEvent.html">XPutBackEvent()</A></B>,
+<B><A HREF="XSendEvent.html">XSendEvent()</A></B>,
+<B><A HREF="XWindowEvent.html">XWindowEvent()</A></B>,
+"<A HREF="../manipulating-event-queue/selecting-using-window-or-event-mask.html">Selecting Events Using a Window or Event Mask</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

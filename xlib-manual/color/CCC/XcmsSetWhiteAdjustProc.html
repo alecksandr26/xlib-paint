@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XcmsSetWhiteAdjustProc</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XcmsSetWhiteAdjustProc</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XcmsSetWhiteAdjustProc" "" "@DEF@">
+<!.IN "White point adjustment" "setting in Color Conversion Context">
+<!.IN "White point adjustment" "procedure">
+<!.IN "White point adjustment" "client data">
+
+<CODE><PRE>
+<B>XcmsWhiteAdjustProc</B> XcmsSetWhiteAdjustProc(<B>ccc</B>, <B>white_adjust_proc</B>, <B>client_data</B>)
+      <A HREF="macros.html">XcmsCCC</A> <B>ccc</B>;
+      XcmsWhiteAdjustProc <B>white_adjust_proc</B>;
+      XPointer <B>client_data</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<H2>Arguments</H2>
+
+<TR><TD> <B>ccc</B>
+<TD>Specifies the CCC.
+
+<TR><TD> <B>white_adjust_proc</B>
+<TD>Specifies the white point adjustment procedure.
+
+<TR><TD> <B>client_data</B>
+<TD>Specifies client data for the white point adjustment procedure or NULL.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XcmsSetWhiteAdjustProc()</B>
+function first sets the white point adjustment procedure and client data 
+in the specified <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A> with the newly specified procedure and client data
+and then returns the old procedure.
+
+<H2>See also</H2>
+
+<B><A HREF="macros.html#DisplayOfCCC">DisplayOfCCC()</A></B>,
+<B><A HREF="XcmsCCCOfColormap.html">XcmsCCCOfColormap()</A></B>,
+<B><A HREF="../XcmsConvertColors.html">XcmsConvertColors()</A></B>,
+<B><A HREF="XcmsCreateCCC.html">XcmsCreateCCC()</A></B>,
+<B><A HREF="XcmsDefaultCCC.html">XcmsDefaultCCC()</A></B>,
+"<A HREF="modifying-attributes.html">Modifying Attributes of a Color Conversion Context</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

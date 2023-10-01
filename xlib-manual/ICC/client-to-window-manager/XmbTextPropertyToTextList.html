@@ -1,0 +1,143 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XmbTextPropertyToTextList</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XmbTextPropertyToTextList</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XmbTextPropertyToTextList" "" "@DEF@">
+<!.IN "XwcTextPropertyToTextList" "" "@DEF@">
+
+<CODE><PRE>
+int XmbTextPropertyToTextList(<B>display</B>, <B>text_prop</B>, <B>list_return</B>, <B>count_return</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="converting-string-lists.html">XTextProperty</A> *<B>text_prop</B>;
+      char ***<B>list_return</B>;
+      int *<B>count_return</B>;
+
+int XwcTextPropertyToTextList(<B>display</B>, <B>text_prop</B>, <B>list_return</B>, <B>count_return</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="converting-string-lists.html">XTextProperty</A> *<B>text_prop</B>;
+      wchar_t ***<B>list_return</B>;
+      int *<B>count_return</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>text_prop</B>
+<TD> Specifies the
+<B><A HREF="converting-string-lists.html">XTextProperty</A></B>
+structure to be used.
+
+<TR><TD> <B>list_return</B>
+<TD> Returns a list of null-terminated character strings.
+
+<TR><TD> <B>count_return</B>
+<TD> Returns the number of strings.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The 
+<B>XmbTextPropertyToTextList()</B>
+and 
+<B>XwcTextPropertyToTextList()</B>
+functions return a list of text strings in the current locale representing the
+null-separated elements of the specified
+<A HREF="converting-string-lists.html">XTextProperty</A>
+structure.
+The data in text_prop must be format 8.
+
+<P>
+
+Multiple elements of the property (for example, the strings in a disjoint
+text selection) are separated by a null byte.
+The contents of the property are not required to be null-terminated;
+any terminating null should not be included in text_prop.nitems.
+
+<P>
+
+If insufficient memory is available for the list and its elements,
+<B>XmbTextPropertyToTextList()</B>
+and
+<B>XwcTextPropertyToTextList()</B>
+return 
+<B>XNoMemory</B> .
+If the current locale is not supported,
+the functions return
+<B>XLocaleNotSupported</B> .
+Otherwise, if the encoding field of text_prop is not convertible 
+to the encoding of the current locale,
+the functions return
+<B>XConverterNotFound</B> .
+For supported locales,
+existence of a converter from COMPOUND_TEXT, STRING
+or the encoding of the current locale is guaranteed if
+<B>XSupportsLocale</B> 
+returns 
+<B>True</B>
+for the current locale (but the actual text
+may contain unconvertible characters).
+Conversion of other encodings is implementation dependent.
+In all of these error cases,
+the functions do not set any return values.
+
+<P>
+
+Otherwise, 
+<B>XmbTextPropertyToTextList()</B>
+and
+<B>XwcTextPropertyToTextList()</B>
+return the list of null-terminated text strings to list_return
+and the number of text strings to count_return.
+
+<P>
+
+If the value field of text_prop is not fully convertible to the encoding of
+the current locale,
+the functions return the number of unconvertible characters.
+Each unconvertible character is converted to a string in the
+current locale that is specific to the current locale.
+To obtain the value of this string, 
+use
+<B><A HREF="XDefaultString.html">XDefaultString()</A></B>.
+Otherwise,
+<B>XmbTextPropertyToTextList()</B>
+and
+<B>XwcTextPropertyToTextList()</B>
+return 
+<B>Success</B> .
+
+<P>
+
+To free the storage for the list and its contents returned by
+<B>XmbTextPropertyToTextList()</B>,
+use
+<B><A HREF="XFreeStringList.html">XFreeStringList()</A></B>.
+To free the storage for the list and its contents returned by
+<B>XwcTextPropertyToTextList()</B>,
+use
+<B><A HREF="XwcFreeStringList.html">XwcFreeStringList()</A></B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XmbTextListToTextProperty.html">XmbTextListToTextProperty()</A></B>,
+<B><A HREF="XmbTextListToTextProperty.html">XwcTextListToTextProperty()</A></B>,
+<B><A HREF="XwcFreeStringList.html">XwcFreeStringList()</A></B>,
+<B><A HREF="XDefaultString.html">XDefaultString()</A></B>,
+<B><A HREF="XSetTextProperty.html">XSetTextProperty()</A></B>,
+<B><A HREF="XStringListToTextProperty.html">XStringListToTextProperty()</A></B>,
+"<A HREF="converting-string-lists.html">Converting String Lists</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,33 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Server Grabbing</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>9.5 Server Grabbing</H1>
+
+Xlib provides functions that you can use to grab and ungrab the server.
+These functions can be used to control processing of output on other
+connections by the window system server.
+While the server is grabbed,
+no processing of requests or close downs on any other connection will occur.
+A client closing its connection automatically ungrabs the server.
+<!.IN "Menus">
+<!.IN "Window" "managers">
+Although grabbing the server is highly discouraged, it is sometimes necessary.
+
+<P>
+
+To grab the server, use
+<B><A HREF="XGrabServer.html">XGrabServer()</A></B>.
+
+<P>
+
+To ungrab the server, use
+<B><A HREF="XUngrabServer.html">XUngrabServer()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="killing-clients.html">Killing Clients</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

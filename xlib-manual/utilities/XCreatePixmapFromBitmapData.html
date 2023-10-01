@@ -1,0 +1,111 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XCreatePixmapFromBitmapData</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XCreatePixmapFromBitmapData</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XCreatePixmapFromBitmapData" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="../pixmap-and-cursor/pixmap.html">Pixmap</A> XCreatePixmapFromBitmapData(<B>display</B>, <B>d</B>, <B>data</B>, <B>width</B>, <B>height</B>, <B>fg</B>, <B>bg</B>, <B>depth</B>)
+     <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+     Drawable <B>d</B>;
+     char *<B>data</B>;
+     unsigned int <B>width</B>, <B>height</B>;
+     unsigned long <B>fg</B>, <B>bg</B>;
+     unsigned int <B>depth</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>d</B>
+<TD> Specifies the drawable that indicates the screen. 
+
+<TR><TD> <B>data</B>
+<TD> Specifies the data in bitmap format.
+
+<TR><TD> <B>width</B><BR>
+	<B>height</B>
+<TD> Specify the width and height.
+
+<TR><TD> <B>fg</B><BR>
+	<B>bg</B>
+<TD> Specify the foreground and background pixel values to use.
+
+<TR><TD> <B>depth</B>
+<TD> Specifies the depth of the pixmap.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XCreatePixmapFromBitmapData()</B>
+function creates a pixmap of the given depth and then does a bitmap-format
+<B><A HREF="../graphics/XPutImage.html">XPutImage()</A></B>
+of the data into it.
+The depth must be supported by the screen of the specified drawable,
+or a
+<B>BadMatch</B>
+error results.
+
+<P>
+
+<B>XCreatePixmapFromBitmapData()</B>
+can generate
+<B>BadAlloc</B>,
+<B>BadDrawable</B>,
+<B>BadGC</B>,
+and
+<B>BadValue</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../GContext.html">GContext</A></B> 
+	argument does not name a defined 
+	<B><A HREF="../GContext.html">GContext</A></B>.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XCreateBitmapFromData.html">XCreateBitmapFromData()</A></B>,
+<B><A HREF="../pixmap-and-cursor/XCreatePixmap.html">XCreatePixmap()</A></B>,
+<B><A HREF="../graphics/XPutImage.html">XPutImage()</A></B>,
+<B><A HREF="XReadBitmapFile.html">XReadBitmapFile()</A></B>,
+<B><A HREF="XWriteBitmapFile.html">XWriteBitmapFile()</A></B>,
+"<A HREF="manipulating-bitmaps.html">Manipulating Bitmaps</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

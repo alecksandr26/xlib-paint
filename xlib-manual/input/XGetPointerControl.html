@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetPointerControl</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetPointerControl</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetPointerControl" "" "@DEF@">
+
+<CODE><PRE>
+XGetPointerControl(<B>display</B>, <B>accel_numerator_return</B>, <B>accel_denominator_return</B>, 
+                       <B>threshold_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      int *<B>accel_numerator_return</B>, *<B>accel_denominator_return</B>;
+      int *<B>threshold_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>accel_numerator_return</B>
+<TD> Returns the numerator for the acceleration multiplier.
+
+<TR><TD> <B>accel_denominator_return</B>
+<TD> Returns the denominator for the acceleration multiplier.
+
+<TR><TD> <B>threshold_return</B>
+<TD> Returns the acceleration threshold.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetPointerControl()</B>
+function returns the pointer's current acceleration multiplier
+and acceleration threshold.
+
+<H2>See also</H2>
+
+<B><A HREF="XChangePointerControl.html">XChangePointerControl()</A></B>,
+"<A HREF="keyboard-and-pointer-settings.html">Keyboard and Pointer Settings</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,88 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Drawing Text</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>8.6 Drawing Text</H1>
+
+This section discusses how to draw:
+
+<UL>
+<P><LI>
+<A HREF="complex.html">Complex text</A>
+
+<P><LI>
+<A HREF="characters.html">Text characters</A>
+
+<P><LI>
+<A HREF="image-characters.html">Image text characters</A>
+
+</UL>
+
+<P>
+
+The fundamental text functions
+<B><A HREF="XDrawText.html">XDrawText()</A></B>
+and
+<B><A HREF="XDrawText16.html">XDrawText16()</A></B>
+use the following structures:
+
+<A NAME="XTextItem"></A>
+<P>
+
+<!.IN "XTextItem" "" "@DEF@">
+<CODE><PRE>
+typedef struct {
+	char *chars;	/* pointer to string */
+	int nchars;	/* number of characters */
+	int delta;	/* delta between strings */
+	Font font;	/* Font to print it in, None don't change */
+} XTextItem;
+</PRE></CODE>
+
+<A NAME="XTextItem16"></A>
+<P>
+
+<!.IN "XTextItem16" "" "@DEF@">
+<CODE><PRE>
+typedef struct {
+	XChar2b *chars;	/* pointer to two-byte characters */
+	int nchars;	/* number of characters */
+	int delta;	/* delta between strings */
+	Font font;	/* font to print it in, None don't change */
+} XTextItem16;
+</PRE></CODE>
+
+<P>
+
+If the font member is not
+<B>None</B> ,
+the font is changed before printing and also is stored in the GC.
+If an error was generated during text drawing,
+the previous items may have been drawn.
+The baseline of the characters are drawn starting at the x and y
+coordinates that you pass in the text drawing functions.
+
+<P>
+
+For example, consider the background rectangle drawn by
+<B><A HREF="XDrawImageString.html">XDrawImageString()</A></B>.
+If you want the upper-left corner of the background rectangle
+to be at pixel coordinate (x,y), pass the (x,y + ascent)
+as the baseline origin coordinates to the text functions.
+The ascent is the font ascent, as given in the
+<A HREF="../font-metrics/#XFontStruct">XFontStruct</A>
+structure.
+If you want the lower-left corner of the background rectangle
+to be at pixel coordinate (x,y), pass the (x,y \- descent + 1)
+as the baseline origin coordinates to the text functions.
+The descent is the font descent, as given in the
+<A HREF="../font-metrics/#XFontStruct">XFontStruct</A>
+structure.
+
+<H5 ALIGN=right><I>Next: <A HREF="complex.html">Drawing Complex Text</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

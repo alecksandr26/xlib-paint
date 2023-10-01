@@ -1,0 +1,91 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XInternAtom</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XInternAtom</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Atom" "interning">
+<!.IN "XInternAtom" "" "@DEF@">
+
+<CODE><PRE>
+Atom XInternAtom(<B>display</B>, <B>atom_name</B>, <B>only_if_exists</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      char *<B>atom_name</B>;
+      Bool <B>only_if_exists</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>atom_name</B>
+<TD> Specifies the name associated with the atom you want returned.
+
+<TR><TD> <B>only_if_exists</B>
+<TD> Specifies a Boolean value that indicates whether the atom must be created.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XInternAtom()</B>
+function returns the atom identifier associated with the specified atom_name
+string.
+If only_if_exists is 
+<B>False</B>,
+the atom is created if it does not exist.
+Therefore,
+<B>XInternAtom()</B>
+can return
+<B>None</B>.
+If the atom name is not in the Host Portable Character Encoding, 
+the result is implementation dependent.
+Uppercase and lowercase matter;
+the strings ``thing'', ``Thing'', and ``thinG'' 
+all designate different atoms.  
+The atom will remain defined even after the client's connection closes.
+It will become undefined only when the last connection to
+the X server closes.
+
+<P>
+
+<B>XInternAtom()</B>
+can generate
+<B>BadAlloc</B>
+and
+<B>BadValue</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadValue</B>
+<TD>Some numeric value falls outside the range of values accepted by the request.
+Unless a specific range is specified for an argument, the full range defined
+by the argument's type is accepted.  Any argument defined as a set of
+alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XGetAtomName.html">XGetAtomName()</A></B>,
+<B><A HREF="XGetWindowProperty.html">XGetWindowProperty()</A></B>,
+<B><A HREF="XInternAtoms.html">XInternAtoms()</A></B>,
+"<A HREF="properties-and-atoms.html">Properties and Atoms</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

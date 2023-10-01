@@ -1,0 +1,193 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGrabKey</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGrabKey</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Key" "grabbing">
+<!.IN "Grabbing" "keys">
+<!.IN "XGrabKey" "" "@DEF@">
+
+<CODE><PRE>
+XGrabKey(<B>display</B>, <B>keycode</B>, <B>modifiers</B>, <B>grab_window</B>, <B>owner_events</B>, <B>pointer_mode</B>, 
+             <B>keyboard_mode</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      int <B>keycode</B>;
+      unsigned int <B>modifiers</B>;
+      Window <B>grab_window</B>;
+      Bool <B>owner_events</B>;
+      int <B>pointer_mode</B>, <B>keyboard_mode</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>keycode</B>
+<TD> Specifies the KeyCode or
+<B>AnyKey</B>.
+
+<TR><TD> <B>modifiers</B>
+<TD> Specifies the set of keymasks or
+<B>AnyModifier</B>.
+The mask is the bitwise inclusive OR of the valid keymask bits.
+
+<TR><TD> <B>grab_window</B>
+<TD> Specifies the grab window.
+
+<TR><TD> <B>owner_events</B>
+<TD> Specifies a Boolean value that indicates whether the keyboard events 
+are to be reported as usual.
+
+<TR><TD> <B>pointer_mode</B>
+<TD> Specifies further processing of pointer events.
+You can pass 
+<B>GrabModeSync</B> 
+or
+<B>GrabModeAsync</B>.
+
+<TR><TD> <B>keyboard_mode</B>
+<TD> Specifies further processing of keyboard events.
+You can pass 
+<B>GrabModeSync</B> 
+or
+<B>GrabModeAsync</B>.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGrabKey()</B>
+function establishes a passive grab on the keyboard.
+In the future,
+the keyboard is actively grabbed (as for
+<B><A HREF="XGrabKeyboard.html">XGrabKeyboard()</A></B>),
+the last-keyboard-grab time is set to the time at which the key was pressed
+(as transmitted in the
+<B><A HREF="../events/keyboard-pointer/keyboard-pointer.html">KeyPress</A></B>
+event), and the
+<B><A HREF="../events/keyboard-pointer/keyboard-pointer.html">KeyPress</A></B>
+event is reported if all of the following conditions are true:
+
+<UL>
+
+
+<P><LI>
+The keyboard is not grabbed and the specified key
+(which can itself be a modifier key) is logically pressed
+when the specified modifier keys are logically down,
+and no other modifier keys are logically down.
+
+<P><LI>
+Either the grab_window is an ancestor of (or is) the focus window,
+or the grab_window is a descendant of the focus window and contains the pointer.
+
+<P><LI>
+A passive grab on the same key combination does not exist
+on any ancestor of grab_window.
+
+</UL>
+
+<P>
+
+The interpretation of the remaining arguments is as for 
+<B><A HREF="XGrabKeyboard.html">XGrabKeyboard()</A></B>.
+The active grab is terminated automatically when the logical state of the
+keyboard has the specified key released
+(independent of the logical state of the modifier keys).
+
+<P>
+
+Note that the logical state of a device (as seen by client applications)
+may lag the physical state if device event processing is frozen.
+
+<P>
+
+A modifiers argument of 
+<B>AnyModifier</B>
+is equivalent to issuing the request for all
+possible modifier combinations (including the combination of no
+modifiers).  
+It is not required that all modifiers specified have
+currently assigned KeyCodes.
+A keycode argument of 
+<B>AnyKey</B>
+is equivalent to issuing
+the request for all possible KeyCodes.
+Otherwise, the specified keycode must be in
+the range specified by min_keycode and max_keycode in the connection
+setup, 
+or a
+<B>BadValue</B>
+error results.
+
+<P>
+
+If some other client has issued a 
+<B>XGrabKey()</B>
+with the same key combination on the same window, a 
+<B>BadAccess</B> 
+error results.
+When using
+<B>AnyModifier</B>
+or 
+<B>AnyKey</B>,
+the request fails completely,
+and a
+<B>BadAccess</B> 
+error results (no grabs are established) 
+if there is a conflicting grab for any combination.
+
+<P>
+
+<B>XGrabKey()</B>
+can generate
+<B>BadAccess</B> ,
+<B>BadValue</B> , 
+and
+<B>BadWindow</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAccess</B>
+<TD> A client attempted to free a color map entry that
+it did not already allocate.
+<TR><TD><B>BadAccess</B>
+<TD> A client attempted to store into a read-only color
+     map entry.
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllowEvents.html">XAllowEvents()</A></B>,
+<B><A HREF="XGrabButton.html">XGrabButton()</A></B>,
+<B><A HREF="XGrabKeyboard.html">XGrabKeyboard()</A></B>,
+<B><A HREF="XGrabPointer.html">XGrabPointer()</A></B>,
+<B><A HREF="XUngrabKey.html">XUngrabKey()</A></B>,
+"<A HREF="keyboard-grabbing.html">Keyboard Grabbing</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

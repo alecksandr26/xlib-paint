@@ -1,0 +1,133 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetKeyboardMapping</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetKeyboardMapping</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetKeyboardMapping" "" "@DEF@">
+
+<CODE><PRE>
+KeySym *XGetKeyboardMapping(<B>display</B>, <B>first_keycode</B>, <B>keycode_count</B>, 
+                            <B>keysyms_per_keycode_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      KeyCode <B>first_keycode</B>;
+      int <B>keycode_count</B>;
+      int *<B>keysyms_per_keycode_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>first_keycode</B>
+<TD> Specifies the first KeyCode that is to be returned.
+
+<TR><TD> <B>keycode_count</B>
+<TD> Specifies the number of KeyCodes that are to be returned.
+
+<TR><TD> <B>keysyms_per_keycode_return</B>
+<TD> Returns the number of KeySyms per KeyCode.
+
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetKeyboardMapping()</B>
+function returns the symbols for the specified number of KeyCodes
+starting with first_keycode.
+The value specified in first_keycode must be greater than 
+or equal to min_keycode as returned by
+<B><A HREF="XDisplayKeycodes.html">XDisplayKeycodes()</A></B>,
+or a
+<B>BadValue</B>
+error results.
+In addition, the following expression must be less than or equal 
+to max_keycode as returned by
+<B><A HREF="XDisplayKeycodes.html">XDisplayKeycodes()</A></B>:
+
+<P>
+
+<BLOCKQUOTE>
+<I>first_keycode + keycode_count - 1</I>
+</BLOCKQUOTE>
+
+<P>
+
+If this is not the case, a 
+<B>BadValue</B>
+error results. 
+The number of elements in the KeySyms list is:
+
+<P>
+
+<BLOCKQUOTE>
+<I>keycode_count * keysyms_per_keycode_return</I>
+</BLOCKQUOTE>
+
+<P>
+
+KeySym number N, counting from zero, for KeyCode K has the following index
+in the list, counting from zero: 
+
+<BLOCKQUOTE><I>
+(K - first_code) * keysyms_per_code_return + N
+</I></BLOCKQUOTE>
+
+<P>
+
+The X server arbitrarily chooses the keysyms_per_keycode_return value 
+to be large enough to report all requested symbols. 
+A special KeySym value of 
+<B>NoSymbol</B> 
+is used to fill in unused elements for
+individual KeyCodes.
+To free the storage returned by 
+<B>XGetKeyboardMapping()</B>,
+use
+<B><A HREF="../display/XFree.html">XFree()</A></B>.
+
+<P>
+
+<B>XGetKeyboardMapping()</B>
+can generate a
+<B>BadValue</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeKeyboardMapping.html">XChangeKeyboardMapping()</A></B>,
+<B><A HREF="XDeleteModifiermapEntry.html">XDeleteModifiermapEntry()</A></B>,
+<B><A HREF="XDisplayKeycodes.html">XDisplayKeycodes()</A></B>,
+<B><A HREF="../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XFreeModifiermap.html">XFreeModifiermap()</A></B>,
+<B><A HREF="XGetModifierMapping.html">XGetModifierMapping()</A></B>,
+<B><A HREF="XInsertModifiermapEntry.html">XInsertModifiermapEntry()</A></B>,
+<B><A HREF="XNewModifiermap.html">XNewModifiermap()</A></B>,
+<B><A HREF="XSetModifierMapping.html">XSetModifierMapping()</A></B>,
+<B><A HREF="XSetPointerMapping.html">XSetPointerMapping()</A></B>,
+"<A HREF="keyboard-encoding.html">Keyboard Encoding</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

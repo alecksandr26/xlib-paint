@@ -1,0 +1,160 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XDrawImageString16</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XDrawImageString16</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XDrawImageString16" "" "@DEF@">
+
+<CODE><PRE>
+XDrawImageString16(<B>display</B>, <B>d</B>, <B>gc</B>, <B>x</B>, <B>y</B>, <B>string</B>, <B>length</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Drawable <B>d</B>;
+      <A HREF="../../GC/manipulating.html">GC</A> <B>gc</B>;
+      int <B>x</B>, <B>y</B>;
+      <A HREF="../font-metrics/#XChar2b">XChar2b</A> *<B>string</B>;
+      int <B>length</B>; 
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>d</B>
+<TD> Specifies the drawable. 
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>x</B><BR>
+	<B>y</B>
+<TD> Specify the x and y coordinates, which are relative to the origin of the specified drawable and define the origin of the first character.
+
+<TR><TD> <B>string</B>
+<TD> Specifies the character string.
+
+<TR><TD> <B>length</B>
+<TD> Specifies the number of characters in the string argument.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XDrawImageString16()</B>
+function is similar to
+<B><A HREF="XDrawImageString.html">XDrawImageString()</A></B>
+except that it uses 2-byte or 16-bit characters.
+Both functions also use both the foreground and background pixels 
+of the GC in the destination.
+
+<P>
+
+The effect is first to fill a
+destination rectangle with the background pixel defined in the GC and then
+to paint the text with the foreground pixel.
+The upper-left corner of the filled rectangle is at:
+
+<P>
+
+<BLOCKQUOTE><CODE><PRE>
+[x, y - font-ascent]
+</PRE></CODE></BLOCKQUOTE>
+
+<P>
+
+The width is:
+
+<P>
+
+<BLOCKQUOTE><CODE><PRE>
+overall-width
+</PRE></CODE></BLOCKQUOTE>
+
+<P>
+
+The height is:
+
+<P>
+
+<BLOCKQUOTE><CODE><PRE>
+font-ascent + font-descent
+</PRE></CODE></BLOCKQUOTE>
+
+<P>
+
+The overall-width, font-ascent, and font-descent
+are as would be returned by 
+<B><A HREF="../font-metrics/XQueryTextExtents.html">XQueryTextExtents()</A></B>
+using gc and string.
+The function and fill-style defined in the GC are ignored for these functions. 
+The effective function is 
+<B>GXcopy</B> ,
+and the effective fill-style is
+<B>FillSolid</B> .
+
+<P>
+
+Both functions use these GC components: 
+<A HREF="../../GC/manipulating.html#plane-mask">plane-mask</A>,
+<A HREF="../../GC/manipulating.html#foreground">foreground</A>,
+<A HREF="../../GC/manipulating.html#background">background</A>,
+<A HREF="../../GC/manipulating.html">font</A>,
+<A HREF="../../GC/manipulating.html#subwindow-mode">subwindow-mode</A>,
+<A HREF="../../GC/manipulating.html#clip-mask">clip-x-origin</A>,
+<A HREF="../../GC/manipulating.html#clip-mask">clip-y-origin</A>,
+and
+<A HREF="../../GC/manipulating.html#clip-mask">clip-mask</A>.
+
+<P>
+
+<B>XDrawImageString16()</B>
+can generate
+<B>BadDrawable</B> ,
+<B>BadGC</B> ,
+and
+<B>BadMatch</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../GContext.html">GContext</A></B> 
+	argument does not name a defined 
+	<B><A HREF="../GContext.html">GContext</A></B>.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XDrawImageString.html">XDrawImageString()</A></B>,
+<B><A HREF="XDrawString.html">XDrawString()</A></B>,
+<B><A HREF="XDrawText.html">XDrawText()</A></B>,
+<B><A HREF="../font-metrics/XLoadFont.html">XLoadFont()</A></B>,
+<B><A HREF="../font-metrics/XTextExtents.html">XTextExtents()</A></B>,
+"<A HREF="image-characters.html">Drawing Image Text Characters</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

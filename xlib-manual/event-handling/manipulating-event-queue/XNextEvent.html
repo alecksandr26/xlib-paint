@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XNextEvent</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XNextEvent</H1>
+
+<!.IN "XNextEvent" "" "@DEF@">
+
+<H2>Syntax</H2>
+
+<CODE><PRE>
+XNextEvent(<B>display</B>, <B>event_return</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="../../events/structures.html#XEvent">XEvent</A> *<B>event_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>event_return</B>
+<TD> Returns the next event in the queue.
+</TABLE>
+
+The
+<B>XNextEvent()</B>
+function copies the first event from the event queue into the specified
+<A HREF="../../events/structures.html#XEvent">XEvent</A>
+structure and then removes it from the queue.
+If the event queue is empty,
+<B>XNextEvent()</B>
+flushes the output buffer and blocks until an event is received.
+
+<H2>See also</H2>
+
+<A HREF="../../events/structures.html#XEvent">XAnyEvent</A>,
+<B><A HREF="XCheckMaskEvent.html">XCheckMaskEvent()</A></B>,
+<B><A HREF="XCheckTypedEvent.html">XCheckTypedEvent()</A></B>,
+<B><A HREF="XCheckTypedWindowEvent.html">XCheckTypedWindowEvent()</A></B>,
+<B><A HREF="XCheckWindowEvent.html">XCheckWindowEvent()</A></B>,
+<B><A HREF="XIfEvent.html">XIfEvent()</A></B>,
+<B><A HREF="XMaskEvent.html">XMaskEvent()</A></B>,
+<B><A HREF="XPeekEvent.html">XPeekEvent()</A></B>,
+<B><A HREF="XPutBackEvent.html">XPutBackEvent()</A></B>,
+<B><A HREF="../XSendEvent.html">XSendEvent()</A></B>,
+<B><A HREF="XWindowEvent.html">XWindowEvent()</A></B>,
+"<A HREF="next-event.html">Returning the Next Event</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

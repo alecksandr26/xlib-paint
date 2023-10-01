@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XQueryBestCursor</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XQueryBestCursor</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XQueryBestCursor" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../introduction/errors.html#Status">Status</A></B> XQueryBestCursor(<B>display</B>, <B>d</B>, <B>width</B>, <B>height</B>, <B>width_return</B>, <B>height_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Drawable <B>d</B>;
+      unsigned int <B>width</B>, <B>height</B>;
+      unsigned int *<B>width_return</B>, *<B>height_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>d</B>
+<TD> Specifies the drawable, which indicates the screen. 
+
+<TR><TD> <B>width</B>
+<TR><TD> <B>height</B>
+<TD> Specify the width and height of the cursor that you want the size information for.
+
+<TR><TD> <B>width_return</B>
+<TR><TD> <B>height_return</B>
+<TD> Return the best width and height that is closest to the specified width 
+and height.
+
+</TABLE>
+
+<H2>Description</H2>
+
+Some displays allow larger cursors than other displays.
+The
+<B>XQueryBestCursor()</B>
+function provides a way to find out what size cursors are actually
+possible on the display.
+<!.IN "Cursor" "limitations" >
+It returns the largest size that can be displayed.
+Applications should be prepared to use smaller cursors on displays that
+cannot support large ones.
+
+<P>
+
+<B>XQueryBestCursor()</B>
+can generate a
+<B>BadDrawable</B>
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../color/XCreateColormap.html">XCreateColormap()</A></B>
+<B><A HREF="XCreateFontCursor.html">XCreateFontCursor()</A></B>,
+<B><A HREF="../window/XDefineCursor.html">XDefineCursor()</A></B>,
+<B><A HREF="XFreeCursor.html">XFreeCursor()</A></B>,
+<B><A HREF="XRecolorCursor.html">XRecolorCursor()</A></B>,
+"<A HREF="cursor.html">Creating, Recoloring, and Freeing Cursors</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: CIELuv Queries</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.11.3 CIELuv Queries</H1>
+
+The following equations are useful in describing the CIELuv query functions:
+
+<P>
+
+<!.IN "Psychometric Hue Angle">
+<!.IN "CIE metric lightness">
+<!.IN "Psychometric Chroma">
+<!.IN "Psychometric Chroma" "maximum">
+
+<BLOCKQUOTE><I>
+CIELuv Psychometric Chroma = sqrt(u_star<SUP>2</SUP> + v_star<SUP>2</SUP> )
+
+<P>
+
+CIELuv Psychometric Hue = tan<SUP>-1</SUP> (v_star / u_star)
+</I></BLOCKQUOTE>
+
+<P>
+
+To obtain the CIE L*u*v* coordinates of maximum Psychometric Chroma
+for a given Psychometric Hue Angle and CIE metric lightness (L*), use
+<B><A HREF="XcmsCIELuvQueryMaxC.html">XcmsCIELuvQueryMaxC()</A></B>.
+
+<P>
+
+To obtain the CIE L*u*v* coordinates of maximum CIE metric lightness (L*)
+for a given Psychometric Hue Angle and Psychometric Chroma, use
+<B><A HREF="XcmsCIELuvQueryMaxL.html">XcmsCIELuvQueryMaxL()</A></B>.
+
+<P>
+
+To obtain the CIE L*u*v* coordinates of maximum Psychometric Chroma
+for a given Psychometric Hue Angle, use
+<B><A HREF="XcmsCIELuvQueryMaxLC.html">XcmsCIELuvQueryMaxLC()</A></B>.
+
+<P>
+
+To obtain the CIE L*u*v* coordinates of minimum CIE metric lightness (L*)
+for a given Psychometric Hue Angle and Psychometric Chroma, use
+<B><A HREF="XcmsCIELuvQueryMinL.html">XcmsCIELuvQueryMinL()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="tekhvc.html">TekHVC Queries</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.lri.fr:8000/">Christophe Tronche</A></ADDRESS>
+</BODY>
+</HTML>

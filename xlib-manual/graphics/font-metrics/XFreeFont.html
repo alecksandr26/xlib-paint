@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XFreeFont</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XFreeFont</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XFreeFont" "" "@DEF@">
+
+<CODE><PRE>
+<B>XFreeFont()</B>(<B>display</B>, <B>font_struct</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="./#XFontStruct">XFontStruct</A> *<B>font_struct</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>font_struct</B>
+<TD> Specifies the storage associated with the font.
+
+</TABLE>
+
+<H2>Description</H2>
+ 
+The
+<B>XFreeFont()</B>
+function deletes the association between the font resource ID and the specified 
+font and frees the
+<A HREF="./#XFontStruct">XFontStruct</A>
+structure.
+The font itself will be freed when no other resource references it.
+The data and the font should not be referenced again.
+
+<P>
+
+<B>XFreeFont()</B>
+can generate a
+<B>BadFont</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadFont</B>
+<TD>A value for a font argument does not name a defined font (or, in some cases, 
+    <B><A HREF="../GContext.html">GContext</A></B>).
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../../GC/XCreateGC.html">XCreateGC()</A></B>,
+<B><A HREF="XGetFontProperty.html">XGetFontProperty()</A></B>,
+<B><A HREF="XListFonts.html">XListFonts()</A></B>,
+<B><A HREF="XLoadFont.html">XLoadFont()</A></B>,
+<B><A HREF="XLoadQueryFont.html">XLoadQueryFont()</A></B>,
+<B><A HREF="XQueryFont.html">XQueryFont()</A></B>,
+<B><A HREF="../../window-and-session-manager/XSetFontPath.html">XSetFontPath()</A></B>,
+<B><A HREF="XUnloadFont.html">XUnloadFont()</A></B>,
+"<A HREF="fonts.html">Loading and Freeing Fonts</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

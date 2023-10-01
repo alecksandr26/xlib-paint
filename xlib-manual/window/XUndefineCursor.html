@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XUndefineCursor</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XUndefineCursor</H1>
+
+<H2>Syntax</H2>
+<!.IN "Window" "undefining the cursor">
+<!.IN "XUndefineCursor" "" "@DEF@">
+
+<CODE><PRE>
+XUndefineCursor(<B>display</B>, <B>w</B>)
+      Display *<B>display</B>;
+      Window <B>w</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XUndefineCursor()</B>
+function undoes the effect of a previous
+<B><A HREF="XDefineCursor.html">XDefineCursor()</A></B>
+for this window.
+When the pointer is in the window,
+the parent's cursor will now be used.
+On the root window,
+the default cursor is restored.
+
+<P>
+
+<B>XUndefineCursor()</B>
+can generate a
+<B>BadWindow</B>
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../pixmap-and-cursor/XCreateFontCursor.html">XCreateFontCursor()</A></B>,
+<B><A HREF="XDefineCursor.html">XDefineCursor()</A></B>,
+<B><A HREF="../pixmap-and-cursor/XRecolorCursor.html">XRecolorCursor()</A></B>,
+"<A HREF="change-attributes.html">Changing Window Attributes</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

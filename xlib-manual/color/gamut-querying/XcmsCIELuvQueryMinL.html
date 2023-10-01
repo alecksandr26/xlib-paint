@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Extensions: XcmsCIELuvQueryMinL</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XcmsCIELuvQueryMinL</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Psychometric Hue Angle">
+<!.IN "CIE metric lightness">
+<!.IN "CIE metric lightness" "minimum">
+<!.IN "XcmsCIELuvQueryMinL" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../conversion-contexts-and-gamut-mapping.html#cmsStatus">Status</A></B> XcmsCIELuvQueryMinL(<B>ccc</B>, <B>hue_angle</B>, <B>chroma</B>, <B>color_return</B>)
+      <A HREF="../CCC/macros.html">XcmsCCC</A> <B>ccc</B>;
+      XcmsFloat <B>hue_angle</B>;
+      XcmsFloat <B>chroma</B>;
+      <A HREF="../structures.html#XcmsColor">XcmsColor</A> *<B>color_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>ccc</B>
+<TD> Specifies the <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>.
+The <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>'s Client White Point and white point adjustment procedures
+are ignored.
+
+<TR><TD> <B>hue_angle</B>
+<TD> Specifies the hue angle (in degrees) at which to find minimum lightness.
+
+<TR><TD> <B>chroma</B>
+<TD> Specifies the chroma at which to find minimum lightness.
+
+<TR><TD> <B>color_return</B>
+<TD> Returns the CIE L*u*v* coordinates of minimum lightness
+displayable by the screen for the given hue angle and chroma.
+The white point associated with the returned
+color specification is the Screen White Point.
+The value returned in the pixel member is undefined.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XcmsCIELuvQueryMinL()</B>
+function, given a hue angle and chroma,
+finds the point of minimum lightness (L*) displayable by the screen.
+It returns this point in CIE L*u*v* coordinates.
+An 
+<B><A HREF="../conversion-contexts-and-gamut-mapping.html#cmsStatus">XcmsFailure</A></B>
+return value usually indicates that the given chroma
+is beyond maximum for the given hue angle.
+
+<H2>See also</H2>
+
+<B><A HREF="XcmsCIELuvQueryMaxC.html">XcmsCIELuvQueryMaxC()</A></B>,
+<B><A HREF="XcmsCIELuvQueryMaxL.html">XcmsCIELuvQueryMaxL()</A></B>,
+<B><A HREF="XcmsCIELuvQueryMaxLC.html">XcmsCIELuvQueryMaxLC()</A></B>,
+<B><A HREF="XcmsQueryBlack.html">XcmsQueryBlack()</A></B>,
+<B><A HREF="XcmsTekHVCQueryMaxC.html">XcmsTekHVCQueryMaxC()</A></B>,
+"<A HREF="cieluv.html">CIELuv Queries</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

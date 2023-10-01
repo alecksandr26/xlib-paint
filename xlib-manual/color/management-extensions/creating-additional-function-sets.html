@@ -1,0 +1,205 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Creating Additional Function Sets</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.12.9 Creating Additional Function Sets</H1>
+
+The creation of additional function sets should be
+required only when an output device does not conform to existing 
+function sets or when additional device-dependent color spaces are necessary.
+A function set consists primarily of a collection of device-dependent
+<B><A HREF="creating-additional-spaces.html#XcmsColorSpace">XcmsColorSpace</A></B>
+structures and a means to read and store a 
+screen's color characterization data.
+This data is stored in an
+<B>XcmsFunctionSet</B>
+structure.
+A handle to this structure (that is, by means of global variable)
+is usually made accessible to the client program for use with
+<B><A HREF="XcmsAddFunctionSet.html">XcmsAddFunctionSet()</A></B>.
+
+<P>
+
+If a function set uses new device-dependent 
+<B><A HREF="creating-additional-spaces.html#XcmsColorSpace">XcmsColorSpace</A></B>
+structures,
+they will be transparently processed into the color management system.
+Function sets can share an 
+<B><A HREF="creating-additional-spaces.html#XcmsColorSpace">XcmsColorSpace</A></B>
+structure for a device-dependent color space.
+In addition, multiple 
+<B><A HREF="creating-additional-spaces.html#XcmsColorSpace">XcmsColorSpace</A></B>
+structures are allowed for a device-dependent color space;
+however, a function set can reference only one of them.
+These 
+<B><A HREF="creating-additional-spaces.html#XcmsColorSpace">XcmsColorSpace</A></B>
+structures will differ in the functions to convert to and from CIE XYZ,
+thus tailored for the specific function set.
+
+<A NAME="XcmsFunctionSet"></A>
+<P>
+
+<CODE><PRE>
+typedef struct _XcmsFunctionSet {
+	XcmsColorSpace **DDColorSpaces;
+	XcmsScreenInitProc screenInitProc;
+	XcmsScreenFreeProc screenFreeProc;
+} XcmsFunctionSet;
+</PRE></CODE>
+
+<P>
+
+The DDColorSpaces member is a pointer to a NULL terminated list
+of pointers to 
+<B><A HREF="creating-additional-spaces.html#XcmsColorSpace">XcmsColorSpace</A></B>
+structures for the device-dependent color spaces that are supported
+by the function set.
+The screenInitProc member is set to the callback procedure (see the following
+interface specification) that initializes the 
+<B>XcmsPerScrnInfo</B>
+structure for a particular screen.
+
+<P>
+
+The screen initialization callback must adhere to the following software
+interface specification:
+<!.IN  "XcmsScreenInitProc" "" "@DEF@">
+
+<CODE><PRE>
+typedef <B><A HREF="../conversion-contexts-and-gamut-mapping.html#cmsStatus">Status</A></B> (*XcmsScreenInitProc)(<B>display</B>, <B>screen_number</B>, <B>screen_info</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen_number</B>;
+      XcmsPerScrnInfo *<B>screen_info</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the appropriate screen number on the host server.
+
+<TR><TD> <B>screen_info</B>
+<TD> Specifies the 
+<B>XcmsPerScrnInfo</B>
+structure, which contains the per screen information.
+
+</TABLE>
+
+The screen initialization callback in the
+<A HREF="#XcmsFunctionSet">XcmsFunctionSet</A>
+structure fetches the color characterization data (device profile) for
+the specified screen,
+typically off properties on the 
+screen's root window.
+It then initializes the specified
+<B>XcmsPerScrnInfo</B>
+structure.
+<!.IN "Device profile">
+<!.IN "Color Characterization Data">
+If successful, the procedure fills in the 
+<B>XcmsPerScrnInfo</B>
+structure as follows:
+
+<UL>
+
+<P><LI>
+It sets the screenData member to the address 
+of the created device profile data structure 
+(contents known only by the function set).
+
+<P><LI>
+It next sets the screenWhitePoint member.
+
+<P><LI>
+It next sets the functionSet member to the address of the
+<A HREF="#XcmsFunctionSet">XcmsFunctionSet</A>
+structure.
+
+<P><LI>
+It then sets the state member to 
+<B>XcmsInitSuccess</B>
+and finally returns
+<B>XcmsSuccess</B>.
+
+</UL>
+
+<P>
+
+If unsuccessful, the procedure sets the state member to 
+<B>XcmsInitFailure</B>
+and returns
+.PN XcmsFailure .
+
+<P>
+
+The
+<B>XcmsPerScrnInfo</B>
+structure contains:
+
+<CODE><PRE>
+typedef struct _XcmsPerScrnInfo {
+	XcmsColor screenWhitePoint;
+	XPointer functionSet;
+	XPointer screenData;
+	unsigned char state;
+	char pad[3];
+} XcmsPerScrnInfo;
+</PRE></CODE>
+
+<P>
+
+The screenWhitePoint member specifies the white point inherent to
+the screen.
+The functionSet member specifies the appropriate function set.
+The screenData member specifies the device profile.
+The state member is set to one of the following:
+
+<UL>
+
+<P><LI>
+<B>XcmsInitNone</B>
+indicates initialization has not been previously attempted.
+
+<P><LI>
+<B>XcmsInitFailure</B>
+indicates initialization has been previously attempted but failed.
+
+<P><LI>
+<B>XcmsInitSuccess</B>
+indicates initialization has been previously attempted and succeeded.
+
+</UL>
+
+<P>
+
+The screen free callback must adhere to the following software
+interface specification:
+<!.IN  "XcmsScreenFreeProc" "" "@DEF@">
+
+<CODE><PRE>
+typedef void (*XcmsScreenFreeProc)(<B>screenData</B>)
+      XPointer <B>screenData</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screenData</B>
+<TD> Specifies the data to be freed.
+
+</TABLE>
+
+This function is called to free the screenData stored in an
+<B>XcmsPerScrnInfo</B>
+structure.
+
+<H5 ALIGN=right><I>Next Chapter: <A HREF="../../GC/">Graphics Context Functions</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

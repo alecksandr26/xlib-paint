@@ -1,0 +1,85 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XFreeColormap</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XFreeColormap</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XFreeColormap" "" "@DEF@">
+
+<CODE><PRE>
+XFreeColormap(<B>display</B>, <B>colormap</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="./#colormap">Colormap</A> <B>colormap</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>colormap</B>
+<TD> Specifies the colormap that you want to destroy.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XFreeColormap()</B>
+function deletes the association between the colormap resource ID 
+and the colormap and frees the colormap storage.
+However, this function has no effect on the default colormap for a screen.
+If the specified colormap is an installed map for a screen,
+it is uninstalled (see
+<B><A HREF="../window-and-session-manager/XUninstallColormap.html">XUninstallColormap()</A></B>).
+If the specified colormap is defined as the colormap for a window (by
+<B><A HREF="../window/XCreateWindow.html">XCreateWindow()</A></B>,
+<B><A HREF="../window/XSetWindowColormap.html">XSetWindowColormap()</A></B>,
+or
+<B><A HREF="../window/XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>),
+<B>XFreeColormap()</B>
+changes the colormap associated with the window to
+<B>None</B> 
+and generates a
+<B><A HREF="../events/colormap-state.html">ColormapNotify</A></B>
+event.
+X does not define the colors displayed for a window with a colormap of
+<B>None</B> .
+
+<P>
+
+<B>XFreeColormap()</B>
+can generate a
+<B>BadColor</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadColor</B>
+<TD>  A value for a Colormap argument does not name a
+      defined Colormap.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocColor.html">XAllocColor()</A></B>,
+<B><A HREF="../window/XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>,
+<B><A HREF="XCopyColormapAndFree.html">XCopyColormapAndFree()</A></B>,
+<B><A HREF="XCreateColormap.html">XCreateColormap()</A></B>,
+<B><A HREF="../window/XCreateWindow.html">XCreateWindow()</A></B>,
+<B><A HREF="XQueryColor.html">XQueryColor()</A></B>,
+<B><A HREF="XStoreColors.html">XStoreColors()</A></B>,
+"<A HREF="colormap.html">Creating, Copying, and Destroying Colormaps</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

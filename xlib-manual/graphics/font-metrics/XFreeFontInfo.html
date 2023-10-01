@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XFreeFontInfo</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XFreeFontInfo</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XFreeFontInfo" "" "@DEF@">
+
+<CODE><PRE>
+XFreeFontInfo(<B>names</B>, <B>free_info</B>, <B>actual_count</B>)
+      char **<B>names</B>;
+      <A HREF="./#XFontStruct">XFontStruct</A> *<B>free_info</B>;
+      int <B>actual_count</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>names</B>
+<TD> Specifies the list of font names.
+
+
+<TR><TD> <B>free_info</B>
+<TD> Specifies the font information.
+
+
+<TR><TD> <B>actual_count</B>
+<TD> Specifies the actual number of font names.
+
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XFreeFontInfo()</B>
+function frees a font structure or an array of font structures,
+and optionally an array of font names.
+If NULL is passed for names, no font names are freed.
+If a font structure for an open font (returned by
+<B><A HREF="XLoadQueryFont.html">XLoadQueryFont()</A></B>)
+is passed, the structure is freed but the font is not closed; use
+<B><A HREF="XUnloadFont.html">XUnloadFont()</A></B>
+to close the font.
+
+<H2>See also</H2>
+
+<B><A HREF="XFreeFontNames.html">XFreeFontNames()</A></B>,
+<B><A HREF="XListFonts.html">XListFonts()</A></B>,
+<B><A HREF="XListFontsWithInfo.html">XListFontsWithInfo()</A></B>,
+<B><A HREF="XLoadFont.html">XLoadFont()</A></B>,
+<B><A HREF="../../window-and-session-manager/XSetFontPath.html">XSetFontPath()</A></B>,
+"<A HREF="names.html">Obtaining and Freeing Font Names and Information</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,96 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XQueryColors</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XQueryColors</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Color" "querying">
+<!.IN "XQueryColors" "" "@DEF@">
+
+<CODE><PRE>
+XQueryColors(<B>display</B>, <B>colormap</B>, <B>defs_in_out</B>, <B>ncolors</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="./#colormap">Colormap</A> <B>colormap</B>;
+      <A HREF="structures.html">XColor</A> <B>defs_in_out</B>[];
+      int <B>ncolors</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>colormap</B>
+<TD> Specifies the colormap.
+
+<TR><TD> <B>defs_in_out</B>
+<TD> Specifies and returns an array of color definition structures for the pixel
+specified in the structure.
+
+<TR><TD> <B>ncolors</B>
+<TD>
+Specifies the number of 
+<A HREF="structures.html">XColor</A>
+structures in the color definition array.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XQueryColors()</B>
+function returns the RGB value for each pixel in each
+<A HREF="structures.html">XColor</A>
+structure and sets the
+<B>DoRed</B>,
+<B>DoGreen</B>,
+and
+<B>DoBlue</B>
+flags in each structure.
+
+
+<P>
+
+<B>XQueryColors()</B>
+can generate
+<B>BadColor</B>
+and
+<B>BadValue</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadColor</B>
+<TD>  A value for a Colormap argument does not name a
+      defined Colormap.
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocColor.html">XAllocColor()</A></B>,
+<B><A HREF="XCreateColormap.html">XCreateColormap()</A></B>,
+<B><A HREF="XLookupColor.html">XLookupColor()</A></B>,
+<B><A HREF="XParseColor.html">XParseColor()</A></B>,
+<B><A HREF="XQueryColor.html">XQueryColor()</A></B>,
+<B><A HREF="XQueryColors.html">XQueryColors()</A></B>,
+<B><A HREF="XStoreColors.html">XStoreColors()</A></B>,
+"<A HREF="modifying-and-querying-cells.html">Modifying and Querying Colormap Cells</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

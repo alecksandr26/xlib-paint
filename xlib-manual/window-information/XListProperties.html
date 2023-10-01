@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XListProperties</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XListProperties</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Property" "listing">
+<!.IN "XListProperties" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="properties-and-atoms.html">Atom</A> *XListProperties(<B>display</B>, <B>w</B>, <B>num_prop_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="../window/">Window</A> <B>w</B>;
+      int *<B>num_prop_return</B>; 
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window whose property list you want to obtain.
+
+<TR><TD> <B>num_prop_return</B>
+<TD> Returns the length of the properties array.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XListProperties()</B>
+function returns a pointer to an array of atom properties that are defined for 
+the specified window or returns NULL if no properties were found.
+To free the memory allocated by this function, use
+<B><A HREF="../display/XFree.html">XFree()</A></B>.
+
+<P>
+
+<B>XListProperties()</B>
+can generate a
+<B>BadWindow</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeProperty.html">XChangeProperty()</A></B>,
+<B><A HREF="XDeleteProperty.html">XDeleteProperty()</A></B>,
+<B><A HREF="XGetWindowProperty.html">XGetWindowProperty()</A></B>,
+<B><A HREF="XRotateWindowProperties.html">XRotateWindowProperties()</A></B>,
+"<A HREF="obtain-properties.html">Obtaining and Changing Window Properties</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

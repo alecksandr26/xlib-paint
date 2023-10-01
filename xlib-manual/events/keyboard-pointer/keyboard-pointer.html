@@ -1,0 +1,390 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Keyboard and Pointer Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.5.2 Keyboard and Pointer Events</H1>
+
+<!.IN "Events" "ButtonPress">
+<!.IN "Events" "ButtonRelease">
+<!.IN "Events" "KeyPress">
+<!.IN "Events" "KeyRelease">
+<!.IN "Events" "MotionNotify">
+This section discusses the processing that occurs for the
+keyboard events
+<B>KeyPress</B>
+and 
+<B>KeyRelease</B> 
+and the pointer events
+<B>ButtonPress</B>,
+<B>ButtonRelease</B>,
+and
+<B>MotionNotify</B>.
+For information about the keyboard event-handling utilities,
+see "<A HREF="../../event-handling/">Event Handling Functions</A>".
+
+<P>
+
+<!.IN "KeyPress" "" "@DEF@">
+<!.IN "KeyRelease" "" "@DEF@">
+The X server reports
+<B>KeyPress</B>
+or
+<B>KeyRelease</B>
+events to clients wanting information about keys that logically change state.
+Note that these events are generated for all keys, 
+even those mapped to modifier bits.
+<!.IN "ButtonPress" "" "@DEF@">
+<!.IN "ButtonRelease" "" "@DEF@">
+The X server reports
+<B>ButtonPress</B>
+or
+<B>ButtonRelease</B>
+events to clients wanting information about buttons that logically change state.
+
+<P>
+
+<!.IN "MotionNotify" "" "@DEF@">
+The X server reports
+<B>MotionNotify</B>
+events to clients wanting information about when the pointer logically moves.
+The X server generates this event whenever the pointer is moved 
+and the pointer motion begins and ends in the window.
+The granularity of
+<B>MotionNotify</B>
+events is not guaranteed, 
+but a client that selects this event type is guaranteed
+to receive at least one event when the pointer moves and then rests.
+
+<P>
+
+The generation of the logical changes lags the physical changes 
+if device event processing is frozen.
+
+<P>
+
+To receive
+<B>KeyPress</B> ,
+<B>KeyRelease</B> ,
+<B>ButtonPress</B> ,
+and
+<B>ButtonRelease</B> 
+events, set 
+<B>KeyPressMask</B>,
+<B>KeyReleaseMask</B>,
+<B>ButtonPressMask</B>,
+and
+<B>ButtonReleaseMask</B>
+bits in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the window.
+
+<P>
+
+To receive 
+<B>MotionNotify</B>
+events, set one or more of the following event 
+masks bits in the event-mask attribute of the window.
+
+<UL>
+<P><LI>
+<B>Button1MotionMask</B> - <B>Button5MotionMask</B>
+
+<P>
+
+The client application receives
+<B>MotionNotify</B>
+events only when one or more of the specified buttons is pressed.
+
+<P><LI>
+<B>ButtonMotionMask</B>
+
+<P>
+
+The client application receives
+<B>MotionNotify</B>
+events only when at least one button is pressed.
+
+<P><LI>
+<B>PointerMotionMask</B>
+
+<P>
+
+The client application receives 
+<B>MotionNotify</B>
+events independent of the state of
+the pointer buttons.
+
+<P><LI>
+<B>PointerMotionHintMask</B>
+
+<P>
+
+If
+<B>PointerMotionHintMask</B>
+is selected in combination with one or more of the above masks, 
+the X server is free to send only one
+<B>MotionNotify</B>
+event (with the is_hint member  of the
+<B>XPointerMovedEvent</B>
+structure set to
+<B>NotifyHint</B>)
+to the client for the event window, 
+until either the key or button state changes,
+the pointer leaves the event window, or the client calls
+<B><A HREF="../../window-information/XQueryPointer.html">XQueryPointer()</A></B>
+or
+<B><A HREF="../../event-handling/XGetMotionEvents.html">XGetMotionEvents()</A></B>.
+The server still may send
+<B>MotionNotify</B>
+events without is_hint set to
+<B>NotifyHint</B>.
+
+</UL>
+
+<P>
+
+The source of the event is the viewable window that the pointer is in.
+The window used by the X server to report these events depends on 
+the window's position in the window hierarchy 
+and whether any intervening window prohibits the generation of these events.
+Starting with the source window, 
+the X server searches up the window hierarchy until it locates the first 
+window specified by a client as having an interest in these events.
+If one of the intervening windows has its do-not-propagate-mask
+set to prohibit generation of the event type,
+the events of those types will be suppressed.
+Clients can modify the actual window used for reporting by performing
+active grabs and, in the case of keyboard events, by using the focus window.
+
+<P>
+
+The structures for these event types contain:
+
+<A NAME="XButtonEvent"></A>
+<A NAME="XButtonPressedEvent"></A>
+<A NAME="XButtonReleasedEvent"></A>
+
+<P>
+
+<!.IN "XButtonEvent" "" "@DEF@">
+<!.IN "XButtonPressedEvent" "" "@DEF@">
+<!.IN "XButtonReleasedEvent" "" "@DEF@">
+
+<CODE><PRE>
+typedef struct {
+	int type;		/* ButtonPress or ButtonRelease */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Window window;		/* ``event'' window it is reported relative to */
+	Window root;		/* root window that the event occurred on */
+	Window subwindow;	/* child window */
+	Time time;		/* milliseconds */
+	int x, y;		/* pointer x, y coordinates in event window */
+	int x_root, y_root;	/* coordinates relative to root */
+	unsigned int state;	/* key or button mask */
+	unsigned int button;	/* detail */
+	Bool same_screen;	/* same screen flag */
+} XButtonEvent;
+typedef XButtonEvent XButtonPressedEvent;
+typedef XButtonEvent XButtonReleasedEvent;
+</PRE></CODE>
+
+<A NAME="XKeyEvent"></A>
+<A NAME="XKeyPressedEvent"></A>
+<A NAME="XKeyReleasedEvent"></A>
+
+<P>
+
+<!.IN "XKeyEvent" "" "@DEF@">
+<!.IN "XKeyPressedEvent" "" "@DEF@">
+<!.IN "XKeyReleasedEvent" "" "@DEF@">
+
+<CODE><PRE>
+typedef struct {
+	int type;		/* KeyPress or KeyRelease */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Window window;		/* ``event'' window it is reported relative to */
+	Window root;		/* root window that the event occurred on */
+	Window subwindow;	/* child window */
+	Time time;		/* milliseconds */
+	int x, y;		/* pointer x, y coordinates in event window */
+	int x_root, y_root;	/* coordinates relative to root */
+	unsigned int state;	/* key or button mask */
+	unsigned int keycode;	/* detail */
+	Bool same_screen;	/* same screen flag */
+} XKeyEvent;
+typedef XKeyEvent XKeyPressedEvent;
+typedef XKeyEvent XKeyReleasedEvent;
+</PRE></CODE>
+
+<A NAME="XMotionEvent"></A>
+<A NAME="XPointerMovedEvent"></A>
+
+<P>
+
+<!.IN "XMotionEvent" "" "@DEF@">
+<!.IN "XPointerMovedEvent" "" "@DEF@">
+<CODE><PRE>
+typedef struct {
+	int type;		/* MotionNotify */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Window window;		/* ``event'' window reported relative to */
+	Window root;		/* root window that the event occurred on */
+	Window subwindow;	/* child window */
+	Time time;		/* milliseconds */
+	int x, y;		/* pointer x, y coordinates in event window */
+	int x_root, y_root;	/* coordinates relative to root */
+	unsigned int state;	/* key or button mask */
+	char is_hint;		/* detail */
+	Bool same_screen;	/* same screen flag */
+} XMotionEvent;
+typedef XMotionEvent XPointerMovedEvent;
+</PRE></CODE>
+
+<P>
+
+These structures have the following common members:
+<B>window</B>, <B>root</B>, <B>subwindow</B>, <B>time</B>, <B>x</B>, <B>y</B>, <B>x_root</B>, <B>y_root</B>, <B>state</B>, and <B>same_screen</B>.
+The <B>window</B> member is set to the window on which the
+event was generated and is referred to as the event window. 
+As long as the conditions previously discussed are met,
+this is the window used by the X server to report the event.
+The <B>root</B> member is set to the source window's root window.
+The <B>x_root</B> and <B>y_root</B> members are set to the pointer's coordinates
+relative to the root window's origin at the time of the event.
+
+<P>
+
+The <B>same_screen</B> member is set to indicate whether the event 
+window is on the same screen
+as the root window and can be either
+<B>True</B> 
+or
+<B>False</B> .
+If
+<B>True</B> ,
+the event and root windows are on the same screen.
+If
+<B>False</B> ,
+the event and root windows are not on the same screen.
+
+<P>
+
+If the source window is an inferior of the event window, 
+the <B>subwindow</B> member of the structure is set to the child of the event window
+that is the source window or the child of the event window that is
+an ancestor of the source window.
+Otherwise, the X server sets the <B>subwindow</B> member to
+<B>None</B>.
+The <B>time</B> member is set to the time when the event was generated 
+and is expressed in milliseconds.
+
+<P>
+
+If the event window is on the same screen as the root window, 
+the <B>x</B> and <B>y</B> members
+are set to the coordinates relative to the event window's origin.
+Otherwise, these members are set to zero.
+
+<P>
+
+The <B>state</B> member is set to indicate the logical state of the pointer buttons 
+and modifier keys just prior to the event,
+which is the bitwise inclusive OR of one or more of the
+button or modifier key masks:
+<B>Button1Mask</B>,
+<B>Button2Mask</B>,
+<B>Button3Mask</B>,
+<B>Button4Mask</B>,
+<B>Button5Mask</B>,
+<B>ShiftMask</B>,
+<B>LockMask</B>,
+<B>ControlMask</B>,
+<B>Mod1Mask</B>,
+<B>Mod2Mask</B>,
+<B>Mod3Mask</B>,
+<B>Mod4Mask</B>,
+and
+<B>Mod5Mask</B>.
+
+<P>
+
+Each of these structures also has a member that indicates the detail.
+For the
+<B>XKeyPressedEvent</B>
+and
+<B>XKeyReleasedEvent</B>
+structures, this member is called <B>keycode</B>.
+It is set to a number that represents a physical key on the keyboard.
+The keycode is an arbitrary representation for any key on the keyboard
+(see sections "<A HREF="../../input/keyboard-encoding.html">Keyboard Encoding</A>" and
+"<A HREF="../../utilities/keyboard/">Keyboard Utility Functions</A>").
+
+<P>
+
+For the
+<B>XButtonPressedEvent</B>
+and
+<B>XButtonReleasedEvent</B>
+structures, this member is called <B>button</B>.
+It represents the pointer button that changed state and can be the
+<B>Button1</B>,
+<B>Button2</B>,
+<B>Button3</B>,
+<B>Button4</B>,
+or
+<B>Button5</B>
+value.
+For the
+<B>XPointerMovedEvent</B>
+structure, this member is called <B>is_hint</B>.
+It can be set to 
+<B>NotifyNormal</B>
+or
+<B>NotifyHint</B>.
+
+<P>
+
+Some of the symbols mentioned in this section have fixed values, as
+follows:
+
+<TABLE>
+<TR><TD COLSPAN=2><HR>
+<TR><TD><B>Symbol	<TD><CODE><B>Value
+<TR><TD COLSPAN=2><HR>
+<TR><TD><B>Button1MotionMask</B>	<TD><CODE>(1L<<8)
+<TR><TD><B>Button2MotionMask</B>	<TD><CODE>(1L<<9)
+<TR><TD><B>Button3MotionMask</B>	<TD><CODE>(1L<<10)
+<TR><TD><B>Button4MotionMask</B>	<TD><CODE>(1L<<11)
+<TR><TD><B>Button5MotionMask</B>	<TD><CODE>(1L<<12)
+<TR><TD><B>Button1Mask</B>		<TD><CODE>(1<<8)
+<TR><TD><B>Button2Mask</B>		<TD><CODE>(1<<9)
+<TR><TD><B>Button3Mask</B>		<TD><CODE>(1<<10)
+<TR><TD><B>Button4Mask</B>		<TD><CODE>(1<<11)
+<TR><TD><B>Button5Mask</B>		<TD><CODE>(1<<12)
+<TR><TD><B>ShiftMask</B>		<TD><CODE>(1<<0)
+<TR><TD><B>LockMask</B>			<TD><CODE>(1<<1)
+<TR><TD><B>ControlMask</B>		<TD><CODE>(1<<2)
+<TR><TD><B>Mod1Mask</B>			<TD><CODE>(1<<3)
+<TR><TD><B>Mod2Mask</B>			<TD><CODE>(1<<4)
+<TR><TD><B>Mod3Mask</B>			<TD><CODE>(1<<5)
+<TR><TD><B>Mod4Mask</B>			<TD><CODE>(1<<6)
+<TR><TD><B>Mod5Mask</B>			<TD><CODE>(1<<7)
+<TR><TD><B>Button1</B>			<TD><CODE>1
+<TR><TD><B>Button2</B>			<TD><CODE>2
+<TR><TD><B>Button3</B>			<TD><CODE>3
+<TR><TD><B>Button4</B>			<TD><CODE>4
+<TR><TD><B>Button5</B>			<TD><CODE>5
+<TR><TD COLSPAN=2><HR>
+</TABLE>
+
+<H5 ALIGN=right><I>Next: <A HREF="../window-entry-exit/">Window Entry/Exit Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

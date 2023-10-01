@@ -1,0 +1,47 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Changing Window Stacking Order</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>3.8 Changing Window Stacking Order</H1>
+
+Xlib provides functions that you can use to raise, lower, circulate,
+or restack windows.
+
+<P>
+
+To raise a window so that no sibling window obscures it, use 
+<B><A HREF="XRaiseWindow.html">XRaiseWindow()</A></B>.
+<P>
+
+To lower a window so that it does not obscure any sibling windows, use 
+<B><A HREF="XLowerWindow.html">XLowerWindow()</A></B>.
+
+<P>
+
+To circulate a subwindow up or down, use
+<B><A HREF="XCirculateSubwindows.html">XCirculateSubwindows()</A></B>.
+
+<P>
+
+To raise the lowest mapped child of a window that is partially or completely
+occluded by another child, use
+<B><A HREF="XCirculateSubwindowsUp.html">XCirculateSubwindowsUp()</A></B>.
+
+<P>
+
+To lower the highest mapped child of a window that partially or 
+completely occludes another child, use 
+<B><A HREF="XCirculateSubwindowsDown.html">XCirculateSubwindowsDown()</A></B>.
+
+<P>
+
+To restack a set of windows from top to bottom, use 
+<B><A HREF="XRestackWindows.html">XRestackWindows()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="change-attributes.html">Changing Window Attributes</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

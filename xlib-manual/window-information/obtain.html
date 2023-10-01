@@ -1,0 +1,36 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Obtaining Window Information</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>4.1 Obtaining Window Information</H1>
+
+Xlib provides functions that you can use to obtain information about 
+the window tree, the window's current attributes, 
+the window's current geometry, or the current pointer coordinates.
+Because they are most frequently used by window managers,
+these functions all return a status to indicate whether the window still
+exists.
+
+<P>
+
+To obtain the parent, a list of children, and number of children for 
+a given window, use 
+<B><A HREF="XQueryTree.html">XQueryTree()</A></B>.
+
+<P>
+
+To obtain the current attributes of a given window, use 
+<B><A HREF="XGetWindowAttributes.html">XGetWindowAttributes()</A></B>.
+
+<P>
+
+To obtain the current geometry of a given drawable, use 
+<B><A HREF="XGetGeometry.html">XGetGeometry()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="translate.html">Translating Screen Coordinates</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

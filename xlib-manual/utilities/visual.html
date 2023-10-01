@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Determining the Appropriate Visual Type</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>16.7 Determining the Appropriate Visual Type</H1>
+
+A single display can support multiple screens.
+Each screen can have several different visual types supported 
+at different depths.
+You can use the functions described in this section to determine
+which visual to use for your application.
+
+<A NAME="XVisualInfo"></A>
+<!.IN "XVisualInfo" "" "@DEF@">
+<P>
+
+The functions in this section use the visual information masks and the
+<B>XVisualInfo</B>
+structure,
+which is defined in
+<B><TT>X11/Xutil.h</TT></B>
+and contains:
+
+<P>
+
+<PRE><CODE>
+/* Visual information mask bits */
+
+#define <B>VisualNoMask</B>		0x0
+#define <B>VisualIDMask</B>		0x1
+#define <B>VisualScreenMask</B>	0x2
+#define <B>VisualDepthMask</B>		0x4
+#define <B>VisualClassMask</B>		0x8
+#define <B>VisualRedMaskMask</B>	0x10
+#define <B>VisualGreenMaskMask</B>	0x20
+#define <B>VisualBlueMaskMask</B>	0x40
+#define <B>VisualColormapSizeMask</B>	0x80
+#define <B>VisualBitsPerRGBMask</B>	0x100
+#define <B>VisualAllMask</B>		0x1FF
+
+/* Values */
+
+typedef struct {
+	<A HREF="../window/visual-types.html#Visual">Visual</A> *visual;
+	VisualID visualid;
+	int screen;
+	unsigned int depth;
+	int class;
+	unsigned long red_mask;
+	unsigned long green_mask;
+	unsigned long blue_mask;
+	int colormap_size;
+	int bits_per_rgb;
+} XVisualInfo;
+</PRE></CODE>
+
+<P>
+
+To obtain a list of visual information structures that match a specified
+template, use
+<B><A HREF="XGetVisualInfo.html">XGetVisualInfo()</A></B>.
+
+<P>
+
+To obtain the visual information that matches the specified depth and
+class of the screen, use
+<B><A HREF="XMatchVisualInfo.html">XMatchVisualInfo()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="manipulating-images.html">Manipulating Images</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

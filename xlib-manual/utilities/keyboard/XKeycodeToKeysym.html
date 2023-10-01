@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XKeycodeToKeysym</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XKeycodeToKeysym</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XKeycodeToKeysym" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="../../input/keyboard-encoding.html#KeySym">KeySym</A> XKeycodeToKeysym(<B>display</B>, <B>keycode</B>, <B>index</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="../../input/keyboard-encoding.html">KeyCode</A> <B>keycode</B>;
+      int <B>index</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>keycode</B>
+<TD> Specifies the KeyCode.
+
+<TR><TD> <B>index</B>
+<TD> Specifies the element of KeyCode vector.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XKeycodeToKeysym()</B>
+function uses internal Xlib tables
+and returns the KeySym defined for the specified KeyCode and
+the element of the KeyCode vector.
+If no symbol is defined,
+<B>XKeycodeToKeysym()</B>
+returns
+<B>NoSymbol</B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XConvertCase.html">XConvertCase()</A></B>,
+<B><A HREF="XKeysymToKeycode.html">XKeysymToKeycode()</A></B>,
+<B><A HREF="XKeysymToString.html">XKeysymToString()</A></B>,
+<B><A HREF="XLookupKeysym.html">XLookupKeysym()</A></B>,
+<B><A HREF="XStringToKeysym.html">XStringToKeysym()</A></B>,
+<A HREF="./">Keyboard Utility Functions</A>.
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

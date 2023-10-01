@@ -1,0 +1,79 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetCommand</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetCommand</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetCommand" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../../introduction/errors.html#Status">Status</A></B> XGetCommand(<B>display</B>, <B>w</B>, <B>argv_return</B>, <B>argc_return</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      char ***<B>argv_return</B>;
+      int *<B>argc_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>argv_return</B>
+<TD> Returns the application's argument list.
+
+<TR><TD> <B>argc_return</B>
+<TD> Returns the number of arguments returned.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The 
+<B>XGetCommand()</B>
+function reads the <A HREF="/gui/x/icccm/sec-C.html#s-C.1.1">WM_COMMAND</A> property from the specified window 
+and returns a string list.
+If the <A HREF="/gui/x/icccm/sec-C.html#s-C.1.1">WM_COMMAND</A> property exists, 
+it is of type STRING and format 8.
+If sufficient memory can be allocated to contain the string list, 
+<B>XGetCommand()</B>
+fills in the argv_return and argc_return arguments
+and returns a nonzero status.
+Otherwise, it returns a zero status.
+If the data returned by the server is in the Latin Portable Character Encoding,
+then the returned strings are in the Host Portable Character Encoding.
+Otherwise, the result is implementation dependent.
+To free the memory allocated to the string list, use
+<B><A HREF="../client-to-window-manager/XFreeStringList.html">XFreeStringList()</A></B>.
+
+<H2>See also</H2>
+
+<B><A HREF="../client-to-window-manager/XAllocClassHint.html">XAllocClassHint()</A></B>,
+<B><A HREF="../client-to-window-manager/XAllocIconSize.html">XAllocIconSize()</A></B>,
+<B><A HREF="../client-to-window-manager/XAllocSizeHints.html">XAllocSizeHints()</A></B>,
+<B><A HREF="../client-to-window-manager/XAllocWMHints.html">XAllocWMHints()</A></B>,
+<B><A HREF="XSetCommand.html">XSetCommand()</A></B>,
+<B><A HREF="../client-to-window-manager/XSetTextProperty.html">XSetTextProperty()</A></B>,
+<B><A HREF="../client-to-window-manager/XSetTransientForHint.html">XSetTransientForHint()</A></B>,
+<B><A HREF="XSetWMClientMachine.html">XSetWMClientMachine()</A></B>,
+<B><A HREF="../client-to-window-manager/XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B>,
+<B><A HREF="../client-to-window-manager/XSetWMIconName.html">XSetWMIconName()</A></B>,
+<B><A HREF="../client-to-window-manager/XSetWMName.html">XSetWMName()</A></B>,
+<B><A HREF="../client-to-window-manager/XSetWMProperties.html">XSetWMProperties()</A></B>,
+<B><A HREF="../client-to-window-manager/XSetWMProtocols.html">XSetWMProtocols()</A></B>,
+<B><A HREF="../client-to-window-manager/XStringListToTextProperty.html">XStringListToTextProperty()</A></B>,
+"<A HREF="wm-command.html">Setting and Reading the WM_COMMAND Property</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

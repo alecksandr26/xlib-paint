@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XAddPixel</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XAddPixel</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XAddPixel" "" "@DEF@">
+
+<CODE><PRE>
+XAddPixel(<B>ximage</B>, <B>value</B>)
+      <A HREF="../graphics/images.html#XImage">XImage</A> *<B>ximage</B>;
+      long <B>value</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>ximage</B>
+<TD> Specifies the image.
+
+<TR><TD> <B>value</B>
+<TD> Specifies the constant value that is to be added.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XAddPixel()</B>
+function adds a constant value to every pixel in an image.
+It is useful when you have a base pixel value from allocating
+color resources and need to manipulate the image to that form.
+
+<H2>See also</H2>
+
+<B><A HREF="XCreateImage.html">XCreateImage()</A></B>,
+<B><A HREF="XDestroyImage.html">XDestroyImage()</A></B>,
+<B><A HREF="XGetPixel.html">XGetPixel()</A></B>,
+<B><A HREF="XPutPixel.html">XPutPixel()</A></B>,
+<B><A HREF="XSubImage.html">XSubImage()</A></B>,
+"<A HREF="manipulating-images.html">Manipulating Images</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,125 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XClearArea</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XClearArea</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Areas" "clearing">
+<!.IN "Clearing" "areas">
+<!.IN "XClearArea" "" "@DEF@">
+
+<CODE><PRE>
+XClearArea(<B>display</B>, <B>w</B>, <B>x</B>, <B>y</B>, <B>width</B>, <B>height</B>, <B>exposures</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      int <B>x</B>, <B>y</B>;
+      unsigned int <B>width</B>, <B>height</B>;
+      Bool <B>exposures</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+and specify the upper-left corner of the rectangle
+
+<TR><TD> <B>x</B><BR>
+	<B>y</B>
+<TD> Specify the x and y coordinates, which are relative to the origin of the window.
+
+<TR><TD> <B>width</B><BR>
+	<B>height</B>
+<TD> Specify the width and height, which are the dimensions of the rectangle.
+
+<TR><TD> <B>exposures</B>
+<TD> Specifies a Boolean value that indicates if
+<B><A HREF="../events/exposure/expose.html">Expose</A></B>
+events are to be generated.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XClearArea()</B>
+function paints a rectangular area in the specified window according to the
+specified dimensions with the 
+<A HREF="../window/attributes/background.html">window's background pixel or pixmap</A>.
+The
+<A HREF="../GC/manipulating.html#subwindow-mode">subwindow-mode</A>
+effectively is
+<B>ClipByChildren</B>. 
+If width is zero, it
+is replaced with the current width of the window minus x.
+If height is
+zero, it is replaced with the current height of the window minus y.
+If the window has a defined background tile, 
+the rectangle clipped by any children is filled with this tile.
+If the window has
+background 
+<B>None</B>, 
+the contents of the window are not changed.  
+In either
+case, if exposures is 
+<B>True</B>, 
+one or more 
+<B><A HREF="../events/exposure/expose.html">Expose</A></B> 
+events are generated for regions of the rectangle that are either visible or are
+being retained in a backing store.
+If you specify a window whose class is
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B> ,
+a
+<B>BadMatch</B>
+error results.
+
+<P>
+
+<B>XClearArea()</B>
+can generate
+<B>BadMatch</B> ,
+<B>BadValue</B> ,
+and
+<B>BadWindow</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+      
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XClearWindow.html">XClearWindow()</A></B>,
+<B><A HREF="XCopyArea.html">XCopyArea()</A></B>,
+"<A HREF="clearing-areas.html">Clearing Areas</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

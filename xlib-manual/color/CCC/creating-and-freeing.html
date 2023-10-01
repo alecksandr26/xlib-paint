@@ -1,0 +1,30 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Creating and Freeing a Color Conversion Context</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.8.5 Creating and Freeing a Color Conversion Context</H1>
+
+You can explicitly create a <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A> within your application by calling
+<B><A HREF="XcmsCreateCCC.html">XcmsCreateCCC()</A></B>.
+These created <A HREF="../conversion-contexts-and-gamut-mapping.html">CCCs</A> can then be used by those functions that explicitly
+call for a <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A> argument.
+Old <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>s that will not be used by the application should be freed using
+<B><A HREF="XcmsFreeCCC.html">XcmsFreeCCC()</A></B>.
+
+<P>
+
+To create a <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>, use
+<B><A HREF="XcmsCreateCCC.html">XcmsCreateCCC()</A></B>.
+
+<P>
+
+To free a <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>, use
+<B><A HREF="XcmsFreeCCC.html">XcmsFreeCCC()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="../converting-between-color-spaces.html">Converting Between Color Spaces</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

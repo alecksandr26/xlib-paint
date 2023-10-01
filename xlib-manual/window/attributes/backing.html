@@ -1,0 +1,31 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Window Attributes: Backing Planes and Backing Pixel Attributes</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>3.2.6 Backing Planes and Backing Pixel Attributes</H1>
+
+You can set backing planes to indicate (with bits set to 1) 
+which bit planes of an
+<B><A HREF="../create.html">InputOutput</A></B>
+window hold dynamic data that must be preserved in backing store 
+and during save unders.
+The default value for the backing-planes attribute is all bits set to 1.
+You can set backing pixel to specify what bits to use in planes not 
+covered by backing planes.
+The default value for the backing-pixel attribute is all bits set to 0.
+The X server is free to save only the specified bit planes in the backing store
+or the save under and is free to regenerate the remaining planes with 
+the specified pixel value.
+Any extraneous bits in these values (that is, those bits beyond 
+the specified depth of the window) may be simply ignored.
+If you request backing store or save unders,
+you should use these members to minimize the amount of off-screen memory 
+required to store your window.
+
+<H5 ALIGN=right><I>Next: <A HREF="event-and-do-not-propagate.html">Event Mask and Do Not Propagate Mask Attributes</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

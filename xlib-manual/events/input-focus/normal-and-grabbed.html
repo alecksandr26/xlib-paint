@@ -1,0 +1,425 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Normal Focus Events and Focus Events While Grabbed</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.7.1 Normal Focus Events and Focus Events While Grabbed</H1>
+
+Normal focus events are identified by
+<A HREF="./#XFocusChangeEvent">XFocusInEvent</A>
+or
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structures whose <B>mode</B> member is set to 
+<B>NotifyNormal</B>.
+Focus events while grabbed are identified by
+<A HREF="./#XFocusChangeEvent">XFocusInEvent</A>
+or
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structures whose <B>mode</B> member is set to 
+<B>NotifyWhileGrabbed</B>.
+The X server processes normal focus and focus events while grabbed according to 
+the following:
+
+<UL>
+
+<P><LI>
+When the focus moves from window A to window B, A is an inferior of B, 
+and the pointer is in window P, 
+the X server does the following:
+
+<UL>
+
+<P><LI>
+It generates a
+<B><A HREF="./">FocusOut</A></B>
+event on window A, with the detail member of the
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structure set to 
+<B>NotifyAncestor</B>. 
+
+<P><LI>
+It generates a
+<B><A HREF="./">FocusOut</A></B>
+event on each window between window A and window B, exclusive,
+with the <B>detail</B> member of each
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structure set to 
+<B>NotifyVirtual</B>.
+
+<P><LI>
+It generates a
+<B><A HREF="./">FocusIn</A></B>
+event on window B, with the <B>detail</B> member of the 
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structure set to 
+<B>NotifyInferior</B>.
+
+<P><LI>
+If window P is an inferior of window B
+but window P is not window A or an inferior or ancestor of window A,
+it generates a
+<B><A HREF="./">FocusIn</A></B>
+event on each window below window B, down to and including window P, 
+with the <B>detail</B> member of each 
+<A HREF="./#XFocusChangeEvent">XFocusInEvent</A>
+structure set to 
+<B>NotifyPointer</B>.
+</UL>
+
+<P><LI>
+When the focus moves from window A to window B, B is an inferior of A, 
+and the pointer is in window P, 
+the X server does the following:
+
+<UL>
+
+<P><LI>
+If window P is an inferior of window A
+but P is not an inferior of window B or an ancestor of B,
+it generates a
+<B><A HREF="./">FocusOut</A></B>
+event on each window from window P up to but not including window A,
+with the <B>detail</B> member of each 
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structure set to  
+<B>NotifyPointer</B>.
+
+<P><LI>
+It generates a
+<B><A HREF="./">FocusOut</A></B>
+event on window A,
+with the <B>detail</B> member of the
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structure set to  
+<B>NotifyInferior</B>. 
+
+<P><LI>
+It generates a
+<B><A HREF="./">FocusIn</A></B>
+event on each window between window A and window B, exclusive, with the 
+<B>detail</B> member of each 
+<A HREF="./#XFocusChangeEvent">XFocusInEvent</A>
+structure set to  
+<B>NotifyVirtual</B>. 
+
+<P><LI>
+It generates a
+<B><A HREF="./">FocusIn</A></B>
+event on window B, with the <B>detail</B> member of the 
+<A HREF="./#XFocusChangeEvent">XFocusInEvent</A>
+structure set to  
+<B>NotifyAncestor</B>.
+</UL>
+
+<P><LI>
+When the focus moves from window A to window B, 
+window C is their least common ancestor, 
+and the pointer is in window P, 
+the X server does the following:
+
+<UL>
+
+<P><LI>
+If window P is an inferior of window A,
+it generates a
+<B><A HREF="./">FocusOut</A></B>
+event on each window from window P up to but not including window A, 
+with the <B>detail</B> member of the 
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structure set to  
+<B>NotifyPointer</B>.
+
+<P><LI>
+It generates a
+<B><A HREF="./">FocusOut</A></B>
+event on window A,
+with the <B>detail</B> member of the
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structure set to  
+<B>NotifyNonlinear</B>.
+
+<P><LI>
+It generates a
+<B><A HREF="./">FocusOut</A></B>
+event on each window between window A and window C, exclusive,
+with the <B>detail</B> member of each
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structure set to  
+<B>NotifyNonlinearVirtual</B>.
+
+<P><LI>
+It generates a
+<B><A HREF="./">FocusIn</A></B>
+event on each window between C and B, exclusive,
+with the <B>detail</B> member of each
+<A HREF="./#XFocusChangeEvent">XFocusInEvent</A>
+structure set to  
+<B>NotifyNonlinearVirtual</B>.
+
+<P><LI>
+It generates a
+<B><A HREF="./">FocusIn</A></B>
+event on window B, with the <B>detail</B> member of the 
+<A HREF="./#XFocusChangeEvent">XFocusInEvent</A>
+structure set to  
+<B>NotifyNonlinear</B>.
+
+<P><LI>
+If window P is an inferior of window B, it generates a
+<B><A HREF="./">FocusIn</A></B>
+event on each window below window B down to and including window P, 
+with the <B>detail</B> member of the 
+<A HREF="./#XFocusChangeEvent">XFocusInEvent</A>
+structure set to  
+<B>NotifyPointer</B>.
+</UL>
+
+<P><LI>
+When the focus moves from window A to window B on different screens 
+and the pointer is in window P, 
+the X server does the following:
+
+<UL>
+
+<P><LI>
+If window P is an inferior of window A, it generates a
+<B><A HREF="./">FocusOut</A></B>
+event on each window from window P up to but not including window A, 
+with the <B>detail</B> member of each 
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structure set to  
+<B>NotifyPointer</B> .
+
+<P><LI>
+It generates a
+<B><A HREF="./">FocusOut</A></B>
+event on window A,
+with the <B>detail</B> member of the
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structure set to  
+<B>NotifyNonlinear</B>.
+
+<P><LI>
+If window A is not a root window,
+it generates a
+<B><A HREF="./">FocusOut</A></B>
+event on each window above window A up to and including its root, 
+with the <B>detail</B> member of each
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structure set to  
+<B>NotifyNonlinearVirtual</B>.
+
+<P><LI>
+If window B is not a root window,
+it generates a
+<B><A HREF="./">FocusIn</A></B>
+event on each window from window B's root down to but not including
+window B, with the <B>detail</B> member of each
+<A HREF="./#XFocusChangeEvent">XFocusInEvent</A>
+structure set to  
+<B>NotifyNonlinearVirtual</B>.
+
+<P><LI>
+It generates a
+<B><A HREF="./">FocusIn</A></B>
+event on window B, with the <B>detail</B> member of each 
+<A HREF="./#XFocusChangeEvent">XFocusInEvent</A>
+structure set to  
+<B>NotifyNonlinear</B>.
+
+<P><LI>
+If window P is an inferior of window B, it generates a
+<B><A HREF="./">FocusIn</A></B>
+event on each window below window B down to and including window P, 
+with the <B>detail</B> member of each 
+<A HREF="./#XFocusChangeEvent">XFocusInEvent</A>
+structure set to  
+<B>NotifyPointer</B>.
+</UL>
+
+<P><LI>
+When the focus moves from window A to 
+<B>PointerRoot</B>
+(events sent to the window under the pointer)
+or
+<B>None</B> 
+(discard), and the pointer is in window P,
+the X server does the following:
+
+<UL>
+
+<P><LI>
+If window P is an inferior of window A, it generates a
+<B><A HREF="./">FocusOut</A></B>
+event on each window from window P up to but not including window A, 
+with the <B>detail</B> member of each 
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structure set to  
+<B>NotifyPointer</B>.
+
+<P><LI>
+It generates a
+<B><A HREF="./">FocusOut</A></B>
+event on window A, with the detail member of the
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structure set to
+<B>NotifyNonlinear</B>.
+
+<P><LI>
+If window A is not a root window,
+it generates a
+<B><A HREF="./">FocusOut</A></B>
+event on each window above window A up to and including its root, 
+with the <B>detail</B> member of each
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structure set to
+<B>NotifyNonlinearVirtual</B>.
+
+<P><LI>
+It generates a
+<B><A HREF="./">FocusIn</A></B>
+event on the root window of all screens, with the <B>detail</B> member of each
+<A HREF="./#XFocusChangeEvent">XFocusInEvent</A>
+structure set to
+<B>NotifyPointerRoot</B>
+(or
+<B>NotifyDetailNone</B>).
+
+<P><LI>
+If the new focus is
+<B>PointerRoot</B>,
+it generates a
+<B><A HREF="./">FocusIn</A></B>
+event on each window from window P's root down to and including window P, 
+with the <B>detail</B> member of each
+<A HREF="./#XFocusChangeEvent">XFocusInEvent</A>
+structure set to
+<B>NotifyPointer</B>.
+</UL>
+
+<P><LI>
+When the focus moves from 
+<B>PointerRoot</B>
+(events sent to the window under the pointer)
+or
+<B>None</B> 
+to window A, and the pointer is in window P, 
+the X server does the following: 
+
+<UL>
+
+<P><LI>
+If the old focus is
+<B>PointerRoot</B>,
+it generates a
+<B><A HREF="./">FocusOut</A></B>
+event on each window from window P up to and including window P's root, 
+with the <B>detail</B> member of each
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structure set to
+<B>NotifyPointer</B> .
+
+<P><LI>
+It generates a
+<B><A HREF="./">FocusOut</A></B>
+event on all root windows,
+with the detail member of each
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structure set to
+<B>NotifyPointerRoot</B>
+(or
+<B>NotifyDetailNone</B>).
+
+<P><LI>
+If window A is not a root window,
+it generates a
+<B><A HREF="./">FocusIn</A></B>
+event on each window from window A's root down to but not including window A,
+with the <B>detail</B>member of each
+<A HREF="./#XFocusChangeEvent">XFocusInEvent</A>
+structure set to
+<B>NotifyNonlinearVirtual</B>.
+
+<P><LI>
+It generates a
+<B><A HREF="./">FocusIn</A></B>
+event on window A,
+with the <B>detail</B> member of the 
+<A HREF="./#XFocusChangeEvent">XFocusInEvent</A>
+structure set to  
+<B>NotifyNonlinear</B>.
+
+<P><LI>
+If window P is an inferior of window A, it generates a
+<B><A HREF="./">FocusIn</A></B>
+event on each window below window A down to and including window P, 
+with the <B>detail</B> member of each 
+<A HREF="./#XFocusChangeEvent">XFocusInEvent</A>
+structure set to  
+<B>NotifyPointer</B>.
+</UL>
+
+<P><LI>
+When the focus moves from 
+<B>PointerRoot</B>
+(events sent to the window under the pointer)
+to
+<B>None</B>
+(or vice versa), and the pointer is in window P, 
+the X server does the following:
+
+<UL>
+
+<P><LI>
+If the old focus is
+<B>PointerRoot</B> ,
+it generates a
+<B><A HREF="./">FocusOut</A></B>
+event on each window from window P up to and including window P's root, 
+with the <B>detail</B> member of each
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structure set to
+<B>NotifyPointer</B>.
+
+<P><LI>
+It generates a
+<B><A HREF="./">FocusOut</A></B>
+event on all root windows,
+with the <B>detail</B> member of each 
+<A HREF="./#XFocusChangeEvent">XFocusOutEvent</A>
+structure set to either
+<B>NotifyPointerRoot</B>
+or
+<B>NotifyDetailNone</B>. 
+
+<P><LI>
+It generates a
+<B><A HREF="./">FocusIn</A></B>
+event on all root windows,
+with the <B>detail</B> member of each
+<A HREF="./#XFocusChangeEvent">XFocusInEvent</A>
+structure set to
+<B>NotifyDetailNone</B> 
+or
+<B>NotifyPointerRoot</B>.
+
+<P><LI>
+If the new focus is
+<B>PointerRoot</B>,
+it generates a
+<B><A HREF="./">FocusIn</A></B>
+event on each window from window P's root down to and including window P, 
+with the <B>detail</B> member of each
+<A HREF="./#XFocusChangeEvent">XFocusInEvent</A>
+structure set to
+<B>NotifyPointer</B>.
+</UL>
+
+</UL>
+
+<H5 ALIGN=right><I>Next: <A HREF="grab.html">Focus Events Generated by Grabs</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

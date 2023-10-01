@@ -1,0 +1,89 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetKeyboardControl</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetKeyboardControl</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetKeyboardControl" "" "@DEF@">
+
+<CODE><PRE>
+XGetKeyboardControl(<B>display</B>, <B>values_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      XKeyboardState *<B>values_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>values_return</B>
+<TD> Returns the current keyboard controls in the specified
+<B>XKeyboardState</B>
+structure.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetKeyboardControl()</B>
+function returns the current control values for the keyboard to the
+<B>XKeyboardState</B>
+structure.
+
+<A NAME="XKeyboardState"></A>
+<P>
+
+<!.IN "XGetKeyboardControl">
+<!.IN "XKeyboardState" "" "@DEF@">
+
+<PRE><CODE>
+typedef struct {
+	int key_click_percent;
+	int bell_percent;
+	unsigned int bell_pitch, bell_duration;
+	unsigned long led_mask;
+	int global_auto_repeat;
+	char auto_repeats[32];
+} XKeyboardState;
+</PRE></CODE>
+
+<P>
+
+For the LEDs, 
+the least-significant bit of <B>led_mask</B> corresponds to LED one,
+and each bit set to 1 in led_mask indicates an LED that is lit.
+The <B>global_auto_repeat</B> member can be set to
+<B>AutoRepeatModeOn</B>
+or
+<B>AutoRepeatModeOff</B> .
+The <B>auto_repeats</B> member is a bit vector.
+Each bit set to 1 indicates that auto-repeat is enabled 
+for the corresponding key.
+The vector is represented as 32 bytes.  
+Byte N (from 0) contains the bits for keys 8N to 8N + 7
+with the least-significant bit in the byte representing key 8N.
+
+<H2>See also</H2>
+
+<B><A HREF="XAutoRepeatOff.html">XAutoRepeatOff()</A></B>,
+<B><A HREF="XAutoRepeatOn.html">XAutoRepeatOn()</A></B>,
+<B><A HREF="XBell.html">XBell()</A></B>,
+<B><A HREF="XChangeKeyboardControl.html">XChangeKeyboardControl()</A></B>,
+<B><A HREF="XChangeKeyboardMapping.html">XChangeKeyboardMapping()</A></B>,
+<B><A HREF="XGetKeyboardControl.html">XGetKeyboardControl()</A></B>,
+<B><A HREF="XQueryKeymap.html">XQueryKeymap()</A></B>,
+<B><A HREF="XSetPointerMapping.html">XSetPointerMapping()</A></B>,
+"<A HREF="keyboard-and-pointer-settings.html">Keyboard and Pointer Settings</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

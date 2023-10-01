@@ -1,0 +1,83 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: MapRequest Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.11.3 MapRequest Events</H1>
+
+<!.IN "Events" "MapRequest">
+<!.IN "MapRequest" "" "@DEF@">
+The X server can report
+<B>MapRequest</B>
+events to clients wanting information about a different client's desire 
+to map windows.
+A window is considered mapped when a map window request completes.
+The X server generates this event whenever a different client initiates 
+a map window request on an unmapped window whose override_redirect member 
+is set to
+<B>False</B> .
+Clients initiate map window requests by calling
+<B><A HREF="../../window/XMapWindow.html">XMapWindow()</A></B>,
+<B><A HREF="../../window/XMapRaised.html">XMapRaised()</A></B>,
+or
+<B><A HREF="../../window/XMapSubwindows.html">XMapSubwindows()</A></B>.
+
+<P>
+
+To receive
+<B>MapRequest</B>
+events, set the
+<B>SubstructureRedirectMask</B>
+bit in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the window. 
+This means another client's attempts to map a child window by calling one of
+the map window request functions is intercepted, and you are sent a 
+<B>MapRequest</B>
+instead.
+For example, suppose a client application calls
+<B><A HREF="../../window/XMapWindow.html">XMapWindow()</A></B>
+to map a window.
+If you (usually a window manager) had selected
+<B>SubstructureRedirectMask</B>
+on the parent window and if the <A HREF="../../window/attributes/override-redirect.html">override-redirect</A> attribute 
+of the window is set to
+<B>False</B>,
+the X server reports a
+<B>MapRequest</B>
+event to you 
+and does not map the specified window.
+Thus, this event gives your window manager client the ability 
+to control the placement of subwindows.
+
+<A NAME="XMapRequestEvent">
+<P>
+
+The structure for this event type contains:
+
+<P>
+
+<!.IN "XMapRequestEvent" "" "@DEF@">
+
+<CODE><PRE>
+
+typedef struct {
+	int type;	/* MapRequest */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Window parent;
+	Window window;
+} XMapRequestEvent;
+</PRE></CODE>
+
+<P>
+
+The <B>parent</B> member is set to the parent window.
+The <B>window</B> member is set to the window to be mapped.
+
+<H5 ALIGN=right><I>Next: <A HREF="resize.html">ResizeRequest Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>
+

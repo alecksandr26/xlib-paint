@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetZoomHints</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetZoomHints</H1>
+
+This function is no longer supported by the
+<I><A HREF="/gui/x/icccm/">Inter-Client Communication Conventions Manual</A></I>.
+
+<H2>Syntax</H2>
+
+<!.IN "XGetZoomHints" "" "@DEF@">
+
+<CODE><PRE>
+<B>Status</B> XGetZoomHints(<I>display</I>, <I>w</I>, <I>zhints_return</I>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<I>display</I>;
+      Window <I>w</I>;
+      <A HREF="../../ICC/client-to-window-manager/wm-normal-hints.html#XSizeHints">XSizeHints</A> *<I>zhints_return</I>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <I>display</I>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <I>w</I>
+<TD> Specifies the window.
+
+<TR><TD> <I>zhints_return</I>
+<TD> Returns the zoom hints.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetZoomHints()</B>
+function returns the size hints for a window in its zoomed state.
+It returns a nonzero status if it succeeds or zero if
+the application specified no zoom size hints for this window.
+
+<P>
+
+<B>XGetZoomHints()</B>
+can generate a
+<B>BadWindow</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+"<A HREF="d.html">Compatibility Functions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

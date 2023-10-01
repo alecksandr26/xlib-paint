@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XcmsCCCOfColormap</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XcmsCCCOfColormap</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XcmsCCCOfColormap" "" "@DEF@">
+<!.IN "Colormap" "CCC of">
+<!.IN "CCC" "of colormap">
+<!.IN "Color Conversion Context" "of colormap">
+
+<CODE><PRE>
+      <A HREF="macros.html">XcmsCCC</A> XcmsCCCOfColormap(<B>display</B>, <B>colormap</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="../#colormap">Colormap</A> <B>colormap</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>colormap</B>
+<TD> Specifies the colormap.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XcmsCCCOfColormap()</B>
+function returns the <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A> associated with the specified colormap.
+Once obtained, 
+the <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A> attributes can be queried or modified.
+Unless the <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A> associated with the specified colormap is changed with
+<B><A HREF="XcmsSetCCCOfColormap.html">XcmsSetCCCOfColormap()</A></B>.
+this <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A> is used when the specified colormap is used as an argument 
+to color functions.
+
+<H2>See also</H2>
+
+<B><A HREF="macros.html#DisplayOfCCC">DisplayOfCCC()</A></B>,
+<B><A HREF="../XcmsConvertColors.html">XcmsConvertColors()</A></B>,
+<B><A HREF="XcmsCreateCCC.html">XcmsCreateCCC()</A></B>,
+<B><A HREF="XcmsDefaultCCC.html">XcmsDefaultCCC()</A></B>,
+<B><A HREF="XcmsSetCCCOfColormap.html">XcmsSetCCCOfColormap()</A></B>,
+<B><A HREF="XcmsSetWhitePoint.html">XcmsSetWhitePoint()</A></B>,
+"<A HREF="getting-and-setting.html">Getting and Setting the Color Conversion Context of a Colormap</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

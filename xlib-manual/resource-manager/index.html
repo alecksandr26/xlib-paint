@@ -1,0 +1,126 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Resource Manager Functions</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>Chapter 15: Resource Manager Functions</H1>
+
+A program often needs a variety of options in the X environment
+(for example, fonts, colors, icons, and cursors).
+Specifying all of these options on the command line is awkward
+because users may want to customize many aspects of the program
+and need a convenient way to establish these customizations as
+the default settings.
+The resource manager is provided for this purpose.
+Resource specifications are usually stored in human-readable files
+and in server properties.
+
+<P>
+
+The resource manager is a database manager with a twist.
+In most database systems, 
+you perform a query using an imprecise specification,
+and you get back a set of records.
+The resource manager, however, allows you to specify a large
+set of values with an imprecise specification, to query the database 
+with a precise specification, and to get back only a single value.
+This should be used by applications that need to know what the
+user prefers for colors, fonts, and other resources.
+It is this use as a database for dealing with X resources that
+inspired the name ``Resource Manager,''
+although the resource manager can be and is used in other ways.
+
+<P>
+
+For example, 
+a user of your application may want to specify 
+that all windows should have a blue background 
+but that all mail-reading windows should have a red background.
+With well-engineered and coordinated applications,
+a user can define this information using only two lines of specifications.
+
+<P>
+
+As an example of how the resource manager works,
+consider a mail-reading application called xmh.
+Assume that it is designed so that it uses a
+complex window hierarchy all the way down to individual command buttons,
+which may be actual small subwindows in some toolkits.
+These are often called objects or widgets.
+In such toolkit systems,
+each user interface object can be composed of other objects
+and can be assigned a name and a class.
+Fully qualified names or classes can have arbitrary numbers of component names,
+but a fully qualified name always has the same number of component names as a
+fully qualified class.
+This generally reflects the structure of the application as composed
+of these objects, starting with the application itself.
+
+<P>
+
+For example, the xmh mail program has a name ``xmh'' and is one
+of a class of ``Mail'' programs.
+By convention, the first character of class components is capitalized,
+and the first letter of name components is in lowercase.
+Each name and class finally has an attribute
+(for example ``foreground'' or ``font'').
+If each window is properly assigned a name and class,
+it is easy for the user to specify attributes of any portion 
+of the application.
+
+<P>
+
+At the top level, 
+the application might consist of a paned window (that is, a window divided
+into several sections) named ``toc''.
+One pane of the paned window is a button box window named ``buttons''
+and is filled with command buttons. 
+One of these command buttons is used to incorporate
+new mail and has the name ``incorporate''.
+This window has a fully qualified name, ``xmh.toc.buttons.incorporate'',
+and a fully qualified class, ``Xmh.Paned.Box.Command''.
+Its fully qualified name is the name of its parent, ``xmh.toc.buttons'', 
+followed by its name, ``incorporate''.
+Its class is the class of its parent, ``Xmh.Paned.Box'', 
+followed by its particular class, ``Command''.  
+The fully qualified name of a resource is
+the attribute's name appended to the object's fully qualified
+name, and the fully qualified class is its class appended to the object's
+class.
+
+<P>
+
+The incorporate button might need the following resources: 
+Title string,
+Font,
+Foreground color for its inactive state,
+Background color for its inactive state,
+Foreground color for its active state, and
+Background color for its active state.
+Each resource is considered
+to be an attribute of the button and, as such, has a name and a class.
+For example, the foreground color for the button in
+its active state might be named ``activeForeground'',
+and its class might be ``Foreground''.
+
+<P>
+
+When an application looks up a resource (for example, a color),
+it passes the complete name and complete class of the resource
+to a look-up routine.
+The resource manager compares this complete specification
+against the incomplete specifications of entries in the resource
+database, finds the best match, and returns the corresponding
+value for that entry.
+
+<P>
+
+The definitions for the resource manager are contained in
+<B><TT>X11/Xresource.h</TT></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="file-syntax.html">Resource File Syntax</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

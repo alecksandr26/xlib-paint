@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XDestroyImage</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XDestroyImage</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XDestroyImage" "" "@DEF@">
+
+<CODE><PRE>
+XDestroyImage(<B>ximage</B>)
+        <A HREF="../graphics/images.html#XImage">XImage</A> *<B>ximage</B>; 
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>ximage</B>
+<TD> Specifies the image.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XDestroyImage()</B>
+function deallocates the memory associated with the
+<A HREF="../graphics/images.html#XImage">XImage</A>
+structure.
+
+<P>
+
+Note that when the image is created using
+<B><A HREF="XCreateImage.html">XCreateImage()</A></B>,
+<B><A HREF="../graphics/XGetImage.html">XGetImage()</A></B>,
+or 
+<B><A HREF="XSubImage.html">XSubImage()</A></B>,
+the destroy procedure that this macro calls
+frees both the image structure and the data pointed to by the image structure. 
+
+<H2>See also</H2>
+
+<B><A HREF="XAddPixel.html">XAddPixel()</A></B>,
+<B><A HREF="XCreateImage.html">XCreateImage()</A></B>,
+<B><A HREF="XGetPixel.html">XGetPixel()</A></B>,
+<B><A HREF="XPutPixel.html">XPutPixel()</A></B>,
+<B><A HREF="XSubImage.html">XSubImage()</A></B>,
+"<A HREF="manipulating-images.html">Manipulating Images</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

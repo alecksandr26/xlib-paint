@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XUngrabKeyboard</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XUngrabKeyboard</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Keyboard" "ungrabbing">
+<!.IN "Ungrabbing" "keyboard">
+<!.IN "XUngrabKeyboard" "" "@DEF@">
+
+<CODE><PRE>
+XUngrabKeyboard(<B>display</B>, <B>time</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="pointer-grabbing.html#Time">Time</A> <B>time</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>time</B>
+<TD> Specifies the time.
+You can pass either a timestamp or
+<B>CurrentTime</B>.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XUngrabKeyboard()</B>
+function
+releases the keyboard and any queued events if this client has it actively grabbed from
+either
+<B><A HREF="XGrabKeyboard.html">XGrabKeyboard()</A></B>
+or
+<B><A HREF="XGrabKey.html">XGrabKey()</A></B>.
+<B>XUngrabKeyboard()</B>
+does not release the keyboard and any queued events
+if the specified time is earlier than
+the last-keyboard-grab time or is later than the current X server time.
+It also generates
+<B><A HREF="../events/input-focus/">FocusIn</A></B> 
+and 
+<B><A HREF="../events/input-focus/">FocusOut</A></B> 
+events.
+The X server automatically performs an 
+<B>UngrabKeyboard</B>
+request if the event window for an
+active keyboard grab becomes not viewable.
+
+<H2>See also</H2>
+
+<B><A HREF="XAllowEvents.html">XAllowEvents()</A></B>,
+<B><A HREF="XGrabButton.html">XGrabButton()</A></B>,
+<B><A HREF="XGrabKey.html">XGrabKey()</A></B>,
+<B><A HREF="XGrabKeyboard.html">XGrabKeyboard()</A></B>,
+<B><A HREF="XGrabPointer.html">XGrabPointer()</A></B>,
+"<A HREF="keyboard-grabbing.html">Keyboard Grabbing</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

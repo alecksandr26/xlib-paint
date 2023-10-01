@@ -1,0 +1,122 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetSelectionOwner</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetSelectionOwner</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Selection" "setting the owner">
+<!.IN "XSetSelectionOwner" "" "@DEF@">
+
+<CODE><PRE>
+XSetSelectionOwner(<B>display</B>, <B>selection</B>, <B>owner</B>, <B>time</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="properties-and-atoms.html">Atom</A> <B>selection</B>;
+      <A HREF="../window/">Window</A> <B>owner</B>; 
+      <A HREF="../input/pointer-grabbing.html#Time">Time</A> <B>time</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>selection</B>
+<TD> Specifies the selection atom.
+
+<TR><TD> <B>owner</B>
+<TD> Specifies the owner of the specified selection atom.
+You can pass a window or
+<B>None</B> .
+
+<TR><TD> <B>time</B>
+<TD> Specifies the time.
+You can pass either a timestamp or
+<B>CurrentTime</B>.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XSetSelectionOwner()</B>
+function changes the owner and last-change time for the specified selection
+and has no effect if the specified time is earlier than the current
+last-change time of the specified selection 
+or is later than the current X server time.
+Otherwise, the last-change time is set to the specified time,
+with
+<B>CurrentTime</B>
+replaced by the current server time.
+If the owner window is specified as
+<B>None</B> ,
+then the owner of the selection becomes 
+<B>None</B>
+(that is, no owner).
+Otherwise, the owner of the selection becomes the client executing
+the request.
+
+<P>
+ 
+If the new owner (whether a client or
+<B>None</B> )
+is not
+the same as the current owner of the selection and the current
+owner is not
+<B>None</B> ,
+the current owner is sent a 
+<B><A HREF="../events/client-communication/selection-clear.html">SelectionClear</A></B> 
+event.
+If the client that is the owner of a selection is later
+terminated (that is, its connection is closed)
+or if the owner window it has specified in the request is later
+destroyed,
+the owner of the selection automatically
+reverts to
+<B>None</B> ,
+but the last-change time is not affected.
+The selection atom is uninterpreted by the X server.
+<B><A HREF="XGetSelectionOwner.html">XGetSelectionOwner()</A></B>
+returns the owner window, which is reported in 
+<B><A HREF="../events/client-communication/selection-request.html">SelectionRequest</A></B>
+and
+<B><A HREF="../events/client-communication/selection-clear.html">SelectionClear</A></B>
+events.
+Selections are global to the X server.
+
+<P>
+
+<B>XSetSelectionOwner()</B>
+can generate
+<B>BadAtom</B>
+and
+<B>BadWindow</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAtom</B>
+<TD> A value for an Atom argument does not name a
+     defined Atom.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XConvertSelection.html">XConvertSelection()</A></B>,
+<B><A HREF="XGetSelectionOwner.html">XGetSelectionOwner()</A></B>,
+"<A HREF="selection.html">Selections</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

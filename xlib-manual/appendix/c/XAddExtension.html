@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Extensions: XAddExtension</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XAddExtension</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XAddExtension" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="hooking-into-xlib.html#XExtCodes">XExtCodes</A> *XAddExtension(<B>display</B>)
+        <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<H2>Description</H2>
+
+For local Xlib extensions, the
+<B>XAddExtension()</B>
+function allocates the
+<A HREF="hooking-into-xlib.html#XExtCodes">XExtCodes</A>
+structure, bumps the extension number count,
+and chains the extension onto the extension list.
+(This permits extensions to Xlib without requiring server extensions.)
+
+<H2>See also</H2>
+
+<B><A HREF="XInitExtension.html">XInitExtension()</A></B>,
+"<A HREF="hooking-into-xlib.html">Hooking into Xlib </A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

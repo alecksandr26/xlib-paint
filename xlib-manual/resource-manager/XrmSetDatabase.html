@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmSetDatabase</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmSetDatabase</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XrmSetDatabase" "" "@DEF@">
+
+<CODE><PRE>
+void XrmSetDatabase(<B>display</B>, <B>database</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <B><A HREF="creating-and-storing-databases.html">XrmDatabase</A></B> <B>database</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>database</B>
+<TD> Specifies the resource database.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XrmSetDatabase()</B>
+function associates the specified resource database (or NULL)
+with the specified display.
+The database previously associated with the display (if any) is not destroyed.
+A client or toolkit may find this function convenient for retaining a database
+once it is constructed.
+
+<H2>See also</H2>
+
+<B><A HREF="XrmDestroyDatabase.html">XrmDestroyDatabase()</A></B>,
+<B><A HREF="XrmGetDatabase.html">XrmGetDatabase()</A></B>,
+<B><A HREF="XrmGetFileDatabase.html">XrmGetFileDatabase()</A></B>,
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>,
+<B><A HREF="XrmGetStringDatabase.html">XrmGetStringDatabase()</A></B>,
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmLocaleOfDatabase.html">XrmLocaleOfDatabase()</A></B>,
+<B><A HREF="XrmPutFileDatabase.html">XrmPutFileDatabase()</A></B>,
+<B><A HREF="XrmPutResource.html">XrmPutResource()</A></B>,
+"<A HREF="creating-and-storing-databases.html">Creating and Storing Databases</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

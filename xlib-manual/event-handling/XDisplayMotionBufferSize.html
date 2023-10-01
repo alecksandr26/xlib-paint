@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XDisplayMotionBufferSize</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XDisplayMotionBufferSize</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XDisplayMotionBufferSize" "" "@DEF@">
+
+<CODE><PRE>
+unsigned long XDisplayMotionBufferSize(<B>display</B>)
+        <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The server may retain the recent history of the pointer motion
+and do so to a finer granularity than is reported by
+<B><A HREF="../events/keyboard-pointer/keyboard-pointer.html">MotionNotify</A></B>
+events.
+The
+<B><A HREF="XGetMotionEvents.html">XGetMotionEvents()</A></B>
+function makes this history available.
+
+<H2>See also</H2>
+
+<B><A HREF="XGetMotionEvents.html">XGetMotionEvents()</A></B>,
+<B><A HREF="manipulating-event-queue/XIfEvent.html">XIfEvent()</A></B>,
+<B><A HREF="manipulating-event-queue/XNextEvent.html">XNextEvent()</A></B>,
+<B><A HREF="XPutBackEvent.html">XPutBackEvent()</A></B>,
+<B><A HREF="XSendEvent.html">XSendEvent()</A></B>,
+"<A HREF="getting-pointer-motion-history.html">Getting Pointer Motion History</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XQueryFont</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XQueryFont</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XQueryFont" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="./#XFontStruct">XFontStruct</A> *XQueryFont(<B>display</B>, <B>font_ID</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      XID <B>font_ID</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>font_ID</B>
+<TD> Specifies the font ID or the 
+<B><A HREF="/toto/GContext.html">GContext</A></B>
+ID.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XQueryFont()</B>
+function returns a pointer to the
+<A HREF="./#XFontStruct">XFontStruct</A>
+structure, which contains information associated with the font.
+You can query a font or the font stored in a GC.
+The font ID stored in the 
+<A HREF="./#XFontStruct">XFontStruct</A>
+structure will be the 
+<B><A HREF="/toto/GContext.html">GContext</A></B> 
+ID, and you need to be careful when using this ID in other functions
+(see
+<B><A HREF="../../GC/XGContextFromGC.html">XGContextFromGC()</A></B>).
+If the font does not exist,
+<B>XQueryFont()</B>
+returns NULL.
+To free this data, use
+<B><A HREF="XFreeFontInfo.html">XFreeFontInfo()</A></B>.
+
+<H2>See also</H2>
+
+<B><A HREF="../../GC/XCreateGC.html">XCreateGC()</A></B>,
+<B><A HREF="XFreeFont.html">XFreeFont()</A></B>,
+<B><A HREF="XGetFontProperty.html">XGetFontProperty()</A></B>,
+<B><A HREF="XListFonts.html">XListFonts()</A></B>,
+<B><A HREF="XLoadFont.html">XLoadFont()</A></B>,
+<B><A HREF="XLoadQueryFont.html">XLoadQueryFont()</A></B>,
+<B><A HREF="XSetFontPath.html">XSetFontPath()</A></B>,
+<B><A HREF="XUnloadFont.html">XUnloadFont()</A></B>,
+"<A HREF="fonts.html">Loading and Freeing Fonts</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

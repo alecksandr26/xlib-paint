@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Manipulating Bitmaps</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>16.9 Manipulating Bitmaps</H1>
+
+Xlib provides functions that you can use to read a bitmap from a file,
+save a bitmap to a file, or create a bitmap. 
+This section describes those functions that transfer bitmaps to and
+from the client's file system, thus allowing their reuse in a later
+connection (for example, from an entirely different client or to a
+different display or server).
+
+<P>
+
+The X version 11 bitmap file format is:
+
+<P>
+
+<PRE><CODE>
+#define <B>name</B>_width <B>width</B>
+#define <B>name</B>_height <B>height</B>
+#define <B>name</B>_x_hot <B>x</B>
+#define <B>name</B>_y_hot <B>y</B>
+static unsigned char <B>name</B>_bits[] = { 0x<B>NN</B>,... }
+</PRE></CODE>
+
+<P>
+
+The lines for the variables ending with _x_hot and _y_hot suffixes are optional
+because they are present only if a hotspot has been defined for this bitmap.
+The lines for the other variables are required.
+The word ``unsigned'' is optional;
+that is, the type of the _bits array can be ``char'' or ``unsigned char''.
+The _bits array must be large enough to contain the size bitmap.
+The bitmap unit is eight.
+
+<P>
+
+To read a bitmap from a file and store it in a pixmap, use
+<B><A HREF="XReadBitmapFile.html">XReadBitmapFile()</A></B>.
+
+<P>
+
+To read a bitmap from a file and return it as data, use
+<B><A HREF="XReadBitmapFileData.html">XReadBitmapFileData()</A></B>.
+
+<P>
+
+To write out a bitmap from a pixmap to a file, use
+<B><A HREF="XWriteBitmapFile.html">XWriteBitmapFile()</A></B>.
+
+<P>
+
+To create a pixmap and then store bitmap-format data into it, use
+<B><A HREF="XCreatePixmapFromBitmapData.html">XCreatePixmapFromBitmapData()</A></B>.
+
+<P>
+
+To include a bitmap written out by 
+<B><A HREF="XWriteBitmapFile.html">XWriteBitmapFile()</A></B>
+<!.IN "XWriteBitmapFile">
+in a program directly, as opposed to reading it in every time at run time, use
+<B><A HREF="XCreateBitmapFromData.html">XCreateBitmapFromData()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="context-manager.html">Using the Context Manager</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,34 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Getting Pointer Motion History</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>11.7 Getting Pointer Motion History</H1>
+
+Some X server implementations will maintain a more complete
+history of pointer motion than is reported by event notification.
+The pointer position at each pointer hardware interrupt may be
+stored in a buffer for later retrieval.
+This buffer is called the motion history buffer.
+For example, a few applications, such as paint programs,
+want to have a precise history of where the pointer
+traveled. 
+However, this historical information is highly excessive for most applications.
+
+<P>
+
+To determine the approximate maximum number of elements in the motion buffer, 
+use
+<B><A HREF="XDisplayMotionBufferSize.html">XDisplayMotionBufferSize()</A></B>.
+
+<P>
+
+To get the motion history for a specified window and time, use
+<B><A HREF="XGetMotionEvents.html">XGetMotionEvents()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="protocol-errors/">Handling Protocol Errors</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,48 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Window Attributes: Colormap Attribute</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>3.2.9 Colormap Attribute</H1>
+
+The colormap attribute specifies which colormap best reflects the true
+colors of the 
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+window.  
+The colormap must have the same visual type as the window,
+or a 
+<B>BadMatch</B>
+error results.  
+X servers capable of supporting multiple 
+hardware colormaps can use this information, 
+and window managers can use it for calls to
+<B><A HREF="../../window-and-session-manager/XInstallColormap.html">XInstallColormap()</A></B>.
+You can set the colormap attribute to a colormap or to
+<B>CopyFromParent</B>
+(default).
+
+<P>
+
+If you set the colormap to
+<B>CopyFromParent</B>,
+the parent window's colormap is copied and used by its child.
+However, the child window must have the same visual type as the parent, 
+or a 
+<B>BadMatch</B>
+error results. 
+The parent window must not have a colormap of 
+<B>None</B>,
+or a 
+<B>BadMatch</B>
+error results.
+The colormap is copied by sharing the colormap object between the child 
+and parent, not by making a complete copy of the colormap contents.
+Subsequent changes to the parent window's colormap attribute do
+not affect the child window.
+
+<H5 ALIGN=right><I>Next: <A HREF="cursor.html">Cursor Attribute</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

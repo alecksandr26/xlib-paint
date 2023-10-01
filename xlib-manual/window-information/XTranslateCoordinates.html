@@ -1,0 +1,91 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XTranslateCoordinates</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XTranslateCoordinates</H1>
+
+<H2>Syntax</H2>
+
+To translate a coordinate in one window to the coordinate
+space of another window, use
+<B>XTranslateCoordinates()</B>.
+<!.IN "XTranslateCoordinates" "" "@DEF@">
+
+<CODE><PRE>
+Bool XTranslateCoordinates(<B>display</B>, <B>src_w</B>, <B>dest_w</B>, <B>src_x</B>, <B>src_y</B>, <B>dest_x_return</B>, 
+                            <B>dest_y_return</B>, <B>child_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>src_w</B>, <B>dest_w</B>;
+      int <B>src_x</B>, <B>src_y</B>;
+      int *<B>dest_x_return</B>, *<B>dest_y_return</B>;
+      Window *<B>child_return</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>src_w</B>
+<TD> Specifies the source window.
+
+<TR><TD> <B>dest_w</B>
+<TD> Specifies the destination window.
+
+<TR><TD> <B>src_x</B><BR><B>src_y</B>
+<TD> Specify the x and y coordinates within the source window.
+
+<TR><TD> <B>dest_x_return</B><BR><B>dest_y_return</B>
+<TD> Return the x and y coordinates within the destination window.
+
+<TR><TD> <B>child_return</B>
+<TD> Returns the child if the coordinates are contained in a mapped child of the
+destination window.
+
+</TABLE>
+
+<H2>Description</H2>
+
+If
+<B>XTranslateCoordinates()</B>
+returns
+<B>True</B>,
+it takes the src_x and src_y coordinates relative
+to the source window's origin and returns these coordinates to 
+dest_x_return and dest_y_return
+relative to the destination window's origin.
+If
+<B>XTranslateCoordinates()</B>
+returns 
+<B>False</B>, 
+src_w and dest_w are on different screens,
+and dest_x_return and dest_y_return are zero.
+If the coordinates are contained in a mapped child of dest_w,
+that child is returned to child_return.
+Otherwise, child_return is set to
+<B>None</B>.
+
+<P>
+
+<B>XTranslateCoordinates()</B>
+can generate a
+<B>BadWindow</B>
+error.
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+"<A HREF="translate.html">Translating Screen Coordinates</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>
+

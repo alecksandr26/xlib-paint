@@ -1,0 +1,143 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Extensions: Hooks into the Library</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>Hooks into the Library</H1>
+
+These functions allow you to define procedures that are to be
+called when various circumstances occur.
+The procedures include the creation of a new GC for a connection,
+the copying of a GC, the freeing of a GC, the creating and freeing of fonts,
+the conversion of events defined by extensions to and from wire
+format, and the handling of errors.
+
+<P>
+
+All of these functions return the previous procedure defined for this
+extension.
+
+<P>
+
+To define a procedure to be called whenever
+<B><A HREF="../../display/XCloseDisplay.html">XCloseDisplay()</A></B>
+is called, use
+<B><A HREF="XESetCloseDisplay.html">XESetCloseDisplay()</A></B>.
+
+<P>
+
+To define a procedure to be called whenever a new <A HREF="../../GC/manipulating.html">GC</A> is created, use
+<B><A HREF="XESetCreateGC.html">XESetCreateGC()</A></B>.
+
+<P>
+
+To define a procedure to be called whenever a <A HREF="../../GC/manipulating.html">GC</A> is copied, use
+<B><A HREF="XESetCopyGC.html">XESetCopyGC()</A></B>.
+
+<P>
+
+To define a procedure to be called whenever a <A HREF="../../GC/manipulating.html">GC</A> is freed, use
+<B><A HREF="XESetFreeGC.html">XESetFreeGC()</A></B>.
+
+<P>
+
+To define a procedure to be called whenever
+<B><A HREF="../../graphics/font-metrics/XLoadQueryFont.html">XLoadQueryFont()</A></B>
+and
+<B><A HREF="../../graphics/font-metrics/XQueryFont.html">XQueryFont()</A></B>
+are called, use
+<B><A HREF="XESetCreateFont.html">XESetCreateFont()</A></B>.
+
+<P>
+
+To define a procedure to be called whenever a font is freed, use
+<B><A HREF="XESetFreeFont.html">XESetFreeFont()</A></B>.
+
+<A NAME="xEvent"></A>
+<P>
+
+The 
+<B><A HREF="XESetWireToEvent.html">XESetWireToEvent()</A></B>
+and
+<B><A HREF="XESetEventToWire.html">XESetEventToWire()</A></B>
+functions allow you to define new events to the library.
+An 
+<A HREF="../../events/structures.html#XEvent">XEvent</A>
+structure always has a type code (type
+<B>int</B>)
+as the first component.
+This uniquely identifies what kind of event it is.
+The second component is always the serial number (type
+<B>unsigned</B>
+<B>long</B>)
+of the last request processed by the server.
+The third component is always a Boolean (type
+<B>Bool</B>)
+indicating whether the event came from a
+<B><A HREF="../a.html#SendEvent">SendEvent</A></B>
+protocol request.
+The fourth component is always a pointer to the display
+the event was read from.
+The fifth component is always a resource ID of one kind or another,
+usually a window, carefully selected to be useful to toolkit dispatchers.
+The fifth component should always exist, even if
+the event does not have a natural destination;
+if there is no value
+from the protocol to put in this component, initialize it to zero.
+
+<P ALIGN=center><B>Note</B>
+<BLOCKQUOTE>
+There is an implementation limit such that your host event
+structure size cannot be bigger than the size of the
+<A HREF="../../events/structures.html#XEvent">XEvent</A> 
+union of structures.
+There also is no way to guarantee that more than 24 elements or 96 characters
+in the structure will be fully portable between machines.
+</BLOCKQUOTE>
+
+<P>
+
+To initialize the serial number component of the event, call
+<B><A HREF="_XSetLastRequestRead.html">_XSetLastRequestRead()</A></B>
+with the event and use the return value.
+
+<P>
+
+To define a procedure to be called whenever an extension error needs to be
+converted from wire format to host format, use
+<B><A HREF="XESetWireToError.html">XESetWireToError()</A></B>.
+
+<P>
+
+To install an error procedure, use
+<B><A HREF="XESetError.html">XESetError()</A></B>.
+
+<P>
+
+To define a procedure to be called to define an error message, use
+<B><A HREF="XESetErrorString.html">XESetErrorString()</A></B>.
+
+<P>
+
+To define a procedure to be called when an extension error is printed, 
+to print the error value, use
+<B><A HREF="XESetPrintErrorValues.html">XESetPrintErrorValues()</A></B>.
+
+<P>
+
+To define a procedure to be called whenever a <A HREF="../../GC/manipulating.html">GC</A> cache
+needs to be updated in the server, use
+<B><A HREF="XESetFlushGC.html">XESetFlushGC()</A></B>.
+
+<P>
+
+To define a procedure to be called whenever data is about to be sent
+to the server, use
+<B><A HREF="XESetBeforeFlush.html">XESetBeforeFlush()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="hooks-onto-xlib-data-structures.html">Hooks onto Xlib Data Structures</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

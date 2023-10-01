@@ -1,0 +1,105 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XLookupString</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XLookupString</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XLookupString" "" "@DEF@">
+
+<CODE><PRE>
+int XLookupString(<B>event_struct</B>, <B>buffer_return</B>, <B>bytes_buffer</B>, <B>keysym_return</B>, <B>status_in_out</B>)
+      <A HREF="../events/keyboard-pointer/keyboard-pointer.html#XKeyEvent">XKeyEvent</A> *<B>event_struct</B>;
+      char *<B>buffer_return</B>;
+      int <B>bytes_buffer</B>;
+      <A HREF="../input/keyboard-encoding.html#KeySym">KeySym</A> *<B>keysym_return</B>;
+      XComposeStatus *<B>status_in_out</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>event_struct</B>
+<TD> Specifies the key event structure to be used.
+You can pass
+<A HREF="../events/keyboard-pointer/keyboard-pointer.html#XKeyEvent">XKeyPressedEvent</A>
+or
+<A HREF="../events/keyboard-pointer/keyboard-pointer.html#XKeyEvent">XKeyReleasedEvent</A> .
+
+<TR><TD> <B>buffer_return</B>
+<TD> Returns the translated characters.
+
+<TR><TD> <B>bytes_buffer</B>
+<TD> Specifies the length of the buffer.
+No more than bytes_buffer of translation are returned.
+
+<TR><TD> <B>keysym_return</B>
+<TD> Returns the KeySym computed from the event if this argument is not NULL.
+
+<TR><TD> <B>status_in_out</B>
+<TD> Specifies or returns the 
+<B>XComposeStatus</B> 
+structure or NULL.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XLookupString()</B>
+function translates a key event to a KeySym and a string.
+The KeySym is obtained by using the standard interpretation of the
+<B>Shift</B>,
+<B>Lock</B>,
+group, and numlock modifiers as defined in the X Protocol specification.
+If the KeySym has been rebound (see
+<B><A HREF="XRebindKeysym.html">XRebindKeysym()</A></B>),
+the bound string will be stored in the buffer.
+Otherwise, the KeySym is mapped, if possible, to an ISO Latin-1 character
+or (if the Control modifier is on) to an ASCII control character,
+and that character is stored in the buffer.
+<B>XLookupString()</B>
+returns the number of characters that are stored in the buffer.
+
+<A NAME="XComposeStatus"></A>
+<P>
+
+If present (non-NULL),
+the
+<B>XComposeStatus</B>
+structure records the state,
+which is private to Xlib,
+that needs preservation across calls to
+<B>XLookupString()</B>
+to implement compose processing.
+The creation of
+<B>XComposeStatus</B>
+structures is implementation dependent;
+a portable program must pass NULL for this argument.
+
+<P>
+
+<B>XLookupString()</B>
+depends on the cached keyboard information mentioned in the
+previous section, so it is necessary to use
+<B><A HREF="keyboard/XRefreshKeyboardMapping.html">XRefreshKeyboardMapping()</A></B>
+to keep this information up-to-date.
+
+<H2>See also</H2>
+
+<B><A HREF="keyboard/XLookupKeysym.html">XLookupKeysym()</A></B>,
+<B><A HREF="XRebindKeysym.html">XRebindKeysym()</A></B>,
+<B><A HREF="keyboard/XRefreshKeyboardMapping.html">XRefreshKeyboardMapping()</A></B>,
+<B><A HREF="keyboard/XStringToKeysym.html">XStringToKeysym()</A></B>
+<A HREF="../events/keyboard-pointer/keyboard-pointer.html#XButtonEvent">XButtonEvent</A>,
+<A HREF="../events/window-state-change/map.html#XMapEvent">XMapEvent</A>,
+"<A HREF="latin-keyboard.html">Latin-1 Keyboard Event Functions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

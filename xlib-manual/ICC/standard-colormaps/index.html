@@ -1,0 +1,239 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Standard Colormaps</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>14.3 Standard Colormaps</H1>
+
+Applications with color palettes, smooth-shaded drawings, or digitized
+images demand large numbers of colors.  
+In addition, these applications often require an efficient mapping 
+from color triples to pixel values that display the appropriate colors.
+
+<P>
+
+As an example, consider a three-dimensional display program that wants 
+to draw a smoothly shaded sphere.  
+At each pixel in the image of the sphere, 
+the program computes the intensity and color of light
+reflected back to the viewer.  
+The result of each computation is a triple of RGB
+coefficients in the range 0.0 to 1.0.  
+To draw the sphere, the program needs a colormap that provides a
+large range of uniformly distributed colors.  
+The colormap should be arranged so that the program can
+convert its RGB triples into pixel values very quickly,
+because drawing the entire sphere requires many such
+conversions.
+
+<P>
+
+On many current workstations,
+the display is limited to 256 or fewer colors.  
+Applications must allocate colors carefully, 
+not only to make sure they cover the entire range they need 
+but also to make use of as many of the available colors as possible.
+On a typical X display, 
+many applications are active at once.
+Most workstations have only one hardware look-up table for colors,
+so only one application colormap can be installed at a given time.
+The application using the installed colormap is displayed correctly, 
+and the other applications go technicolor and are
+displayed with false colors.
+
+<P>
+
+As another example, consider a user who is running an 
+image processing program to display earth-resources data.  
+The image processing program needs a colormap set up with 8 reds, 
+8 greens, and 4 blues, for a total of 256 colors.
+Because some colors are already in use in the default colormap, 
+the image processing program allocates and installs a new colormap.
+
+<P>
+
+The user decides to alter some of the colors in the image
+by invoking a color palette program to mix and choose colors.
+The color palette program also needs a
+colormap with eight reds, eight greens, and four blues, so just like
+the image processing program, it must allocate and
+install a new colormap.
+
+<P>
+
+Because only one colormap can be installed at a time,
+the color palette may be displayed incorrectly
+whenever the image processing program is active.
+Conversely, whenever the palette program is active, 
+the image may be displayed incorrectly.  
+The user can never match or compare colors in the palette and image.
+Contention for colormap resources can be reduced if applications
+with similar color needs share colormaps.
+
+<P>
+
+The image processing program and the color palette program 
+could share the same colormap if there existed a convention that described
+how the colormap was set up.  
+Whenever either program was active, 
+both would be displayed correctly.
+
+<P>
+
+The standard colormap properties define a set of commonly used
+colormaps.  
+Applications that share these colormaps and conventions display 
+true colors more often and provide a better interface to the user.
+
+<P>
+
+Standard colormaps allow applications to share commonly used color
+resources.  
+This allows many applications to be displayed in true colors
+simultaneously, even when each application needs an entirely filled
+colormap.
+
+<P>
+
+Several standard colormaps are described in this section.
+Usually, a window manager creates these colormaps.
+Applications should use the standard colormaps if they already exist.
+
+<P>
+
+To allocate an
+<B>XStandardColormap</B>
+structure, use
+<B><A HREF="XAllocStandardColormap.html">XAllocStandardColormap()</A></B>.
+
+<A NAME="XStandardColormap"></A>
+<P>
+
+The 
+<B>XStandardColormap</B>
+structure contains:
+
+<P>
+
+<PRE><CODE>
+/* Hints */
+
+#define <B>ReleaseByFreeingColormap</B>	( (XID) 1L)
+
+/* Values */
+<!.IN "XStandardColormap" "" "@DEF@">
+
+typedef struct {
+	Colormap colormap;
+	unsigned long red_max;
+	unsigned long red_mult;
+	unsigned long green_max;
+	unsigned long green_mult;
+	unsigned long blue_max;
+	unsigned long blue_mult;
+	unsigned long base_pixel;
+	VisualID visualid;
+	XID killid;
+} XStandardColormap;
+</PRE></CODE>
+
+<P>
+
+The <B>colormap</B> member is the colormap created by the
+<B><A HREF="../../color/XCreateColormap.html">XCreateColormap()</A></B>
+function.
+The <B>red_max</B>, <B>green_max</B>, and <B>blue_max</B>members give the maximum
+red, green, and blue values, respectively.  
+Each color coefficient ranges from zero to its max, inclusive.  
+For example,
+a common colormap allocation is 3/3/2 (3 planes for red, 3
+planes for green, and 2 planes for blue).  
+This colormap would have red_max = 7, green_max = 7, 
+and blue_max = 3.  
+An alternate allocation that uses only 216 colors is red_max = 5, 
+green_max = 5, and blue_max = 5.
+
+<P>
+
+The <B>red_mult</B>, <B>green_mult</B>, and <B>blue_mult</B>members give the
+scale factors used to compose a full pixel value. 
+(See the discussion of the <B>base_pixel</B> members for further information.)
+For a 3/3/2 allocation, red_mult might be 32,
+green_mult might be 4, and blue_mult might be 1.  
+For a 6-colors-each allocation, red_mult might be 36, 
+green_mult might be 6, and blue_mult might be 1.
+
+<P>
+
+The <B>base_pixel</B> member gives the base pixel value used to
+compose a full pixel value.  
+Usually, <B>the</B> base_pixel is obtained from a call to the 
+<B><A HREF="../../color/XAllocColorPlanes.html">XAllocColorPlanes()</A></B>
+function.  
+Given integer red, green, and blue coefficients in their appropriate 
+ranges, one then can compute a corresponding pixel value by
+using the following expression:
+
+<P>
+
+<BLOCKQUOTE><I>
+(r * red_mult + g * green_mult + b * blue_mult + base_pixel) & 0xFFFFFFFF
+</I></BLOCKQUOTE>
+
+<P>
+
+For 
+<B><A HREF="../../window/visual-types.html">GrayScale</A></B>
+colormaps, 
+only the <B>colormap</B>, <B>red_max</B>, <B>red_mult</B>, 
+and <B>base_pixel</B> members are defined. 
+The other members are ignored.  
+To compute a 
+<B>GrayScale</B>
+pixel value, use the following expression:
+
+<P>
+
+<BLOCKQUOTE><I>
+(gray * red_mult + base_pixel) & 0xFFFFFFFF
+</I></BLOCKQUOTE>
+
+<P>
+
+Negative multipliers can be represented by converting the 2's
+complement representation of the multiplier into an unsigned long and
+storing the result in the appropriate _mult field.
+The step of masking by 0xFFFFFFFF effectively converts the resulting
+positive multiplier into a negative one.
+The masking step will take place automatically on many machine architectures,
+depending on the size of the integer type used to do the computation,
+
+<P>
+
+The <B>visualid</B> member gives the ID number of the visual from which the
+colormap was created.
+The <B>killid</B> member gives a resource ID that indicates whether
+the cells held by this standard colormap are to be released 
+by freeing the colormap ID or by calling the
+<B><A HREF="../../window-and-session-manager/XKillClient.html">XKillClient()</A></B>
+function on the indicated resource.
+(Note that this method is necessary for allocating out of an existing colormap.)
+
+<P>
+
+The properties containing the 
+<B><A HREF="./#XStandardColormap">XStandardColormap</A></B> 
+information have 
+the type RGB_COLOR_MAP.
+
+<P>
+
+The remainder of this section discusses standard colormap properties and atoms
+as well as how to manipulate standard colormaps.
+
+<H5 ALIGN=right><I>Next: <A HREF="properties-and-atoms.html">Standard Colormap Properties and Atoms</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

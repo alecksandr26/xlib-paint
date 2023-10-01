@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XcmsFreeCCC</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XcmsFreeCCC</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XcmsFreeCCC" "" "@DEF@">
+<!.IN "Color Conversion Context" "freeing">
+<!.IN "CCC" "freeing">
+
+<CODE><PRE>
+void XcmsFreeCCC(<B>ccc</B>)
+      <A HREF="macros.html">XcmsCCC</A> <B>ccc</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>ccc</B>
+<TD> Specifies the <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XcmsFreeCCC()</B>
+function frees the memory used for the specified CCC.
+Note that default CCCs and those currently associated with colormaps
+are ignored.
+
+<H2>See also</H2>
+
+<B><A HREF="macros.html#DisplayOfCCC">DisplayOfCCC()</A></B>,
+<B><A HREF="XcmsCCCOfColormap.html">XcmsCCCOfColormap()</A></B>,
+<B><A HREF="../XcmsConvertColors.html">XcmsConvertColors()</A></B>,
+<B><A HREF="XcmsCreateCCC.html">XcmsCreateCCC()</A></B>,
+<B><A HREF="XcmsDefaultCCC.html">XcmsDefaultCCC()</A></B>,
+<B><A HREF="XcmsSetWhitePoint.html">XcmsSetWhitePoint()</A></B>,
+"<A HREF="creating-and-freeing.html">Creating and Freeing a Color Conversion Context</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

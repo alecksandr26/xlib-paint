@@ -1,0 +1,94 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XFetchName</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XFetchName</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XFetchName" "" "@DEF@">
+
+<CODE><PRE>
+Status XFetchName(<B>display</B>, <B>w</B>, <B>window_name_return</B>)
+      Display *<B>display</B>;
+      Window <B>w</B>;
+      char **<B>window_name_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>window_name_return</B>
+<TD> Returns the window name, which is a null-terminated string.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XFetchName()</B>
+function returns the name of the specified window.
+If it succeeds,
+it returns a nonzero status; 
+otherwise, no name has been set for the window,
+and it returns zero.
+If the WM_NAME property has not been set for this window,
+<B>XFetchName()</B>
+sets window_name_return to NULL.
+If the data returned by the server is in the Latin Portable Character Encoding,
+then the returned string is in the Host Portable Character Encoding.
+Otherwise, the result is implementation dependent.
+When finished with it, a client must free
+the window name string using
+<B><A HREF="../../display/XFree.html">XFree()</A></B>.
+
+<P>
+
+<B>XFetchName()</B>
+can generate a
+<B>BadWindow</B>
+error.
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocClassHint.html">XAllocClassHint()</A></B>,
+<B><A HREF="XAllocIconSize.html">XAllocIconSize()</A></B>,
+<B><A HREF="XAllocSizeHints.html">XAllocSizeHints()</A></B>,
+<B><A HREF="XAllocWMHints.html">XAllocWMHints()</A></B>,
+<B><A HREF="../../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XGetWMName.html">XGetWMName()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetCommand.html">XSetCommand()</A></B>,
+<B><A HREF="XSetTextProperty.html">XSetTextProperty()</A></B>,
+<B><A HREF="XSetTransientForHint.html">XSetTransientForHint()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetWMClientMachine.html">XSetWMClientMachine()</A></B>,
+<B><A HREF="XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B>,
+<B><A HREF="XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B>,
+<B><A HREF="XSetWMIconName.html">XSetWMIconName()</A></B>,
+<B><A HREF="XSetWMIconName.html">XSetWMIconName()</A></B>,
+<B><A HREF="XSetWMName.html">XSetWMName()</A></B>,
+<B><A HREF="XSetWMProperties.html">XSetWMProperties()</A></B>,
+<B><A HREF="XSetWMProtocols.html">XSetWMProtocols()</A></B>,
+<B><A HREF="XStoreName.html">XStoreName()</A></B>,
+<B><A HREF="XStringListToTextProperty.html">XStringListToTextProperty()</A></B>,
+"<A HREF="text.html">Setting and Reading Text Properties</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

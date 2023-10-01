@@ -1,0 +1,117 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Window Attributes: Background</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>3.2.1 Background Attribute</H1>
+
+Only
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+windows can have a background.
+You can set the background of an
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+window by using a pixel or a pixmap.
+
+<P>
+
+The background-pixmap attribute of a window specifies the pixmap to be used for 
+a window's background.
+This pixmap can be of any size, although some sizes may be faster than others.
+The background-pixel attribute of a window specifies a pixel value used to paint
+a window's background in a single color.
+
+<A NAME="ParentRelative"></A>
+<P>
+
+You can set the background-pixmap to a pixmap,  
+<B>None</B>
+(default), or 
+<B>ParentRelative</B>.
+You can set the background-pixel of a window to any pixel value (no default).
+If you specify a background-pixel, 
+it overrides either the default background-pixmap
+or any value you may have set in the background-pixmap.
+A pixmap of an undefined size that is filled with the background-pixel is used 
+for the background.
+Range checking is not performed on the background pixel;
+it simply is truncated to the appropriate number of bits.
+
+<P>
+
+If you set the background-pixmap,
+it overrides the default.
+The background-pixmap and the window must have the same depth,
+or a
+<B>BadMatch</B>
+error results.
+If you set background-pixmap to
+<B>None</B>,
+the window has no defined background.  
+If you set the background-pixmap to
+<B>ParentRelative</B>:
+
+<UL>
+
+<P><LI>
+The parent window's background-pixmap is used. 
+The child window, however, must have the same depth as 
+its parent,
+or a
+<B>BadMatch</B>
+error results.
+
+<P><LI>
+If the parent window has a background-pixmap of
+<B>None</B>,
+the window also has a background-pixmap of
+<B>None</B>. 
+
+<P><LI>
+A copy of the parent window's background-pixmap is not made.
+The parent's background-pixmap is examined each time the child window's 
+background-pixmap is required.  
+
+<P><LI>
+The background tile origin always aligns with the parent window's
+background tile origin. 
+If the background-pixmap is not
+<B>ParentRelative</B>,
+the background tile origin is the child window's origin.
+</UL>
+
+<P>
+
+Setting a new background, whether by setting background-pixmap or
+background-pixel, overrides any previous background.
+The background-pixmap can be freed immediately if no further explicit reference
+is made to it (the X server will keep a copy to use when needed).
+If you later draw into the pixmap used for the background,
+what happens is undefined because the
+X implementation is free to make a copy of the pixmap or
+to use the same pixmap.
+
+<P>
+
+When no valid contents are available for regions of a window
+and either the regions are visible or the server is maintaining backing store,
+the server automatically tiles the regions with the window's background
+unless the window has a background of
+<B>None</B>.
+If the background is
+<B>None</B>,
+the previous screen contents from other windows of the same depth as the window
+are simply left in place as long as the contents come from the parent of the
+window or an inferior of the parent.
+Otherwise, the initial contents of the exposed regions are undefined.
+<B><A HREF="../../events/exposure/expose.html">Expose</A></B> 
+events are then generated for the regions, even if the background-pixmap
+is
+<B>None</B>
+(see "<A HREF="../../events/exposure/">Exposure events</A>").
+
+<H5 ALIGN=right><I>Next: <A HREF="border.html">Border Attribute</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

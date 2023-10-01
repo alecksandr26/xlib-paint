@@ -1,0 +1,110 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Prototype Gamut Compression Procedure</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.10.1 Prototype Gamut Compression Procedure</H1>
+
+The gamut compression callback interface must adhere to the
+following:
+<!.IN "XcmsCompressionProc" "" "@DEF@">
+
+<CODE><PRE>
+typedef <B><A HREF="../conversion-contexts-and-gamut-mapping.html#cmsStatus">Status</A></B> (*XcmsCompressionProc)(<B>ccc</B>, <B>colors_in_out</B>, <B>ncolors</B>, <B>index</B>, <B>compression_flags_return</B>)
+      <A HREF="../CCC/macros.html">XcmsCCC</A> <B>ccc</B>;
+      <A HREF="../structures.html#XcmsColor">XcmsColor</A> <B>colors_in_out[]</B>;
+      unsigned int <B>ncolors</B>;
+      unsigned int <B>index</B>;
+      Bool <B>compression_flags_return[]</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>ccc</B>
+<TD> Specifies the <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>.
+
+<TR><TD> <B>colors_in_out</B>
+<TD> Specifies an array of color specifications.
+Pixel members should be ignored and must remain unchanged upon return.
+
+<TR><TD> <B>ncolors</B>
+<TD> Specifies the number of 
+<A HREF="../structures.html#XcmsColor">XcmsColor</A>
+structures in the color specification array.
+
+<TR><TD> <B>index</B>
+<TD> Specifies the index into the array of
+<A HREF="../structures.html#XcmsColor">XcmsColor</A>
+structures for the encountered color specification that lies outside the 
+screen's color gamut.
+Valid values are 0 (for the first element) to ncolors - 1.
+
+<TR><TD> <B>compression_flags_return</B>
+<TD> Returns an array of Boolean values for indicating compression status.
+If a non-NULL pointer is supplied
+and a color at a given index is compressed, then
+<B>True</B>
+should be stored at the corresponding index in this array;
+otherwise, the array should not be modified.
+
+</TABLE>
+
+When implementing a gamut compression procedure, consider the following
+rules and assumptions:
+
+<UL>
+
+<P><LI>
+The gamut compression procedure can attempt to compress one or multiple
+specifications at a time.
+
+<P><LI>
+When called, elements 0 to index - 1 in the color specification
+array can be assumed to fall within the screen's color gamut.
+In addition, these color specifications are already in some device-dependent
+format (typically
+<B>XcmsRGBi</B>).
+If any modifications are made to these color specifications,
+they must be in their initial device-dependent format upon return.
+
+<P><LI>
+When called, the element in the color specification array specified
+by the index argument contains the color specification outside the 
+screen's color gamut encountered by the calling routine.
+In addition, this color specification can be assumed to be in
+<B>XcmsCIEXYZ</B>.
+Upon return, this color specification must be in
+<B>XcmsCIEXYZ</B>.
+
+<P><LI>
+When called, elements from index to ncolors - 1 
+in the color specification array may or may not fall within the
+screen's color gamut.
+In addition, these color specifications can be assumed to be in
+<B>XcmsCIEXYZ</B>.
+If any modifications are made to these color specifications, 
+they must be in
+<B>XcmsCIEXYZ</B>
+upon return.
+
+<P><LI>
+The color specifications passed to the gamut compression procedure
+have already been adjusted to the Screen White Point.
+This means that at this point the color specification's white point
+is the Screen White Point.
+
+<P><LI>
+If the gamut compression procedure uses a device-independent color space not
+initially accessible for use in the color management system, use 
+<B><A HREF="../management-extensions/XcmsAddColorSpace.html">XcmsAddColorSpace()</A></B>
+to insure that it is added.
+
+</UL>
+
+<H5 ALIGN=right><I>Next: <A HREF="supplied-gamut-compression.html">Supplied Gamut Compression Procedures</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

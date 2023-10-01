@@ -1,0 +1,108 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XWarpPointer</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XWarpPointer</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XWarpPointer" "" "@DEF@">
+
+<CODE><PRE>
+XWarpPointer(<B>display</B>, <B>src_w</B>, <B>dest_w</B>, <B>src_x</B>, <B>src_y</B>, <B>src_width</B>, <B>src_height</B>, <B>dest_x</B>, 
+                <B>dest_y</B>)
+        <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+        Window <B>src_w</B>, <B>dest_w</B>;
+        int <B>src_x</B>, <B>src_y</B>;
+        unsigned int <B>src_width</B>, <B>src_height</B>;
+        int <B>dest_x</B>, <B>dest_y</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>src_w</B>
+<TD> Specifies the source window or
+<B>None</B>.
+
+<TR><TD> <B>dest_w</B>
+<TD> Specifies the destination window or
+<B>None</B>.
+
+<TR><TD> <B>src_x</B><BR>
+	<B>src_y</B><BR>
+	<B>src_width</B><BR>
+	<B>src_height</B>
+<TD> Specify a rectangle in the source window.
+
+<TR><TD> <B>dest_x</B><BR>
+	<B>dest_y</B>
+<TD> Specify the x and y coordinates within the destination window.
+
+</TABLE>
+
+<H2>Description</H2>
+
+If dest_w is
+<B>None</B>,
+<B>XWarpPointer()</B>
+moves the pointer by the offsets (dest_x, dest_y) relative to the current
+position of the pointer.
+If dest_w is a window,
+<B>XWarpPointer()</B>
+moves the pointer to the offsets (dest_x, dest_y) relative to the origin of
+dest_w.
+However, if src_w is a window,
+the move only takes place if the window src_w contains the pointer 
+and if the specified rectangle of src_w contains the pointer.
+
+<P>
+
+The src_x and src_y coordinates are relative to the origin of src_w.
+If src_height is zero,
+it is replaced with the current height of src_w minus src_y.
+If src_width is zero,
+it is replaced with the current width of src_w minus src_x.
+
+<P>
+
+There is seldom any reason for calling this function. 
+The pointer should normally be left to the user.
+If you do use this function, however, it generates events just as if the user
+had instantaneously moved the pointer from one position to another.
+Note that you cannot use
+<B>XWarpPointer()</B>
+to move the pointer outside the confine_to window of an active pointer grab.
+An attempt to do so will only move the pointer as far as the closest edge of the
+confine_to window. 
+
+<P>
+
+<B>XWarpPointer()</B>
+can generate a
+<B>BadWindow</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XSetInputFocus.html">XSetInputFocus()</A></B>,
+"<A HREF="moving-pointer.html">Moving the Pointer</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

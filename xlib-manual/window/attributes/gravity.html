@@ -1,0 +1,122 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Window Attributes: Gravity</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>3.2.3 Gravity Attributes</H1>
+
+The bit gravity of a window defines which region of the window should be 
+retained when an
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+window is resized. 
+The default value for the bit-gravity attribute is 
+<B>ForgetGravity</B>.
+The window gravity of a window allows you to define how the 
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+or
+<B><A HREF="../create.html#InputClass">InputOnly</A></B>
+window should be repositioned if its parent is resized.  
+The default value for the
+win-gravity attribute is 
+<B>NorthWestGravity</B> .
+
+<P>
+
+If the inside height of a window is not changed 
+and if the window is moved or its border is changed, 
+then the contents of the window are not lost but move with the window.
+Changing the inside width or
+height of the window causes its contents to be
+moved or lost (depending on the bit-gravity of the window) and causes
+children to be reconfigured (depending on their win-gravity).
+For a
+change of width and height, the (x, y) pairs are defined:
+
+<P>
+<TABLE>
+<TR><TD COLSPAN=2><HR>
+<TR><TH>Gravity Direction		<TH>Coordinates
+<TR><TD COLSPAN=2><HR>
+<TR><TD><B>NorthWestGravity</B>		<TD>(0, 0)
+<TR><TD><B>NorthGravity</B>		<TD>(Width/2, 0)
+<TR><TD><B>NorthEastGravity</B>		<TD>(Width, 0)
+<TR><TD><B>WestGravity</B>		<TD>(0, Height/2)
+<TR><TD><B>CenterGravity</B>		<TD>(Width/2, Height/2)
+<TR><TD><B>EastGravity</B>		<TD>(Width, Height/2)
+<TR><TD><B>SouthWestGravity</B>		<TD>(0, Height)
+<TR><TD><B>SouthGravity</B>		<TD>(Width/2, Height)
+<TR><TD><B>SouthEastGravity</B>		<TD>(Width, Height)
+</TABLE>
+
+<P>
+
+When a window with one of these bit-gravity values is resized, 
+the corresponding pair
+defines the change in position of each pixel in the window.
+When a window with one of these win-gravities has its parent window resized,
+the corresponding pair defines the change in position of the window 
+within the parent.
+When a window is so repositioned, a
+<B><A HREF="../../events/window-state-change/gravity.html">GravityNotify</A></B>
+event is generated.
+
+<P>
+
+A bit-gravity of
+<B>StaticGravity</B> 
+indicates that the contents or origin should not move relative to the 
+origin of the root window.
+If the change in size of the window is coupled with a change in position (x, y),
+then for bit-gravity the change in position of each pixel is (-x, -y), and for
+win-gravity the change in position of a child when its parent is so resized is
+(-x, -y).
+Note that
+<B>StaticGravity</B>
+still only takes effect when the width or height of the window is changed, 
+not when the window is moved.
+
+<P>
+
+A bit-gravity of 
+<B>ForgetGravity</B> 
+indicates that the window's contents are always discarded after a size change, 
+even if a backing store or save under has been requested.
+The window is tiled with its <A HREF="background.html">background</A>
+and zero or more 
+<B><A HREF="../../events/exposure/expose.html">Expose</A></B> 
+events are generated. 
+If no <A HREF="background.html">background</A> is defined, the existing screen contents are not
+altered.
+Some X servers may also ignore the specified bit-gravity and 
+always generate 
+<B><A HREF="../../events/exposure/expose.html">Expose</A></B>
+events.
+
+<P>
+
+The contents and borders of inferiors are not affected by their parent's
+bit-gravity.
+A server is permitted to ignore the specified bit-gravity and use
+<B>Forget</B>
+instead.
+
+<P>
+
+A win-gravity of 
+<B>UnmapGravity</B> 
+is like 
+<B>NorthWestGravity</B>
+(the window is not moved),
+except the child is also
+unmapped when the parent is resized,
+and an 
+<B><A HREF="../../events/window-state-change/unmap.html">UnmapNotify</A></B> 
+event is
+generated.
+
+<H5 ALIGN=right><I>Next: <A HREF="backing-store.html">Backing Store Attribute</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

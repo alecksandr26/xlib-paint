@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XFreeCursor</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XFreeCursor</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XFreeCursor" "" "@DEF@">
+
+<CODE><PRE>
+XFreeCursor(<B>display</B>, <B>cursor</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="cursor.html">Cursor</A> <B>cursor</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>cursor</B>
+<TD> Specifies the cursor. 
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XFreeCursor()</B>
+function deletes the association between the cursor resource ID 
+and the specified cursor.
+The cursor storage is freed when no other resource references it.
+The specified cursor ID should not be referred to again.
+
+<P>
+
+<B>XFreeCursor()</B>
+can generate a
+<B>BadCursor</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadCursor</B> 
+<TD>A value for a Cursor argument does not name a
+    defined Cursor.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../color/XCreateColormap.html">XCreateColormap()</A></B>
+<B><A HREF="XCreateFontCursor.html">XCreateFontCursor()</A></B>,
+<B><A HREF="../window/XDefineCursor.html">XDefineCursor()</A></B>,
+<B><A HREF="XQueryBestCursor.html">XQueryBestCursor()</A></B>,
+<B><A HREF="XRecolorCursor.html">XRecolorCursor()</A></B>,
+"<A HREF="cursor.html">Creating, Recoloring, and Freeing Cursors</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

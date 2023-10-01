@@ -1,0 +1,91 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Event Masks</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.3 Event Masks</H1>
+
+<!.IN "Event mask" "" "@DEF@">
+Clients select event reporting of most events relative to a window.
+To do this, pass an event mask to an Xlib event-handling
+function that takes an event_mask argument.
+The bits of the event mask are defined in
+<B><TT>X11/X.h</TT></B>.
+Each bit in the event mask maps to an event mask name,
+which describes the event or events you want the X server to
+return to a client application.
+
+<P>
+
+Unless the client has specifically asked for them,
+most events are not reported to clients when they are generated. 
+Unless the client suppresses them by setting graphics-exposures in the <A HREF="../GC/manipulating.html">GC</A> to
+<B>False</B> ,
+<B><A HREF="exposure/graphics-expose-and-no-expose.html">GraphicsExpose</A></B> 
+and 
+<B><A HREF="exposure/graphics-expose-and-no-expose.html">NoExpose</A></B> 
+are reported by default as a result of
+<B><A HREF="../graphics/XCopyPlane.html">XCopyPlane()</A></B>
+and
+<B><A HREF="../graphics/XCopyArea.html">XCopyArea()</A></B>.
+<B><A HREF="client-communication/selection-clear.html">SelectionClear</A></B>,
+<B><A HREF="client-communication/selection-request.html">SelectionRequest</A></B>,
+<B><A HREF="client-communication/selection.html">SelectionNotify</A></B>,
+or
+<B><A HREF="client-communication/client-message.html">ClientMessage</A></B>
+cannot be masked.
+Selection related events are only sent to clients cooperating
+with selections (see section "<A HREF="../window-information/selection.html">Selections</A>").
+When the keyboard or pointer mapping is changed,
+<B><A HREF="window-state-change/mapping.html">MappingNotify</A></B>
+is always sent to clients.
+
+<P>
+
+The following table 
+lists the event mask constants you can pass to
+the event_mask argument and
+the circumstances in which you would want to specify the
+event mask:
+
+<A NAME="NoEventMask"></A>
+<TABLE>
+<TR><TD COLSPAN=2><HR>
+<TR><TD><B>Event Mask	<TD><B>Circumstances
+<TR><TD COLSPAN=2><HR>
+<TR><TD><B>NoEventMask</B>										<TD>No events wanted
+<TR><TD><B><A HREF="processing-overview.html#KeyPressMask">KeyPressMask</A></B>				<TD>Keyboard down events wanted
+<TR><TD><B><A HREF="processing-overview.html#KeyReleaseMask">KeyReleaseMask</A></B>			<TD>Keyboard up events wanted
+<TR><TD><B><A HREF="processing-overview.html#ButtonPressMask">ButtonPressMask</A></B>			<TD>Pointer button down events wanted
+<TR><TD><B><A HREF="processing-overview.html#ButtonReleaseMask">ButtonReleaseMask</A></B>		<TD>Pointer button up events wanted
+<TR><TD><B><A HREF="processing-overview.html#EnterWindowMask">EnterWindowMask</A></B>			<TD>Pointer window entry events wanted
+<TR><TD><B><A HREF="processing-overview.html#LeaveWindowMask">LeaveWindowMask</A></B>			<TD>Pointer window leave events wanted
+<TR><TD><B><A HREF="processing-overview.html#PointerMotionMask">PointerMotionMask</A></B>		<TD>Pointer motion events wanted
+<TR><TD><B><A HREF="processing-overview.html#PointerMotionHintMask">PointerMotionHintMask</A></B>	<TD>Pointer motion hints wanted
+<TR><TD><B><A HREF="processing-overview.html#Button1MotionMask">Button1MotionMask</A></B>		<TD>Pointer motion while button 1 down
+<TR><TD><B><A HREF="processing-overview.html#Button2MotionMask">Button2MotionMask</A></B>		<TD>Pointer motion while button 2 down
+<TR><TD><B><A HREF="processing-overview.html#Button3MotionMask">Button3MotionMask</A></B>		<TD>Pointer motion while button 3 down
+<TR><TD><B><A HREF="processing-overview.html#Button4MotionMask">Button4MotionMask</A></B>		<TD>Pointer motion while button 4 down
+<TR><TD><B><A HREF="processing-overview.html#Button5MotionMask">Button5MotionMask</A></B>		<TD>Pointer motion while button 5 down
+<TR><TD><B><A HREF="processing-overview.html#ButtonMotionMask">ButtonMotionMask</A></B>			<TD>Pointer motion while any button down
+<TR><TD><B><A HREF="processing-overview.html#KeymapStateMask">KeymapStateMask</A></B>			<TD>Keyboard state wanted at window entry and focus in
+<TR><TD><B><A HREF="processing-overview.html#ExposureMask">ExposureMask</A></B>				<TD>Any exposure wanted
+<TR><TD><B><A HREF="processing-overview.html#VisibilityChangeMask">VisibilityChangeMask</A></B>		<TD>Any change in visibility wanted
+<TR><TD><B><A HREF="processing-overview.html#StructureNotifyMask">StructureNotifyMask</A></B>		<TD>Any change in window structure wanted
+<TR><TD><B><A HREF="processing-overview.html#ResizeRedirectMask">ResizeRedirectMask</A></B>		<TD>Redirect resize of this window
+<TR><TD><B><A HREF="processing-overview.html#SubstructureNotifyMask">SubstructureNotifyMask</A></B>	<TD>Substructure notification wanted
+<TR><TD><B><A HREF="processing-overview.html#SubstructureRedirectMask">SubstructureRedirectMask</A></B>	<TD>Redirect structure requests on children
+<TR><TD><B><A HREF="processing-overview.html#FocusChangeMask">FocusChangeMask</A></B>			<TD>Any change in input focus wanted
+<TR><TD><B><A HREF="processing-overview.html#PropertyChangeMask">PropertyChangeMask</A></B>		<TD>Any change in property wanted
+<TR><TD><B><A HREF="processing-overview.html#ColormapChangeMask">ColormapChangeMask</A></B>		<TD>Any change in colormap wanted
+<TR><TD><B><A HREF="processing-overview.html#OwnerGrabButtonMask">OwnerGrabButtonMask</A></B>		<TD>Automatic grabs should activate with owner_events set to 
+	<B>True</B>
+<TR><TD COLSPAN=2><HR>
+</TABLE>
+
+<H5 ALIGN=right><I>Next: <A HREF="processing-overview.html">Event Processing Overview</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

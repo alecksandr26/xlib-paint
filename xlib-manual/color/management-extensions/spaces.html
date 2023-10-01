@@ -1,0 +1,36 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Color Spaces</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.12.1 Color Spaces</H1>
+
+The CIE XYZ color space serves as the hub for all
+conversions between device-independent and device-dependent color spaces.
+Therefore, the knowledge to convert an 
+<A HREF="../structures.html#XcmsColor">XcmsColor</A>
+structure to and from CIE XYZ format is associated with each color space.
+For example, conversion from CIE L*u*v* to RGB requires the knowledge
+to convert from CIE L*u*v* to CIE XYZ and from CIE XYZ to RGB.
+This knowledge is stored as an array of functions that,
+when applied in series, will convert the 
+<A HREF="../structures.html#XcmsColor">XcmsColor</A>
+structure to or from CIE XYZ format.
+This color specification conversion mechanism facilitates
+the addition of color spaces.
+
+<P>
+
+Of course, when converting between only device-independent color spaces
+or only device-dependent color spaces,
+shortcuts are taken whenever possible.
+For example, conversion from TekHVC to CIE L*u*v* is performed 
+by intermediate conversion to CIE u*v*Y and then to CIE L*u*v*, 
+thus bypassing conversion between CIE u*v*Y and CIE XYZ.
+
+<H5 ALIGN=right><I>Next: <A HREF="adding-dev-indepedent-spaces.html">Adding Device-Independent Color Spaces</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

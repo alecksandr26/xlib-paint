@@ -1,0 +1,258 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Color Structures</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.1 Color Structures</H1>
+
+Functions that operate only on RGB color space values use an
+<B>XColor</B>
+structure, which contains:
+
+<P>
+
+<!.IN "XColor" "" "@DEF@">
+
+<CODE><PRE>
+typedef struct {
+	unsigned long pixel;			/* pixel value */
+	unsigned short red, green, blue;	/* rgb values */
+	char flags;				/* DoRed, DoGreen, DoBlue */	
+	char pad;
+} XColor;
+</PRE></CODE>
+
+<P>
+
+The red, green, and blue values are always in the range 0 to 65535
+inclusive, independent of the number of bits actually used in the
+display hardware.
+The server scales these values down to the range used by the hardware.
+Black is represented by (0,0,0), 
+and white is represented by (65535,65535,65535).
+
+<!.IN "Color">
+In some functions,
+the flags member controls which of the red, green, and blue members is used 
+and can be the inclusive OR of zero or more of
+<B>DoRed</B> ,
+<B>DoGreen</B> ,
+and 
+<B>DoBlue</B> .
+
+<A NAME="XcmsColor"></A>
+<P>
+
+Functions that operate on all color space values use an
+<B>XcmsColor</B>
+structure.
+This structure contains a union of substructures,
+each supporting color specification encoding for a particular color space.
+Like the
+<B>XColor</B>
+structure, the
+<B>XcmsColor</B>
+structure contains pixel
+and color specification information (the spec member in the 
+<B>XcmsColor</B>
+structure).
+<!.IN "XcmsColor" "" "@DEF@">
+
+<P>
+
+<CODE><PRE>
+typedef unsigned long XcmsColorFormat;		/* Color Specification Format */
+
+typedef struct {
+	union {
+		XcmsRGB RGB;
+		XcmsRGBi RGBi;
+		XcmsCIEXYZ CIEXYZ;
+		XcmsCIEuvY CIEuvY;
+		XcmsCIExyY CIExyY;
+		XcmsCIELab CIELab;
+		XcmsCIELuv CIELuv;
+		XcmsTekHVC TekHVC;
+		XcmsPad Pad;
+	} spec;
+	unsigned long pixel;
+	XcmsColorFormat format;
+} XcmsColor;					/* Xcms Color Structure */
+</PRE></CODE>
+
+<A NAME="XcmsUndefinedFormat"></A>
+<A NAME="XcmsRGBFormat"></A>
+<P>
+
+Because the color specification can be encoded for the various color spaces, 
+encoding for the spec member is identified by the format member,
+which is of type
+<B>XcmsColorFormat</B>.
+The following macros define standard formats.
+
+<CODE><PRE>
+#define <B>XcmsUndefinedFormat</B>	0x00000000
+#define <B>XcmsCIEXYZFormat</B>	0x00000001	/* CIE XYZ */
+#define <B>XcmsCIEuvYFormat</B>	0x00000002	/* CIE u'v'Y */
+#define <B>XcmsCIExyYFormat</B>	0x00000003	/* CIE xyY */
+#define <B>XcmsCIELabFormat</B>	0x00000004	/* CIE L*a*b* */
+#define <B>XcmsCIELuvFormat</B>	0x00000005	/* CIE L*u*v* */
+#define <B>XcmsTekHVCFormat</B>	0x00000006	/* TekHVC */
+#define <B>XcmsRGBFormat</B>		0x80000000	/* RGB Device */
+#define <B>XcmsRGBiFormat</B>		0x80000001	/* RGB Intensity */
+</PRE></CODE>
+
+<P>
+
+Formats for device-independent color spaces are
+distinguishable from those for device-dependent spaces by the 32nd bit.
+If this bit is set,
+it indicates that the color specification is in a device-dependent form;
+otherwise, it is in a device-independent form.
+If the 31st bit is set,
+this indicates that the color space has been added to Xlib at run time
+(see "<A HREF="management-extensions/creating-additional-spaces.html">Creating Additional Color Spaces</A>").
+The format value for a color space added at run time may be different each
+time the program is executed.
+If references to such a color space must be made outside the client
+(for example, storing a color specification in a file),
+then reference should be made by color space string prefix
+(see 
+<B><A HREF="management-extensions/XcmsFormatOfPrefix.html">XcmsFormatOfPrefix()</A></B>
+and
+<B><A HREF="management-extensions/XcmsPrefixOfFormat.html">XcmsPrefixOfFormat()</A></B>).
+
+<P>
+
+Data types that describe the color specification encoding for the various
+color spaces are defined as follows:
+
+<!.IN "XcmsRGB" "" "@DEF@">
+
+<P>
+
+<CODE><PRE>
+typedef double XcmsFloat;
+<A NAME="XcmsRGB"></A>
+
+
+typedef struct {
+	unsigned short red;	/* 0x0000 to 0xffff */
+	unsigned short green;	/* 0x0000 to 0xffff */
+	unsigned short blue;	/* 0x0000 to 0xffff */
+} XcmsRGB;			/* RGB Device */
+<A NAME="XcmsRGBi"></A>
+
+
+typedef struct {
+	XcmsFloat red;		/* 0.0 to 1.0 */
+	XcmsFloat green;	/* 0.0 to 1.0 */
+	XcmsFloat blue;		/* 0.0 to 1.0 */
+} XcmsRGBi;			/* RGB Intensity */
+<A NAME="XcmsCIEXYZ"></A>
+
+
+typedef struct {
+	XcmsFloat X;
+	XcmsFloat Y;		/* 0.0 to 1.0 */
+	XcmsFloat Z;
+} XcmsCIEXYZ;			/* CIE XYZ */
+<A NAME="XcmsCIEuvY"></A>
+
+
+typedef struct {
+	XcmsFloat u_prime;	/* 0.0 to ~0.6 */
+	XcmsFloat v_prime;	/* 0.0 to ~0.6 */
+	XcmsFloat Y; 		/* 0.0 to 1.0 */
+} XcmsCIEuvY;			/* CIE u'v'Y */
+<A NAME="XcmsCIExyY"></A>
+
+
+typedef struct {
+	XcmsFloat x; 		/* 0.0 to ~.75 */
+	XcmsFloat y; 		/* 0.0 to ~.85 */
+	XcmsFloat Y; 		/* 0.0 to 1.0 */
+} XcmsCIExyY;			/* CIE xyY */
+<A NAME="XcmsCIELab"></A>
+
+
+typedef struct {
+	XcmsFloat L_star; 	/* 0.0 to 100.0 */
+	XcmsFloat a_star;
+	XcmsFloat b_star;
+} XcmsCIELab;			/* CIE L*a*b* */
+<A NAME="XcmsCIELuv"></A>
+
+
+typedef struct {
+	XcmsFloat L_star; 	/* 0.0 to 100.0 */
+	XcmsFloat u_star;
+	XcmsFloat v_star;
+} XcmsCIELuv;			/* CIE L*u*v* */
+<A NAME="XcmsTekHVC"></A>
+
+
+typedef struct {
+	XcmsFloat H; 		/* 0.0 to 360.0 */
+	XcmsFloat V; 		/* 0.0 to 100.0 */
+	XcmsFloat C; 		/* 0.0 to 100.0 */
+} XcmsTekHVC;			/* TekHVC */
+<A NAME="XcmsPad"></A>
+
+
+typedef struct {
+	XcmsFloat pad0;
+	XcmsFloat pad1;
+	XcmsFloat pad2;
+	XcmsFloat pad3;
+} XcmsPad;			/* four doubles */
+
+</PRE></CODE>
+
+<P>
+
+The device-dependent formats provided allow color specification in:
+
+<UL>
+
+<P><LI>
+RGB Intensity (<B>XcmsRGBi</B>)
+
+<P>
+
+Red, green, and blue linear intensity values,
+floating-point values from 0.0 to 1.0,
+where 1.0 indicates full intensity, 0.5 half intensity, and so on.
+
+<P><LI>
+RGB Device (<B>XcmsRGB</B>)
+
+<P>
+
+Red, green, and blue values appropriate for the specified output device.
+<B>XcmsRGB</B>
+values are of type unsigned short,
+scaled from 0 to 65535 inclusive,
+and are interchangeable with the red, green, and blue values in an 
+<B>XColor</B>
+structure. 
+
+</UL>
+
+<P>
+
+It is important to note that RGB Intensity values are not gamma corrected
+values.
+In contrast,
+RGB Device values generated as a result of converting color specifications 
+are always gamma corrected, and
+RGB Device values acquired as a result of querying a colormap
+or passed in by the client are assumed by Xlib to be gamma corrected.
+The term <B>RGB value</B> in this manual always refers to an RGB Device value.
+
+<H5 ALIGN=right><I>Next: <A HREF="strings/">Color Strings</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

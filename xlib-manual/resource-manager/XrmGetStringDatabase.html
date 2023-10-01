@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmGetStringDatabase</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmGetStringDatabase</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XrmGetStringDatabase" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="creating-and-storing-databases.html">XrmDatabase</A></B> XrmGetStringDatabase(<B>data</B>)
+     char *<B>data</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>data</B>
+<TD> Specifies the database contents using a string.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XrmGetStringDatabase()</B>
+function creates a new database and stores the resources specified
+in the specified null-terminated string.
+<B>XrmGetStringDatabase()</B>
+is similar to
+<B><A HREF="XrmGetFileDatabase.html">XrmGetFileDatabase()</A></B>
+except that it reads the information out of a string instead of out of a file.
+The string should contain a sequence of entries in valid ResourceLine
+format (see "<A HREF="file-syntax.html">Resource File Syntax</A>") terminated by a null character;
+the database that results from using a string
+with incorrect syntax is implementation dependent.
+The string is parsed in the current locale, 
+and the database is created in the current locale.
+
+<H2>See also</H2>
+
+<B><A HREF="XrmDestroyDatabase.html">XrmDestroyDatabase()</A></B>,
+<B><A HREF="XrmGetDatabase.html">XrmGetDatabase()</A></B>,
+<B><A HREF="XrmGetFileDatabase.html">XrmGetFileDatabase()</A></B>,
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>,
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmLocaleOfDatabase.html">XrmLocaleOfDatabase()</A></B>,
+<B><A HREF="XrmPutFileDatabase.html">XrmPutFileDatabase()</A></B>,
+<B><A HREF="XrmPutResource.html">XrmPutResource()</A></B>,
+<B><A HREF="XrmSetDataBase.html">XrmSetDataBase()</A></B>,
+"<A HREF="creating-and-storing-databases.html">Creating and Storing Databases</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

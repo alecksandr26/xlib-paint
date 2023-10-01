@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Formatting Conventions</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>1.8. Formatting Conventions</H1>
+
+<I>Xlib --- C Language X Interface</I> uses the following conventions:
+
+<UL>
+<P><LI>
+This HTML version of the manual uses formatting conventions that are
+slighty different of the original (troff) manual:
+
+<P>
+
+Global symbols are either printed in 
+<B>bold</B>, either hyperlinked or both. Functions name are printed in
+bold, suffixed with () and hyperlinked to their definition
+page. Symbols define in include files are rendered with a <B>bold</B>
+typeface. Structure names are printed in regular type and are
+hyperlinked to their definition.
+
+When declared and defined,
+function arguments are printed in <B>bold</B>, and also in the following explanatory text.
+
+<P><LI>
+Each function is introduced by a general discussion that 
+distinguishes it from other functions.
+The function declaration itself follows,
+and each argument is specifically explained.
+Although ANSI C function prototype syntax is not used,
+Xlib header files normally declare functions using function prototypes
+in ANSI C environments.
+General discussion of the function, if any is required,
+follows the arguments.
+Where applicable, 
+the last paragraph of the explanation lists the possible 
+Xlib error codes that the function can generate.
+For a complete discussion of the Xlib error codes,
+see "<A HREF="../event-handling/protocol-errors/default-handlers.html">Using the Default Error Handlers</A>".
+
+<P><LI>
+To eliminate any ambiguity between those arguments that you pass and those that 
+a function returns to you,
+the explanations for all arguments that you pass start with the word
+<I>specifies</I> or, in the case of multiple arguments, the word <I>specify</I>.
+The explanations for all arguments that are returned to you start with the
+word <I>returns</I> or, in the case of multiple arguments, the word <I>return</I>.
+The explanations for all arguments that you can pass and are returned start
+with the words <I>specifies and returns</I>.
+
+<P><LI>
+Any pointer to a structure that is used to return a value is designated as 
+such by the <I>_return</I> suffix as part of its name.
+All other pointers passed to these functions are
+used for reading only.
+A few arguments use pointers to structures that are used for
+both input and output and are indicated by using the <I>_in_out</I> suffix.
+
+</UL>
+
+<H5 ALIGN=right><I>Next Chapter: <A HREF="../display/">Display Functions</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

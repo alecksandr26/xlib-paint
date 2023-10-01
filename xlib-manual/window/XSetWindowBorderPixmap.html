@@ -1,0 +1,101 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetWindowBorderPixmap</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetWindowBorderPixmap</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XSetWindowBorderPixmap" "" "@DEF@">
+
+<CODE><PRE>
+XSetWindowBorderPixmap(<B>display</B>, <B>w</B>, <B>border_pixmap</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      Pixmap <B>border_pixmap</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>border_pixmap</B>
+<TD> Specifies the border pixmap or
+<B>CopyFromParent</B>.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XSetWindowBorderPixmap()</B>
+function sets the border pixmap of the window to the pixmap you specify.
+The border pixmap can be freed immediately if no further explicit
+references to it are to be made.
+<B>If</B>you specify
+.PN CopyFromParent ,
+a copy of the parent window's border pixmap is used.
+If you attempt to perform this on an
+<B><A HREF="create.html#InputClass">InputOnly</A></B>
+window, a
+<B>BadMatch</B>
+error results.
+<!.IN "Resource IDs" "freeing">
+<!.IN "Freeing" "resources">
+
+<P>
+
+<B>XSetWindowBorderPixmap()</B>
+can generate
+<B>BadMatch</B>,
+<B>BadPixmap</B>,
+and
+<B>BadWindow</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+
+<TR><TD><B>BadPixmap</B>
+<TD> A value for a Pixmap argument does not name a
+     defined Pixmap.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>,
+<B><A HREF="XConfigureWindow.html">XConfigureWindow()</A></B>,
+<B><A HREF="XCreateWindow.html">XCreateWindow()</A></B>,
+<B><A HREF="XDestroyWindow.html">XDestroyWindow()</A></B>,
+<B><A HREF="../XInstallColormap.html">XInstallColormap()</A></B>,
+<B><A HREF="XMapWindow.html">XMapWindow()</A></B>,
+<B><A HREF="XRaiseWindow.html">XRaiseWindow()</A></B>,
+<B><A HREF="XSetWindowBackground.html">XSetWindowBackground()</A></B>,
+<B><A HREF="XSetWindowBackgroundPixmap.html">XSetWindowBackgroundPixmap()</A></B>,
+<B><A HREF="XSetWindowBorder.html">XSetWindowBorder()</A></B>,
+<B><A HREF="XSetWindowColormap.html">XSetWindowColormap()</A></B>,
+<B><A HREF="XUnmapWindow.html">XUnmapWindow()</A></B>,
+"<A HREF="change-attributes.html">Changing Window Attributes</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

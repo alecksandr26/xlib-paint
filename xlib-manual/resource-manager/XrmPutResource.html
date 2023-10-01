@@ -1,0 +1,74 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmPutResource</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmPutResource</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XrmPutResource" "" "@DEF@">
+
+<CODE><PRE>
+void XrmPutResource(<B>database</B>, <B>specifier</B>, <B>type</B>, <B>value</B>)
+     <B><A HREF="creating-and-storing-databases.html">XrmDatabase</A></B> *<B>database</B>;
+     char *<B>specifier</B>;
+     char *<B>type</B>;
+     <B><A HREF="creating-and-storing-databases.html">XrmValue</A></B> *<B>value</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>database</B>
+<TD> Specifies the resource database.
+
+<TR><TD> <B>specifier</B>
+<TD> Specifies a complete or partial specification of the resource.
+
+<TR><TD> <B>type</B>
+<TD> Specifies the type of the resource.
+
+<TR><TD> <B>value</B>
+<TD> Specifies the value of the resource, which is specified as a string.
+
+</TABLE>
+
+<H2>Description</H2>
+
+If database contains NULL,
+<B>XrmPutResource()</B>
+creates a new database and returns a pointer to it.
+<B>XrmPutResource()</B>
+is a convenience function that calls
+<B><A HREF="XrmStringToBindingQuarkList.html">XrmStringToBindingQuarkList()</A></B>
+followed by:
+
+<P>
+
+<PRE><CODE>
+XrmQPutResource(database, bindings, quarks, XrmStringToQuark(type), value)
+</PRE></CODE>
+
+If the specifier and type are not in the Host Portable Character Encoding,
+the result is implementation dependent.
+The value is stored in the database without modification.
+
+<H2>See also</H2>
+
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>,
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmMergeDatabases.html">XrmMergeDatabases()</A></B>,
+<B><A HREF="XrmPutLineResource.html">XrmPutLineResource()</A></B>,
+<B><A HREF="XrmPutStringResource.html">XrmPutStringResource()</A></B>,
+<B><A HREF="XrmQPutResource.html">XrmQPutResource()</A></B>,
+<B><A HREF="XrmQPutStringResource.html">XrmQPutStringResource()</A></B>,
+<B><A HREF="XrmUniqueQuark.html">XrmUniqueQuark()</A></B>,
+"<A HREF="storing.html">Storing Into a Resource Database</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

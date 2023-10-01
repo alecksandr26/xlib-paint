@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Extensions: XcmsQueryBlack</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XcmsQueryBlack</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XcmsQueryBlack" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../conversion-contexts-and-gamut-mapping.html#cmsStatus">Status</A></B> XcmsQueryBlack(<B>ccc</B>, <B>target_format</B>, <B>color_return</B>)
+      <A HREF="../CCC/macros.html">XcmsCCC</A> <B>ccc</B>;
+      <A HREF="../structures.html#XcmsColor">XcmsColorFormat</A> <B>target_format</B>;
+      <A HREF="../structures.html#XcmsColor">XcmsColor</A> *<B>color_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>ccc</B>
+<TD> Specifies the <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>.
+The <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>'s Client White Point and white point adjustment procedures
+are ignored.
+
+<TR><TD> <B>target_format</B>
+<TD> Specifies the target color specification format.
+
+<TR><TD> <B>color_return</B>
+<TD> Returns the color specification in the specified target format
+for zero intensity red, green, and blue.
+The white point associated with the returned
+color specification is the Screen White Point.
+The value returned in the pixel member is undefined.
+
+</TABLE>
+
+<H2>Description</H2>
+ 
+The
+<B>XcmsQueryBlack()</B>
+function returns the color specification in the specified target format
+for zero intensity red, green, and blue.
+
+<H2>See also</H2>
+
+<B><A HREF="XcmsCIELabQueryMaxC.html">XcmsCIELabQueryMaxC()</A></B>, 
+<B><A HREF="XcmsCIELuvQueryMaxC.html">XcmsCIELuvQueryMaxC()</A></B>, 
+<B><A HREF="XcmsQueryBlue.html">XcmsQueryBlue()</A></B>,
+<B><A HREF="XcmsQueryGreen.html">XcmsQueryGreen()</A></B>,
+<B><A HREF="XcmsQueryRed.html">XcmsQueryRed()</A></B>,
+<B><A HREF="XcmsQueryWhite.html">XcmsQueryWhite()</A></B>,
+<B><A HREF="XcmsTekHVCQueryMaxC.html">XcmsTekHVCQueryMaxC()</A></B>,
+"<A HREF="red-green-blue.html">Red, Green, and Blue Queries</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

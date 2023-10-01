@@ -1,0 +1,142 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XQueryTextExtents</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XQueryTextExtents</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XQueryTextExtents" "" "@DEF@">
+
+<CODE><PRE>
+XQueryTextExtents(<B>display</B>, <B>font_ID</B>, <B>string</B>, <B>nchars</B>, <B>direction_return</B>, <B>font_ascent_return</B>, 
+                    <B>font_descent_return</B>, <B>overall_return</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      XID <B>font_ID</B>;
+      char *<B>string</B>;
+      int <B>nchars</B>;
+      int *<B>direction_return</B>;
+      int *<B>font_ascent_return</B>, *<B>font_descent_return</B>;
+      <A HREF="./#XCharStruct">XCharStruct</A> *<B>overall_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>font_ID</B>
+<TD> Specifies either the font ID or the 
+<B><A HREF="/toto/GContext.html">GContext</A></B>
+ID that contains the font.
+
+<TR><TD> <B>string</B>
+<TD> Specifies the character string.
+
+<TR><TD> <B>nchars</B>
+<TD> Specifies the number of characters in the character string.
+
+<TR><TD> <B>direction_return</B>
+<TD> Returns the value of the direction hint
+(<B>FontLeftToRight</B>
+or
+<B>FontRightToLeft</B>).
+
+<TR><TD> <B>font_ascent_return</B>
+<TD> Returns the font ascent.
+
+<TR><TD> <B>font_descent_return</B>
+<TD> Returns the font descent.
+
+<TR><TD> <B>overall_return</B>
+<TD> Returns the overall size in the specified
+<A HREF="./#XCharStruct">XCharStruct</A> 
+structure.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XQueryTextExtents()</B>
+function returns the bounding box of the specified 8-bit
+character string in the specified font or the font contained in the
+specified GC.
+This function queries the X server and, therefore, suffer the round-trip
+overhead that is avoided by
+<B><A HREF="XTextExtents.html">XTextExtents()</A></B>.
+The function returns a
+<A HREF="./#XCharStruct">XCharStruct</A> 
+structure, whose members are set to the values as follows.
+
+<P>
+
+The ascent member is set to the maximum of the ascent metrics 
+of all characters in the string.
+The descent member is set to the maximum of the descent metrics.
+The width member is set to the sum of the character-width metrics 
+of all characters in the string.
+For each character in the string,
+let W be the sum of the character-width metrics of all characters preceding
+it in the string.
+Let L be the left-side-bearing metric of the character plus W.
+Let R be the right-side-bearing metric of the character plus W.
+The lbearing member is set to the minimum L of all characters in the string.
+The rbearing member is set to the maximum R.
+
+<P>
+
+For fonts defined with linear indexing rather than 2-byte matrix indexing,
+each 
+<A HREF="./#XChar2b">XChar2b</A> 
+structure is interpreted as a 16-bit number with byte1 as the 
+most-significant byte.
+If the font has no defined default character,
+undefined characters in the string are taken to have all zero metrics.
+
+<P>
+
+Characters with all zero metrics are ignored.
+If the font has no defined default_char,
+the undefined characters in the string are also ignored.
+
+<P>
+
+<B>XQueryTextExtents()</B>
+can generate
+<B>BadFont</B>
+and
+<B>BadGC</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadFont</B>
+<TD>A value for a font argument does not name a defined font (or, in some cases, 
+    <B><A HREF="../GContext.html">GContext</A></B>).
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../GContext.html">GContext</A></B> 
+	argument does not name a defined 
+	<B><A HREF="../GContext.html">GContext</A></B>.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XLoadFont.html">XLoadFont()</A></B>,
+<B><A HREF="XQueryTextExtents16.html">XQueryTextExtents16()</A></B>,
+<B><A HREF="XTextExtents.html">XTextExtents()</A></B>,
+<B><A HREF="XTextExtents16.html">XTextExtents16()</A></B>,
+<B><A HREF="XTextWidth.html">XTextWidth()</A></B>,
+"<A HREF="computing-logical-extent.html">Computing Logical Extents</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

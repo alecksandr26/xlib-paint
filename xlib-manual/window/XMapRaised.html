@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XMapRaised</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XMapRaised</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XMapRaised" "" "@DEF@">
+
+<CODE><PRE>
+XMapRaised(<B>display</B>, <B>w</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XMapRaised()</B>
+function
+essentially is similar to
+<B><A HREF="XMapWindow.html">XMapWindow()</A></B>
+in that it maps the window and all of its
+subwindows that have had map requests.
+However, it also raises the specified window to the top of the stack.
+For additional information,
+see 
+<B><A HREF="XMapWindow.html">XMapWindow()</A></B>.
+
+<P>
+
+<B>XMapRaised()</B>
+can generate multiple
+<B>BadWindow</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>,
+<B><A HREF="XConfigureWindow.html">XConfigureWindow()</A></B>,
+<B><A HREF="XCreateWindow.html">XCreateWindow()</A></B>,
+<B><A HREF="XDestroyWindow.html">XDestroyWindow()</A></B>,
+<B><A HREF="XMapSubwindows.html">XMapSubwindows()</A></B>,
+<B><A HREF="XMapWindow.html">XMapWindow()</A></B>,
+<B><A HREF="XUnmapWindow.html">XUnmapWindow()</A></B>,
+"<A HREF="map.html">Mapping Windows</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

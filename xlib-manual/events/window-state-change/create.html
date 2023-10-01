@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: CreateNotify Events</TITLE>
+<HEAD>
+
+<BODY>
+
+<H1 ALIGN=center>10.10.3 CreateNotify Events</H1>
+
+The X server can report
+<B>CreateNotify</B>
+events to clients wanting information about creation of windows.
+The X server generates this event whenever a client
+application creates a window by calling
+<B><A HREF="../../window/XCreateWindow.html">XCreateWindow()</A></B>
+or
+<B><A HREF="../../window/XCreateWindow.html">XCreateSimpleWindow()</A></B>.
+
+<P>
+
+To receive 
+<B>CreateNotify</B>
+events, set the
+<B>SubstructureNotifyMask</B>
+bit in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the window.
+Creating any children then generates an event.
+
+<A NAME="XCreateWindowEvent"></A>
+<P>
+
+The structure for the event type contains:
+
+<P>
+<PRE><CODE>
+typedef struct {
+	int <B>type</B>;		/* CreateNotify */
+	unsigned long <B>serial</B>;	/* # of last request processed by server */
+	Bool <B>send_event</B>;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *<B>display</B>;	/* Display the event was read from */
+	Window <B>parent</B>;		/* parent of the window */
+	Window <B>window</B>;		/* window id of window created */
+	int <B>x</B>, <B>y</B>;		/* window location */
+	int <B>width</B>, <B>height</B>;	/* size of window */
+	int <B>border_width</B>;	/* border width */
+	Bool <B>override_redirect</B>;	/* creation should be overridden */
+} XCreateWindowEvent;
+</CODE></PRE>
+
+<P>
+
+The <B>parent</B> member is set to the created window's parent.<BR>
+The <B>window</B> member specifies the created window.<BR>
+The <B>x</B> and <B>y</B> members are set to the created window's coordinates relative 
+to the parent window's origin and indicate the position of the upper-left 
+outside corner of the created window.<BR>
+The <B>width</B> and <B>height</B> members are set to the inside size of the created window 
+(not including the border) and are always nonzero.<BR>
+The <B>border_width</B> member is set to the width of the created window's border, in pixels.<BR>
+The <B>override_redirect</B> member is set to the override-redirect attribute of the
+window.
+Window manager clients normally should ignore this window 
+if the override_redirect member is
+<B>True</B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="destroy.html">DestroyNotify Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

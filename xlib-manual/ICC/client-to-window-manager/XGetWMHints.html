@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetWMHints</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetWMHints</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetWMHints" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="wm-hints.html#XWMHints">XWMHints</A></B> *XGetWMHints(<B>display</B>, <B>w</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetWMHints()</B>
+function reads the window manager hints and 
+returns NULL if no WM_HINTS property was set on the window 
+or returns a pointer to a 
+<B><A HREF="wm-hints.html#XWMHints">XWMHints</A></B> 
+structure if it succeeds.
+When finished with the data,
+free the space used for it by calling
+<B><A HREF="../../display/XFree.html">XFree()</A></B>.
+
+<P>
+
+<B>XGetWMHints()</B>
+can generate a
+<B>BadWindow</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocClassHint.html">XAllocClassHint()</A></B>,
+<B><A HREF="XAllocIconSize.html">XAllocIconSize()</A></B>,
+<B><A HREF="XAllocSizeHints.html">XAllocSizeHints()</A></B>,
+<B><A HREF="XAllocWMHints.html">XAllocWMHints()</A></B>,
+<B><A HREF="../../display/XFree.html">XFree()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetCommand.html">XSetCommand()</A></B>,
+<B><A HREF="XSetTextProperty.html">XSetTextProperty()</A></B>,
+<B><A HREF="XSetTransientForHint.html">XSetTransientForHint()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetWMClientMachine.html">XSetWMClientMachine()</A></B>,
+<B><A HREF="XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B>,
+<B><A HREF="XSetWMHints.html">XSetWMHints()</A></B>,
+<B><A HREF="XSetWMIconName.html">XSetWMIconName()</A></B>,
+<B><A HREF="XSetWMName.html">XSetWMName()</A></B>,
+<B><A HREF="XSetWMProperties.html">XSetWMProperties()</A></B>,
+<B><A HREF="XSetWMProtocols.html">XSetWMProtocols()</A></B>,
+<B><A HREF="XStringListToTextProperty.html">XStringListToTextProperty()</A></B>,
+"<A HREF="wm-hints.html">Setting and Reading the WM_HINTS Property</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

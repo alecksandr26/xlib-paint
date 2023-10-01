@@ -1,0 +1,98 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XcmsLookupColor</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XcmsLookupColor</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Color" "naming">
+<!.IN "XcmsLookupColor" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="conversion-contexts-and-gamut-mapping.html#cmsStatus">Status</A></B> XcmsLookupColor(<B>display</B>, <B>colormap</B>, <B>color_string</B>, <B>color_exact_return</B>, <B>color_screen_return</B>,
+			 <B>result_format</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="./#colormap">Colormap</A> <B>colormap</B>;
+      char *<B>color_string</B>;
+      <A HREF="structures.html#XcmsColor">XcmsColor</A> *<B>color_exact_return</B>, *<B>color_screen_return</B>;
+      <A HREF="structures.html#XcmsColor">XcmsColorFormat</A> <B>result_format</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>colormap</B>
+<TD> Specifies the colormap.
+
+<TR><TD> <B>color_string</B>
+<TD> Specifies the color string.
+
+<TR><TD> <B>color_exact_return</B>
+<TD> Returns the color specification parsed from the color string
+or parsed from the corresponding string found in a color name database.
+
+<TR><TD> <B>color_screen_return</B>
+<TD> Returns the color that can be reproduced on the screen.
+
+<TR><TD> <B>result_format</B>
+<TD> Specifies the color format for the returned color
+specifications (color_screen_return and color_exact_return arguments).
+If the format is
+<B>XcmsUndefinedFormat</B>
+and the color string contains a
+numerical color specification,
+the specification is returned in the format used in that numerical
+color specification.
+If the format is
+<B>XcmsUndefinedFormat</B>
+and the color string contains a color name,
+the specification is returned in the format used 
+to store the color in the database.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XcmsLookupColor()</B>
+function looks up the string name of a color with respect to the screen
+associated with the specified colormap.
+It returns both the exact color values and
+the closest values provided by the screen 
+with respect to the visual type of the specified colormap.
+The values are returned in the format specified by result_format.
+If the color name is not in the Host Portable Character Encoding, 
+the result is implementation dependent.
+Use of uppercase or lowercase does not matter.
+<B>XcmsLookupColor()</B>
+returns
+<B>XcmsSuccess</B>
+or
+<B>XcmsSuccessWithCompression</B>
+if the name is resolved; otherwise, it returns
+<B>XcmsFailure</B>.
+If
+<B>XcmsSuccessWithCompression</B>
+is returned, the color specification returned in 
+color_screen_return is the result of gamut compression.
+
+<H2>See also</H2>
+
+<B><A HREF="XcmsAllocColor.html">XcmsAllocColor()</A></B>,
+<B><A HREF="XcmsQueryColor.html">XcmsQueryColor()</A></B>,
+<B><A HREF="XcmsQueryColors.html">XcmsQueryColors()</A></B>,
+<B><A HREF="XcmsStoreColor.html">XcmsStoreColor()</A></B>,
+<B><A HREF="XQueryColor.html">XQueryColor()</A></B>,
+"<A HREF="mapping-names-to-values.html">Mapping Color Names to Values</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

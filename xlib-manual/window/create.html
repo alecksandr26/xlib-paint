@@ -1,0 +1,95 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Windows: Creating</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>3.3 Creating Windows</H1>
+
+Xlib provides basic ways for creating windows,
+and toolkits often supply higher-level functions specifically for
+creating and placing top-level windows,
+which are discussed in the appropriate toolkit documentation.
+If you do not use a toolkit, however,
+you must provide some standard information or hints for the window
+manager by using the <B><A HREF="../ICC/">Xlib inter-client communication functions</A></B>.
+
+<P>
+
+If you use Xlib to create your own top-level windows
+(direct children of the root window),
+you must observe the following rules so that all applications interact
+reasonably across the different styles of window management:
+
+<UL>
+<P><LI>
+You must never fight with the window manager for the size or
+placement of your top-level window.
+<P><LI>
+You must be able to deal with whatever size window you get, 
+even if this means that your application just prints a message 
+like ``Please make me bigger'' in its window.
+<P><LI>
+You should only attempt to resize or move top-level windows in
+direct response to a user request.
+If a request to change the size of a top-level window fails,
+you must be prepared to live with what you get.
+You are free to resize or move the children of top-level
+windows as necessary.
+(Toolkits often have facilities for automatic relayout.)
+<P><LI>
+If you do not use a toolkit that automatically sets standard window properties,
+you should set these properties for top-level windows before mapping them.
+
+</UL>
+<P>
+
+For further information,
+see "<A HREF="../ICC/">Inter-Client Communication Functions</A>" and the <I><A HREF="/gui/x/icccm/">Inter-Client Communication Conventions Manual</A></I>.
+
+<P>
+
+<B><A HREF="XCreateWindow.html">XCreateWindow()</A></B>
+is the more general function that allows you to set specific window attributes 
+when you create a window.
+<B><A HREF="XCreateWindow.html">XCreateSimpleWindow()</A></B>
+creates a window that inherits its attributes from its parent window.
+
+<A NAME="InputClass"></A>
+<P>
+
+<!.IN "Window" "InputOnly">
+The X server acts as if 
+<B><A HREF="create.html#InputClass">InputOnly</A></B> 
+windows do not exist for
+the purposes of graphics requests, exposure processing, and
+<B><A HREF="../events/window-state-change/visibility.html">VisibilityNotify</A></B> 
+events.
+An 
+<B><A HREF="create.html#InputClass">InputOnly</A></B> 
+window cannot be used as a
+drawable (that is, as a source or destination for graphics requests).
+<B><A HREF="create.html#InputClass">InputOnly</A></B>
+and 
+<B>InputOutput</B>
+windows act identically in other respects (properties,
+grabs, input control, and so on).
+Extension packages can define other classes of windows.
+
+<P>
+
+To create an unmapped window and set its window attributes, use
+<B><A HREF="XCreateWindow.html">XCreateWindow()</A></B>.
+
+<P>
+
+To create an unmapped 
+<B>InputOutput</B>
+subwindow of a given parent window, use
+<B><A HREF="XCreateWindow.html">XCreateSimpleWindow()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="destroy.html">Destroying Windows</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

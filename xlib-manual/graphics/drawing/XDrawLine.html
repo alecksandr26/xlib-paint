@@ -1,0 +1,124 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XDrawLine</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XDrawLine</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XDrawLine" "" "@DEF@">
+
+<CODE><PRE>
+XDrawLine(<B>display</B>, <B>d</B>, <B>gc</B>, <B>x1</B>, <B>y1</B>, <B>x2</B>, <B>y2</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Drawable <B>d</B>;
+      <A HREF="../../GC/manipulating.html">GC</A> <B>gc</B>;
+      int <B>x1</B>, <B>y1</B>, <B>x2</B>, <B>y2</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>d</B>
+<TD> Specifies the drawable. 
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>x1</B><BR>
+	<B>y1</B><BR>
+	<B>x2</B><BR>
+	<B>y2</B>
+<TD> Specify the points (x1, y1) and (x2, y2) to be connected.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XDrawLine()</B>
+function uses the components of the specified GC to
+draw a line between the specified set of points (x1, y1) and (x2, y2).
+It does not perform joining at coincident endpoints.
+For any given line, 
+<B>XDrawLine()</B>
+does not draw a pixel more than once.
+If lines intersect, the intersecting pixels are drawn multiple times.  
+
+<P>
+
+<B>XDrawLine()</B>
+use these <A HREF="../../GC/manipulating.html">GC</A> components:
+<A HREF="../../GC/manipulating.html#function">function</A>, <A HREF="../../GC/manipulating.html#plane-mask">plane-mask</A>, 
+<A HREF="../../GC/manipulating.html#line-width">line-width</A>,
+<A HREF="../../GC/manipulating.html#line-style">line-style</A>,
+<A HREF="../../GC/manipulating.html#cap-style">cap-style</A>,
+<A HREF="../../GC/manipulating.html#fill-style">fill-style</A>,
+<A HREF="../../GC/manipulating.html#subwindow-mode">subwindow-mode</A>,
+<A HREF="../../GC/manipulating.html#clip-mask">clip-x-origin</A>,
+<A HREF="../../GC/manipulating.html#clip-mask">clip-y-origin</A>,
+and <A HREF="../../GC/manipulating.html#clip-mask">clip-mask</A>.
+
+<B>XDrawLine()</B> also uses these <A HREF="../../GC/manipulating.html">GC</A> mode-dependent components:
+<A HREF="../../GC/manipulating.html#foreground">foreground</A>,
+<A HREF="../../GC/manipulating.html#background">background</A>,
+<A HREF="../../GC/manipulating.html#tile">tile</A>,
+<A HREF="../../GC/manipulating.html#stipple">stipple</A>,
+<A HREF="../../GC/manipulating.html#tile">tile-stipple-x-origin</A>, 
+<A HREF="../../GC/manipulating.html#tile">tile-stipple-y-origin</A>,
+<A HREF="../../GC/manipulating.html#dashes">dash-offset</A>,
+and
+<A HREF="../../GC/manipulating.html#dashes">dash-list</A>.
+
+<P>
+
+<B>XDrawLine()</B>,
+can generate
+<B>BadDrawable</B> ,
+<B>BadGC</B> ,
+and
+<B>BadMatch</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../../my-own/gcontext.html">GContext</A></B>
+	argument does not name a defined 
+	<B><A HREF="../../my-own/gcontext.html">GContext</A></B>.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+      
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XDrawArc.html">XDrawArc()</A></B>,
+<B><A HREF="XDrawLines.html">XDrawLines()</A></B>,
+<B><A HREF="XDrawPoint.html">XDrawPoint()</A></B>,
+<B><A HREF="XDrawRectangle.html">XDrawRectangle()</A></B>,
+<B><A HREF="XDrawSegments.html">XDrawSegments()</A></B>,
+"<A HREF="lines.html">Drawing Single and Multiple Lines</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

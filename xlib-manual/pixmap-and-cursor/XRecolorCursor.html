@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XRecolorCursor</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XRecolorCursor</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XRecolorCursor" "" "@DEF@">
+
+<CODE><PRE>
+XRecolorCursor(<B>display</B>, <B>cursor</B>, <B>foreground_color</B>, <B>background_color</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="cursor.html">Cursor</A> <B>cursor</B>;
+      <A HREF="../color/structures.html">XColor</A> *<B>foreground_color</B>, *<B>background_color</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>cursor</B>
+<TD> Specifies the cursor. 
+
+<TR><TD> <B>foreground_color</B>
+<TD> Specifies the RGB values for the foreground of the source. 
+
+<TR><TD> <B>background_color</B>
+<TD> Specifies the RGB values for the background of the source.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XRecolorCursor()</B>
+function changes the color of the specified cursor, and
+if the cursor is being displayed on a screen,
+the change is visible immediately.
+The pixel members of the
+<A HREF="../color/structures.html">XColor</A>
+structures are ignored; only the RGB values are used.
+
+<P>
+
+<B>XRecolorCursor()</B>
+can generate a
+<B>BadCursor</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../color/XCreateColormap.html">XCreateColormap()</A></B>
+<B><A HREF="XCreateFontCursor.html">XCreateFontCursor()</A></B>,
+<B><A HREF="../window/XDefineCursor.html">XDefineCursor()</A></B>,
+<B><A HREF="XFreeCursor.html">XFreeCursor()</A></B>,
+<B><A HREF="XQueryBestCursor.html">XQueryBestCursor()</A></B>,
+"<A HREF="cursor.html">Creating, Recoloring, and Freeing Cursors</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

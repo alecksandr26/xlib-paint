@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Pointer Button Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.5.1 Pointer Button Events</H1>
+
+The following describes the event processing that occurs when a pointer button 
+press is processed with the pointer in some window w and 
+when no active pointer grab is in progress.
+
+<P>
+
+The X server searches the ancestors of w from the root down,
+looking for a passive grab to activate.
+If no matching passive grab on the button exists,
+the X server automatically starts an active grab for the client receiving
+the event and sets the last-pointer-grab time to the current server time.
+The effect is essentially equivalent to an
+<B><A HREF="../../input/XGrabButton.html">XGrabButton()</A></B>
+with these client passed arguments:
+
+<TABLE>
+<TR><TD COLSPAN=2><HR>
+<TR><TD><B>Argument		<TD><B>Value
+<TR><TD COLSPAN=2><HR>
+<TR><TD><B>w</B>		<TD>The event window 
+<TR><TD><B>event_mask</B>	<TD>The client's selected pointer events on the event window
+<TR><TD><B>pointer_mode</B>	<TD><B>GrabModeAsync</B>
+<TR><TD><B>keyboard_mode</B>	<TD><B>GrabModeAsync</B> 
+<TR><TD><B>owner_events</B>	<TD><B>True</B>, on the event window, otherwise <B>False</B> 
+<TR><TD><B>confine_to</B>	<TD><B>None</B> 
+<TR><TD><B>cursor</B>		<TD><B>None</B> 
+<TR><TD COLSPAN=2><HR>
+</TABLE>
+
+<P>
+
+The active grab is automatically terminated when 
+the logical state of the pointer has all buttons released.
+Clients can modify the active grab by calling
+<B><A HREF="../../input/XUngrabPointer.html">XUngrabPointer()</A></B>
+and
+<B><A HREF="../../input/XChangeActivePointerGrab.html">XChangeActivePointerGrab()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="keyboard-pointer.html">Keyboard and Pointer Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

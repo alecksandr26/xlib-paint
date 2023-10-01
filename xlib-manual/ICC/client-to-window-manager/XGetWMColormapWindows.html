@@ -1,0 +1,94 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetWMColormapWindows</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetWMColormapWindows</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetWMColormapWindows" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../../introduction/errors.html#Status">Status</A></B> XGetWMColormapWindows(<B>display</B>, <B>w</B>, <B>colormap_windows_return</B>, <B>count_return</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      Window **<B>colormap_windows_return</B>;
+      int *<B>count_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>colormap_windows_return</B>
+<TD> Returns the list of windows.
+
+<TR><TD> <B>count_return</B>
+<TD> Returns the number of windows in the list.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The 
+<B>XGetWMColormapWindows()</B>
+function returns the list of window identifiers stored 
+in the WM_COLORMAP_WINDOWS property on the specified window.
+These identifiers indicate the colormaps that the window manager
+may need to install for this window.
+If the property exists, is of type WINDOW, is of format 32, 
+and the atom WM_COLORMAP_WINDOWS can be interned, 
+<B>XGetWMColormapWindows()</B>
+sets the windows_return argument to a list of window identifiers, 
+sets the count_return argument to the number of elements in the list, 
+and returns a nonzero status.
+Otherwise, it sets neither of the return arguments
+and returns a zero status.
+To release the list of window identifiers, use
+<B><A HREF="../../display/XFree.html">XFree()</A></B>. 
+
+<P>
+
+<B>XGetWMColormapWindows()</B>
+can generate a
+<B>BadWindow</B>
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocClassHint.html">XAllocClassHint()</A></B>,
+<B><A HREF="XAllocIconSize.html">XAllocIconSize()</A></B>,
+<B><A HREF="XAllocSizeHints.html">XAllocSizeHints()</A></B>,
+<B><A HREF="XAllocWMHints.html">XAllocWMHints()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetCommand.html">XSetCommand()</A></B>,
+<B><A HREF="XSetTextProperty.html">XSetTextProperty()</A></B>,
+<B><A HREF="XSetTransientForHint.html">XSetTransientForHint()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetWMClientMachine.html">XSetWMClientMachine()</A></B>,
+<B><A HREF="XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B>,
+<B><A HREF="XSetWMIconName.html">XSetWMIconName()</A></B>,
+<B><A HREF="XSetWMName.html">XSetWMName()</A></B>,
+<B><A HREF="XSetWMProperties.html">XSetWMProperties()</A></B>,
+<B><A HREF="XSetWMProtocols.html">XSetWMProtocols()</A></B>,
+<B><A HREF="XStringListToTextProperty.html">XStringListToTextProperty()</A></B>,
+"<A HREF="wm-protocols.html">Setting and Reading the WM_TRANSIENT_FOR Property</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

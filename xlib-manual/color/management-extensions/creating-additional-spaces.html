@@ -1,0 +1,98 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Creating Additional Color Spaces</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.12.4 Creating Additional Color Spaces</H1>
+
+Color space specific information necessary 
+for color space conversion and color string parsing is stored in an
+<B>XcmsColorSpace</B>
+structure.
+Therefore, a new structure containing this information is required
+for each additional color space.
+In the case of device-independent color spaces,
+a handle to this new structure (that is, by means of a global variable)
+is usually made accessible to the client program for use with the
+<B><A HREF="XcmsAddColorSpace.html">XcmsAddColorSpace()</A></B>
+function.
+
+<P>
+
+If a new 
+<B>XcmsColorSpace</B>
+structure specifies a color space not registered with the X Consortium,
+they should be treated as private to the client
+because format values for unregistered color spaces are assigned at run time.
+If references to an unregistered color space must be made outside the
+client (for example, storing color specifications in a file using the
+unregistered color space), then reference should be made by color space prefix
+(see
+<B><A HREF="XcmsFormatOfPrefix.html">XcmsFormatOfPrefix()</A></B>
+and
+<B><A HREF="XcmsPrefixOfFormat.html">XcmsPrefixOfFormat()</A></B>).
+
+<A NAME="XcmsColorSpace"></A>
+<P>
+
+<CODE><PRE>
+typedef (*XcmsConversionProc)();
+typedef XcmsConversionProc *XcmsFuncListPtr;	/* A NULL terminated list of function pointers*/
+
+typedef struct _XcmsColorSpace {
+	char *prefix;
+	XcmsColorFormat format;
+	XcmsParseStringProc parseString;
+	XcmsFuncListPtr to_CIEXYZ;
+	XcmsFuncListPtr from_CIEXYZ;
+	int inverse_flag;
+} XcmsColorSpace;
+</PRE></CODE>
+
+<P>
+
+The prefix member specifies the prefix that indicates a color string 
+is in this color space's string format.
+For example, the strings ``ciexyz'' or ``CIEXYZ'' for CIE XYZ,
+and ``rgb'' or ``RGB'' for RGB.
+The prefix is case-insensitive.
+The format member specifies the color specification format.
+Formats for unregistered color spaces are assigned at run time.
+The parseString member contains a pointer to the function 
+that can parse a color string into an 
+<B><A HREF="../structures.html#XcmsColor">XcmsColor</A></B>
+structure.
+This function returns an integer (int): nonzero if it succeeded
+and zero otherwise.
+The to_CIEXYZ and from_CIEXYZ members contain pointers,
+each to a NULL terminated list of function pointers.
+When the list of functions is executed in series,
+it will convert the color specified in an 
+<B><A HREF="../structures.html#XcmsColor">XcmsColor</A></B>
+structure from/to the current color space format to/from the CIE XYZ format.
+Each function returns an integer (int): nonzero if it succeeded
+and zero otherwise.
+The white point to be associated with the colors is specified
+explicitly, even though white points can be found in the Color Conversion
+Context.
+The inverse_flag member, if nonzero, specifies that for each function listed 
+in to_CIEXYZ,
+its inverse function can be found in from_CIEXYZ such that:
+
+<P>
+
+Given:  n = number of functions in each list
+<P>
+for each i, such that 0 <= i < n
+    from_CIEXYZ[n - i - 1] is the inverse of to_CIEXYZ[i].
+<P>
+
+This allows Xlib to use the shortest conversion path,
+thus bypassing CIE XYZ if possible (for example, TekHVC to CIE L*u*v*).
+
+<H5 ALIGN=right><I>Next: <A HREF="parse-string-callback.html">Parse String Callback</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

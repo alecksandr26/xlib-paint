@@ -1,0 +1,155 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Chapter 6: Color Management Functions</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>Chapter 6: Color Management Functions</H1>
+
+Each X window always has an associated colormap that
+provides a level of indirection between pixel values and colors displayed
+on the screen.
+Xlib provides functions that you can use to manipulate a colormap.
+The X protocol defines colors using values in the RGB color space.
+The RGB color space is device-dependent;
+rendering an RGB value on differing output devices typically results
+in different colors.
+Xlib also provides a means for clients to specify color using
+device-independent color spaces for consistent results across devices.
+Xlib supports device-independent color spaces derivable from the CIE XYZ
+color space.
+This includes the CIE XYZ, xyY, L*u*v*, and L*a*b* color spaces as well as
+the TekHVC color space.
+
+<P>
+
+This chapter discusses how to:
+
+<UL>
+
+<P><LI>
+<A HREF="colormap.html">Create, copy, and destroy a colormap</A>
+
+<P><LI>
+<A HREF="strings/">Specify colors by name or value</A>
+
+<P><LI>
+<A HREF="cell.html">Allocate, modify, and free color cells</A>
+
+<P><LI>
+<A HREF="modifying-and-querying-cells.html">Read entries in a colormap</A>
+
+<P><LI>
+<A HREF="converting-between-color-spaces.html">Convert between color spaces</A>
+
+<P><LI>
+<A HREF="callback/">Control aspects of color conversion</A>
+
+<P><LI>
+<A HREF="gamut-querying/">Query the color gamut of a screen</A>
+
+<P><LI>
+<A HREF="management-extensions/">Add new color spaces</A>
+
+</UL>
+
+<P>
+
+All functions, types, and symbols in this chapter with the prefix ``Xcms''
+are defined in
+<B><TT>&lt;X11/Xcms.h&gt;.</TT></B>
+The remaining functions and types are defined in
+<B><TT>&lt;X11/Xlib.h&gt;.</TT></B>
+
+<A NAME="colormap"></A>
+<P>
+
+Functions in this chapter manipulate the representation of color on the
+screen.
+For each possible value that a pixel can take in a window,
+there is a color cell in the colormap.
+For example, 
+if a window is four bits deep, pixel values 0 through 15 are defined. 
+A colormap is a collection of color cells.
+A color cell consists of a triple of red, green, and blue values.
+The hardware imposes limits on the number of significant
+bits in these values.
+As each pixel is read out of display memory, the pixel
+is looked up in a colormap.
+The RGB value of the cell determines what color is displayed on the screen.
+On a grayscale display with a black-and-white monitor, 
+the values are combined to determine the brightness on the screen.
+
+<P>
+
+Typically, an application allocates color cells or sets of color cells
+to obtain the desired colors.
+The client can allocate read-only cells.
+In which case, 
+the pixel values for these colors can be shared among multiple applications, 
+and the RGB value of the cell cannot be changed.
+If the client allocates read/write cells,
+they are exclusively owned by the client,
+and the color associated with the pixel value can be changed at will.
+Cells must be allocated (and, if read/write, initialized with an RGB value)
+by a client to obtain desired colors.
+The use of pixel value for an
+unallocated cell results in an undefined color.
+
+<P>
+
+Because colormaps are associated with windows, X supports displays
+with multiple colormaps and, indeed, different types of colormaps.
+If there are insufficient colormap resources in the display,
+some windows will display in their true colors, and others
+will display with incorrect colors.
+A window manager usually controls which windows are displayed
+in their true colors if more than one colormap is required for
+the color resources the applications are using.
+At any time, there is a set of installed colormaps for a screen.
+Windows using one of the installed colormaps display with true colors, and
+windows using other colormaps generally display with incorrect colors.
+You can control the set of installed colormaps by using
+<B><A HREF="../window-and-session-manager/XInstallColormap.html">XInstallColormap()</A></B>
+and
+<B><A HREF="../window-and-session-manager/XUninstallColormap.html">XUninstallColormap()</A></B>.
+
+<P>
+
+Colormaps are local to a particular screen.
+Screens always have a default colormap,
+and programs typically allocate cells out of this colormap.
+Generally, you should not write applications that monopolize 
+color resources.
+Although some hardware supports multiple colormaps installed at one time,
+many of the hardware displays
+built today support only a single installed colormap, so the primitives
+are written to encourage sharing of colormap entries between applications.
+
+<P>
+
+The 
+<B><A HREF="../display/display-macros.html#DefaultColormap">DefaultColormap()</A></B>
+macro returns the default colormap.
+The 
+<B><A HREF="../display/display-macros.html#DefaultVisual">DefaultVisual()</A></B>
+macro
+returns the default visual type for the specified screen.
+
+<!.IN "Color map">
+
+Possible visual types are 
+<B><A HREF="../window/visual-types.html">StaticGray</A></B> , 
+<B><A HREF="../window/visual-types.html">GrayScale</A></B> , 
+<B><A HREF="../window/visual-types.html">StaticColor</A></B> ,
+<B><A HREF="../window/visual-types.html">PseudoColor</A></B> , 
+<B><A HREF="../window/visual-types.html">TrueColor</A></B> , 
+or 
+<B><A HREF="../window/visual-types.html">DirectColor</A></B> 
+(see "<A HREF="../window/visual-types.html">Visual Types</A>").
+
+<H5 ALIGN=right><I>Next: <A HREF="structures.html">Color Structures</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

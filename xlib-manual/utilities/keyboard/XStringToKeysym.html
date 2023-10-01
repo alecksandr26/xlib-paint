@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XStringToKeysym</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XStringToKeysym</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XStringToKeysym" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="../../input/keyboard-encoding.html#KeySym">KeySym</A> XStringToKeysym(<B>string</B>)
+      char *<B>string</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>string</B>
+<TD> Specifies the name of the KeySym that is to be converted.
+
+</TABLE>
+
+<H2>Description</H2>
+
+Standard KeySym names are obtained from
+<B><TT>X11/keysymdef.h</TT></B>
+by removing the XK_ prefix from each name.
+KeySyms that are not part of the Xlib standard also may be obtained
+with this function.
+The set of KeySyms that are available in this manner 
+and the mechanisms by which Xlib obtains them is implementation dependent.
+
+<P>
+
+If the KeySym name is not in the Host Portable Character Encoding,
+the result is implementation dependent.
+If the specified string does not match a valid KeySym,
+<B>XStringToKeysym()</B>
+returns
+<B>NoSymbol</B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XConvertCase.html">XConvertCase()</A></B>,
+<B><A HREF="XKeycodeToKeysym.html">XKeycodeToKeysym()</A></B>,
+<B><A HREF="XKeysymToString.html">XKeysymToString()</A></B>,
+<B><A HREF="XLookupKeysym.html">XLookupKeysym()</A></B>,
+<A HREF="./">Keyboard Utility Functions</A>.
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

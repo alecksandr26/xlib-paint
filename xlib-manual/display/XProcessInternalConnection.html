@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XProcessInternalConnection</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XProcessInternalConnection</H1>
+
+<!.IN "XProcessInternalConnection" "" "@DEF@">
+
+<H2>Syntax</H2>
+
+<CODE><PRE>
+void XProcessInternalConnection(<B>display</B>, <B>fd</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      int <B>fd</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>fd</B>
+<TD> Specifies the file descriptor.
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XProcessInternalConnection()</B>
+function processes input available on an internal connection.
+This function should be called for an internal connection only
+after an operating system facility (for example,
+<B>select</B>
+or
+<B>poll</B>)
+has indicated that input is available; otherwise,
+the effect is not defined.
+
+<H2>See also</H2>
+
+<B><A HREF="XAddConnectionWatch.html">XAddConnectionWatch()</A></B>, 
+<B><A HREF="XRemoveConnectionWatch.html">XRemoveConnectionWatch()</A></B>,
+<B><A HREF="XInternalConnectionNumbers.html">XInternalConnectionNumbers()</A></B>,
+"<A HREF="internal-connections.html">Internal Connections</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

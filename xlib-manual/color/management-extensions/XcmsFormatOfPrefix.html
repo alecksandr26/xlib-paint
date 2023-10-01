@@ -1,0 +1,46 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XcmsFormatOfPrefix</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XcmsFormatOfPrefix</H1>
+
+<H2>Syntax</H2>
+
+<!.IN  "XcmsFormatOfPrefix" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="../structures.html#XcmsColor">XcmsColorFormat</A> XcmsFormatOfPrefix(<B>prefix</B>)
+      char *<B>prefix</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>prefix</B>
+<TD> Specifies the string that contains the color space prefix.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B><A HREF="XcmsFormatOfPrefix.html">XcmsFormatOfPrefix()</A></B>
+function returns the format for the specified color space prefix
+(for example, the string ``CIEXYZ'').
+The prefix is case-insensitive.
+If the color space is not accessible in the color management system,
+<B><A HREF="XcmsFormatOfPrefix.html">XcmsFormatOfPrefix()</A></B>
+returns 
+<B><A HREF="../structures.html#XcmsUndefinedFormat">XcmsUndefinedFormat</A></B> .
+
+<H2>See also</H2>
+
+"<A HREF="querying-space-format-and-prefix.html">Querying Color Space Format and Prefix</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

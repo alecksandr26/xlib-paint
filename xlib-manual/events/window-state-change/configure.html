@@ -1,0 +1,131 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Events: ConfigureNotify</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.10.2 ConfigureNotify</H1>
+
+The X server can report
+<B>ConfigureNotify</B>
+events to clients wanting information about actual changes to a window's
+state, such as size, position, border, and stacking order.
+The X server generates this event type whenever one of the following configure 
+window requests made by a client application actually completes:
+
+<UL>
+
+<LI> A window's size, position, border, and/or stacking order is reconfigured 
+by calling
+<B><A HREF="../../window/XConfigureWindow.html">XConfigureWindow()</A></B>.
+
+<LI>
+The window's position in the stacking order is changed by calling
+<B><A HREF="../../window/XLowerWindow.html">XLowerWindow()</A></B>,
+<B><A HREF="../../window/XRaiseWindow.html">XRaiseWindow()</A></B>,
+or
+<B><A HREF="../../window/XRestackWindows.html">XRestackWindows()</A></B>.
+
+<LI>
+A window is moved by calling
+<B><A HREF="../../window/XMoveWindow.html">XMoveWindow()</A></B>.
+
+<LI>
+A window's size is changed by calling
+<B><A HREF="../../window/XResizeWindow.html">XResizeWindow()</A></B>.
+
+<LI>
+A window's size and location is changed by calling
+<B><A HREF="../../window/XMoveResizeWindow.html">XMoveResizeWindow()</A></B>.
+
+<LI>
+A window is mapped and its position in the stacking order is changed
+by calling
+<B><A HREF="../../window/XMapRaised.html">XMapRaised()</A></B>.
+
+<LI>
+A window's border width is changed by calling
+<B><A HREF="../../window/XSetWindowBorderWidth.html">XSetWindowBorderWidth()</A></B>.
+
+</UL>
+
+<P>
+
+To receive 
+<B>ConfigureNotify</B>
+events, set the
+<B>StructureNotifyMask</B>
+bit in the event-mask attribute of the window or the
+<B>SubstructureNotifyMask</B>
+bit in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the parent window
+(in which case, configuring any child generates an event).
+
+<A NAME="XConfigureEvent"></A>
+<P>
+
+The structure for this event type contains:
+
+<P>
+
+<PRE><CODE>
+typedef struct {
+	int <B>type</B>;	        /* ConfigureNotify */
+	unsigned long <B>serial</B>;	/* # of last request processed by server */
+	Bool <B>send_event</B>;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *<B>display</B>;	/* Display the event was read from */
+	Window <B>event</B>;
+	Window <B>window</B>;
+	int <B>x</B>, <B>y</B>;
+	int <B>width</B>, <B>height</B>;
+	int <B>border_width</B>;
+	Window <B>above</B>;
+	Bool <B>override_redirect</B>;
+} XConfigureEvent;
+</CODE></PRE>
+
+<P>
+
+The <B>event</B> member is set either to the reconfigured window or to its parent,
+depending on whether
+<B>StructureNotify</B>
+or
+<B>SubstructureNotify</B>
+was selected.
+The <B>window</B> member is set to the window whose size, position, 
+border, and/or stacking
+order was changed.
+
+<P>
+
+The <B>x</B> and <B>y</B> members are set to the coordinates relative to the parent window's 
+origin and indicate the position of the upper-left outside corner of the window.
+The <B>width</B> and <B>height</B> members are set to the inside size of the window, 
+not including
+the border.
+The <B>border_width</B> member is set to the width of the window's border, in pixels.
+
+<P>
+
+The <B>above</B> member is set to the sibling window and is used 
+for stacking operations.
+If the X server sets this member to
+<B>None</B> ,
+the window whose state was changed is on the bottom of the stack
+with respect to sibling windows.
+However, if this member is set to a sibling window, 
+the window whose state was changed is placed on top of this sibling window.
+
+<P>
+
+The <B>override_redirect</B> member is set to the <A HREF="../../window/attributes/override-redirect.html">override-redirect</A> attribute of the
+window.
+Window manager clients normally should ignore this window if the 
+override_redirect member
+is
+<B>True</B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="create.html">CreateNotify Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

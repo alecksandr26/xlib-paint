@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XDeleteContext</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XDeleteContext</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XDeleteContext" "" "@DEF@">
+
+<CODE><PRE>
+int XDeleteContext(<B>display</B>, <B>rid</B>, <B>context</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      XID <B>rid</B>;
+      XContext <B>context</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>rid</B>
+<TD> Specifies the resource ID with which the data is associated.
+
+<TR><TD> <B>context</B>
+<TD> Specifies the context type to which the data belongs.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XDeleteContext()</B>
+function deletes the entry for the given resource ID 
+and type from the data structure.
+This function returns the same error codes that
+<B><A HREF="XFindContext.html">XFindContext()</A></B>
+returns if called with the same arguments.
+<B>XDeleteContext()</B>
+does not free the data whose address was saved.
+
+<H2>See also</H2>
+
+<B><A HREF="XFindContext.html">XFindContext()</A></B>,
+<B><A HREF="XSaveContext.html">XSaveContext()</A></B>,
+<B><A HREF="XUniqueContext.html">XUniqueContext()</A></B>,
+"<A HREF="context-manager.html">Using the Context Manager</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,112 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetGCValues</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetGCValues</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetGCValues" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../introduction/errors.html#Status">Status</A></B> XGetGCValues(<B>display</B>, <B>gc</B>, <B>valuemask</B>, <B>values_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="manipulating.html">GC</A> <B>gc</B>;
+      unsigned long <B>valuemask</B>;
+      <A HREF="manipulating.html#XGCValues">XGCValues</A> *<B>values_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>valuemask</B>
+<TD> Specifies which components in the GC are to be returned in the values_return argument. 
+This argument is the bitwise inclusive OR of zero or more of the valid
+GC component mask bits.
+
+<TR><TD> <B>values_return</B>
+<TD> Returns the GC values in the specified
+<A HREF="manipulating.html#XGCValues">XGCValues</A> 
+structure.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetGCValues()</B>
+function returns the components specified by valuemask for the specified GC.
+If the valuemask contains a valid set of GC mask bits
+(<B>GCFunction</B>,
+<B>GCPlaneMask</B>,
+<B>GCForeground</B>,
+<B>GCBackground</B>,
+<B>GCLineWidth</B>,
+<B>GCLineStyle</B>,
+<B>GCCapStyle</B>,
+<B>GCJoinStyle</B>,
+<B>GCFillStyle</B>,
+<B>GCFillRule</B>,
+<B>GCTile</B>,
+<B>GCStipple</B>,
+<B>GCTileStipXOrigin</B>,
+<B>GCTileStipYOrigin</B>,
+<B>GCFont</B>,
+<B>GCSubwindowMode</B>,
+<B>GCGraphicsExposures</B>,
+<B>GCClipXOrigin</B>,
+<B>GCCLipYOrigin</B>,
+<B>GCDashOffset</B>,
+or
+<B>GCArcMode</B>)
+and no error occurs,
+<B>XGetGCValues()</B>
+sets the requested components in values_return and returns a nonzero status.
+Otherwise, it returns a zero status.
+Note that the clip-mask and dash-list (represented by the
+<B>GCClipMask</B>
+and 
+<B>GCDashList</B>
+bits, respectively, in the valuemask)
+cannot be requested.
+Also note that an invalid resource ID (with one or more of the three
+most-significant bits set to 1) will be returned for
+<B>GCFont</B>,
+<B>GCTile</B>,
+and
+<B>GCStipple</B>
+if the component has never been explicitly set by the client.
+
+<H2>See also</H2>
+
+<B><A HREF="../display/display-macros.html#AllPlanes">AllPlanes()</A></B>,
+<B><A HREF="XChangeGC.html">XChangeGC()</A></B>, 
+<B><A HREF="../graphics/XCopyArea.html">XCopyArea()</A></B>,
+<B><A HREF="XCopyGC.html">XCopyGC()</A></B>, 
+<B><A HREF="XCreateGC.html">XCreateGC()</A></B>,
+<B><A HREF="XCreateRegion.html">XCreateRegion()</A></B>,
+<B><A HREF="XDrawArc.html">XDrawArc()</A></B>,
+<B><A HREF="XDrawLine.html">XDrawLine()</A></B>,
+<B><A HREF="XDrawRectangle.html">XDrawRectangle()</A></B>,
+<B><A HREF="XDrawText.html">XDrawText()</A></B>,
+<B><A HREF="XFillRectangle.html">XFillRectangle()</A></B>,
+<B><A HREF="XFreeGC.html">XFreeGC()</A></B>, 
+<B><A HREF="XGContextFromGC.html">XGContextFromGC()</A></B>,
+<B><A HREF="convenience-functions/XQueryBestSize.html">XQueryBestSize()</A></B>,
+<B><A HREF="convenience-functions/XSetArcMode.html">XSetArcMode()</A></B>,
+<B><A HREF="convenience-functions/XSetClipOrigin.html">XSetClipOrigin()</A></B>,
+"<A HREF="manipulating.html">Manipulating Graphics Context/State</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

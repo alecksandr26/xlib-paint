@@ -1,0 +1,94 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XChangeActivePointerGrab</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XChangeActivePointerGrab</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Pointer" "grabbing">
+<!.IN "Changing" "pointer grab" >
+<!.IN "XChangeActivePointerGrab" "" "@DEF@">
+
+<CODE><PRE>
+XChangeActivePointerGrab(<B>display</B>, <B>event_mask</B>, <B>cursor</B>, <B>time</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      unsigned int <B>event_mask</B>;
+      Cursor <B>cursor</B>;
+      <A HREF="pointer-grabbing.html#Time">Time</A> <B>time</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>event_mask</B>
+<TD> Specifies which pointer events are reported to the client.
+The mask is the bitwise inclusive OR of the valid pointer event mask bits.
+
+<TR><TD> <B>cursor</B>
+<TD> Specifies the cursor that is to be displayed or
+<B>None</B>.
+
+<TR><TD> <B>time</B>
+<TD> Specifies the time.
+You can pass either a timestamp or
+<B>CurrentTime</B>.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XChangeActivePointerGrab()</B>
+function changes the specified dynamic parameters if the pointer is actively
+grabbed by the client and if the specified time is no earlier than the
+last-pointer-grab time and no later than the current X server time.
+This function has no effect on the passive parameters of a
+<B><A HREF="XGrabButton.html">XGrabButton()</A></B>.
+The interpretation of event_mask and cursor is the same as described in
+<B><A HREF="XGrabPointer.html">XGrabPointer()</A></B>.
+
+<P>
+
+<B>XChangeActivePointerGrab()</B>
+can generate
+<B>BadCursor</B> 
+and
+<B>BadValue</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadCursor</B> 
+<TD>A value for a Cursor argument does not name a
+    defined Cursor.
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllowEvents.html">XAllowEvents()</A></B>,
+<B><A HREF="XGrabButton.html">XGrabButton()</A></B>,
+<B><A HREF="XGrabKey.html">XGrabKey()</A></B>,
+<B><A HREF="XGrabKeyboard.html">XGrabKeyboard()</A></B>,
+<B><A HREF="XGrabPointer.html">XGrabPointer()</A></B>,
+<B><A HREF="XUngrabPointer.html">XUngrabPointer()</A></B>,
+"<A HREF="pointer-grabbing.html">Pointer Grabbing</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,95 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: </TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetNormalHints</H1>
+
+This function has been superseded by
+<B><A HREF="../../ICC/client-to-window-manager/XSetWMNormalHints.html">XSetWMNormalHints()</A></B>.
+
+<!.IN "XSetNormalHints" "" "@DEF@">
+
+<H2>Syntax</H2>
+
+<CODE><PRE>
+XSetNormalHints(<B>display</B>, <B>w</B>, <B>hints</B>)
+      Display *<B>display</B>;
+      Window <B>w</B>;
+      XSizeHints *<B>hints</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>hints</B>
+<TD> Specifies a pointer to the size hints for the window in its normal state.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XSetNormalHints()</B>
+function sets the size hints structure for the specified window.
+Applications use
+<B>XSetNormalHints()</B>
+to inform the window manager of the size
+or position desirable for that window.
+In addition, 
+an application that wants to move or resize itself should call
+<B>XSetNormalHints()</B>
+and specify its new desired location and size
+as well as making direct Xlib calls to move or resize.  
+This is because window managers may ignore redirected
+configure requests, but they pay attention to property changes.
+
+<P>
+
+To set size hints, 
+an application not only must assign values to the appropriate members
+in the hints structure but also must set the flags member of the structure 
+to indicate which information is present and where it came from.  
+A call to
+<B>XSetNormalHints()</B>
+is meaningless, unless the flags member is set to indicate which members of
+the structure have been assigned values.
+
+<P>
+
+<B>XSetNormalHints()</B>
+can generate
+<B>BadAlloc</B>
+and
+<B>BadWindow</B> 
+errors.
+
+<H2>Syntax</H2>
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+<B><A HREF="../../ICC/client-to-window-manager/XSetWMNormalHints.html">XSetWMNormalHints()</A></B>,
+"<A HREF="./">Compatibility Functions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

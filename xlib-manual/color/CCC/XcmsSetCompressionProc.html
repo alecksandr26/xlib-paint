@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XcmsSetCompressionProc</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XcmsSetCompressionProc</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XcmsSetCompressionProc" "" "@DEF@">
+<!.IN "Gamut compression" "setting in Color Conversion Context">
+<!.IN "Gamut compression" "procedure">
+<!.IN "Gamut compression" "client data">
+
+<CODE><PRE>
+XcmsCompressionProc XcmsSetCompressionProc(<B>ccc</B>, <B>compression_proc</B>, <B>client_data</B>)
+      <A HREF="macros.html">XcmsCCC</A> <B>ccc</B>;
+      XcmsCompressionProc <B>compression_proc</B>;
+      XPointer <B>client_data</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>ccc</B>
+<TD> Specifies the <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>.
+
+<TR><TD> <B>compression_proc</B>
+<TD> Specifies the gamut compression procedure that is to be applied 
+when a color lies outside the screen's color gamut.
+If NULL is specified and a function using this <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A> must convert
+a color specification to a device-dependent format and encounters a color
+that lies outside the screen's color gamut, 
+that function will return
+<B><A HREF="../conversion-contexts-and-gamut-mapping.html#cmsStatus">XcmsFailure</A></B> .
+
+<TR><TD> <B>client_data</B>
+<TD> Specifies client data for the gamut compression procedure or NULL.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XcmsSetCompressionProc()</B>
+function first sets the gamut compression procedure and client data 
+in the specified CCC with the newly specified procedure and client data
+and then returns the old procedure.
+
+<H2>See also</H2>
+
+"<A HREF="modifying-attributes.html">Modifying Attributes of a Color Conversion Context</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,76 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Events: ReparentNotify</TITLE>
+<HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.10.8. ReparentNotify</H1>
+
+The X server can report
+<B>ReparentNotify</B>
+events to clients wanting information about changing a window's parent.
+The X server generates this event whenever a client
+application calls
+<B><A HREF="../../window-and-session-manager/XReparentWindow.html">XReparentWindow()</A></B>
+and the window is actually reparented.
+
+<P>
+
+To receive 
+<B>ReparentNotify</B>
+events, set the
+<B>StructureNotifyMask</B>
+bit in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the window or the
+<B>SubstructureNotifyMask</B>
+bit in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of either the old or the new parent window
+(in which case, reparenting any child generates an event).
+
+<A NAME="XReparentEvent"></A>
+<P>
+
+The structure for this event type contains:
+
+<P>
+
+<PRE><CODE>
+typedef struct {
+	int <B>type</B>;               /* ReparentNotify */
+	unsigned long <B>serial</B>;	/* # of last request processed by server */
+	Bool <B>send_event</B>;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *<B>display</B>;	/* Display the event was read from */
+	Window <B>event</B>;
+	Window <B>window</B>;
+	Window <B>parent</B>;
+	int <B>x</B>, <B>y</B>;
+	Bool override_redirect;
+} XReparentEvent;
+
+</PRE></CODE>
+
+<P>
+
+The <B>event</B> member is set either to the reparented window
+or to the old or the new parent, depending on whether
+<B>StructureNotify</B>
+or
+<B>SubstructureNotify</B>
+was selected. 
+<P>
+The <B>window</B> member is set to the window that was reparented.
+The <B>parent</B> member is set to the new parent window.
+<P>
+The <B>x</B> and <B>y</B> members are set to the reparented window's coordinates relative 
+to the new parent window's
+origin and define the upper-left outer corner of the reparented window.
+<P>
+The <B>override_redirect</B> member is set to the <A HREF="../../window/attributes/override-redirect.html">override-redirect</A> attribute of the
+window specified by the <B>window</B> member.
+Window manager clients normally should ignore this window 
+if the <B>override_redirect</B> member is
+<B>True</B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="unmap.html">UnmapNotify Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

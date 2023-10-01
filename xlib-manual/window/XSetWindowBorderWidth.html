@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetWindowBorderWidth</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetWindowBorderWidth</H1>
+
+<!.IN "XSetWindowBorderWidth" "" "@DEF@">
+<H2>Syntax</H2>
+
+<CODE><PRE>
+XSetWindowBorderWidth(<B>display</B>, <B>w</B>, <B>width</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      unsigned int <B>width</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>width</B>
+<TD> Specifies the width of the window border.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XSetWindowBorderWidth()</B>
+function sets the specified window's border width to the specified width.
+
+<P>
+
+<B>XSetWindowBorderWidth()</B>
+can generate a
+<B>BadWindow</B>
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>,
+<B><A HREF="XConfigureWindow.html">XConfigureWindow()</A></B>,
+<B><A HREF="XCreateWindow.html">XCreateWindow()</A></B>,
+<B><A HREF="XDestroyWindow.html">XDestroyWindow()</A></B>,
+<B><A HREF="XMapWindow.html">XMapWindow()</A></B>,
+<B><A HREF="XMoveResizeWindow.html">XMoveResizeWindow()</A></B>,
+<B><A HREF="XMoveWindow.html">XMoveWindow()</A></B>,
+<B><A HREF="XRaiseWindow.html">XRaiseWindow()</A></B>,
+<B><A HREF="XResizeWindow.html">XResizeWindow()</A></B>,
+<B><A HREF="XUnmapWindow.html">XUnmapWindow()</A></B>,
+"<A HREF="configure.html">Configuring Windows</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

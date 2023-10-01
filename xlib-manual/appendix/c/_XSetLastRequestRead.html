@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Extensions: _XSetLastRequestRead</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>_XSetLastRequestRead</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "_XSetLastRequestRead" "" "@DEF@">
+
+<CODE><PRE>
+unsigned long _XSetLastRequestRead(<B>display</B>, <B>rep</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      xGenericReply *<B>rep</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>rep</B>
+<TD> Specifies the wire event structure.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>_XSetLastRequestRead()</B>
+function computes and returns a complete serial number from the partial
+serial number in the event.
+
+<H2>See also</H2>
+
+<B><A HREF="XESetBeforeFlush.html">XESetBeforeFlush()</A></B>,
+<B><A HREF="XESetCloseDisplay.html">XESetCloseDisplay()</A></B>,
+<B><A HREF="XESetCopyGC.html">XESetCopyGC()</A></B>,
+<B><A HREF="XESetCreateFont.html">XESetCreateFont()</A></B>,
+<B><A HREF="XESetCreateGC.html">XESetCreateGC()</A></B>,
+<B><A HREF="XESetError.html">XESetError()</A></B>,
+<B><A HREF="XESetErrorString.html">XESetErrorString()</A></B>,
+<B><A HREF="XESetEventToWire.html">XESetEventToWire()</A></B>,
+<B><A HREF="XESetFlushGC.html">XESetFlushGC()</A></B>,
+<B><A HREF="XESetFreeFont.html">XESetFreeFont()</A></B>,
+<B><A HREF="XESetFreeGC.html">XESetFreeGC()</A></B>,
+<B><A HREF="XESetPrintErrorValues.html">XESetPrintErrorValues()</A></B>,
+<B><A HREF="XESetWireToError.html">XESetWireToError()</A></B>,
+<B><A HREF="XESetWireToEvent.html">XESetWireToEvent()</A></B>,
+"<A HREF="hooks-into-the-library.html">Hooks into the Library</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

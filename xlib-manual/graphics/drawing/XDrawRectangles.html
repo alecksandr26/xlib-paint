@@ -1,0 +1,133 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XDrawRectangles</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XDrawRectangles</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XDrawRectangles" "" "@DEF@">
+
+<CODE><PRE>
+XDrawRectangles(<B>display</B>, <B>d</B>, <B>gc</B>, <B>rectangles</B>, <B>nrectangles</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Drawable <B>d</B>;
+      <A HREF="../../GC/manipulating.html">GC</A> <B>gc</B>;
+      <A HREF="./#XRectangle">XRectangle</A> <B>rectangles</B>[];
+      int <B>nrectangles</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>d</B>
+<TD> Specifies the drawable. 
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>rectangles</B>
+<TD> Specifies an array of rectangles.
+
+<TR><TD> <B>nrectangles</B>
+<TD> Specifies the number of rectangles in the array.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XDrawRectangles()</B>
+functions draw the outlines of the specified rectangles as
+if a five-point 
+<B><A HREF="../../appendix/a.html#PolyLine">PolyLine</A></B>
+protocol request were specified for each rectangle:
+
+<PRE><CODE>
+[x,y] [x+width,y] [x+width,y+height] [x,y+height] [x,y]
+</PRE></CODE>
+
+<P>
+ 
+For the specified rectangles, 
+this function does not draw a pixel more than once.
+<B>XDrawRectangles()</B>
+draws the rectangles in the order listed in the array.
+If rectangles intersect,
+the intersecting pixels are drawn multiple times.
+
+<P>
+
+This function uses these GC components: 
+<A HREF="../../GC/manipulating.html#function">function</A>, 
+<A HREF="../../GC/manipulating.html#plane-mask">plane-mask</A>,
+<A HREF="../../GC/manipulating.html#line-width">line-width</A>,
+<A HREF="../../GC/manipulating.html#line-style">line-style</A>,
+<A HREF="../../GC/manipulating.html#cap-style">cap-style</A>,
+<A HREF="../../GC/manipulating.html#join-style">join-style</A>,
+<A HREF="../../GC/manipulating.html#fill-style">fill-style</A>,
+<A HREF="../../GC/manipulating.html#subwindow-mode">subwindow-mode</A>,
+<A HREF="../../GC/manipulating.html#clip-mask">clip-x-origin</A>,
+<A HREF="../../GC/manipulating.html#clip-mask">clip-y-origin</A>, and
+<A HREF="../../GC/manipulating.html#clip-mask">clip-mask</A>.
+It also uses these GC mode-dependent components: 
+<A HREF="../../GC/manipulating.html#foreground">foreground</A>, 
+<A HREF="../../GC/manipulating.html#background">background</A>,
+<A HREF="../../GC/manipulating.html#tile">tile</A>,
+<A HREF="../../GC/manipulating.html#stipple">stipple</A>,
+<A HREF="../../GC/manipulating.html#tile">tile-stipple-x-origin</A>,
+<A HREF="../../GC/manipulating.html#tile">tile-stipple-y-origin</A>,
+<A HREF="../../GC/manipulating.html#dashes">dash-offset</A>,
+and
+<A HREF="../../GC/manipulating.html#dashes">dash-list</A>.
+
+<P>
+
+<B><A HREF="XDrawRectangle.html">XDrawRectangle()</A></B>
+can generate
+<B>BadDrawable</B> ,
+<B>BadGC</B> ,
+and
+<B>BadMatch</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../GContext.html">GContext</A></B> 
+	argument does not name a defined 
+	<B><A HREF="../GContext.html">GContext</A></B>.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XDrawArc.html">XDrawArc()</A></B>,
+<B><A HREF="XDrawRectangle.html">XDrawRectangle()</A></B>,
+<B><A HREF="XDrawPoint.html">XDrawPoint()</A></B>,
+"<A HREF="rectangles.html">Drawing Single and Multiple Rectangles</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

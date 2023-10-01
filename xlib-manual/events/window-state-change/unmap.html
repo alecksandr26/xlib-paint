@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: UnmapNotify Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.10.9 UnmapNotify Events</H1>
+
+<!.IN "Events" "UnmapNotify">
+<!.IN "UnmapNotify" "" "@DEF@">
+The X server can report
+<B>UnmapNotify</B>
+events to clients wanting information about which windows are unmapped.
+The X server generates this event type whenever a client application changes the
+window's state from mapped to unmapped.
+
+<P>
+
+To receive 
+<B>UnmapNotify</B>
+events, set the
+<B>StructureNotifyMask</B>
+bit in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the window or the
+<B>SubstructureNotifyMask</B>
+bit in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the parent window
+(in which case, unmapping any child window generates an event).
+
+<A NAME="XUnmapEvent"></A>
+<P>
+
+The structure for this event type contains:
+
+<P>
+
+<!.IN "XUnmapEvent" "" "@DEF@">
+
+<PRE><CODE>
+
+typedef struct {
+	int type;	/* UnmapNotify */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Window event;
+	Window window;
+	Bool from_configure;
+} XUnmapEvent;
+</CODE></PRE>
+
+<P>
+
+The <B>event</B> member is set either to the unmapped window or to its parent,
+depending on whether
+<B>StructureNotify</B>
+or
+<B>SubstructureNotify</B>
+was selected.
+This is the window used by the X server to report the event.
+The <B>window</B> member is set to the window that was unmapped.
+The <B>from_configure</B> member is set to
+<B>True</B> 
+if the event was generated as a result of a resizing of the window's parent when
+the window itself had a win_gravity of
+<B>UnmapGravity</B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="visibility.html">VisibilityNotify Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmMergeDatabases</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmMergeDatabases</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XrmMergeDatabases" "" "@DEF@">
+
+<CODE><PRE>
+void XrmMergeDatabases(<B>source_db</B>, <B>target_db</B>)
+      XrmDatabase <B>source_db</B>, *<B>target_db</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>source_db</B>
+<TD> Specifies the resource database that is to be merged into the target database.
+
+<TR><TD> <B>target_db</B>
+<TD> Specifies the resource database into which the source 
+database is to be merged.
+
+</TABLE>
+
+<H2>Description</H2>
+ 
+Calling the
+<B>XrmMergeDatabases()</B>
+function is equivalent to calling the
+<B><A HREF="XrmCombineDatabase.html">XrmCombineDatabase()</A></B>
+function with an override argument of
+<B>True</B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XrmCombineDatabase.html">XrmCombineDatabase()</A></B>,
+<B><A HREF="XrmCombineFileDatabase.html">XrmCombineFileDatabase()</A></B>,
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>,
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmPutResource.html">XrmPutResource()</A></B>,
+"<A HREF="merging-databases.html">Merging Resource Databases</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

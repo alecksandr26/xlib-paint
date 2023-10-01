@@ -1,0 +1,115 @@
+<HTML>
+<HEAD>
+<TTILE>Xlib Reference Manual: XConfigureWindow</TITLE>
+</HEAD>
+
+<BODY>
+
+<H1 ALIGN=center>XConfigureWindow</H1>
+
+<H2>Syntax</H2>
+<PRE><CODE>
+XConfigureWindow(<B>display</B>, <B>w</B>, <B>value_mask</B>, <B>values</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      unsigned int <B>value_mask</B>;
+      <A HREF="configure.html#XWindowChanges">XWindowChanges</A> *<B>values</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+<TR><TD><B>display</B>
+<TD>Specifies the connection to the X server.
+<TR><TD> <B>w</B>
+<TD>Specifies the window to be reconfigured.
+<TR><TD><B>value_mask</B>
+<TD>Specifies which values are to be set using information in
+the values structure.
+This mask is the bitwise inclusive OR of the valid configure window values bits.
+<TR><TD><B>values</B>
+<TD>Specifies the 
+<B><A HREF="configure.html#XWindowChanges">XWindowChanges</A></B>
+structure.
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XConfigureWindow()</B>
+function uses the values specified in the
+<B><A HREF="configure.html#XWindowChanges">XWindowChanges</A></B>
+structure to reconfigure a window's size, position, border, and stacking order.
+Values not specified are taken from the existing geometry of the window.
+
+<P>
+
+If a sibling is specified without a stack_mode or if the window
+is not actually a sibling,
+a
+<B>BadMatch</B>
+error results. 
+Note that the computations for
+<B>BottomIf</B>,
+<B>TopIf</B>,
+and
+<B>Opposite</B>
+are performed with respect to the window's final geometry (as controlled by the
+other arguments passed to
+<B>XConfigureWindow()</B>),
+not its initial geometry.
+Any backing store contents of the window, its
+inferiors, and other newly visible windows are either discarded or
+changed to reflect the current screen contents 
+(depending on the implementation).
+
+<P>
+
+<B>XConfigureWindow()</B>
+can generate
+<B>BadMatch</B>,
+<B>BadValue</B>,
+and
+<B>BadWindow</B> 
+errors.
+ 
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+to match in some other way required by the request.
+
+<TR><TD><B>BadValue</B>
+<TD>Some numeric value falls outside the range of values accepted by the request.
+Unless a specific range is specified for an argument, the full range defined
+by the argument's type is accepted.  Any argument defined as a set of
+alternatives can generate this error.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>,
+<B><A HREF="XCreateWindow.html">XCreateWindow()</A></B>,
+<B><A HREF="XDestroyWindow.html">XDestroyWindow()</A></B>,
+<B><A HREF="XMapWindow.html">XMapWindow()</A></B>,
+<B><A HREF="XMoveWindow.html">XMoveWindow()</A></B>,
+<B><A HREF="XMoveResizeWindow.html">XMoveResizeWindow()</A></B>,
+<B><A HREF="XRaiseWindow.html">XRaiseWindow()</A></B>,
+<B><A HREF="XResizeWindow.html">XResizeWindow()</A></B>,
+<B><A HREF="XSetWindowBorderWidth.html">XSetWindowBorderWidth()</A></B>,
+<B><A HREF="XUnmapWindow.html">XUnmapWindow()</A></B>,
+"<A HREF="configure.html">Configuring Windows</A>"
+
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

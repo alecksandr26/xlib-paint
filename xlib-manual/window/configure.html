@@ -1,0 +1,240 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Configuring Window</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>3.7 Configuring Windows</H1>
+
+<A NAME="XWindowChanges"></A>
+
+Xlib provides functions that you can use to
+move a window, resize a window, move and resize a window, or
+change a window's border width.
+To change one of these parameters,
+set the appropriate member of the
+<B>XWindowChanges</B>
+structure and OR in the corresponding value mask in subsequent calls to
+<B><A HREF="XConfigureWindow.html">XConfigureWindow()</A></B>.
+The symbols for the value mask bits and the
+<B>XWindowChanges</B>
+structure are:
+
+<PRE><CODE>
+
+/* Configure window value mask bits */
+
+#define CWX		(1<<0)
+#define CWY		(1<<1)
+#define CWWidth		(1<<2)
+#define CWHeight	(1<<3)
+#define CWBorderWidth	(1<<4)
+#define CWSibling	(1<<5)
+#define CWStackMode	(1<<6)
+</CODE></PRE>
+
+<!.IN "XWindowChanges" "" "@DEF@">
+
+<A NAME="XWindowChanges"></A>
+<PRE><CODE>
+/* Values */
+
+typedef struct {
+	int x, y;
+	int width, height;
+	int border_width;
+	Window sibling;
+	int stack_mode;
+} XWindowChanges;
+</CODE></PRE>
+
+The x and y members are used to set the window's x and y coordinates,
+which are relative to the parent's origin
+and indicate the position of the upper-left outer corner of the window.
+The width and height members are used to set the inside size of the window,
+not including the border, and must be nonzero, or a
+<B>BadValue</B>
+error results.
+Attempts to configure a root window have no effect.
+
+<P>
+
+The border_width member is used to set the width of the border in pixels.
+Note that setting just the border width leaves the outer-left corner of the window
+in a fixed position but moves the absolute position of the window's origin.
+If you attempt to set the border-width attribute of an
+<B><A HREF="create.html#InputClass">InputOnly</A></B>
+window nonzero, a
+<B>BadMatch</B>
+error results. 
+
+<P>
+
+The sibling member is used to set the sibling window for stacking operations.
+The stack_mode member is used to set how the window is to be restacked 
+and can be set to
+<B>Above</B>, 
+<B>Below</B>, 
+<B>TopIf</B>, 
+.PN BottomIf ,
+or 
+<B>Opposite</B>.
+
+<P>
+
+If the <A HREF="attributes/override-redirect.html">override-redirect</A> flag of the window is
+<B>False</B>
+and if some other client has selected
+<B><A HREF="../events/processing-overview.html#SubstructureRedirectMask">SubstructureRedirectMask</A></B>
+on the parent, the X server generates a
+<B><A HREF="../events/structure-control/configure.html">ConfigureRequest</A></B>
+event, and no further processing is performed.
+Otherwise, 
+if some other client has selected 
+<B><A HREF="../events/processing-overview.html#ResizeRedirectMask">ResizeRedirectMask</A></B>
+on the window and the inside
+width or height of the window is being changed,
+a 
+<B><A HREF="../events/structure-control/resize.html">ResizeRequest</A></B>
+event is generated, and the current inside width and height are
+used instead.
+Note that the override-redirect flag of the window has no effect
+on
+<B><A HREF="../events/processing-overview.html#ResizeRedirectMask">ResizeRedirectMask</A></B> 
+and that
+<B><A HREF="../events/processing-overview.html#SubstructureRedirectMask">SubstructureRedirectMask</A></B>
+on the parent has precedence over
+<B><A HREF="../events/processing-overview.html#ResizeRedirectMask">ResizeRedirectMask</A></B> 
+on the window.
+
+<P>
+
+When the geometry of the window is changed as specified, 
+the window is restacked among siblings, and a
+<B><A HREF="../events/window-state-change/configure.html">ConfigureNotify</A></B> 
+event is generated if the state of the window actually changes.
+<B><A HREF="../events/window-state-change/gravity.html">GravityNotify</A></B>
+events are generated after 
+<B><A HREF="../events/window-state-change/configure.html">ConfigureNotify</A></B> 
+events.
+If the inside width or height of the window has actually changed, 
+children of the window are affected as specified.
+
+<P>
+
+If a window's size actually changes,
+the window's subwindows move according to their window gravity.
+Depending on the window's bit gravity,
+the contents of the window also may be moved (see "<A HREF="attributes/gravity.html">Gravity Attributes</A>").
+
+<P>
+
+If regions of the window were obscured but now are not,
+exposure processing is performed on these formerly obscured windows, 
+including the window itself and its inferiors. 
+As a result of increasing the width or height,
+exposure processing is also performed on any new regions of the window 
+and any regions where window contents are lost.
+
+<P>
+
+The restack check (specifically, the computation for 
+<B>BottomIf</B>,
+<B>TopIf</B>,
+and 
+<B>Opposite</B>)
+is performed with respect to the window's final size and position (as
+controlled by the other arguments of the request), not its initial position.
+If a sibling is specified without a stack_mode,
+a
+<B>BadMatch</B>
+error results.
+
+<P>
+
+If a sibling and a stack_mode are specified, 
+the window is restacked as follows:
+
+<P>
+<TABLE>
+<TR><TD><B>Above</B>
+<TD> The window is placed just above the sibling.
+
+<TR><TD><B>Below</B>
+<TD> The window is placed just below the sibling.
+
+<TR><TD><B>TopIf</B>
+<TD> If the sibling occludes the window, the window is placed
+at the top of the stack.
+
+<TR><TD><B>BottomIf</B>
+<TD> If the window occludes the sibling, the window is
+placed at the bottom of the stack.
+
+<TR><TD><B>Opposite</B>
+<TD> If the sibling occludes the window, the window 
+is placed at the top of the stack.
+If the window occludes the sibling, 
+the window is placed at the bottom of the stack.
+</TABLE>
+
+<P>
+
+If a stack_mode is specified but no sibling is specified,
+the window is restacked as follows:
+
+<P>
+<TABLE>
+<TR><TD><B>Above</B>
+<TD> The window is placed at the top of the stack.
+
+<TR><TD><B>Below</B>
+<TD> The window is placed at the bottom of the stack.
+
+<TR><TD><B>TopIf</B>
+<TD> If any sibling occludes the window, the window is placed at
+the top of the stack.
+
+<TR><TD><B>BottomIf</B>
+<TD> If the window occludes any sibling, the window is placed at
+the bottom of the stack.
+
+<TR><TD><B>Opposite</B>
+<TD> If any sibling occludes the window, the window 
+is placed at the top of the stack. 
+If the window occludes any sibling, 
+the window is placed at the bottom of the stack.
+
+</TABLE>
+
+<P>
+Attempts to configure a root window have no effect.
+
+<P>
+
+To configure a window's size, location, stacking, or border, use
+<B><A HREF="XConfigureWindow.html">XConfigureWindow()</A></B>.
+
+<P>
+
+To move a window without changing its size, use 
+<B><A HREF="XMoveWindow.html">XMoveWindow()</A></B>.
+
+<P>
+
+To change a window's size without changing the upper-left coordinate, use 
+<B><A HREF="XResizeWindow.html">XResizeWindow()</A></B>.
+<P>
+
+To change the size and location of a window, use 
+<B><A HREF="XMoveResizeWindow.html">XMoveResizeWindow()</A></B>.
+<P>
+
+To change the border width of a given window, use
+<B><A HREF="XSetWindowBorderWidth.html">XSetWindowBorderWidth()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="stacking-order.html">Changing Window Stacking Order</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

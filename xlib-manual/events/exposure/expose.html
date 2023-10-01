@@ -1,0 +1,107 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Expose Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.9.1 Expose Events </H1>
+
+<!.IN "Events" "Expose">
+<!.IN "Expose" "" "@DEF@">
+
+The X server can report
+<B>Expose</B>
+events to clients wanting information about when the contents of window regions
+have been lost.
+The circumstances in which the X server generates
+<B>Expose</B>
+events are not as definite as those for other events.
+However, the X server never generates
+<B>Expose</B>
+events on windows whose class you specified as
+<B><A HREF="../../window/create.html#InputClass">InputOnly</A></B> .
+The X server can generate
+<B>Expose</B>
+events when no valid contents are available for regions of a window
+and either the regions are visible, 
+the regions are viewable and the server is (perhaps newly) maintaining 
+backing store on the window,
+or the window is not viewable but the server is (perhaps newly) honoring the
+window's <A HREF="../../window/attributes/backing-store.html">backing-store</A> attribute of
+<B>Always</B>
+or
+<B>WhenMapped</B>.
+The regions decompose into an (arbitrary) set of rectangles,
+and an
+<B>Expose</B>
+event is generated for each rectangle.
+For any given window,
+the X server guarantees to report contiguously 
+all of the regions exposed by some action that causes 
+<B>Expose</B>
+events, such as raising a window.
+
+<P>
+
+To receive
+<B>Expose</B>
+events, set the
+<B>ExposureMask</B>
+bit in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the window. 
+
+<A NAME="XExposeEvent"></A>
+<P>
+
+The structure for this event type contains:
+
+<P>
+
+<!.IN "XExposeEvent" "" "@DEF@">
+<CODE><PRE>
+typedef struct {
+	int type;		/* Expose */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	<A HREF="../../display/opening.html#Display">Display</A> *display;	/* Display the event was read from */
+	Window window;
+	int x, y;
+	int width, height;
+	int count;		/* if nonzero, at least this many more */
+} XExposeEvent;
+</PRE></CODE>
+
+<P>
+
+The <B>window</B> member is set to the exposed (damaged) window.
+
+<P>
+
+The <B>x</B> and <B>y</B> members are set to the coordinates relative to the window's origin
+and indicate the upper-left corner of the rectangle.
+
+<P>
+
+The <B>width</B> and <B>height</B> members are set to the size (extent) of the rectangle.
+
+<P>
+
+The <B>count</B> member is set to the number of
+<B>Expose</B>
+events that are to follow.
+If <B>count</B> is zero, no more
+<B>Expose</B>
+events follow for this window.
+However, if <B>count</B> is nonzero, at least that number of 
+<B>Expose</B>
+events (and possibly more) follow for this window.
+Simple applications that do not want to optimize redisplay by distinguishing
+between subareas of its window can just ignore all
+<B>Expose</B>
+events with nonzero counts and perform full redisplays
+on events with zero counts.
+
+<H5 ALIGN=right><I>Next: <A HREF="graphics-expose-and-no-expose.html">GraphicsExpose and NoExpose Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

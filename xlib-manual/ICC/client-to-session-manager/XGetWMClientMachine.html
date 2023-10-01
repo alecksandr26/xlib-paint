@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetWMClientMachine</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetWMClientMachine</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetWMClientMachine" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../../introduction/errors.html#Status">Status</A></B> XGetWMClientMachine(<B>display</B>, <B>w</B>, <B>text_prop_return</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      <A HREF="../client-to-window-manager/converting-string-lists.html">XTextProperty</A> *<B>text_prop_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>text_prop_return</B>
+<TD> Returns the
+<A HREF="../client-to-window-manager/converting-string-lists.html">XTextProperty</A>
+structure.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetWMClientMachine()</B>
+convenience function performs an 
+<B><A HREF="../client-to-window-manager/XGetTextProperty.html">XGetTextProperty()</A></B>
+on the <A HREF="/gui/x/icccm/sec-C.html#s-C.1.2">WM_CLIENT_MACHINE</A> property.
+It returns a nonzero status on success;
+otherwise, it returns a zero status.
+
+<H2>See also</H2>
+
+<B><A HREF="../client-to-window-manager/XAllocClassHint.html">XAllocClassHint()</A></B>,
+<B><A HREF="../client-to-window-manager/XAllocIconSize.html">XAllocIconSize()</A></B>,
+<B><A HREF="../client-to-window-manager/XAllocSizeHints.html">XAllocSizeHints()</A></B>,
+<B><A HREF="../client-to-window-manager/XAllocWMHints.html">XAllocWMHints()</A></B>,
+<B><A HREF="XSetCommand.html">XSetCommand()</A></B>,
+<B><A HREF="../client-to-window-manager/XSetTextProperty.html">XSetTextProperty()</A></B>,
+<B><A HREF="../client-to-window-manager/XSetTransientForHint.html">XSetTransientForHint()</A></B>,
+<B><A HREF="XSetWMClientMachine.html">XSetWMClientMachine()</A></B>,
+<B><A HREF="../client-to-window-manager/XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B>,
+<B><A HREF="../client-to-window-manager/XSetWMIconName.html">XSetWMIconName()</A></B>,
+<B><A HREF="../client-to-window-manager/XSetWMName.html">XSetWMName()</A></B>,
+<B><A HREF="../client-to-window-manager/XSetWMProperties.html">XSetWMProperties()</A></B>,
+<B><A HREF="../client-to-window-manager/XSetWMProtocols.html">XSetWMProtocols()</A></B>,
+<B><A HREF="../client-to-window-manager/XStringListToTextProperty.html">XStringListToTextProperty()</A></B>,
+"<A HREF="wm-client-machine.html">Setting and Reading the WM_CLIENT_MACHINE Property</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

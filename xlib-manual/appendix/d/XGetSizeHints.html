@@ -1,0 +1,88 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetSizeHints</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetSizeHints</H1>
+
+This function has been superseded by
+<B><A HREF="../../ICC/client-to-window-manager/XGetWMSizeHints.html">XGetWMSizeHints()</A></B>.
+<!.IN "XGetSizeHints" "" "@DEF@">
+
+<H2>Syntax</H2>
+
+
+<CODE><PRE>
+<B>Status</B> XGetSizeHints(<I>display</I>, <I>w</I>, <I>hints_return</I>, <I>property</I>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<I>display</I>;
+      Window <I>w</I>;
+      <A HREF="../../ICC/client-to-window-manager/wm-normal-hints.html#XSizeHints">XSizeHints</A> *<I>hints_return</I>;
+      Atom <I>property</I>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <I>display</I>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <I>w</I>
+<TD> Specifies the window.
+
+<TR><TD> <I>hints_return</I>
+<TD> Returns the size hints.
+
+<TR><TD> <I>property</I>
+<TD> Specifies the property name.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetSizeHints()</B>
+function returns the
+<A HREF="../../ICC/client-to-window-manager/wm-normal-hints.html#XSizeHints">XSizeHints</A>
+structure for the named property and the specified window.
+This is used by
+<B><A HREF="XGetNormalHints.html">XGetNormalHints()</A></B>
+and
+<B><A HREF="XGetZoomHints.html">XGetZoomHints()</A></B>.
+It also can be used to retrieve the value of any property of type
+WM_SIZE_HINTS.
+Thus, it may be useful if other properties of that type get defined.
+<B>XGetSizeHints()</B>
+returns a nonzero status if a size hint was defined
+or zero otherwise.
+
+<P>
+
+<B>XGetSizeHints()</B>
+can generate
+<B>BadAtom</B>
+and 
+<B>BadWindow</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAtom</B>
+<TD> A value for an Atom argument does not name a
+     defined Atom.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+<B><A HREF="../../ICC/client-to-window-manager/XGetWMSizeHints.html">XGetWMSizeHints()</A></B>,
+"<A HREF="d.html">Compatibility Functions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

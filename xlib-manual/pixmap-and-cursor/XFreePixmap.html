@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XFreePixmap</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XFreePixmap</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XFreePixmap" "" "@DEF@">
+
+<CODE><PRE>
+XFreePixmap(<B>display</B>, <B>pixmap</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="pixmap.html">Pixmap</A> <B>pixmap</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>pixmap</B>
+<TD> Specifies the pixmap.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XFreePixmap()</B>
+function first deletes the association between the pixmap ID and the pixmap.
+Then, the X server frees the pixmap storage when there are no references to it.
+The pixmap should never be referenced again.
+
+<P>
+
+<B>XFreePixmap()</B>
+can generate a
+<B>BadPixmap</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadPixmap</B>
+<TD> A value for a Pixmap argument does not name a
+     defined Pixmap.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XCreatePixmap.html">XCreatePixmap()</A></B>,
+<B><A HREF="../graphics/XCopyArea.html">XCopyArea()</A></B>,
+"<A HREF="pixmap.html">Creating and Freeing Pixmaps</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

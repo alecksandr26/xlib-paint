@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: </TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.11 Gamut Querying Functions</H1>
+
+This section describes the gamut querying functions that Xlib provides.
+These functions allow the client to query the boundary 
+of the screen's color gamut in terms of the CIE L*a*b*, CIE L*u*v*, 
+and TekHVC color spaces.
+<!.IN "Gamut querying">
+Functions are also provided that allow you to query 
+the color specification of:
+
+<UL>
+<P><LI>
+White (full intensity red, green, and blue)
+
+<P><LI>
+Red (full intensity red while green and blue are zero)
+
+<P><LI>
+Green (full intensity green while red and blue are zero)
+
+<P><LI>
+Blue (full intensity blue while red and green are zero)
+
+<P><LI>
+Black (zero intensity red, green, and blue)
+</UL>
+
+<P>
+
+The white point associated with color specifications passed to 
+and returned from these gamut querying
+functions is assumed to be the Screen White Point.
+<!.IN "Screen White Point">
+This is a reasonable assumption,
+because the client is trying to query the screen's color gamut.
+
+<P>
+
+The following naming convention is used for the Max and Min functions:
+
+<P>
+
+<BLOCKQUOTE><I>
+Xcms<I>&lt;color_space&gt;</I>QueryMax<I>&lt;dimensions&gt;</I>
+<BR>
+Xcms<I>&lt;color_space&gt;</I>QueryMin<I>&lt;dimensions&gt;</I>
+</I></BLOCKQUOTE>
+
+<P>
+
+The &lt;dimensions&gt; consists of a letter or letters 
+that identify the dimensions of the color space 
+that are not fixed.
+For example, 
+<B><A HREF="XcmsTekHVCQueryMaxC.html">XcmsTekHVCQueryMaxC()</A></B>
+is given a fixed Hue and Value for which maximum Chroma is found.
+
+<H5 ALIGN=right><I>Next: <A HREF="red-green-blue.html">Red, Green, and Blue Queries</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

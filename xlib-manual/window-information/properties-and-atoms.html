@@ -1,0 +1,207 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Properties and Atoms</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>4.3 Properties and Atoms</H1>
+
+A property is a collection of named, typed data.
+The window system has a set of predefined properties
+<!.IN "Atom" "predefined">
+(for example, the name of a window, size hints, and so on), and users can
+define any other arbitrary information and associate it with windows.
+Each property has a name,
+which is an ISO Latin-1 string.
+For each named property,
+a unique identifier (atom) is associated with it. 
+A property also has a type, for example, string or integer.
+These types are also indicated using atoms, so arbitrary new
+types can be defined.
+Data of only one type may be associated with a single
+property name.
+Clients can store and retrieve properties associated with windows.
+For efficiency reasons,
+an atom is used rather than a character string.
+<B><A HREF="XInternAtom.html">XInternAtom()</A></B>
+can be used to obtain the atom for property names.
+<!.IN "Atom" >
+
+<P>
+
+A property is also stored in one of several possible formats.
+The X server can store the information as 8-bit quantities, 16-bit
+quantities, or 32-bit quantities.
+This permits the X server to present the data in the byte order that the
+client expects.
+
+<P ALIGN=center><B>Note</B>
+<BLOCKQUOTE>
+If you define further properties of complex type, 
+you must encode and decode them yourself.
+These functions must be carefully written if they are to be portable.
+For further information about how to write a library extension,
+see "<A HREF="../appendix/c/">Extensions</A>".
+</BLOCKQUOTE>
+
+The type of a property is defined by an atom, which allows for
+arbitrary extension in this type scheme.
+<!.IN "Atom" >
+
+<P>
+
+Certain property names are
+predefined in the server for commonly used functions.
+The atoms for these properties are defined in 
+<B><CODE>X11/Xatom.h</CODE></B>.
+To avoid name clashes with user symbols, the 
+<CODE><B>#define</B></CODE>
+name for each atom has the <CODE>XA_</CODE> prefix.
+For definitions of these properties,
+see below.
+For an explanation of the functions that let you get and set
+much of the information stored in these predefined properties,
+see "<A HREF="../ICC/">Inter-Client Communication Functions</A>".
+
+<P>
+
+The core protocol imposes no semantics on these property names,
+but semantics are specified in other X Consortium standards,
+such as the <I><A HREF="/gui/x/icccm/">Inter-Client Communication Conventions Manual</A></I>
+and the <I>X Logical Font Description Conventions</I>.
+
+<P>
+
+You can use properties to communicate other information between
+applications.
+The functions described in this section let you define new properties 
+and get the unique atom IDs in your applications.
+
+<P>
+
+Although any particular atom can have some client interpretation 
+within each of the name spaces, 
+atoms occur in five distinct name spaces within the protocol: 
+
+<UL>
+<P><LI>
+<A NAME="#selection">Selections</A>
+
+<P><LI>
+<A NAME="#property-names">Property names</A>
+
+<P><LI>
+<A NAME="#property-types">Property types</A>
+
+<P><LI>
+<A NAME="#font-properties">Font properties</A>
+
+<P><LI>
+Type of a 
+<B><A HREF="../events/client-communication/client-message.html">ClientMessage</A></B>
+event (none are built into the X server)
+</UL>
+
+<A NAME="selection"></A>
+<P>
+
+The built-in selection property names are:
+
+<P>
+
+<TABLE>
+<TR><TD>PRIMARY
+<TR><TD>SECONDARY
+</TABLE>
+
+<A NAME="property-names"></A>
+<P>
+
+The built-in property names are: 
+
+<TABLE>
+<TR><TD>CUT_BUFFER0	<TD>RESOURCE_MANAGER
+<TR><TD>CUT_BUFFER1	<TD>WM_CLASS
+<TR><TD>CUT_BUFFER2	<TD>WM_CLIENT_MACHINE
+<TR><TD>CUT_BUFFER3	<TD>WM_COLORMAP_WINDOWS
+<TR><TD>CUT_BUFFER4	<TD>WM_COMMAND
+<TR><TD>CUT_BUFFER5	<TD>WM_HINTS
+<TR><TD>CUT_BUFFER6	<TD>WM_ICON_NAME
+<TR><TD>CUT_BUFFER7	<TD>WM_ICON_SIZE
+<TR><TD>RGB_BEST_MAP	<TD>WM_NAME
+<TR><TD>RGB_BLUE_MAP	<TD>WM_NORMAL_HINTS
+<TR><TD>RGB_DEFAULT_MAP	<TD>WM_PROTOCOLS
+<TR><TD>RGB_GRAY_MAP	<TD>WM_STATE
+<TR><TD>RGB_GREEN_MAP	<TD>WM_TRANSIENT_FOR
+<TR><TD>RGB_RED_MAP	<TD>WM_ZOOM_HINTS
+</TABLE>
+
+<A NAME="property-types"></A>
+<P>
+
+The built-in property types are: 
+
+<P>
+
+<TABLE>
+<TR><TD>ARC		<TD>POINT
+<TR><TD>ATOM		<TD>RGB_COLOR_MAP
+<TR><TD>BITMAP		<TD>RECTANGLE
+<TR><TD>CARDINAL	<TD>STRING
+<TR><TD>COLORMAP	<TD>VISUALID
+<TR><TD>CURSOR		<TD>WINDOW
+<TR><TD>DRAWABLE	<TD>WM_HINTS
+<TR><TD>FONT		<TD>WM_SIZE_HINTS
+<TR><TD>INTEGER		<TD>
+<TR><TD>PIXMAP
+</TABLE>
+
+
+<A NAME="font-properties"></A>
+<P>
+
+The built-in font property names are: 
+
+<TABLE>
+<TR><TD>MIN_SPACE		<TD>STRIKEOUT_DESCENT
+<TR><TD>NORM_SPACE		<TD>STRIKEOUT_ASCENT
+<TR><TD>MAX_SPACE		<TD>ITALIC_ANGLE
+<TR><TD>END_SPACE		<TD>X_HEIGHT
+<TR><TD>SUPERSCRIPT_X		<TD>QUAD_WIDTH
+<TR><TD>SUPERSCRIPT_Y		<TD>WEIGHT
+<TR><TD>SUBSCRIPT_X		<TD>POINT_SIZE
+<TR><TD>SUBSCRIPT_Y		<TD>RESOLUTION
+<TR><TD>UNDERLINE_POSITION	<TD>COPYRIGHT
+<TR><TD>UNDERLINE_THICKNESS	<TD>NOTICE
+<TR><TD>FONT_NAME		<TD>FAMILY_NAME
+<TR><TD>FULL_NAME		<TD>CAP_HEIGHT
+</TABLE>
+
+<P>
+
+For further information about font properties,
+see "<A HREF="../graphics/font-metrics/">Font Metrics</A>".
+
+<P>
+
+To return an atom for a given name, use 
+<B><A HREF="XInternAtom.html">XInternAtom()</A></B>.
+
+To return atoms for an array of names, use 
+<B><A HREF="XInternAtoms.html">XInternAtoms()</A></B>.
+
+<P>
+
+To return a name for a given atom identifier, use 
+<B><A HREF="XGetAtomName.html">XGetAtomName()</A></B>.
+
+<P>
+
+To return the names for an array of atom identifiers, use 
+<B><A HREF="XGetAtomNames.html">XGetAtomNames()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="obtain-properties.html">Obtaining and Changing Window Properties</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

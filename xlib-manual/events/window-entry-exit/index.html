@@ -1,0 +1,232 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Window Entry/Exit Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.6 Window Entry/Exit Events</H1>
+
+<!.IN "Events" "EnterNotify">
+<!.IN "Events" "LeaveNotify">
+This section describes the processing that 
+occurs for the window crossing events
+<B>EnterNotify</B>
+and
+<B>LeaveNotify</B>.
+<!.IN "EnterNotify" "" "@DEF@">
+<!.IN "LeaveNotify" "" "@DEF@">
+If a pointer motion or a window hierarchy change causes the
+pointer to be in a different window than before, the X server reports
+<B>EnterNotify</B>
+or
+<B>LeaveNotify</B>
+events to clients who have selected for these events.
+All 
+<B>EnterNotify</B>
+and 
+<B>LeaveNotify</B>
+events caused by a hierarchy change are
+generated after any hierarchy event
+(<B><A HREF="../window-state-change/unmap.html">UnmapNotify</A></B>,
+<B><A HREF="../window-state-change/map.html">MapNotify</A></B>,
+<B><A HREF="../window-state-change/configure.html">ConfigureNotify</A></B>,
+<B><A HREF="../window-state-change/gravity.html">GravityNotify</A></B>,
+<B><A HREF="../window-state-change/circulate.html">CirculateNotify</A></B>)
+caused by that change;
+however, the X protocol does not constrain the ordering of 
+<B>EnterNotify</B>
+and 
+<B>LeaveNotify</B>
+events with respect to
+<B><A HREF="../input-focus/">FocusOut</A></B>, 
+<B><A HREF="../window-state-change/visibility.html">VisibilityNotify</A></B>,
+and 
+<B><A HREF="../exposure/expose.html">Expose</A></B> 
+events.
+
+<P>
+
+This contrasts with
+<B><A HREF="../keyboard-pointer/keyboard-pointer.html">MotionNotify</A></B>
+events, which are also generated when the pointer moves
+but only when the pointer motion begins and ends in a single window.
+An
+<B>EnterNotify</B>
+or
+<B>LeaveNotify</B>
+event also can be generated when some client application calls
+<B><A HREF="../../input/XGrabPointer.html">XGrabPointer()</A></B>
+and
+<B><A HREF="/toto/XUngrabPointer.html">XUngrabPointer()</A></B>.
+
+<P>
+
+To receive
+<B>EnterNotify</B>
+or
+<B>LeaveNotify</B>
+events, set the
+<B>EnterWindowMask</B>
+or
+<B>LeaveWindowMask</B>
+bits of the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the window.
+
+<P>
+
+The structure for these event types contains:
+
+<P>
+
+<A NAME="XCrossingEvent"></A>
+<A NAME="XEnterWindowEvent"></A>
+<A NAME="XLeaveWindowEvent"></A>
+
+<!.IN "XCrossingEvent" "" "@DEF@">
+<!.IN "XEnterWindowEvent" "" "@DEF@">
+<!.IN "XLeaveWindowEvent" "" "@DEF@">
+
+<CODE><PRE>
+typedef struct {
+	int type;		/* EnterNotify or LeaveNotify */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Window window;		/* ``event'' window reported relative to */
+	Window root;		/* root window that the event occurred on */
+	Window subwindow;	/* child window */
+	Time time;		/* milliseconds */
+	int x, y;		/* pointer x, y coordinates in event window */
+	int x_root, y_root;	/* coordinates relative to root */
+	int mode;		/* NotifyNormal, NotifyGrab, NotifyUngrab */
+	int detail;
+		/*
+	 	* NotifyAncestor, NotifyVirtual, NotifyInferior, 
+	 	* NotifyNonlinear,NotifyNonlinearVirtual
+	 	*/
+	Bool same_screen;	/* same screen flag */
+	Bool focus;		/* boolean focus */
+	unsigned int state;	/* key or button mask */
+} XCrossingEvent;
+typedef XCrossingEvent XEnterWindowEvent;
+typedef XCrossingEvent XLeaveWindowEvent;
+</PRE></CODE>
+
+<P>
+
+The <B>window</B> member is set to the window on which the
+<B>EnterNotify</B>
+or
+<B>LeaveNotify</B>
+event was generated and is referred to as the event window. 
+This is the window used by the X server to report the event, 
+and is relative to the root
+window on which the event occurred. 
+The <B>root</B> member is set to the root window of the screen
+on which the event occurred.
+
+<P>
+
+For a
+<B>LeaveNotify</B>
+event,
+if a child of the event window contains the initial position of the pointer,
+the <B>subwindow</B> component is set to that child.
+Otherwise, the X server sets the <B>subwindow</B> member to
+<B>None</B>.
+For an
+<B>EnterNotify</B>
+event, if a child of the event window contains the final pointer position, 
+the <B>subwindow</B> component is set to that child or
+<B>None</B>.
+
+<P>
+
+The <B>time</B> member is set to the time when the event was generated
+and is expressed in milliseconds.
+The <B>x</B> and <B>y</B> members are set to the coordinates of the pointer position in 
+the event window.
+This position is always the pointer's final position,
+not its initial position.
+If the event window is on the same
+screen as the root window, <B>x</B> and <B>y</B> are the pointer coordinates
+relative to the event window's origin. 
+Otherwise, <B>x</B> and <B>y</B> are set to zero.
+The <B>x_root</B> and <B>y_root</B> members are set to the pointer's coordinates relative to the
+root window's origin at the time of the event.
+
+<P>
+
+The <B>same_screen</B> member is set to indicate whether the event window is on the same screen
+as the root window and can be either
+<B>True</B> 
+or
+<B>False</B>.
+If
+<B>True</B>,
+the event and root windows are on the same screen.
+If
+<B>False</B>,
+the event and root windows are not on the same screen.
+
+<P>
+
+The <B>focus</B> member is set to indicate whether the event window is the focus window or an
+inferior of the focus window.
+The X server can set this member to either
+<B>True</B> 
+or
+<B>False</B>.
+If
+<B>True</B>,
+the event window is the focus window or an inferior of the focus window.
+If
+<B>False</B>,
+the event window is not the focus window or an inferior of the focus window.
+
+<P>
+
+The <B>state</B> member is set to indicate the state of the pointer buttons and
+modifier keys just prior to the
+event.
+The X server can set this member to the bitwise inclusive OR of one 
+or more of the button or modifier key masks:
+<B>Button1Mask</B>,
+<B>Button2Mask</B>,
+<B>Button3Mask</B>,
+<B>Button4Mask</B>,
+<B>Button5Mask</B>,
+<B>ShiftMask</B>,
+<B>LockMask</B>,
+<B>ControlMask</B>,
+<B>Mod1Mask</B>,
+<B>Mod2Mask</B>,
+<B>Mod3Mask</B>,
+<B>Mod4Mask</B>,
+<B>Mod5Mask</B>.
+
+<P>
+
+The <B>mode</B> member is set to indicate whether the events are normal events, 
+<A HREF="grab-ungrab.html">pseudo-motion</A> events
+when a grab activates, or <A HREF="grab-ungrab.html">pseudo-motion</A> events when a grab deactivates.
+The X server can set this member to 
+<B>NotifyNormal</B>,
+<B>NotifyGrab</B>,
+or
+<B>NotifyUngrab</B>.
+
+<P>
+
+The <B>detail</B> member is set to indicate the notify detail and can be
+<B>NotifyAncestor</B>,
+<B>NotifyVirtual</B>,
+<B>NotifyInferior</B>,
+<B>NotifyNonlinear</B>,
+or
+<B>NotifyNonlinearVirtual</B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="normal.html">Normal Entry/Exit Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

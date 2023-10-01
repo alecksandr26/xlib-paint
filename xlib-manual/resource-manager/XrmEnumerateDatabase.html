@@ -1,0 +1,111 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmEnumerateDatabase</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmEnumerateDatabase</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XrmEnumerateDatabase" "" "@DEF@">
+<PRE><CODE>
+#define <B>XrmEnumAllLevels</B> 0
+#define <B>XrmEnumOneLevel</B>  1
+
+Bool XrmEnumerateDatabase(<B>database</B>, <B>name_prefix</B>, <B>class_prefix</B>, <B>mode</B>, <B>proc</B>, <B>arg</B>)
+      <B><A HREF="creating-and-storing-databases.html">XrmDatabase</A></B> <B>database</B>;
+      <B><A HREF="quarks.html#XrmNameList">XrmNameList</A></B> <B>name_prefix</B>;
+      <B><A HREF="quarks.html#XrmClassList">XrmClassList</A></B> <B>class_prefix</B>;
+      int <B>mode</B>;
+      Bool (*<B>proc</B>)();
+      XPointer <B>arg</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>database</B>
+<TD> Specifies the resource database.
+
+<TR><TD> <B>name_prefix</B>
+<TD> Specifies the resource name prefix.
+
+<TR><TD> <B>class_prefix</B>
+<TD> Specifies the resource class prefix.
+
+<TR><TD> <B>mode</B>
+<TD> Specifies the number of levels to enumerate.
+
+<TR><TD> <B>proc</B>
+<TD> Specifies the procedure that is to be called for each matching entry.
+
+<TR><TD> <B>arg</B>
+<TD> Specifies the user-supplied argument that will be passed to the procedure.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XrmEnumerateDatabase()</B>
+function calls the specified procedure for each resource in the database
+that would match some completion of the given name/class resource prefix.
+The order in which resources are found is implementation dependent.
+If mode is
+<B>XrmEnumOneLevel</B>,
+a resource must match the given name/class prefix with
+just a single name and class appended.  If mode is
+<B>XrmEnumAllLevels</B>,
+the resource must match the given name/class prefix with one or more names and
+classes appended.
+If the procedure returns
+<B>True</B>,
+the enumeration terminates and the function returns
+<B>True</B>. 
+If the procedure always returns
+<B>False</B>,
+all matching resources are enumerated and the function returns
+<B>False</B>.
+
+<P>
+
+The procedure is called with the following arguments:
+
+<P>
+
+<PRE><CODE>
+(*<I>proc</I>)(<I>database</I>, <I>bindings</I>, <I>quarks</I>, <I>type</I>, <I>value</I>, <I>arg</I>)
+	<B><A HREF="creating-and-storing-databases.html">XrmDatabase</A></B> *<I>database</I>;
+	<A HREF="quarks.html#XrmBindingList">XrmBindingList</A> <I>bindings</I>;
+	<B><A HREF="quarks.html#XrmQuark">XrmQuarkList</A></B> <I>quarks</I>;
+	<B><A HREF="quarks.html#XrmQuark">XrmRepresentation</A></B> *<I>type</I>;
+	<B><A HREF="creating-and-storing-databases.html">XrmValue</A></B> *<I>value</I>;
+	XPointer <I>closure</I>;
+</PRE></CODE>
+<P>
+
+The bindings and quarks lists are terminated by
+<B>NULLQUARK</B>.
+Note that pointers
+to the database and type are passed, but these values should not be modified.
+
+<P>
+
+The procedure must not modifiy the database.
+If Xlib has been initialized for threads, the procedure is called with
+the database locked and the result of a call by the procedure to any
+Xlib function using the same database is not defined.
+
+<H2>See also</H2>
+
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>,
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmPutResource.html">XrmPutResource()</A></B>,
+"<A HREF="enumerating-entries.html">Enumerating Database Entries</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

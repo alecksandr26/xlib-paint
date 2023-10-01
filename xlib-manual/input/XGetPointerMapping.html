@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetPointerMapping</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetPointerMapping</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetPointerMapping" "" "@DEF@">
+
+<CODE><PRE>
+int XGetPointerMapping(<B>display</B>, <B>map_return</B>, <B>nmap</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      unsigned char <B>map_return</B>[];
+      int <B>nmap</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>map_return</B>
+<TD> Returns the mapping list.
+
+<TR><TD> <B>nmap</B>
+<TD> Specifies the number of items in the mapping list.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetPointerMapping()</B>
+function returns the current mapping of the pointer.
+Pointer buttons are numbered starting from one.
+<B>XGetPointerMapping()</B>
+returns the number of physical buttons actually on the pointer.
+The nominal mapping for a pointer is map[i]=i+1.
+The nmap argument specifies the length of the array where the pointer
+mapping is returned, and only the first nmap elements are returned 
+in map_return.
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeKeyboardControl.html">XChangeKeyboardControl()</A></B>,
+<B><A HREF="XChangeKeyboardMapping.html">XChangeKeyboardMapping()</A></B>,
+<B><A HREF="XSetPointerMapping.html">XSetPointerMapping()</A></B>,
+"<A HREF="keyboard-and-pointer-settings.html">Keyboard and Pointer Settings</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,91 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XRemoveHosts</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XRemoveHosts</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XRemoveHosts" "" "@DEF@">
+
+<CODE><PRE>
+XRemoveHosts(<B>display</B>, <B>hosts</B>, <B>num_hosts</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="hosts.html">XHostAddress</A> *<B>hosts</B>;
+      int <B>num_hosts</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>hosts</B>
+<TD> Specifies each host that is to be removed.
+
+<TR><TD> <B>num_hosts</B>
+<TD> Specifies the number of hosts.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XRemoveHosts()</B>
+function removes each specified host from the access control list for that 
+display.  
+The X server must be on the same host as the client process, or a
+<B>BadAccess</B>
+error results.
+If you remove your machine from the access list, 
+you can no longer connect to that server,
+and this operation cannot be reversed unless you reset the server.
+
+<P>
+
+<B>XRemoveHosts()</B>
+can generate
+<B>BadAccess</B>
+and
+<B>BadValue</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAccess</B>
+<TD> A client attempted to free a color map entry that
+it did not already allocate.
+<TR><TD><B>BadAccess</B>
+<TD> A client attempted to store into a read-only color
+     map entry.
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAddHost.html">XAddHost()</A></B>,
+<B><A HREF="XAddHosts.html">XAddHosts()</A></B>,
+<B><A HREF="XDisableAccessControl.html">XDisableAccessControl()</A></B>,
+<B><A HREF="XEnableAccessControl.html">XEnableAccessControl()</A></B>,
+<B><A HREF="../../display/XFree.html">XFree()</A></B>
+<B><A HREF="XListHosts.html">XListHosts()</A></B>,
+<B><A HREF="XRemoveHost.html">XRemoveHost()</A></B>,
+<B><A HREF="XRemoveHosts.html">XRemoveHosts()</A></B>,
+<B><A HREF="XSetAccessControl.html">XSetAccessControl()</A></B>,
+"<A HREF="hosts.html">Adding, Getting, or Removing Hosts</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

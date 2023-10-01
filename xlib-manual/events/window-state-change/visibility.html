@@ -1,0 +1,122 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: VisibilityNotify Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.10.10 VisibilityNotify Events</H1>
+
+<!.IN "Events" "VisibilityNotify">
+<!.IN "VisibilityNotify" "" "@DEF@">
+The X server can report
+<B>VisibilityNotify</B>
+events to clients wanting any change in the visibility of the specified window.
+A region of a window is visible if someone looking at the screen can
+actually see it.
+The X server generates this event whenever the visibility changes state. 
+However, this event is never generated for windows whose class is
+<B><A HREF="../../window/create.html#InputClass">InputOnly</A></B> .
+
+<P>
+
+All 
+<B>VisibilityNotify</B>
+events caused by a hierarchy change are generated
+after any hierarchy event
+(<B><A HREF="unmap.html">UnmapNotify</A></B>,
+<B><A HREF="map.html">MapNotify</A></B>, 
+<B><A HREF="configure.html">ConfigureNotify</A></B> ,
+<B><A HREF="gravity.html">GravityNotify</A></B> ,
+<B><A HREF="circulate.html">CirculateNotify</A></B>)
+caused by that change. Any
+<B>VisibilityNotify</B>
+event on a given window is generated before any
+<B><A HREF="../exposure/expose.html">Expose</A></B> 
+events on that window, but it is not required that all
+<B>VisibilityNotify</B>
+events on all windows be generated before all 
+<B><A HREF="../exposure/expose.html">Expose</A></B>
+events on all windows.  
+The X protocol does not constrain the ordering of 
+<B>VisibilityNotify</B>
+events with
+respect to 
+<B><A HREF="../input-focus/">FocusOut</A></B>,
+<B><A HREF="../window-entry-exit/">EnterNotify</A></B>,
+and 
+<B><A HREF="../window-entry-exit/">LeaveNotify</A></B>
+events.
+
+<P>
+
+To receive 
+<B>VisibilityNotify</B>
+events, set the
+<B>VisibilityChangeMask</B>
+bit in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the window. 
+
+<P>
+
+The structure for this event type contains:
+
+<P>
+
+<!.IN "XVisibilityEvent" "" "@DEF@">
+<CODE><PRE>
+typedef struct {
+	int type;		/* VisibiltyNotify */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Window window;
+	int state;
+} XVisibilityEvent;
+</PRE></CODE>
+
+<P>
+
+The window member is set to the window whose visibility state changes.
+The state member is set to the state of the window's visibility and can be
+<B>VisibilityUnobscured</B>,
+<B>VisibilityPartiallyObscured</B>,
+or
+<B>VisibilityFullyObscured</B>.
+The X server ignores all of a window's subwindows
+when determining the visibility state of the window and processes 
+<B>VisibilityNotify</B>
+events according to the following:
+
+<UL>
+
+<P><LI>
+When the window changes state from partially obscured, fully obscured,
+or not viewable to viewable and completely unobscured,
+the X server generates the event with the state member of the
+<B>XVisibilityEvent</B>
+structure set to
+<B>VisibilityUnobscured</B>.
+
+<P><LI>
+When the window changes state from viewable and completely unobscured or 
+not viewable to viewable and partially obscured,
+the X server generates the event with the state member of the
+<B>XVisibilityEvent</B>
+structure set to
+<B>VisibilityPartiallyObscured</B>.
+
+<P><LI>
+When the window changes state from viewable and completely unobscured, 
+viewable and partially obscured, or not viewable to viewable and 
+fully obscured,
+the X server generates the event with the state member of the
+<B>XVisibilityEvent</B>
+structure set to
+<B>VisibilityFullyObscured</B>.
+
+</UL>
+
+<H5 ALIGN=right><I>Next: <A HREF="../structure-control/">Structure Control Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XCreateAssocTable</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XCreateAssocTable</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XCreateAssocTable" "" "@DEF@">
+
+<CODE><PRE>
+XAssocTable *XCreateAssocTable(<I>size</I>)
+      int <I>size</I>;	
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>size</B>
+<TD> Specifies the number of buckets in the hash system of
+<A HREF="d.html#XAssocTable">XAssocTable</A>.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The size argument specifies the number of buckets in the 
+hash system of
+<B><A HREF="d.html#XAssocTable">XAssocTable</A></B> .
+For  reasons  of  efficiency  the number of buckets
+should be a power of two.
+Some size  suggestions  might  be:  use  32 buckets  per  100  objects,
+and a reasonable maximum number of objects per buckets is 8.
+If  an  error  allocating  memory  for  the
+<B><A HREF="d.html#XAssocTable">XAssocTable</A></B> 
+occurs, 
+a NULL pointer is returned. 
+
+<H2>See also</H2>
+
+"<A HREF="d.html">Compatibility Functions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

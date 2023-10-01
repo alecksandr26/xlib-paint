@@ -1,0 +1,95 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XCopyColormapAndFree</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XCopyColormapAndFree</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XCopyColormapAndFree" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="./#colormap">Colormap</A> XCopyColormapAndFree(<B>display</B>, <B>colormap</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="./#colormap">Colormap</A> <B>colormap</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>colormap</B>
+<TD> Specifies the colormap.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XCopyColormapAndFree()</B>
+function creates a colormap of the same visual type and for the same screen
+as the specified colormap and returns the new colormap ID.
+It also moves all of the client's existing allocation from the specified
+colormap to the new colormap with their color values intact 
+and their read-only or writable characteristics intact and frees those entries 
+in the specified colormap.
+Color values in other entries in the new colormap are undefined.
+If the specified colormap was created by the client with alloc set to
+<B>AllocAll</B>,
+the new colormap is also created with 
+<B>AllocAll</B>,
+all color values for all entries are copied from the specified colormap,
+and then all entries in the specified colormap are freed.
+If the specified colormap was not created by the client with
+<B>AllocAll</B>,
+the allocations to be moved are all those pixels and planes
+that have been allocated by the client using
+<B><A HREF="XAllocColor.html">XAllocColor()</A></B>,
+<B><A HREF="XAllocNamedColor.html">XAllocNamedColor()</A></B>,
+<B><A HREF="XAllocColorCells.html">XAllocColorCells()</A></B>,
+or
+<B><A HREF="XAllocColorPlanes.html">XAllocColorPlanes()</A></B>
+and that have not been freed since they were allocated.
+
+<P>
+
+<B>XCopyColormapAndFree()</B>
+can generate
+<B>BadAlloc</B>
+and
+<B>BadColor</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadColor</B>
+<TD>  A value for a Colormap argument does not name a
+      defined Colormap.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocColor.html">XAllocColor()</A></B>,
+<B><A HREF="../window/XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>,
+<B><A HREF="XCreateColormap.html">XCreateColormap()</A></B>,
+<B><A HREF="../window/XCreateWindow.html">XCreateWindow()</A></B>,
+<B><A HREF="XFreeColormap.html">XFreeColormap()</A></B>,
+<B><A HREF="XQueryColor.html">XQueryColor()</A></B>,
+<B><A HREF="XStoreColors.html">XStoreColors()</A></B>,
+"<A HREF="colormap.html">Creating, Copying, and Destroying Colormaps</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

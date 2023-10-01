@@ -1,0 +1,42 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XFree</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>2.4. Freeing Client-Created Data</H1>
+
+To free in-memory data that was created by an Xlib function, use
+<B>XFree()</B>.
+<!.IN "XFree" "" "@DEF@">
+
+<H2>Syntax</H2>
+
+<CODE><PRE>
+XFree(<B>data</B>)
+     void *<B>data</B>; 
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>data</B>
+<TD> Specifies the data that is to be freed.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XFree()</B>
+function is a general-purpose Xlib routine that frees the specified data.
+You must use it to free any objects that were allocated by Xlib,
+unless an alternate function is explicitly specified for the object.
+A NULL pointer cannot be passed to this function.
+
+<H5 ALIGN=right><I>Next: <A HREF="closing.html">Closing the Display</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,85 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmQGetSearchResource</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmQGetSearchResource</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XrmQGetSearchResource" "" "@DEF@">
+
+<CODE><PRE>
+Bool XrmQGetSearchResource(<B>list</B>, <B>name</B>, <B>class</B>, <B>type_return</B>, <B>value_return</B>)
+     <A HREF="XrmQGetSearchList.html#XrmSearchList">XrmSearchList</A> <B>list</B>;
+     <B><A HREF="quarks.html#XrmQuark">XrmName</A></B> <B>name</B>;
+     <B><A HREF="quarks.html#XrmQuark">XrmClass</A></B> <B>class</B>;
+     <B><A HREF="quarks.html#XrmQuark">XrmRepresentation</A></B> *<B>type_return</B>;
+     <B><A HREF="creating-and-storing-databases.html">XrmValue</A></B> *<B>value_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>list</B>
+<TD> Specifies the search list returned by
+<B><A HREF="XrmQGetSearchList.html">XrmQGetSearchList()</A></B>.
+
+<TR><TD> <B>name</B>
+<TD> Specifies the resource name.
+
+<TR><TD> <B>class</B>
+<TD> Specifies the resource class.
+
+<TR><TD> <B>type_return</B>
+<TD> Returns data representation type.
+
+<TR><TD> <B>value_return</B>
+<TD> Returns the value in the database.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XrmQGetSearchResource()</B>
+function searches the specified database levels for the resource 
+that is fully identified by the specified name and class.
+The search stops with the first match.
+<B>XrmQGetSearchResource()</B>
+returns 
+<B>True</B> 
+if the resource was found;
+otherwise, it returns
+<B>False</B>.
+
+<P>
+
+A call to 
+<B><A HREF="XrmQGetSearchList.html">XrmQGetSearchList()</A></B>
+with a name and class list containing all but the last component 
+of a resource name followed by a call to 
+<B>XrmQGetSearchResource()</B>
+with the last component name and class returns the same database entry as 
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>
+and 
+<B><A HREF="XrmQGetResource.html">XrmQGetResource()</A></B>
+with the fully qualified name and class.
+
+<H2>See also</H2>
+
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>,
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmMergeDatabases.html">XrmMergeDatabases()</A></B>,
+<B><A HREF="XrmPutResource.html">XrmPutResource()</A></B>,
+<B><A HREF="XrmQGetResource.html">XrmQGetResource()</A></B>,
+<B><A HREF="XrmQGetSearchList.html">XrmQGetSearchList()</A></B>,
+<B><A HREF="XrmUniqueQuark.html">XrmUniqueQuark()</A></B>,
+"<A HREF="looking-up.html">Looking Up Resources</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

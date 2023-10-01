@@ -1,0 +1,38 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Window Attributes: Save Under Flag</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>3.2.5 Save Under Flag</H1>
+
+<!.IN "Save Unders">
+
+Some server implementations may preserve contents of 
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+windows under other 
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+windows.
+This is not the same as preserving the contents of a window for you.
+You may get better visual
+appeal if transient windows (for example, pop-up menus) request that the system
+preserve the screen contents under them, 
+so the temporarily obscured applications do not have to repaint.
+
+<P>
+
+You can set the save-under flag to
+<B>True</B>
+or
+<B>False</B>
+(default).
+If save-under is 
+<B>True</B>, 
+the X server is advised that, when this window is mapped, 
+saving the contents of windows it obscures would be beneficial.
+
+<H5 ALIGN=right><I>Next: <A HREF="backing.html">Backing Planes and Backing Pixel Attributes</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

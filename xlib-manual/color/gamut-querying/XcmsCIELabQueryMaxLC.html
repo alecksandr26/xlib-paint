@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Extensions: XcmsCIELabQueryMaxLC</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XcmsCIELabQueryMaxLC</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Psychometric Hue Angle">
+<!.IN "Psychometric Chroma">
+<!.IN "CIE metric lightness">
+<!.IN "Psychometric Chroma" "maximum">
+<!.IN "CIE metric lightness" "maximum">
+<!.IN "XcmsCIELabQueryMaxLC" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../conversion-contexts-and-gamut-mapping.html#cmsStatus">Status</A></B> XcmsCIELabQueryMaxLC(<B>ccc</B>, <B>hue_angle</B>, <B>color_return</B>)
+      <A HREF="../CCC/macros.html">XcmsCCC</A> <B>ccc</B>;
+      XcmsFloat <B>hue_angle</B>;
+      XcmsColor *<B>color_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>ccc</B>
+<TD> Specifies the <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>.
+The <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>'s Client White Point and white point adjustment procedures
+are ignored.
+
+<TR><TD> <B>hue_angle</B>
+<TD> Specifies the hue angle (in degrees) at which to find maximum chroma.
+
+<TR><TD> <B>color_return</B>
+<TD> Returns the CIE L*a*b* coordinates of maximum chroma
+displayable by the screen for the given hue angle.
+The white point associated with the returned
+color specification is the Screen White Point.
+The value returned in the pixel member is undefined.
+
+</TABLE>
+
+<H2>Description</H2>
+ 
+The
+<B>XcmsCIELabQueryMaxLC()</B>
+function, given a hue angle,
+finds the point of maximum chroma displayable by the screen.
+It returns this point in CIE L*a*b* coordinates.
+
+<H2>See also</H2>
+
+<B><A HREF="XcmsCIELabQueryMaxC.html">XcmsCIELabQueryMaxC()</A></B>,
+<B><A HREF="XcmsCIELabQueryMaxL.html">XcmsCIELabQueryMaxL()</A></B>,
+<B><A HREF="XcmsCIELabQueryMinL.html">XcmsCIELabQueryMinL()</A></B>,
+<B><A HREF="XcmsCIELuvQueryMaxC.html">XcmsCIELuvQueryMaxC()</A></B>,
+<B><A HREF="XcmsQueryBlack.html">XcmsQueryBlack()</A></B>,
+<B><A HREF="XcmsTekHVCQueryMaxC.html">XcmsTekHVCQueryMaxC()</A></B>,
+"<A HREF="cielab.html">CIELab Queries</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

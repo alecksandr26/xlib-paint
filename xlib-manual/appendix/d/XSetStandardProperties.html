@@ -1,0 +1,112 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetStandardProperties</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetStandardProperties</H1>
+
+This function has been superseded by
+<B><A HREF="../../ICC/client-to-window-manager/XSetWMProperties.html">XSetWMProperties()</A></B>
+and sets all or portions of the 
+<A HREF="/gui/x/icccm/sec-4.html#WM_NAME">WM_NAME</A>,
+<A HREF="/gui/x/icccm/sec-4.html#WM_ICON_NAME">WM_ICON_NAME</A>,
+<A HREF="/gui/x/icccm/sec-4.html#WM_HINTS">WM_HINTS</A>, 
+<A HREF="/gui/x/icccm/sec-4.html#WM_COMMAND">WM_COMMAND</A>,
+and 
+<A HREF="/gui/x/icccm/sec-4.html#WM_NORMAL_HINTS">WM_NORMAL_HINTS</A>
+properties.
+<!.IN "XSetStandardProperties" "" "@DEF@">
+
+<H2>Syntax</H2>
+
+<CODE><PRE>
+XSetStandardProperties(<B>display</B>, <B>w</B>, <B>window_name</B>, <B>icon_name</B>, <B>icon_pixmap</B>, <B>argv</B>, <B>argc</B>, <B>hints</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      char *<B>window_name</B>;
+      char *<B>icon_name</B>;
+      Pixmap <B>icon_pixmap</B>;
+      char **<B>argv</B>;
+      int <B>argc</B>;
+      <A HREF="../../ICC/client-to-window-manager/wm-normal-hints.html#XSizeHints">XSizeHints</A> *<B>hints</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>window_name</B>
+<TD> Specifies the window name,
+which should be a null-terminated string.
+
+<TR><TD> <B>icon_name</B>
+<TD> Specifies the icon name,
+which should be a null-terminated string.
+
+<TR><TD> <B>icon_pixmap</B>
+<TD> Specifies the bitmap that is to be used for the icon or
+<B>None</B>.
+
+<TR><TD> <B>argv</B>
+<TD> Specifies the application's argument list.
+
+<TR><TD> <B>argc</B>
+<TD> Specifies the number of arguments.
+
+<TR><TD> <B>hints</B>
+<TD> Specifies a pointer to the size hints for the window in its normal state.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XSetStandardProperties()</B>
+function provides a means by which simple applications set the
+most essential properties with a single call.
+<B>XSetStandardProperties()</B>
+should be used to give a window manager some information about 
+your program's preferences. 
+It should not be used by applications that need
+to communicate more information than is possible with
+<B>XSetStandardProperties()</B>.
+(Typically, argv is the argv array of your main program.)
+If the strings are not in the Host Portable Character Encoding,
+the result is implementation dependent.
+
+<P>
+
+<B>XSetStandardProperties()</B>
+can generate
+<B>BadAlloc</B>
+and
+<B>BadWindow</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../../ICC/client-to-window-manager/XSetWMProperties.html">XSetWMProperties()</A></B>, 
+"<A HREF="d.html">Compatibility Functions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

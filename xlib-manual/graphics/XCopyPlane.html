@@ -1,0 +1,154 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XCopyPlane</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XCopyPlane</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Plane" "copying">
+<!.IN "Copying" "planes">
+<!.IN "XCopyPlane" "" "@DEF@">
+
+<CODE><PRE>
+XCopyPlane(<B>display</B>, <B>src</B>, <B>dest</B>, <B>gc</B>, <B>src_x</B>, <B>src_y</B>, <B>width</B>, <B>height</B>, <B>dest_x</B>, <B>dest_y</B>, <B>plane</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="../Drawable.html">Drawable</A> <B>src</B>, <B>dest</B>;
+      <A HREF="../GC/manipulating.html">GC</A> <B>gc</B>;
+      int <B>src_x</B>, <B>src_y</B>;
+      unsigned int <B>width</B>, <B>height</B>;
+      int <B>dest_x</B>, <B>dest_y</B>;
+      unsigned long <B>plane</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>src</B>
+	<B>dest</B>
+<TD> Specify the source and destination rectangles to be combined. 
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>src_x</B>
+	<B>src_y</B>
+<TD> Specify the x and y coordinates, 
+which are relative to the origin of the source rectangle
+and specify its upper-left corner.
+
+<TR><TD> <B>width</B>
+	<B>height</B>
+<TD> Specify the width and height, which are the dimensions of both the source and destination rectangles.
+
+<TR><TD> <B>dest_x</B>
+	<B>dest_y</B>
+<TD> Specify the x and y coordinates, which are relative to the origin of the destination rectangle and specify its upper-left corner.
+
+<TR><TD> <B>plane</B>
+<TD> Specifies the bit plane.
+You must set exactly one bit to 1.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XCopyPlane()</B>
+function uses a single bit plane of the specified source rectangle
+combined with the specified GC to modify the specified rectangle of dest.
+The drawables must have the same root but need not have the same depth.
+If the drawables do not have the same root, a
+<B>BadMatch</B>
+error results.
+If plane does not have exactly one bit set to 1 and the value of plane
+is not less than %2 sup n%, where <B>n</B> is the depth of src, a
+<B>BadValue</B>
+error results.
+
+<P>
+
+Effectively, 
+<B>XCopyPlane()</B>
+forms a pixmap of the same depth as the rectangle of dest and with a
+size specified by the source region. 
+It uses the foreground/background pixels in the GC (foreground
+everywhere the bit plane in src contains a bit set to 1,
+background everywhere the bit plane in src contains a bit set to 0)
+and the equivalent of a 
+<B><A HREF="../appendix/a.html#CopyArea">CopyArea</A></B>
+protocol request is performed with all the same exposure semantics.
+This can also be thought of as using the specified region of the source 
+bit plane as a stipple with a <A HREF="../GC/manipulating.html#fill-style">fill-style</A> of
+<B>FillOpaqueStippled</B>
+for filling a rectangular area of the destination.
+
+<P>
+
+This function uses these GC components: 
+<A HREF="../GC/manipulating.html#function">function</A>,
+<A HREF="../GC/manipulating.html#plane-mask">plane-mask</A>,
+<A HREF="../GC/manipulating.html#foreground">foreground</A>,
+<A HREF="../GC/manipulating.html#background">background</A>,
+<A HREF="../GC/manipulating.html#subwindow-mode">subwindow-mode</A>,
+<A HREF="../GC/manipulating.html#graphics-exposure">graphics-exposures</A>, 
+<A HREF="../GC/manipulating.html#clip-mask">clip-x-origin</A>,
+<A HREF="../GC/manipulating.html#clip-mask">clip-y-origin</A>,
+and 
+<A HREF="../GC/manipulating.html#clip-mask">clip-mask</A>.
+
+<P>
+
+<B>XCopyPlane()</B>
+can generate
+<B>BadDrawable</B>,
+<B>BadGC</B>,
+<B>BadMatch</B>,
+and 
+<B>BadValue</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../GContext.html">GContext</A></B> 
+	argument does not name a defined 
+	<B><A HREF="../GContext.html">GContext</A></B>.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+      
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XCopyArea.html">XCopyArea()</A></B>,
+<B><A HREF="XClearArea.html">XClearArea()</A></B>,
+"<A HREF="copying-areas.html">Copying Areas</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

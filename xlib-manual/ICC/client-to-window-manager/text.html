@@ -1,0 +1,39 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Setting and Reading Text Properties</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>14.1.3 Setting and Reading Text Properties</H1>
+
+Xlib provides two functions that you can use to set and read
+the text properties for a given window.
+You can use these functions to set and read those properties of type TEXT
+(<A HREF="/gui/x/icccm/sec-4.html#WM_NAME">WM_NAME</A>, 
+<A HREF="/gui/x/icccm/sec-4.html#WM_ICON_NAME">WM_ICON_NAME</A>, 
+<A HREF="/gui/x/icccm/sec-C.html#s-C.1.1">WM_COMMAND</A>, and 
+<A HREF="/gui/x/icccm/sec-C.html#s-C.1.2">WM_CLIENT_MACHINE</A>).
+In addition,
+Xlib provides separate convenience functions that you can use to set each 
+of these properties.
+For further information about these convenience functions,
+see sections "<A HREF="wm-name.html">Setting and Reading the WM_NAME Property</A>",
+"<A HREF="wm-icon-name.html">Setting and Reading the WM_ICON_NAME Property</A>",
+"<A HREF="../client-to-session-manager/wm-command.html">Setting and Reading the WM_COMMAND Property</A>", and
+"<A HREF="../client-to-session-manager/wm-client-machine.html">Setting and Reading the WM_CLIENT_MACHINE Property</A>", respectively.
+
+<P>
+
+To set one of a window's text properties, use
+<B><A HREF="XSetTextProperty.html">XSetTextProperty()</A></B>.
+
+<P>
+
+To read one of a window's text properties, use
+<B><A HREF="XGetTextProperty.html">XGetTextProperty()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="wm-name.html">Setting and Reading the WM_NAME Property</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,99 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XQueryBestStipple</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XQueryBestStipple</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XQueryBestStipple" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../../introduction/errors.html#Status">Status</A></B> XQueryBestStipple(<B>display</B>, <B>which_screen</B>, <B>width</B>, <B>height</B>, <B>width_return</B>, <B>height_return</B>) 
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Drawable <B>which_screen</B>;
+      unsigned int <B>width</B>, <B>height</B>;
+      unsigned int *<B>width_return</B>, *<B>height_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>which_screen</B>
+<TD> Specifies any drawable on the screen.
+
+<TR><TD> <B>width</B>
+	<B>height</B>
+<TD> Specify the width and height.
+
+<TR><TD> <B>width_return</B>
+	<B>height_return</B>
+<TD> Return the width and height of the object best supported 
+by the display hardware.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XQueryBestStipple()</B>
+function returns the best or closest size, that is, the size that can be
+stippled fastest on the screen specified by which_screen.
+The drawable indicates the screen and possibly the window class and depth.
+If an
+<B><A HREF="../../window/create.html#InputClass">InputOnly</A></B>
+window is used as the drawable, a
+<B>BadMatch</B>
+error results.
+
+<P>
+
+<B>XQueryBestStipple()</B>
+can generate
+<B>BadDrawable</B>
+and
+<B>BadMatch</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+      
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../XCreateGC.html">XCreateGC()</A></B>,
+<B><A HREF="XQueryBestTile.html">XQueryBestTile()</A></B>,
+<B><A HREF="XQueryBestSize.html">XQueryBestSize()</A></B>,
+<B><A HREF="XSetArcMode.html">XSetArcMode()</A></B>,
+<B><A HREF="XSetClipOrigin.html">XSetClipOrigin()</A></B>,
+<B><A HREF="XSetFillStyle.html">XSetFillStyle()</A></B>,
+<B><A HREF="XSetFont.html">XSetFont()</A></B>,
+<B><A HREF="XSetLineAttributes.html">XSetLineAttributes()</A></B>,
+<B><A HREF="XSetState.html">XSetState()</A></B>,
+<B><A HREF="XSetTile.html">XSetTile()</A></B>,
+"<A HREF="fill-tile-and-stipple.html">Setting the Fill Tile and Stipple</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

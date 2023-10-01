@@ -1,0 +1,31 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Clearing Areas</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>8.1 Clearing Areas</H1>
+
+Xlib provides functions that you can use to clear an area or the entire window.
+Because pixmaps do not have defined backgrounds, 
+they cannot be filled by using the functions described in this section.
+Instead, to accomplish an analogous operation on a pixmap,
+you should use 
+<B><A HREF="filling-areas/XFillRectangle.html">XFillRectangle()</A></B>,
+which sets the pixmap to a known value.
+
+<P>
+
+To clear a rectangular area of a given window, use
+<B><A HREF="XClearArea.html">XClearArea()</A></B>.
+
+<P>
+
+To clear the entire area in a given window, use
+<B><A HREF="XClearWindow.html">XClearWindow()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="copying-areas.html">Copying Areas</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

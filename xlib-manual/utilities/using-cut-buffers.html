@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Using Cut Buffers</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>16.6 Using Cut Buffers</H1>
+
+<!.IN "Cut Buffers">
+Xlib provides functions to manipulate cut buffers,
+a very simple form of cut and paste inter-client communication.
+Selections are a much more powerful and useful mechanism for
+interchanging data between clients (see "<A HREF="../window-information/selection.html">Selections</A>"),
+and generally should be used instead of cut buffers.
+
+<P>
+
+Cut buffers are implemented as properties on the first root window
+of the display.
+The buffers can only contain text, in the STRING encoding.
+The text encoding is not changed by Xlib when fetching or storing.
+Eight buffers are provided
+and can be accessed as a ring or as explicit buffers (numbered 0 through 7).
+
+<P>
+
+To store data in cut buffer 0, use 
+<B><A HREF="XStoreBytes.html">XStoreBytes()</A></B>.
+
+<P>
+
+To store data in a specified cut buffer, use
+<B><A HREF="XStoreBuffer.html">XStoreBuffer()</A></B>.
+
+<P>
+
+To return data from cut buffer 0, use 
+<B><A HREF="XFetchBytes.html">XFetchBytes()</A></B>.
+
+<P>
+
+To return data from a specified cut buffer, use 
+<B><A HREF="XFetchBuffer.html">XFetchBuffer()</A></B>.
+
+<P>
+
+To rotate the cut buffers, use 
+<B><A HREF="XRotateBuffers.html">XRotateBuffers()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="visual.html">Determining the Appropriate Visual Type</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

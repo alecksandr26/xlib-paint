@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XShrinkRegion</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XShrinkRegion</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XShrinkRegion" "" "@DEF@">
+
+<CODE><PRE>
+XShrinkRegion(<B>r</B>, <B>dx</B>, <B>dy</B>)
+      <A HREF="./">Region</A> <B>r</B>;
+      int <B>dx</B>, <B>dy</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>r</B>
+<TD> Specifies the region.
+
+<TR><TD> <B>dx</B><BR>
+	<B>dy</B>
+<TD> Specify the x and y coordinates,
+which define the amount you want to shrink the specified region.
+
+</TABLE>
+
+<H2>Description</H2>
+
+Positive values shrink the size of the region, 
+and negative values expand the region.
+
+<H2>See also</H2>
+
+<B><A HREF="XCreateRegion.html">XCreateRegion()</A></B>,
+<B><A HREF="../../graphics/drawing/XDrawRectangle.html">XDrawRectangle()</A></B>,
+<B><A HREF="XEmptyRegion.html">XEmptyRegion()</A></B>,
+<B><A HREF="XIntersectRegion.html">XIntersectRegion()</A></B>,
+<B><A HREF="XOffsetRegion.html">XOffsetRegion()</A></B>,
+<B><A HREF="XShrinkRegion.html">XShrinkRegion()</A></B>,
+<B><A HREF="XSubtractRegion.html">XSubtractRegion()</A></B>,
+<B><A HREF="XUnionRectWithRegion.html">XUnionRectWithRegion()</A></B>,
+<B><A HREF="XUnionRegion.html">XUnionRegion()</A></B>,
+<B><A HREF="XXorRegion.html">XXorRegion()</A></B>,
+"<A HREF="moving-shrinking.html">Moving or Shrinking Regions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

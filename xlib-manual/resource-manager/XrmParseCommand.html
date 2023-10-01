@@ -1,0 +1,155 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmParseCommand</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmParseCommand</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XrmParseCommand" "" "@DEF@">
+
+<CODE><PRE>
+void XrmParseCommand(<B>database</B>, <B>table</B>, <B>table_count</B>, <B>name</B>, <B>argc_in_out</B>, <B>argv_in_out</B>)
+      <B><A HREF="creating-and-storing-databases.html">XrmDatabase</A></B> *<B>database</B>;
+      <B><A HREF="parsing-command-line.html#XrmOptionDescRec">XrmOptionDescList</A></B> <B>table</B>;
+      int <B>table_count</B>;
+      char *<B>name</B>;
+      int *<B>argc_in_out</B>;
+      char **<B>argv_in_out</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>database</B>
+<TD> Specifies the resource database.
+
+<TR><TD> <B>table</B>
+<TD> Specifies the table of command line arguments to be parsed.
+
+<TR><TD> <B>table_count</B>
+<TD> Specifies the number of entries in the table.
+
+<TR><TD> <B>name</B>
+<TD> Specifies the application name.
+
+<TR><TD> <B>argc_in_out</B>
+<TD> Specifies the number of arguments and returns the number of remaining arguments.
+
+<TR><TD> <B>argv_in_out</B>
+<TD> Specifies the command line arguments
+and returns the remaining arguments.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XrmParseCommand()</B>
+function parses an (argc, argv) pair according to the specified option table,
+loads recognized options into the specified database with type ``String,''
+and modifies the (argc, argv) pair to remove all recognized options.
+If database contains NULL,
+<B>XrmParseCommand()</B>
+creates a new database and returns a pointer to it.
+Otherwise, entries are added to the database specified.
+If a database is created, it is created in the current locale.
+
+<P>
+
+The specified table is used to parse the command line.
+Recognized options in the table are removed from argv,
+and entries are added to the specified resource database
+in the order they occur in argv.
+The table entries contain information on the option string,
+the option name, the style of option, 
+and a value to provide if the option kind is 
+<B>XrmoptionNoArg</B>.
+The option names are compared byte-for-byte to arguments in argv,
+independent of any locale.
+The resource values given in the table are stored in the resource database
+without modification.
+All resource database entries are created
+using a ``String'' representation type.
+The argc argument specifies the number of arguments in argv
+and is set on return to the remaining number of arguments that were not parsed.
+The name argument should be the name of your application
+for use in building the database entry.
+The name argument is prefixed to the resourceName in the option table
+before storing a database entry.
+The name argument is treated as a single component, even if it
+has embedded periods.
+No separating (binding) character is inserted,
+so the table must contain either a period (.) or an asterisk (*)
+as the first character in each resourceName entry.
+To specify a more completely qualified resource name,
+the resourceName entry can contain multiple components.
+If the name argument and the resourceNames are not in the
+Host Portable Character Encoding,
+the result is implementation dependent.
+
+<P>
+
+The following provides a sample option table:
+
+<P>
+
+<PRE><CODE>
+static XrmOptionDescRec opTable[] = {
+	{"-background",	"*background",			XrmoptionSepArg, (XPointer) NULL},
+	{"-bd",		"*borderColor",			XrmoptionSepArg, (XPointer) NULL},
+	{"-bg",		"*background",			XrmoptionSepArg, (XPointer) NULL},
+	{"-borderwidth","*TopLevelShell.borderWidth",	XrmoptionSepArg, (XPointer) NULL},
+	{"-bordercolor","*borderColor",			XrmoptionSepArg, (XPointer) NULL},
+	{"-bw",		"*TopLevelShell.borderWidth",	XrmoptionSepArg, (XPointer) NULL},
+	{"-display",	".display",			XrmoptionSepArg, (XPointer) NULL},
+	{"-fg",		"*foreground",			XrmoptionSepArg, (XPointer) NULL},
+	{"-fn",		"*font",			XrmoptionSepArg, (XPointer) NULL},
+	{"-font",	"*font",			XrmoptionSepArg, (XPointer) NULL},
+	{"-foreground",	"*foreground",			XrmoptionSepArg, (XPointer) NULL},
+	{"-geometry",	".TopLevelShell.geometry",	XrmoptionSepArg, (XPointer) NULL},
+	{"-iconic",	".TopLevelShell.iconic",	XrmoptionNoArg,	 (XPointer) "on"},
+	{"-name",	".name",			XrmoptionSepArg, (XPointer) NULL},
+	{"-reverse",	"*reverseVideo",		XrmoptionNoArg,	 (XPointer) "on"},
+	{"-rv",		"*reverseVideo",		XrmoptionNoArg,	 (XPointer) "on"},
+	{"-synchronous","*synchronous",			XrmoptionNoArg,	 (XPointer) "on"},
+	{"-title",	".TopLevelShell.title",		XrmoptionSepArg, (XPointer) NULL},
+	{"-xrm",	NULL,				XrmoptionResArg, (XPointer) NULL},
+};
+</PRE></CODE>
+
+<P>
+
+In this table, if the -background (or -bg) option is used to set
+background colors, the stored resource specifier matches all
+resources of attribute background.  
+If the -borderwidth option is used, 
+the stored resource specifier applies only to border width
+attributes of class TopLevelShell (that is, outer-most windows, including
+pop-up windows).  
+If the -title option is used to set a window name,
+only the topmost application windows receive the resource.
+
+<P>
+
+When parsing the command line,
+any unique unambiguous abbreviation for an option name in the table is 
+considered a match for the option.
+Note that uppercase and lowercase matter.
+
+<H2>See also</H2>
+
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>,
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmMergeDatabases.html">XrmMergeDatabases()</A></B>,
+<B><A HREF="XrmPutResource.html">XrmPutResource()</A></B>,
+<B><A HREF="XrmUniqueQuark.html">XrmUniqueQuark()</A></B>,
+"<A HREF="parsing-command-line.html">Parsing Command Line Options</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

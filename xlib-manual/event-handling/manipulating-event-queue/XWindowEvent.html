@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XWindowEvent</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XWindowEvent</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XWindowEvent" "" "@DEF@">
+
+<CODE><PRE>
+XWindowEvent(<B>display</B>, <B>w</B>, <B>event_mask</B>, <B>event_return</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      long <B>event_mask</B>;
+      <A HREF="../../events/structures.html#XEvent">XEvent</A> *<B>event_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window whose events you are interested in.
+
+<TR><TD> <B>event_mask</B>
+<TD> Specifies the event mask.
+
+<TR><TD> <B>event_return</B>
+<TD> Returns the matched event's associated structure.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XWindowEvent()</B>
+function searches the event queue for an event that matches both the specified
+window and event mask.
+When it finds a match,
+<B>XWindowEvent()</B>
+removes that event from the queue and copies it into the specified
+<A HREF="../../events/structures.html#XEvent">XEvent</A>
+structure.
+The other events stored in the queue are not discarded.
+If a matching event is not in the queue,
+<B>XWindowEvent()</B>
+flushes the output buffer and blocks until one is received.
+
+<H2>See also</H2>
+
+<B><A HREF="XCheckMaskEvent.html">XCheckMaskEvent()</A></B>,
+<B><A HREF="XCheckTypedEvent.html">XCheckTypedEvent()</A></B>,
+<B><A HREF="XCheckTypedWindowEvent.html">XCheckTypedWindowEvent()</A></B>,
+<B><A HREF="XCheckWindowEvent.html">XCheckWindowEvent()</A></B>,
+<B><A HREF="XIfEvent.html">XIfEvent()</A></B>,
+<B><A HREF="XMaskEvent.html">XMaskEvent()</A></B>,
+<B><A HREF="../manipulating-event-queue/XNextEvent.html">XNextEvent()</A></B>,
+<B><A HREF="../manipulating-event-queue/XPeekEvent.html">XPeekEvent()</A></B>,
+<B><A HREF="../XPutBackEvent.html">XPutBackEvent()</A></B>,
+<B><A HREF="../XSendEvent.html">XSendEvent()</A></B>,
+"<A HREF="../manipulating-event-queue/selecting-using-window-or-event-mask.html">Selecting Events Using a Window or Event Mask</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

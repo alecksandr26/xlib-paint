@@ -1,0 +1,76 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XDefineCursor</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XDefineCursor</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Window" "defining the cursor">
+<!.IN "XDefineCursor" "" "@DEF@">
+
+<CODE><PRE>
+XDefineCursor(<B>display</B>, <B>w</B>, <B>cursor</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      Cursor <B>cursor</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>cursor</B>
+<TD> Specifies the cursor that is to be displayed or
+<B>None</B>.
+
+</TABLE>
+
+<H2>Description</H2>
+
+If a cursor is set, it will be used when the pointer is in the window.
+If the cursor is
+<B>None</B>,
+it is equivalent to
+<B><A HREF="XUndefineCursor.html">XUndefineCursor()</A></B>.
+
+<P>
+
+<B>XDefineCursor()</B>
+can generate
+<B>BadCursor</B>
+and
+<B>BadWindow</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadCursor</B> 
+<TD>A value for a Cursor argument does not name a
+    defined Cursor.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../pixmap-and-cursor/XCreateFontCursor.html">XCreateFontCursor()</A></B>,
+<B><A HREF="../pixmap-and-cursor/XRecolorCursor.html">XRecolorCursor()</A></B>,
+<B><A HREF="XUndefineCursor.html">XUndefineCursor()</A></B>,
+"<A HREF="change-attributes.html">Changing Window Attributes</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,90 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XAddConnectionWatch</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XAddConnectionWatch</H1>
+
+<!.IN "XWatchProc" "" "@DEF@">
+<!.IN "XAddConnectionWatch" "" "@DEF@">
+
+<A NAME="XWatchProc"></A>
+<H2>Syntax</H2>
+
+<CODE><PRE>
+typedef void (*XConnectionWatchProc)(<B>display</B>, <B>client_data</B>, <B>fd</B>, <B>opening</B>, <B>watch_data</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      XPointer <B>client_data</B>;
+      int <B>fd</B>;
+      Bool <B>opening</B>;
+      XPointer *<B>watch_data</B>;
+
+Status XAddConnectionWatch(<B>display</B>, <B>procedure</B>, <B>client_data</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      XWatchProc <B>procedure</B>;
+      XPointer <B>client_data</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>procedure</B>
+<TD> Specifies the procedure to be called.
+
+<TR><TD> <B>client_data</B>
+<TD> Specifies the additional client data.
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XAddConnectionWatch()</B>
+function registers a procedure to be called each time Xlib opens or closes an
+internal connection for the specified display.  The procedure is passed the
+display, the specified client_data, the file descriptor for the connection,
+a Boolean indicating whether the connection is being opened or closed, and a
+pointer to a location for private watch data.  If opening is
+<B>True</B>,
+the procedure can store a pointer to private data in the location pointed
+to by watch_data;
+when the procedure is later called for this same connection and opening is
+<B>False</B>,
+the location pointed to by watch_data will hold this same private data pointer.
+
+<P>
+
+This function can be called at any time after a display is opened.
+If internal connections already exist, the registered procedure will
+immediately be called for each of them, before
+<B>XAddConnectionWatch()</B>
+returns.
+<B>XAddConnectionWatch()</B>
+returns a nonzero status if the procedure is successfully registered;
+otherwise, it returns zero.
+
+<P>
+
+The registered procedure should not call any Xlib functions.
+If the procedure directly or indirectly causes the state of internal
+connections or watch procedures to change, the result is not defined.
+If Xlib has been initialized for threads, the procedure is called with
+the display locked and the result of a call by the procedure to any
+Xlib function that locks the display is not defined unless the executing
+thread has externally locked the display using
+<B><A HREF="XLockDisplay.html">XLockDisplay()</A></B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XRemoveConnectionWatch.html">XRemoveConnectionWatch()</A></B>,
+<B><A HREF="XProcessInternalConnection.html">XProcessInternalConnection()</A></B>,
+<B><A HREF="XInternalConnectionNumbers.html">XInternalConnectionNumbers()</A></B>,
+"<A HREF="internal-connections.html">Internal Connections</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

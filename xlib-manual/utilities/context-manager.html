@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Using the Context Manager</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>16.10 Using the Context Manager</H1>
+
+The context manager provides a way of associating data with an X resource ID
+(mostly typically a window) in your program.  
+Note that this is local to your program;
+the data is not stored in the server on a property list.
+Any amount of data in any number of pieces can be associated with a
+resource ID,
+and each piece of data has a type associated with it.  
+The context manager requires knowledge of the resource ID
+and type to store or retrieve data.
+
+<P>
+
+Essentially, the context manager can be viewed as a two-dimensional, 
+sparse array:  one dimension is subscripted by the X resource ID
+and the other by a context type field.
+Each entry in the array contains a pointer to the data.
+Xlib provides context management functions with which you can
+save data values, get data values, delete entries, and create a unique
+context type.
+The symbols used are in
+<B><TT>X11/Xutil.h.</TT></B>
+
+<P>
+
+To save a data value that corresponds to a resource ID and context type, use
+<B><A HREF="XSaveContext.html">XSaveContext()</A></B>.
+
+<P>
+
+To get the data associated with a resource ID and type, use
+<B><A HREF="XFindContext.html">XFindContext()</A></B>.
+
+<P>
+
+To delete an entry for a given resource ID and type, use
+<B><A HREF="XDeleteContext.html">XDeleteContext()</A></B>.
+
+<P>
+
+To create a unique context type that may be used in subsequent calls to
+<B><A HREF="XSaveContext.html">XSaveContext()</A></B>
+and
+<B><A HREF="XFindContext.html">XFindContext()</A></B>,
+use
+<B><A HREF="XUniqueContext.html">XUniqueContext()</A></B>.
+
+<P>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

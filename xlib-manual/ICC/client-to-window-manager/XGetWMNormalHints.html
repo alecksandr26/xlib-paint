@@ -1,0 +1,121 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetWMNormalHints</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetWMNormalHints</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetWMNormalHints" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../../introduction/errors.html#Status">Status</A></B> XGetWMNormalHints(<B>display</B>, <B>w</B>, <B>hints_return</B>, <B>supplied_return</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      <A HREF="wm-normal-hints.html#XSizeHints">XSizeHints</A> *<B>hints_return</B>;
+      long *<B>supplied_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>hints_return</B>
+<TD> Returns the size hints for the window in its normal state.
+
+<TR><TD> <B>supplied_return</B>
+<TD> Returns the hints that were supplied by the user.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The 
+<B>XGetWMNormalHints()</B>
+function returns the size hints stored in the WM_NORMAL_HINTS property 
+on the specified window.
+If the property is of type WM_SIZE_HINTS, is of format 32,
+and is long enough to contain either an old (pre-<A HREF="/gui/x/icccm/">ICCCM</A>) 
+or new size hints structure, 
+<B>XGetWMNormalHints()</B>
+sets the various fields of the 
+<A HREF="wm-normal-hints.html#XSizeHints">XSizeHints</A>
+structure, sets the supplied_return argument to the list of fields 
+that were supplied by the user (whether or not they contained defined values),
+and returns a nonzero status.
+Otherwise, it returns a zero status.
+
+<P>
+
+If 
+<B>XGetWMNormalHints()</B>
+returns successfully and a pre-<A HREF="/gui/x/icccm/">ICCCM</A> size hints property is read, 
+the supplied_return argument will contain the following bits:
+
+<P>
+
+<BLOCKQUOTE>
+(USPosition|USSize|PPosition|PSize|PMinSize| PMaxSize|PResizeInc|PAspect)
+</BLOCKQUOTE>
+
+<P>
+
+If the property is large enough to contain the base size 
+and window gravity fields as well, 
+the supplied_return argument will also contain the following bits:
+
+<P>
+
+<BLOCKQUOTE>
+PBaseSize|PWinGravity
+</BLOCKQUOTE>
+
+<P>
+
+<B>XGetWMNormalHints()</B>
+can generate a
+<B>BadWindow</B>
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocClassHint.html">XAllocClassHint()</A></B>,
+<B><A HREF="XAllocIconSize.html">XAllocIconSize()</A></B>,
+<B><A HREF="XAllocSizeHints.html">XAllocSizeHints()</A></B>,
+<B><A HREF="XAllocWMHints.html">XAllocWMHints()</A></B>,
+<B><A HREF="../../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XGetWMSizeHints.html">XGetWMSizeHints()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetCommand.html">XSetCommand()</A></B>,
+<B><A HREF="XSetTextProperty.html">XSetTextProperty()</A></B>,
+<B><A HREF="XSetTransientForHint.html">XSetTransientForHint()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetWMClientMachine.html">XSetWMClientMachine()</A></B>,
+<B><A HREF="XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B>,
+<B><A HREF="XSetWMIconName.html">XSetWMIconName()</A></B>,
+<B><A HREF="XSetWMName.html">XSetWMName()</A></B>,
+<B><A HREF="XSetWMNormalHints.html">XSetWMNormalHints()</A></B>, 
+<B><A HREF="XSetWMProperties.html">XSetWMProperties()</A></B>,
+<B><A HREF="XSetWMProtocols.html">XSetWMProtocols()</A></B>,
+<B><A HREF="XSetWMSizeHints.html">XSetWMSizeHints()</A></B>,
+<B><A HREF="XStringListToTextProperty.html">XStringListToTextProperty()</A></B>,
+"<A HREF="wm-normal-hints.html">Setting and Reading the WM_NORMAL_HINTS Property</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,89 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Transferring Images between Client and Server</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>8.7 Transferring Images between Client and Server</H1>
+
+Xlib provides functions that you can use to transfer images between a client and the server.
+Because the server may require diverse data formats, 
+Xlib provides an image object that fully describes the data in memory 
+and that provides for basic operations on that data.  
+You should reference the data 
+through the image object rather than referencing the data directly.
+However, some implementations of the Xlib library may efficiently deal with 
+frequently used data formats by replacing
+functions in the procedure vector with special case functions.
+Supported operations include destroying the image, getting a pixel,
+storing a pixel, extracting a subimage of an image, and adding a constant
+to an image (see section "<A HREF="../utilities/manipulating-images.html">Manipulating Images</A>").
+
+<P>
+
+All the image manipulation functions discussed in this section make use of 
+the 
+<B>XImage</B>
+structure,
+which describes an image as it exists in the client's memory.
+
+<A NAME="XImage"></A>
+<P>
+
+<!.IN "XImage" "" "@DEF@">
+<PRE><CODE>
+typedef struct _XImage {
+	int width, height;		/* size of image */
+	int xoffset;			/* number of pixels offset in X direction */
+	int format;			/* XYBitmap, XYPixmap, ZPixmap */
+	char *data;			/* pointer to image data */
+	int byte_order;			/* data byte order, LSBFirst, MSBFirst */
+	int bitmap_unit;		/* quant. of scanline 8, 16, 32 */
+	int bitmap_bit_order;		/* LSBFirst, MSBFirst */
+	int bitmap_pad;			/* 8, 16, 32 either XY or ZPixmap */
+	int depth;			/* depth of image */
+	int bytes_per_line;		/* accelerator to next scanline */
+	int bits_per_pixel;		/* bits per pixel (ZPixmap) */
+	unsigned long red_mask;		/* bits in z arrangement */
+	unsigned long green_mask;
+	unsigned long blue_mask;
+	XPointer obdata;		/* hook for the object routines to hang on */
+	struct funcs {			/* image manipulation routines */
+		struct _XImage *(*create_image)();
+		int (*destroy_image)();
+		unsigned long (*get_pixel)();
+		int (*put_pixel)();
+		struct _XImage *(*sub_image)();
+		int (*add_pixel)();
+	} f;
+} XImage;
+</PRE></CODE>
+
+<P>
+
+To initialize the image manipulation routines of an image structure, use
+<B><A HREF="XInitImage.html">XInitImage()</A></B>.
+
+<P>
+
+To combine an image with a rectangle of a drawable on the display,
+use
+<B><A HREF="XPutImage.html">XPutImage()</A></B>.
+
+<P>
+
+To return the contents of a rectangle in a given drawable on the display,
+use
+<B><A HREF="XGetImage.html">XGetImage()</A></B>.
+
+<P>
+
+To copy the contents of a rectangle on the display
+to a location within a preexisting image structure, use
+<B><A HREF="XGetSubImage.html">XGetSubImage()</A></B>.
+
+<H5 ALIGN=right><I>Next Chapter: <A HREF="../window-and-session-manager/">Window and Session Manager Functions</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

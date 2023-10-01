@@ -1,0 +1,26 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Sending Events to Other Applications</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>11.6 Sending Events to Other Applications</H1>
+
+
+To send an event to a specified window, use
+<B><A HREF="XSendEvent.html">XSendEvent()</A></B>.
+
+<!.IN "XSendEvent">
+This function is often used in selection processing.
+For example, the owner of a selection should use
+<B><A HREF="XSendEvent.html">XSendEvent()</A></B>
+to send a
+<B><A HREF="../events/client-communication/selection.html">SelectionNotify</A></B>
+event to a requestor when a selection has been converted 
+and stored as a property.
+
+<H5 ALIGN=right><I>Next: <A HREF="getting-pointer-motion-history.html">Getting Pointer Motion History</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Selections</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>4.5 Selections</H1>
+
+<!.IN "Selection">
+Selections are one method used by applications to exchange data.
+By using the property mechanism,
+applications can exchange data of arbitrary types and can negotiate
+the type of the data.
+A selection can be thought of as an indirect property with a dynamic type.
+That is, rather than having the property stored in the X server,
+the property is maintained by some client (the owner).
+A selection is global in nature (considered to belong to the user 
+but be maintained by clients) rather than being private to a particular 
+window subhierarchy or a particular set of clients.
+
+<P>
+
+Xlib provides functions that you can use to set, get, or request conversion
+of selections.
+This allows applications to implement the notion of current selection,
+which requires that notification be sent to applications when they no 
+longer own the selection.
+Applications that support selection often highlight the current selection
+and so must be informed when another application has
+acquired the selection so that they can unhighlight the selection.
+
+<P>
+
+When a client asks for the contents of
+a selection, it specifies a selection target type.
+This target type
+can be used to control the transmitted representation of the contents.
+For example, if the selection is ``the last thing the user clicked on''
+and that is currently an image, then the target type might specify
+whether the contents of the image should be sent in XY format or Z format.
+
+<P>
+
+The target type can also be used to control the class of
+contents transmitted, for example, 
+asking for the ``looks'' (fonts, line
+spacing, indentation, and so forth) of a paragraph selection, not the
+text of the paragraph.
+The target type can also be used for other
+purposes.
+The protocol does not constrain the semantics.
+
+<P>
+
+To set the selection owner, use 
+<B><A HREF="XSetSelectionOwner.html">XSetSelectionOwner()</A></B>.
+
+<P>
+
+To return the selection owner, use 
+<B><A HREF="XGetSelectionOwner.html">XGetSelectionOwner()</A></B>.
+
+<P>
+
+To request conversion of a selection, use 
+<B><A HREF="XConvertSelection.html">XConvertSelection()</A></B>.
+
+<H5 ALIGN=right><I>Next Chapter: <A HREF="../pixmap-and-cursor/">Pixmap and Cursor Functions</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XResourceManagerString</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XResourceManagerString</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XResourceManagerString" "" "@DEF@">
+
+<CODE><PRE>
+char *XResourceManagerString(<B>display</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XResourceManagerString()</B>
+function returns the RESOURCE_MANAGER property from the server's root
+window of screen zero, which was returned when the connection was opened using
+<B><A HREF="../display/opening.html">XOpenDisplay()</A></B>.
+The property is converted from type STRING to the current locale.
+The conversion is identical to that produced by 
+<B><A HREF="../ICC/client-to-window-manager/XmbTextPropertyToTextList.html">XmbTextPropertyToTextList()</A></B>
+for a single element STRING property.
+The returned string is owned by Xlib and should not be freed by the client.
+The property value must be in a format that is acceptable to
+<B><A HREF="XrmGetStringDatabase.html">XrmGetStringDatabase()</A></B>.
+If no property exists, NULL is returned.
+
+<H2>See also</H2>
+
+<B><A HREF="XScreenResourceString.html">XScreenResourceString()</A></B>,
+"<A HREF="creating-and-storing-databases.html">Creating and Storing Databases</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XFreeStringList</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XFreeStringList</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XFreeStringList" "" "@DEF@">
+
+<CODE><PRE>
+void XFreeStringList(<B>list</B>)
+      char **<B>list</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>list</B>
+<TD> Specifies the list of strings to be freed.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The 
+<B>XFreeStringList()</B>
+function releases memory allocated by 
+<B><A HREF="XmbTextPropertyToTextList.html">XmbTextPropertyToTextList()</A></B>
+and
+<B><A HREF="XTextPropertyToStringList.html">XTextPropertyToStringList()</A></B>
+and the missing charset list allocated by 
+<B><A HREF="XCreateFontSet.html">XCreateFontSet()</A></B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocClassHint.html">XAllocClassHint()</A></B>,
+<B><A HREF="XAllocIconSize.html">XAllocIconSize()</A></B>,
+<B><A HREF="XAllocSizeHints.html">XAllocSizeHints()</A></B>,
+<B><A HREF="XAllocWMHints.html">XAllocWMHints()</A></B>,
+<B><A HREF="../../display/XFree.html">XFree()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetCommand.html">XSetCommand()</A></B>,
+<B><A HREF="XSetTransientForHint.html">XSetTransientForHint()</A></B>,
+<B><A HREF="XSetTextProperty.html">XSetTextProperty()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetWMClientMachine.html">XSetWMClientMachine()</A></B>,
+<B><A HREF="XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B>,
+<B><A HREF="XSetWMIconName.html">XSetWMIconName()</A></B>,
+<B><A HREF="XSetWMName.html">XSetWMName()</A></B>,
+<B><A HREF="XSetWMProperties.html">XSetWMProperties()</A></B>,
+<B><A HREF="XSetWMProtocols.html">XSetWMProtocols()</A></B>,
+<B><A HREF="XStringListToTextProperty.html">XStringListToTextProperty()</A></B>,
+<B><A HREF="XTextPropertyToStringList.html">XTextPropertyToStringList()</A></B>,
+"<A HREF="converting-string-lists.html">Converting String Lists</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

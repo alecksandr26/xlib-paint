@@ -1,0 +1,96 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetGeometry</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetGeometry</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetGeometry" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="../introduction/errors.html#Status">Status</A> XGetGeometry(<B>display</B>, <B>d</B>, <B>root_return</B>, <B>x_return</B>, <B>y_return</B>, <B>width_return</B>, 
+                      <B>height_return</B>, <B>border_width_return</B>, <B>depth_return</B>)
+        <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+        Drawable <B>d</B>;
+        Window *<B>root_return</B>;
+        int *<B>x_return</B>, *<B>y_return</B>;
+        unsigned int *<B>width_return</B>, *<B>height_return</B>;
+        unsigned int *<B>border_width_return</B>;
+        unsigned int *<B>depth_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>d</B>
+<TD> Specifies the drawable, which can be a window or a pixmap. 
+
+<TR><TD> <B>root_return</B>
+<TD> Returns the root window.
+
+<TR><TD> <B>x_return</B><BR><B>y_return</B>
+<TD> Return the x and y coordinates that define the location of the drawable.
+For a window, 
+these coordinates specify the upper-left outer corner relative to
+its parent's origin.
+For pixmaps, these coordinates are always zero.
+
+<TR><TD> <B>width_return</B><BR><B>height_return</B>
+<TD> Return the drawable's dimensions (width and height).
+For a window, 
+these dimensions specify the inside size, not including the border.
+
+<TR><TD> <B>border_width_return</B>
+<TD> Returns the border width in pixels. 
+If the drawable is a pixmap, it returns zero.
+
+<TR><TD> <B>depth_return</B>
+<TD> Returns the depth of the drawable (bits per pixel for the object).
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetGeometry()</B>
+function returns the root window and the current geometry of the drawable.
+The geometry of the drawable includes the x and y coordinates, width and height,
+border width, and depth.
+These are described in the argument list.
+It is legal to pass to this function a window whose class is
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>.
+
+<P>
+
+<B>XGetGeometry()</B>
+can generate a
+<B>BadDrawable</B>
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XGetWindowAttributes.html">XGetWindowAttributes()</A></B>,
+<B><A HREF="XQueryPointer.html">XQueryPointer()</A></B>,
+<B><A HREF="XQueryTree.html">XQueryTree()</A></B>,
+"<A HREF="obtain.html">Obtaining Window Information</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

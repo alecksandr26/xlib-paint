@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XDestroyWindow</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XDestroyWindow</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XDestroyWindow" "" "@DEF@">
+
+<CODE><PRE>
+XDestroyWindow(<B>display</B>, <B>w</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XDestroyWindow()</B>
+function destroys the specified window as well as all of its subwindows and causes
+the X server to generate a
+<B><A HREF="../events/window-state-change/destroy.html">DestroyNotify</A></B>
+event for each window.
+The window should never be referenced again.
+If the window specified by the w argument is mapped,
+it is unmapped automatically.
+The ordering of the
+<B><A HREF="../events/window-state-change/destroy.html">DestroyNotify</A></B>
+events is such that for any given window being destroyed,
+<B><A HREF="../events/window-state-change/destroy.html">DestroyNotify</A></B>
+is generated on any inferiors of the window before being generated on
+the window itself.
+The ordering among siblings and across subhierarchies is not otherwise
+constrained.
+If the window you specified is a root window, no windows are destroyed.
+Destroying a mapped window will generate 
+<B><A HREF="../events/exposure/expose.html">Expose</A></B> 
+events on other windows that were obscured by the window being destroyed.
+
+<P>
+
+<B>XDestroyWindow()</B>
+can generate a
+<B>BadWindow</B>
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>,
+<B><A HREF="XConfigureWindow.html">XConfigureWindow()</A></B>,
+<B><A HREF="XCreateWindow.html">XCreateWindow()</A></B>,
+<B><A HREF="XDestroySubWindows.html">XDestroySubWindows()</A></B>,
+<B><A HREF="XMapWindow.html">XMapWindow()</A></B>,
+<B><A HREF="XRaiseWindow.html">XRaiseWindow()</A></B>,
+<B><A HREF="XUnmapWindow.html">XUnmapWindow()</A></B>,
+"<A HREF="destroy.html">Destroying Windows</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

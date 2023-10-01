@@ -1,0 +1,89 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XcmsCreateCCC</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XcmsCreateCCC</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XcmsCreateCCC" "" "@DEF@">
+<!.IN "Color Conversion Context" "creation">
+<!.IN "CCC" "creation">
+
+<CODE><PRE>
+      <A HREF="macros.html">XcmsCCC</A> XcmsCreateCCC(<B>display</B>, <B>screen_number</B>, <B>visual</B>, <B>client_white_point</B>, <B>compression_proc</B>,
+                    <B>compression_client_data</B>, <B>white_adjust_proc</B>, <B>white_adjust_client_data</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen_number</B>;
+      <A HREF="../../window/visual-types.html#Visual">Visual</A> *<B>visual</B>;
+      <A HREF="../structures.html#XcmsColor">XcmsColor</A> *<B>client_white_point</B>;
+      XcmsCompressionProc <B>compression_proc</B>;
+      XPointer <B>compression_client_data</B>;
+      XcmsWhiteAdjustProc <B>white_adjust_proc</B>;
+      XPointer <B>white_adjust_client_data</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the appropriate screen number on the host server.
+
+<TR><TD> <B>visual</B>
+<TD> Specifies the visual type.
+
+<TR><TD> <B>client_white_point</B>
+<TD> Specifies the Client White Point.
+If NULL is specified, 
+the Client White Point is to be assumed to be the same as the
+Screen White Point.
+Note that the pixel member is ignored.
+
+<TR><TD> <B>compression_proc</B>
+<TD> Specifies the gamut compression procedure that is to be applied 
+when a color lies outside the screen's color gamut.
+If NULL is specified and a function using this CCC must convert
+a color specification to a device-dependent format and encounters a color
+that lies outside the screen's color gamut, 
+that function will return
+<B><A HREF="../conversion-contexts-and-gamut-mapping.html#cmsStatus">XcmsFailure</A></B>.
+
+<TR><TD> <B>compression_client_data</B>
+<TD> Specifies client data for use by the gamut compression procedure or NULL.
+
+<TR><TD> <B>white_adjust_proc</B>
+<TD> Specifies the white adjustment procedure that is to be applied
+when the Client White Point differs from the Screen White Point.
+NULL indicates that no white point adjustment is desired.
+
+<TR><TD> <B>white_adjust_client_data</B>
+<TD> Specifies client data for use with the white point adjustment procedure or NULL.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XcmsCreateCCC()</B>
+function creates a <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A> for the specified display, screen, and visual.
+
+<H2>See also</H2>
+
+<B><A HREF="macros.html#DisplayOfCCC">DisplayOfCCC()</A></B>,
+<B><A HREF="XcmsCCCOfColormap.html">XcmsCCCOfColormap()</A></B>,
+<B><A HREF="../XcmsConvertColors.html">XcmsConvertColors()</A></B>,
+<B><A HREF="XcmsDefaultCCC.html">XcmsDefaultCCC()</A></B>,
+<B><A HREF="XcmsFreeCCC.html">XcmsFreeCCC()</A></B>,
+<B><A HREF="XcmsSetWhitePoint.html">XcmsSetWhitePoint()</A></B>,
+"<A HREF="creating-and-freeing.html">Creating and Freeing a Color Conversion Context</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

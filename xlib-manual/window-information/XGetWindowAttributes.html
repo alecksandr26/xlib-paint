@@ -1,0 +1,232 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetWindowAttributes</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetWindowAttributes</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetWindowAttributes" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="../introduction/errors.html#Status">Status</A> XGetWindowAttributes(<B>display</B>, <B>w</B>, <B>window_attributes_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      XWindowAttributes *<B>window_attributes_return</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window whose current attributes you want to obtain.
+
+<TR><TD> <B>window_attributes_return</B>
+<TD> Returns the specified window's attributes in the
+<B>XWindowAttributes</B>
+structure.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetWindowAttributes()</B>
+function returns the current attributes for the specified window to an
+<B>XWindowAttributes</B>
+structure.
+
+<!.IN "XWindowAttributes" "" "@DEF@">
+<A NAME="XWindowAttributes"></A>
+<CODE><PRE>
+typedef struct {
+	int x, y;			/* location of window */
+	int width, height;		/* width and height of window */
+	int border_width;		/* border width of window */
+	int depth;			/* depth of window */
+	Visual *visual;			/* the associated visual structure */
+	Window root;			/* root of screen containing window */
+	int class;			/* <B><A HREF="../window/create.html#InputClass">InputOutput</A></B>, <B><A HREF="../window/create.html#InputClass">InputOnly</A></B>*/
+	int bit_gravity;		/* one of the bit gravity values */
+	int win_gravity;		/* one of the window gravity values */
+	int backing_store;		/* NotUseful, WhenMapped, Always */
+	unsigned long backing_planes;	/* planes to be preserved if possible */
+	unsigned long backing_pixel;	/* value to be used when restoring planes */
+	Bool save_under;		/* boolean, should bits under be saved? */
+	Colormap colormap;		/* color map to be associated with window */
+	Bool map_installed;		/* boolean, is color map currently installed*/
+	int map_state;			/* IsUnmapped, IsUnviewable, IsViewable */
+	long all_event_masks;		/* set of events all people have interest in*/
+	long your_event_mask;		/* my event mask */
+	long do_not_propagate_mask;	/* set of events that should not propagate */
+	Bool override_redirect;		/* boolean value for override-redirect */
+	Screen *screen;			/* back pointer to correct screen */
+} XWindowAttributes;
+</PRE></CODE>
+
+<P>
+
+The <B>x</B> and <B>y</B> members are set to the upper-left outer
+corner relative to the parent window's origin.<BR>
+The <B>width</B>and <B>height</B> members are set to the inside size of the window, 
+not including the border.<BR>
+The <B>border_width</B> member is set to the window's border width in pixels.<BR>
+The <B>depth</B> member is set to the depth of the window 
+(that is, bits per pixel for the object).<BR>
+The <B>visual</B> member is a pointer to the screen's associated
+<B>Visual</B>
+structure.<BR>
+The <B>root</B> member is set to the root window of the screen containing the window.<BR>
+The <B>class</B> member is set to the window's class and can be either
+<B><A HREF="../window/create.html#InputClass">InputOutput</A></B>
+or
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>.
+
+<P>
+
+The <B>bit_gravity</B> member is set to the window's bit gravity
+and can be one of the following:
+
+<P>
+
+<TABLE>
+<TR><TD><B>ForgetGravity</B>	<TD><B>EastGravity</B>
+<TR><TD><B>NorthWestGravity</B>	<TD><B>SouthWestGravity</B>
+<TR><TD><B>NorthGravity</B>	<TD><B>SouthGravity</B>
+<TR><TD><B>NorthEastGravity</B>	<TD><B>SouthEastGravity</B>
+<TR><TD><B>WestGravity</B>	<TD><B>StaticGravity</B>
+<TR><TD><B>CenterGravity</B>
+</TABLE>
+
+<P>
+
+The <B>win_gravity</B> member is set to the window's window gravity
+and can be one of the following:
+
+<P>
+
+<TABLE>
+<TR><TD><B>UnmapGravity</B>	<TD><B>EastGravity</B>
+<TR><TD><B>NorthWestGravity</B>	<TD><B>SouthWestGravity</B>
+<TR><TD><B>NorthGravity</B>	<TD><B>SouthGravity</B>
+<TR><TD><B>NorthEastGravity</B>	<TD><B>SouthEastGravity</B>
+<TR><TD><B>WestGravity</B>	<TD><B>StaticGravity</B>
+<TR><TD><B>CenterGravity</B>
+</TABLE>
+
+<P>
+
+For additional information on gravity,
+see "<A HREF="../window/create.html">Creating Windows</A>".
+
+<P>
+
+The <B>backing_store</B> member is set to indicate how the X server should maintain
+the contents of a window 
+and can be 
+<B>WhenMapped</B>,
+<B>Always</B>,
+or
+<B>NotUseful</B>.
+<P>
+The <B>backing_planes</B> member is set to indicate (with bits set to 1) which bit 
+planes of the window hold dynamic data that must be preserved in backing_stores 
+and during save_unders.<BR>
+The <B>backing_pixel</B> member is set to indicate what values to use 
+for planes not set in backing_planes.
+
+<P>
+
+The save_under member is set to 
+<B>True</B>
+or
+<B>False</B>.
+
+<P>
+
+The <B>colormap</B> member is set to the colormap for the specified window and can be
+a colormap ID or 
+<B>None</B>.
+
+<P>
+
+The <B>map_installed</B> member is set to indicate whether the colormap is 
+currently installed and can be 
+<B>True</B>
+or
+<B>False</B>.
+
+<P>
+
+The <B>map_state</B> member is set to indicate the state of the window and can be
+<B>IsUnmapped</B>,
+<B>IsUnviewable</B>,
+or
+<B>IsViewable</B>.
+<B>IsUnviewable</B>
+is used if the window is mapped but some ancestor is unmapped.
+
+<P>
+
+The <B>all_event_masks</B> member is set to the bitwise inclusive OR of all event 
+masks selected on the window by all clients.<BR>
+The <B>your_event_mask</B> member is set to the bitwise inclusive OR of all event 
+masks selected by the querying client.<BR>
+The <B>do_not_propagate_mask</B> member is set to the bitwise inclusive OR of the 
+set of events that should not propagate.
+
+<P>
+
+The <B>override_redirect</B> member is set to indicate whether this window overrides
+structure control facilities and can be 
+<B>True</B>
+or
+<B>False</B>.
+Window manager clients should ignore the window if this member is
+<B>True</B>.
+
+<P>
+
+The <B>screen</B> member is set to a screen pointer that gives you a back pointer 
+to the correct screen.
+This makes it easier to obtain the screen information without
+having to loop over the root window fields to see which field matches.
+
+<P>
+
+<B>XGetWindowAttributes()</B>
+can generate
+<B>BadDrawable</B>
+and
+<B>BadWindow</B>
+errors.
+
+<P>
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XGetGeometry.html">XGetGeometry()</A></B>,
+<B><A HREF="XQueryPointer.html">XQueryPointer()</A></B>,
+<B><A HREF="XQueryTree.html">XQueryTree()</A></B>,
+"<A HREF="obtain.html">Obtaining Window Information</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

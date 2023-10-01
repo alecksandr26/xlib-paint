@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XPutBackEvent</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XPutBackEvent</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XPutBackEvent" "" "@DEF@">
+
+<CODE><PRE>
+XPutBackEvent(<B>display</B>, <B>event</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="../events/structures.html#XEvent">XEvent</A> *<B>event</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>event</B>
+<TD> Specifies the event.
+
+</TABLE>
+
+<H2>Description</H2>
+ 
+The
+<B>XPutBackEvent()</B>
+function pushes an event back onto the head of the display's event queue
+by copying the event into the queue.
+This can be useful if you read an event and then decide that you
+would rather deal with it later.
+There is no limit to the number of times in succession that you can call
+<B>XPutBackEvent()</B>.
+
+<H2>See also</H2>
+
+<B><A HREF="manipulating-event-queue/XIfEvent.html">XIfEvent()</A></B>,
+<B><A HREF="manipulating-event-queue/XNextEvent.html">XNextEvent()</A></B>,
+<B><A HREF="XSendEvent.html">XSendEvent()</A></B>,
+"<A HREF="putting-back.html">Putting an Event Back into the Queue</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

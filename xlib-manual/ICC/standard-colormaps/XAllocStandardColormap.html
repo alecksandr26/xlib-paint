@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XAllocStandardColormap</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XAllocStandardColormap</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XAllocStandardColormap" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="./#XStandardColormap">XStandardColormap</A></B> *XAllocStandardColormap()
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XAllocStandardColormap()</B>
+function allocates and returns a pointer to a
+<B><A HREF="./#XStandardColormap">XStandardColormap</A></B>
+structure.
+Note that all fields in the
+<B><A HREF="./#XStandardColormap">XStandardColormap</A></B>
+structure are initially set to zero.
+If insufficient memory is available, 
+<B>XAllocStandardColormap()</B>
+returns NULL.
+To free the memory allocated to this structure,
+use
+<B><A HREF="../../display/XFree.html">XFree()</A></B>.
+
+<H2>See also</H2>
+
+<B><A HREF="../../color/XAllocColor.html">XAllocColor()</A></B>,
+<B><A HREF="../../color/XCreateColormap.html">XCreateColormap()</A></B>,
+<B><A HREF="../../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XGetRGBColormaps.html">XGetRGBColormaps()</A></B>,
+<B><A HREF="../../display/XSetCloseDownMode.html">XSetCloseDownMode()</A></B>,
+<B><A HREF="XSetRGBColormaps.html">XSetRGBColormaps()</A></B>,
+"<A HREF="./">Standard Colormaps</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

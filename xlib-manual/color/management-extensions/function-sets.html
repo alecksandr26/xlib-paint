@@ -1,0 +1,38 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Function Sets</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.12.7 Function Sets</H1>
+
+Functions to convert between device-dependent color spaces
+and CIE XYZ may differ for different classes of output devices
+(for example, color versus gray monitors).
+Therefore, the notion of a Color Characterization Function Set
+has been developed.
+A function set consists of device-dependent color spaces
+and the functions that convert color specifications 
+between these device-dependent color spaces and the CIE XYZ color space
+appropriate for a particular class of output devices.
+The function set also contains a function that reads
+color characterization data off root window properties.
+It is this characterization data that will differ between devices within
+a class of output devices.
+<!.IN "Device Color Characterization">
+For details about how color characterization data is
+stored in root window properties,
+see the section on Device Color Characterization in the
+<I><A HREF="/gui/x/icccm/">Inter-Client Communication Conventions Manual</A></I>.
+The LINEAR_RGB function set is provided by Xlib
+and will support most color monitors.
+Function sets may require data that differs
+from those needed for the LINEAR_RGB function set.
+In that case, 
+its corresponding data may be stored on different root window properties.
+
+<H5 ALIGN=right><I>Next: <A HREF="adding-function-sets.html">Adding Function Sets</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

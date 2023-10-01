@@ -1,0 +1,138 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XMapWindow</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XMapWindow</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XMapWindow" "" "@DEF@">
+
+<CODE><PRE>
+XMapWindow(<B>display</B>, <B>w</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="./">Window</A> <B>w</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XMapWindow()</B>
+function
+maps the window and all of its
+subwindows that have had map requests.
+Mapping a window that has an unmapped ancestor does not display the
+window but marks it as eligible for display when the ancestor becomes
+mapped.
+Such a window is called unviewable.
+When all its ancestors are mapped,
+the window becomes viewable
+and will be visible on the screen if it is not obscured by another window.
+This function has no effect if the window is already mapped.
+
+<P>
+
+If the override-redirect of the window is
+<B>False</B>
+and if some other client has selected
+<B><A HREF="../events/processing-overview.html#SubstructureRedirectMask">SubstructureRedirectMask</A></B>
+on the parent window, then the X server generates a
+<B><A HREF="../events/structure-control/map.html">MapRequest</A></B>
+event, and the
+<B>XMapWindow()</B>
+function does not map the window.
+Otherwise, the window is mapped, and the X server generates a
+<B><A HREF="../events/window-state-change/map.html">MapNotify</A></B>
+event.
+
+<P>
+
+If the window becomes viewable and no earlier contents for it are remembered,
+the X server tiles the window with its background.
+If the window's background is undefined,
+the existing screen contents are not
+altered, and the X server generates zero or more 
+<B><A HREF="../events/exposure/expose.html">Expose</A></B>
+events.
+If backing-store was maintained while the window was unmapped, no 
+<B><A HREF="../events/exposure/expose.html">Expose</A></B>
+events
+are generated.
+If backing-store will now be maintained, 
+a full-window exposure is always generated.
+Otherwise, only visible regions may be reported.
+Similar tiling and exposure take place for any newly viewable inferiors.
+
+<P>
+
+<!.IN "XMapWindow">
+If the window is an
+<B><A HREF="create.html#InputClass">InputOutput</A></B> 
+window,
+<B>XMapWindow()</B>
+generates 
+<B><A HREF="../events/exposure/expose.html">Expose</A></B> 
+events on each 
+<B><A HREF="create.html#InputClass">InputOutput</A></B>
+window that it causes to be displayed.
+If the client maps and paints the window 
+and if the client begins processing events, 
+the window is painted twice.
+To avoid this,
+first ask for 
+<B><A HREF="../events/exposure/expose.html">Expose</A></B> 
+events and then map the window,
+so the client processes input events as usual.
+The event list will include 
+<B><A HREF="../events/exposure/expose.html">Expose</A></B> 
+for each
+window that has appeared on the screen. 
+The client's normal response to
+an 
+<B><A HREF="../events/exposure/expose.html">Expose</A></B> 
+event should be to repaint the window.
+This method usually leads to simpler programs and to proper interaction
+with window managers.
+
+<P>
+
+<B>XMapWindow()</B>
+can generate a
+<B>BadWindow</B>
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>,
+<B><A HREF="XConfigureWindow.html">XConfigureWindow()</A></B>,
+<B><A HREF="XCreateWindow.html">XCreateWindow()</A></B>,
+<B><A HREF="XDestroyWindow.html">XDestroyWindow()</A></B>,
+<B><A HREF="XMapRaised.html">XMapRaised()</A></B>,
+<B><A HREF="XMapSubwindows.html">XMapSubwindows()</A></B>,
+<B><A HREF="XUnmapWindow.html">XUnmapWindow()</A></B>,
+"<A HREF="map.html">Mapping Windows</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

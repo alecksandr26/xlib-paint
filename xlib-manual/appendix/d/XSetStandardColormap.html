@@ -1,0 +1,85 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetStandardColormap</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetStandardColormap</H1>
+
+This function has been superseded by
+<B><A HREF="../../ICC/standard-colormaps/XSetRGBColormaps.html">XSetRGBColormaps()</A></B>.
+
+<H2>Syntax</H2>
+
+<!.IN "XSetStandardColormap" "" "@DEF@">
+
+<CODE><PRE>
+XSetStandardColormap(<I>display</I>, <I>w</I>, <I>colormap</I>, <I>property</I>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<I>display</I>;
+      Window <I>w</I>;
+      <B><A HREF="../../ICC/standard-colormaps/#XStandardColormap">XStandardColormap</A></B> *<I>colormap</I>;
+      Atom <I>property</I>;	/* RGB_BEST_MAP, etc. */
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <I>display</I>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <I>w</I>
+<TD> Specifies the window.
+
+<TR><TD> <I>colormap</I>
+<TD> Specifies the colormap.
+
+<TR><TD> <I>property</I>
+<TD> Specifies the property name.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XSetStandardColormap()</B>
+function usually is only used by window or session managers.
+
+<P>
+
+<B>XSetStandardColormap()</B>
+can generate
+<B>BadAlloc</B>,
+<B>BadAtom</B>,
+<B>BadDrawable</B>,
+and
+<B>BadWindow</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadAtom</B>
+<TD> A value for an Atom argument does not name a
+     defined Atom.
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+"<A HREF="d.html">Compatibility Functions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

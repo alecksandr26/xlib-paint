@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Programming Considerations</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>1.6. Programming Considerations</H1>
+
+The major programming considerations are:
+
+<UL>
+<P><LI>
+Coordinates and sizes in X are actually 16-bit quantities.
+This decision was made to minimize the bandwidth required for a
+given level of performance.
+Coordinates usually are declared as an
+<B>int</B> 
+in the interface.
+Values larger than 16 bits are truncated silently.
+Sizes (width and height) are declared as unsigned quantities.
+
+<P><LI>
+Keyboards are the greatest variable between different
+manufacturers' workstations.
+If you want your program to be portable,
+you should be particularly conservative here.
+
+<P><LI>
+Many display systems have limited amounts of off-screen memory.
+If you can, you should minimize use of pixmaps and backing
+store.
+
+<P><LI>
+The user should have control of his screen real estate.
+Therefore, you should write your applications to react to window management
+rather than presume control of the entire screen.
+What you do inside of your top-level window, however,
+is up to your application.
+For further information,
+see "<A HREF="../ICC/">Inter-Client Communication Functions</A>"
+and the <A HREF="/gui/x/icccm/"><I>Inter-Client Communication Conventions Manual</I></A>.
+
+</UL>
+
+<H5 ALIGN=right><I>Next: <A HREF="character-set.html">Character Sets and Encodings</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

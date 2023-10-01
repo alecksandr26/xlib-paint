@@ -1,0 +1,118 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XDrawString</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XDrawString</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XDrawString" "" "@DEF@">
+
+<CODE><PRE>
+XDrawString(<B>display</B>, <B>d</B>, <B>gc</B>, <B>x</B>, <B>y</B>, <B>string</B>, <B>length</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Drawable <B>d</B>;
+      <A HREF="../../GC/manipulating.html">GC</A> <B>gc</B>;
+      int <B>x</B>, <B>y</B>;
+      char *<B>string</B>;
+      int <B>length</B>; 
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>d</B>
+<TD> Specifies the drawable. 
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>x</B><BR>
+	<B>y</B>
+<TD> Specify the x and y coordinates, which are relative to the origin of the specified drawable and define the origin of the first character.
+
+<TR><TD> <B>string</B>
+<TD> Specifies the character string.
+
+<TR><TD> <B>length</B>
+<TD> Specifies the number of characters in the string argument.
+
+</TABLE>
+
+<H2>Description</H2>
+
+Each character image, as defined by the font in the GC, is treated as an
+additional mask for a fill operation on the drawable.
+The drawable is modified only where the font character has a bit set to 1.
+
+<P>
+
+Both functions use these GC components: 
+<A HREF="../../GC/manipulating.html#function">function</A>,
+<A HREF="../../GC/manipulating.html#plane-mask">plane-mask</A>,
+<A HREF="../../GC/manipulating.html#fill-style">fill-style</A>,
+<A HREF="../../GC/manipulating.html">font</A>,
+<A HREF="../../GC/manipulating.html#subwindow-mode">subwindow-mode</A>,
+<A HREF="../../GC/manipulating.html#clip-mask">clip-x-origin</A>,
+<A HREF="../../GC/manipulating.html#clip-mask">clip-y-origin</A>,
+and
+<A HREF="../../GC/manipulating.html#clip-mask">clip-mask</A>.
+They also use these GC mode-dependent components: 
+<A HREF="../../GC/manipulating.html#foreground">foreground</A>,
+<A HREF="../../GC/manipulating.html#background">background</A>,
+<A HREF="../../GC/manipulating.html#tile">tile</A>,
+<A HREF="../../GC/manipulating.html#stipple">stipple</A>,
+<A HREF="../../GC/manipulating.html#tile">tile-stipple-x-origin</A>,
+and
+<A HREF="../../GC/manipulating.html#tile">tile-stipple-y-origin</A>.
+
+<P>
+
+<B>XDrawString()</B>
+can generate
+<B>BadDrawable</B> ,
+<B>BadGC</B> ,
+and
+<B>BadMatch</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../../my-own/gcontext.html">GContext</A></B>
+	argument does not name a defined 
+	<B><A HREF="../../my-own/gcontext.html">GContext</A></B>.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XDrawImageString.html">XDrawImageString()</A></B>,
+<B><A HREF="../font-metrics/XLoadFont.html">XLoadFont()</A></B>,
+<B><A HREF="XDrawString16.html">XDrawString16()</A></B>,
+<B><A HREF="XDrawText.html">XDrawText()</A></B>,
+"<A HREF="characters.html">Drawing Text Characters</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

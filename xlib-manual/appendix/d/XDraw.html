@@ -1,0 +1,174 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XDraw</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XDraw</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XDraw" "" "@DEF@" >
+
+<CODE><PRE>
+#include &lt;X11/X10.h&gt;
+
+Status XDraw(<B>display</B>, <B>d</B>, <B>gc</B>, <B>vlist</B>, <B>vcount</B>)
+	<A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+	Drawable <B>d</B>;
+	GC <B>gc</B>;
+	<A HREF="#Vertex">Vertex</A> *<B>vlist</B>;
+	int <B>vcount</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>d</B>
+<TD> Specifies the drawable. 
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>vlist</B>
+<TD> Specifies a pointer to the list of vertices that indicate what to draw.
+
+<TR><TD> <B>vcount</B>
+<TD> Specifies how many vertices are in vlist.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XDraw()</B>
+function draws an arbitrary polygon or curve.  
+The figure drawn is defined by the specified list of vertices (vlist).
+The points are connected by lines as specified in the flags in the
+vertex structure.
+
+<A NAME="Vertex"></A>
+<P>
+
+Each Vertex, as defined in
+<B><TT>X11/X10.h</TT></B>,
+is a structure with the following members:
+
+<P>
+
+<!.IN "Vertex" "" "@DEF@">
+<CODE><PRE>
+typedef struct _Vertex {
+	short x,y;
+	unsigned short flags;
+} Vertex;
+</PRE></CODE>
+
+<P>
+
+The x and y members are the coordinates of the vertex 
+that are relative to either the upper-left inside corner of the drawable 
+(if 
+<B>VertexRelative</B>
+is zero) or the previous vertex (if 
+<B>VertexRelative</B>
+is one).
+
+<P>
+
+The flags, as defined in 
+<B><TT>X11/X10.h , </TT></B>
+are as follows:
+<!.IN "VertexRelative" "" "@DEF@">
+<!.IN "VertexDontDraw" "" "@DEF@">
+<!.IN "VertexCurved" "" "@DEF@">
+<!.IN "VertexStartClosed" "" "@DEF@">
+<!.IN "VertexEndClosed" "" "@DEF@">
+
+<CODE><PRE>
+<B>VertexRelative</B>	0x0001	/* else absolute */
+<B>VertexDontDraw</B>	0x0002	/* else draw */
+<B>VertexCurved</B>	0x0004	/* else straight */
+<B>VertexStartClosed</B>	0x0008	/* else not */
+<B>VertexEndClosed</B>	0x0010	/* else not */
+</PRE></CODE>
+
+<P>
+
+<UL>
+
+<P><LI>
+If 
+<B>VertexRelative</B>
+is not set,  
+the coordinates are absolute (that is, relative to the drawable's origin).  
+The first vertex must be an absolute vertex.
+
+<P><LI>
+If
+<B>VertexDontDraw</B>
+is one, 
+no line or curve is drawn from the previous vertex to this one.  
+This is analogous to picking up the pen and moving to another place 
+before drawing another line.
+
+<P><LI>
+If 
+<B>VertexCurved</B>
+is one, 
+a spline algorithm is used to draw a smooth curve from the previous vertex
+through this one to the next vertex.  
+Otherwise, a straight line is drawn from the previous vertex to this one.  
+It makes sense to set 
+<B>VertexCurved</B>
+to one only if a previous and next vertex are both defined
+(either explicitly in the array or through the definition of a closed 
+curve).
+
+<P><LI>
+It is permissible for 
+<B>VertexDontDraw</B>
+bits and 
+<B>VertexCurved</B>
+bits both to be one. 
+This is useful if you want to define the previous point for the smooth curve
+but do not want an actual curve drawing to start until this point.
+
+<P><LI>
+If 
+<B>VertexStartClosed</B>
+is one, 
+then this point marks the beginning of a closed curve.  
+This vertex must be followed later in the array by another vertex 
+whose effective coordinates are identical
+and that has a
+<B>VertexEndClosed</B>
+bit of one.
+The points in between form a cycle to determine predecessor 
+and successor vertices for the spline algorithm.
+
+</UL>
+<P>
+
+This function uses these GC components:
+function, plane-mask, line-width, line-style, cap-style, join-style,
+fill-style, subwindow-mode, clip-x-origin, clip-y-origin, and
+clip-mask.
+It also uses these GC mode-dependent components: 
+foreground, background, tile, stipple,
+tile-stipple-x-origin, tile-stipple-y-origin, dash-offset, and dash-list.
+
+
+<H2>See also</H2>
+
+<B><A HREF="XDrawFilled.html">XDrawFilled()</A></B>,
+"<A HREF="d.html">Compatibility Functions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

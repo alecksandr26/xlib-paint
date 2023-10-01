@@ -1,0 +1,148 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: GraphicsExpose and NoExpose Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.9.2 GraphicsExpose and NoExpose Events</H1>
+
+<!.IN "Events" "GraphicsExpose">
+<!.IN "Events" "NoExpose">
+<!.IN "GraphicsExpose" "" "@DEF@">
+
+The X server can report
+<B>GraphicsExpose</B>
+events to clients wanting information about when a destination region could not
+be computed during certain graphics requests:
+<B><A HREF="../../graphics/XCopyArea.html">XCopyArea()</A></B>
+or
+<B><A HREF="../../graphics/XCopyPlane.html">XCopyPlane()</A></B>.
+The X server generates this event whenever a destination region could not be
+computed due to an obscured or out-of-bounds source region.
+In addition, the X server guarantees to report contiguously all of the regions exposed by
+some graphics request 
+(for example, copying an area of a drawable to a destination
+drawable).
+
+<P>
+
+<!.IN "NoExpose" "" "@DEF@">
+The X server generates a
+<B>NoExpose</B>
+event whenever a graphics request that might
+produce a
+<B>GraphicsExpose</B>
+event does not produce any.
+In other words, the client is really asking for a
+<B>GraphicsExpose</B>
+event but instead receives a
+<B>NoExpose</B>
+event.
+
+<P>
+
+To receive
+<B>GraphicsExpose</B>
+or
+<B>NoExpose</B>
+events, you must first set the graphics-exposure 
+attribute of the graphics context to
+<B>True</B>.
+You also can set the graphics-expose attribute when creating a graphics
+context using
+<B><A HREF="../../GC/XCreateGC.html">XCreateGC()</A></B>
+or by calling
+<B><A HREF="../../GC/convenience-functions/XSetGraphicsExposures.html">XSetGraphicsExposures()</A></B>.
+
+<P>
+
+The structures for these event types contain:
+
+<A NAME="XGraphicsExposeEvent"></A>
+<P>
+
+<!.IN "XGraphicsExposeEvent" "" "@DEF@">
+<CODE><PRE>
+typedef struct {
+	int type;		/* GraphicsExpose */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Drawable drawable;
+	int x, y;
+	int width, height;
+	int count;		/* if nonzero, at least this many more */
+	int major_code;		/* core is CopyArea or CopyPlane */
+	int minor_code;		/* not defined in the core */
+} XGraphicsExposeEvent;
+</PRE></CODE>
+
+<A NAME="XNoExposeEvent"></A>
+<P>
+
+<!.IN "XNoExposeEvent" "" "@DEF@">
+<CODE><PRE>
+typedef struct {
+	int type;	/* NoExpose */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Drawable drawable;
+	int major_code;	/* core is CopyArea or CopyPlane */
+	int minor_code;	/* not defined in the core */
+} XNoExposeEvent;
+</PRE></CODE>
+
+<P>
+
+Both structures have these common members: drawable, major_code, and minor_code.
+The drawable member is set to the drawable of the destination region on 
+which the graphics request was to be performed.
+The major_code member is set to the graphics request initiated by the client
+and can be either
+<B>X_CopyArea</B>
+or
+<B>X_CopyPlane</B>.
+If it is
+<B>X_CopyArea</B>,
+a call to
+<B><A HREF="../../graphics/XCopyArea.html">XCopyArea()</A></B>
+initiated the request.
+If it is
+<B>X_CopyPlane</B>,
+a call to
+<B><A HREF="../../graphics/XCopyPlane.html">XCopyPlane()</A></B>
+initiated the request.
+These constants are defined in 
+<B><TT>&lt;X11/Xproto.h&gt;</TT></B>.
+The minor_code member,
+like the major_code member, 
+indicates which graphics request was initiated by
+the client. 
+However, the minor_code member is not defined by the core
+X protocol and will be zero in these cases, 
+although it may be used by an extension.
+
+<P>
+
+The 
+<B>XGraphicsExposeEvent</B>
+structure has these additional members: x, y, width, height, and count. 
+The x and y members are set to the coordinates relative to the drawable's origin
+and indicate the upper-left corner of the rectangle.
+The width and height members are set to the size (extent) of the rectangle.
+The count member is set to the number of
+<B>GraphicsExpose</B>
+events to follow.
+If count is zero, no more
+<B>GraphicsExpose</B>
+events follow for this window.
+However, if count is nonzero, at least that number of
+<B>GraphicsExpose</B>
+events (and possibly more) are to follow for this window.
+
+<H5 ALIGN=right><I>Next: <A HREF="../window-state-change/">Window State Change Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

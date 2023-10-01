@@ -1,0 +1,151 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Setting and Reading the WM_HINTS Property</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>14.1.6 Setting and Reading the WM_HINTS Property</H1>
+
+Xlib provides functions that you can use to set and read 
+the <A HREF="/gui/x/icccm/sec-4.html#WM_HINTS">WM_HINTS</A> property for a given window.
+These functions use the flags and the
+<B>XWMHints</B>
+structure, as defined in the
+<B><TT>X11/Xutil.h</TT></B>
+header file.
+
+<P>
+
+To allocate an
+<B>XWMHints</B>
+structure, use
+<B><A HREF="XAllocWMHints.html">XAllocWMHints()</A></B>.
+
+<A NAME="XWMHints"></A>
+<P>
+
+The
+<B>XWMHints</B>
+structure contains:
+
+<P>
+
+<PRE><CODE>
+/* Window manager hints mask bits */
+
+#define	<B>InputHint</B>	(1L << 0)
+#define	<B>StateHint</B>	(1L << 1)
+#define	<B>IconPixmapHint</B>	(1L << 2)
+#define	<B>IconWindowHint</B>	(1L << 3)
+#define	<B>IconPositionHint</B>	(1L << 4)
+#define	<B>IconMaskHint</B>	(1L << 5)
+#define	<B>WindowGroupHint</B>	(1L << 6)
+#define	<B>UrgencyHint</B>	(1L << 8)
+#define	<B>AllHints</B> 	(InputHint|StateHint|IconPixmapHint|IconWindowHint|IconPositionHint|IconMaskHint|WindowGroupHint)
+</PRE></CODE>
+
+<!.IN "XWMHints" "" "@DEF@">
+<PRE><CODE>
+
+/* Values */
+
+typedef struct {
+	long flags;		/* marks which fields in this structure are defined */
+	Bool input;		/* does this application rely on the window manager to
+				   get keyboard input? */
+	int initial_state;	/* see below */
+	Pixmap icon_pixmap;	/* pixmap to be used as icon */
+	Window icon_window;	/* window to be used as icon */
+	int icon_x, icon_y;	/* initial position of icon */
+	Pixmap icon_mask;	/* pixmap to be used as mask for icon_pixmap */
+	XID window_group;	/* id of related window group */
+	/* this structure may be extended in the future */
+} XWMHints;
+</PRE></CODE>
+
+<P>
+
+The <B>input</B> member is used to communicate to the window manager the input focus
+model used by the application.
+Applications that expect input but never explicitly set focus to any 
+of their subwindows (that is, use the push model of focus management), 
+such as X Version 10 style applications that use real-estate
+driven focus, should set this member to 
+<B>True</B>.  
+Similarly, applications
+that set input focus to their subwindows only when it is given to their
+top-level window by a window manager should also set this member to 
+<B>True</B>.
+Applications that manage their own input focus by explicitly setting
+focus to one of their subwindows whenever they want keyboard input 
+(that is, use the pull model of focus management) should set this member to 
+<B>False</B>.
+Applications that never expect any keyboard input also should set this member
+to 
+<B>False</B>.
+
+<P>
+
+Pull model window managers should make it possible for push model
+applications to get input by setting input focus to the top-level windows of
+applications whose input member is 
+<B>True</B>.  
+Push model window managers should
+make sure that pull model applications do not break them 
+by resetting input focus to 
+<B>PointerRoot</B> 
+when it is appropriate (for example, whenever an application whose
+input member is 
+<B>False</B> 
+sets input focus to one of its subwindows).
+
+<P>
+
+The definitions for the <B>initial_state</B> flag are:
+
+<PRE><CODE>
+#define	<B>WithdrawnState</B>	0
+#define	<B>NormalState</B>	1	/* most applications start this way */
+#define	<B>IconicState</B>	3	/* application wants to start as an icon */
+</PRE></CODE>
+
+The <B>icon_mask</B> specifies which pixels of the icon_pixmap should be used as the
+icon.  
+This allows for nonrectangular icons.
+Both <B>icon_pixmap</B> and <B>icon_mask</B> must be bitmaps.
+The <B>icon_window</B> lets an application provide a window for use as an icon
+for window managers that support such use.
+The <B>window_group</B> lets you specify that this window belongs to a group
+of other windows.
+For example, if a single application manipulates multiple 
+top-level windows, this allows you to provide enough
+information that a window manager can iconify all of the windows
+rather than just the one window.
+
+<P>
+
+The
+<B>UrgencyHint</B>
+flag, if set in the <B>flags</B> field, indicates that the client deems the window
+contents to be urgent, requiring the timely response of the user.  The
+window manager will make some effort to draw the user's attention to this
+window while this flag is set.  The client must provide some means by which the
+user can cause the urgency flag to be cleared (either mitigating
+the condition that made the window urgent or merely shutting off the alarm)
+or the window to be withdrawn.
+
+<P>
+
+To set a window's <A HREF="/gui/x/icccm/sec-4.html#WM_HINTS">WM_HINTS</A> property, use
+<B><A HREF="XSetWMHints.html">XSetWMHints()</A></B>.
+
+<P>
+
+To read a window's WM_HINTS property, use
+<B><A HREF="XGetWMHints.html">XGetWMHints()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="wm-normal-hints.html">Setting and Reading the WM_NORMAL_HINTS Property</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

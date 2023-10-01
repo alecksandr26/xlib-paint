@@ -1,0 +1,95 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XBell</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XBell</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XBell" "" "@DEF@">
+
+<CODE><PRE>
+XBell(<B>display</B>, <B>percent</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      int <B>percent</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>percent</B>
+<TD> Specifies the volume for the bell,
+which can range from \-100 to 100 inclusive. 
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XBell()</B>
+function rings the bell on the keyboard on the specified display, if possible.
+The specified volume is relative to the base volume for the keyboard.
+If the value for the percent argument is not in the range \-100 to 100
+inclusive, a
+<B>BadValue</B>
+error results.
+The volume at which the bell rings
+when the percent argument is nonnegative is:
+
+<BLOCKQUOTE>
+<I>base - [(base * percent) / 100] + percent</I>
+</BLOCKQUOTE>
+
+<P>
+
+The volume at which the bell rings
+when the percent argument is negative is:
+
+<BLOCKQUOTE>
+<I>base + [(base * percent) / 100]</I>
+</BLOCKQUOTE>
+
+<P>
+
+To change the base volume of the bell, use
+<B><A HREF="XChangeKeyboardControl.html">XChangeKeyboardControl()</A></B>.
+
+<P>
+
+<B>XBell()</B>
+can generate a
+<B>BadValue</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAutoRepeatOff.html">XAutoRepeatOff()</A></B>,
+<B><A HREF="XAutoRepeatOn.html">XAutoRepeatOn()</A></B>,
+<B><A HREF="XChangeKeyboardControl.html">XChangeKeyboardControl()</A></B>,
+<B><A HREF="XChangeKeyboardMapping.html">XChangeKeyboardMapping()</A></B>,
+<B><A HREF="XGetKeyboardControl.html">XGetKeyboardControl()</A></B>,
+<B><A HREF="XQueryKeymap.html">XQueryKeymap()</A></B>,
+<B><A HREF="XSetPointerMapping.html">XSetPointerMapping()</A></B>,
+"<A HREF="keyboard-and-pointer-settings.html">Keyboard and Pointer Settings</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

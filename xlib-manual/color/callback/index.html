@@ -1,0 +1,35 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Callback Functions</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.10 Callback Functions</H1>
+
+This section describes the gamut compression and white point
+adjustment callbacks.
+
+<P>
+
+The gamut compression procedure specified in the <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>
+is called when an attempt to convert a color specification from
+<B>XcmsCIEXYZ</B>
+to a device-dependent format (typically
+<B>XcmsRGBi</B>)
+results in a color that lies outside the screen's color gamut.
+If the gamut compression procedure requires client data, this data is passed
+via the gamut compression client data in the <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>.
+
+<P>
+
+During color specification conversion between device-independent
+and device-dependent color spaces,
+if a white point adjustment procedure is specified in the <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>,
+it is triggered when the Client White Point and Screen White Point differ.
+If required, the client data is obtained from the <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>.
+
+<H5 ALIGN=right><I>Next: <A HREF="prototype-gamut-compression.html">Prototype Gamut Compression Procedure</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

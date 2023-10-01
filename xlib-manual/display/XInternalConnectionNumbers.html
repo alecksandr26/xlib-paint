@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XInternalConnectionNumbers</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XInternalConnectionNumbers</H1>
+
+<!.IN "XInternalConnectionNumbers" "" "@DEF@">
+
+<H2>Syntax</H2>
+
+<CODE><PRE>
+<B><A HREF="../introduction/errors.html#Status">Status</A></B> XInternalConnectionNumbers(<B>display</B>, <B>fd_return</B>, <B>count_return</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      int **<B>fd_return</B>;
+      int *<B>count_return</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>fd_return</B>
+<TD> Returns the file descriptors.
+
+<TR><TD> <B>count_return</B>
+<TD> Returns the number of file descriptors.
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XInternalConnectionNumbers()</B>
+function returns a list of the file descriptors for all internal
+connections currently open for the specified display.
+When the allocated list is no longer needed,
+free it by using
+<B><A HREF="XFree.html">XFree()</A></B>.
+This functions returns a nonzero status if the list is successfully allocated;
+otherwise, it returns zero.
+
+<H2>See also</H2>
+
+<B><A HREF="XAddConnectionWatch.html">XAddConnectionWatch()</A></B>, 
+<B><A HREF="XRemoveConnectionWatch.html">XRemoveConnectionWatch()</A></B>,
+<B><A HREF="XProcessInternalConnection.html">XProcessInternalConnection()</A></B>,
+"<A HREF="internal-connections.html">Internal Connections</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

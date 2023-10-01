@@ -1,0 +1,109 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XCopyGC</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XCopyGC</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XCopyGC" "" "@DEF@">
+
+<CODE><PRE>
+XCopyGC(<B>display</B>, <B>src</B>, <B>valuemask</B>, <B>dest</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="manipulating.html">GC</A> <B>src</B>, <B>dest</B>;
+      unsigned long <B>valuemask</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>src</B>
+<TD> Specifies the components of the source GC.
+
+<TR><TD> <B>valuemask</B>
+<TD> Specifies which components in the GC are to be copied to the destination GC. 
+This argument is the bitwise inclusive OR of zero or more of the valid
+GC component mask bits.
+
+<TR><TD> <B>dest</B>
+<TD> Specifies the destination GC.
+
+</TABLE>
+
+<H2>Description</H2>
+ 
+The
+<B>XCopyGC()</B>
+function copies the specified components from the source GC
+to the destination GC.
+The source and destination GCs must have the same root and depth,
+or a
+<B>BadMatch</B>
+error results.
+The valuemask specifies which component to copy, as for
+<B><A HREF="XCreateGC.html">XCreateGC()</A></B>.
+
+<P>
+
+<B>XCopyGC()</B>
+can generate
+<B>BadAlloc</B>,
+<B>BadGC</B>,
+and
+<B>BadMatch</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../my-own/gcontext.html">GContext</A></B> 
+	argument does not name a defined 
+	<B><A HREF="../my-own/gcontext.html">GContext</A></B>.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+      
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../display/display-macros.html#AllPlanes">AllPlanes()</A></B>,
+<B><A HREF="XChangeGC.html">XChangeGC()</A></B>, 
+<B><A HREF="../graphics/XCopyArea.html">XCopyArea()</A></B>,
+<B><A HREF="XCreateGC.html">XCreateGC()</A></B>,
+<B><A HREF="../utilities/regions/XCreateRegion.html">XCreateRegion()</A></B>,
+<B><A HREF="../graphics/drawing/XDrawArc.html">XDrawArc()</A></B>,
+<B><A HREF="../graphics/drawing/XDrawLine.html">XDrawLine()</A></B>,
+<B><A HREF="../graphics/drawing/XDrawRectangle.html">XDrawRectangle()</A></B>,
+<B><A HREF="../graphics/drawing-text/XDrawText.html">XDrawText()</A></B>,
+<B><A HREF="../graphics/filling-areas/XFillRectangle.html">XFillRectangle()</A></B>,
+<B><A HREF="XFreeGC.html">XFreeGC()</A></B>, 
+<B><A HREF="XGContextFromGC.html">XGContextFromGC()</A></B>,
+<B><A HREF="XGetGCValues.html">XGetGCValues()</A></B>, 
+<B><A HREF="convenience-functions/XQueryBestSize.html">XQueryBestSize()</A></B>,
+<B><A HREF="convenience-functions/XSetArcMode.html">XSetArcMode()</A></B>,
+<B><A HREF="convenience-functions/XSetClipOrigin.html">XSetClipOrigin()</A></B>,
+"<A HREF="manipulating.html">Manipulating Graphics Context/State</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

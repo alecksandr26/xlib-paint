@@ -1,0 +1,165 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetImage</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetImage</H1>
+
+<H2>Syntax</H2>
+
+This function specifically supports rudimentary screen dumps.
+<!.IN "XGetImage" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="images.html#XImage">XImage</A> *XGetImage(<B>display</B>, <B>d</B>, <B>x</B>, <B>y</B>, <B>width</B>, <B>height</B>, <B>plane_mask</B>, <B>format</B>)
+        <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+        Drawable <B>d</B>;
+        int <B>x</B>, <B>y</B>;
+        unsigned int <B>width</B>, <B>height</B>;
+        unsigned long <B>plane_mask</B>;
+        int <B>format</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>d</B>
+<TD> Specifies the drawable. 
+
+<TR><TD> <B>x</B><BR>
+	<B>y</B>
+<TD> Specify the x and y coordinates, which are relative to the origin of the drawable and define the upper-left corner of the rectangle.
+
+<TR><TD> <B>width</B><BR>
+	<B>height</B>
+<TD> Specify the width and height of the subimage, which define the dimensions of the rectangle.
+
+<TR><TD> <B>plane_mask</B>
+<TD> Specifies the plane mask.
+
+<TR><TD> <B>format</B>
+<TD> Specifies the format for the image.
+You can pass
+<B>XYPixmap</B>
+or 
+<B>ZPixmap</B> .
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetImage()</B>
+function returns a pointer to an
+<A HREF="images.html#XImage">XImage</A>
+structure.
+This structure provides you with the contents of the specified rectangle of
+the drawable in the format you specify.
+If the format argument is 
+<B>XYPixmap</B> ,
+the image contains only the bit planes you passed to the plane_mask argument.
+If the plane_mask argument only requests a subset of the planes of the
+display, the depth of the returned image will be the number of planes
+requested.
+If the format argument is 
+<B>ZPixmap</B> ,
+<B>XGetImage()</B>
+returns as zero the bits in all planes not 
+specified in the plane_mask argument.
+The function performs no range checking on the values in plane_mask and ignores
+extraneous bits.
+
+<P>
+
+<B>XGetImage()</B>
+returns the depth of the image to the depth member of the
+<A HREF="images.html#XImage">XImage</A>
+structure.
+The depth of the image is as specified when the drawable was created,
+except when getting a subset of the planes in 
+<B>XYPixmap</B>
+format, when the depth is given by the number of bits set to 1 in plane_mask.
+
+<P>
+
+If the drawable is a pixmap, 
+the given rectangle must be wholly contained within the pixmap, 
+or a
+<B>BadMatch</B>
+error results.
+If the drawable is a window, 
+the window must be viewable, 
+and it must be the case that if there were no inferiors or overlapping windows,
+the specified rectangle of the window would be fully visible on the screen
+and wholly contained within the outside edges of the window,
+or a
+<B>BadMatch</B>
+error results.
+Note that the borders of the window can be included and read with
+this request.
+If the window has backing-store, the backing-store contents are
+returned for regions of the window that are obscured by noninferior
+windows. 
+If the window does not have backing-store,
+the returned contents of such obscured regions are undefined.
+The returned contents of visible regions of inferiors
+of a different depth than the specified window's depth are also undefined.
+The pointer cursor image is not included in the returned contents.
+If a problem occurs,
+<B>XGetImage()</B>
+returns NULL.
+
+<P>
+
+<B>XGetImage()</B>
+can generate
+<B>BadDrawable</B> ,
+<B>BadMatch</B> ,
+and
+<B>BadValue</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../utilities/XAddPixel.html">XAddPixel()</A></B>,
+<B><A HREF="../utilities/XCreateImage.html">XCreateImage()</A></B>,
+<B><A HREF="../utilities/XDestroyImage.html">XDestroyImage()</A></B>,
+<B><A HREF="../utilities/XGetPixel.html">XGetPixel()</A></B>,
+<B><A HREF="XInitImage.html">XInitImage()</A></B>,
+<B><A HREF="XPutImage.html">XPutImage()</A></B>,
+<B><A HREF="../utilities/XPutPixel.html">XPutPixel()</A></B>,
+<B><A HREF="XGetSubImage.html">XGetSubImage()</A></B>,
+"<A HREF="images.html">Transferring Images between Client and Server</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,115 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Converting String Lists</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>14.1.2 Converting String Lists</H1>
+
+Many of the text properties allow a variety of types and formats.
+Because the data stored in these properties are not
+simple null-terminated strings, a
+<B>XTextProperty</B>
+structure is used to describe the encoding, type, and length of the text 
+as well as its value.
+The
+<B>XTextProperty</B>
+structure contains:
+
+<!.IN "XTextProperty" "" "@DEF@">
+<CODE><PRE>
+typedef struct {
+	unsigned char *value;	/* property data */
+	Atom encoding;		/* type of property */
+	int format;		/* 8, 16, or 32 */
+	unsigned long nitems;	/* number of items in value */
+} XTextProperty;
+</PRE></CODE>
+
+<P>
+
+Xlib provides functions to convert localized text to or from encodings
+that support the inter-client communication conventions for text.
+In addition, functions are provided for converting between lists of pointers 
+to character strings and text properties in the STRING encoding.
+
+<P>
+
+The functions for localized text return a signed integer error status 
+that encodes 
+<B>Success</B>
+as zero, specific error conditions as negative numbers, and partial conversion
+as a count of unconvertible characters.
+
+<A NAME="XICCEncodingStyle"></A>
+<P>
+
+<!.IN "XICCEncodingStyle" "" "@DEF@">
+
+<PRE><CODE>
+#define <B>XNoMemory</B> -1
+#define <B>XLocaleNotSupported</B> -2
+#define <B>XConverterNotFound</B> -3
+
+typedef enum {
+	XStringStyle,		/* STRING */
+	XCompoundTextStyle,	/* COMPOUND_TEXT */
+	XTextStyle,		/* text in owner's encoding (current locale) */
+	XStdICCTextStyle	/* STRING, else COMPOUND_TEXT */
+} XICCEncodingStyle;
+</CODE></PRE>
+
+<P>
+
+To convert a list of text strings to an 
+<B>XTextProperty</B>
+structure, use
+<B><A HREF="XmbTextListToTextProperty.html">XmbTextListToTextProperty()</A></B>
+or
+<B><A HREF="XmbTextListToTextProperty.html">XwcTextListToTextProperty()</A></B>.
+
+<P>
+
+To obtain a list of text strings from an 
+XTextProperty 
+structure, use
+<B><A HREF="XmbTextPropertyToTextList.html">XmbTextPropertyToTextList()</A></B>
+or
+<B><A HREF="XmbTextPropertyToTextList.html">XwcTextPropertyToTextList()</A></B>.
+
+<P>
+
+To free the in-memory data associated with the specified
+wide character string list, use
+<B><A HREF="XwcFreeStringList.html">XwcFreeStringList()</A></B>.
+
+<P>
+
+To obtain the default string for text conversion in the current locale,
+use
+<B><A HREF="XDefaultString.html">XDefaultString()</A></B>.
+
+<P>
+
+To set the specified list of strings in the STRING encoding to a 
+XTextProperty
+structure, use
+<B><A HREF="XStringListToTextProperty.html">XStringListToTextProperty()</A></B>.
+
+<P>
+
+To obtain a list of strings from a specified
+XTextProperty
+structure in the STRING encoding, use
+<B><A HREF="XTextPropertyToStringList.html">XTextPropertyToStringList()</A></B>.
+
+<P>
+
+To free the in-memory data associated with the specified string list, use
+<B><A HREF="XFreeStringList.html">XFreeStringList()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="text.html">Setting and Reading Text Properties</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmPutFileDatabase</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmPutFileDatabase</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XrmPutFileDatabase" "" "@DEF@">
+
+<CODE><PRE>
+void XrmPutFileDatabase(<B>database</B>, <B>stored_db</B>)
+     <B><A HREF="creating-and-storing-databases.html">XrmDatabase</A></B> <B>database</B>;
+     char *<B>stored_db</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>database</B>
+<TD> Specifies the database that is to be used.
+
+<TR><TD> <B>stored_db</B>
+<TD> Specifies the file name for the stored database.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XrmPutFileDatabase()</B>
+function stores a copy of the specified database in the specified file.
+Text is written to the file as a sequence of entries in valid
+ResourceLine format (see "<A HREF="file-syntax.html">Resource File Syntax</A>").
+The file is written in the locale of the database.
+Entries containing resource names that are not in the Host Portable Character
+Encoding or containing values that are not in the encoding of the database
+locale, are written in an implementation dependent manner.
+The order in which entries are written is implementation dependent.
+Entries with representation types other than ``String'' are ignored.
+
+<H2>See also</H2>
+
+<B><A HREF="XrmDestroyDatabase.html">XrmDestroyDatabase()</A></B>,
+<B><A HREF="XrmGetDatabase.html">XrmGetDatabase()</A></B>,
+<B><A HREF="XrmGetFileDatabase.html">XrmGetFileDatabase()</A></B>,
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>,
+<B><A HREF="XrmGetStringDatabase.html">XrmGetStringDatabase()</A></B>,
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmLocaleOfDatabase.html">XrmLocaleOfDatabase()</A></B>,
+<B><A HREF="XrmPutFileDatabase.html">XrmPutFileDatabase()</A></B>,
+<B><A HREF="XrmPutResource.html">XrmPutResource()</A></B>,
+<B><A HREF="XrmSetDataBase.html">XrmSetDataBase()</A></B>,
+"<A HREF="creating-and-storing-databases.html">Creating and Storing Databases</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

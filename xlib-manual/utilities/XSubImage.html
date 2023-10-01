@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSubImage</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSubImage</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XSubImage" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="../graphics/images.html#XImage">XImage</A> *XSubImage(<B>ximage</B>, <B>x</B>, <B>y</B>, <B>subimage_width</B>, <B>subimage_height</B>)
+      <A HREF="../graphics/images.html#XImage">XImage</A> *<B>ximage</B>;
+      int <B>x</B>;
+      int <B>y</B>;
+      unsigned int <B>subimage_width</B>;
+      unsigned int <B>subimage_height</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>ximage</B>
+<TD> Specifies the image.
+
+<TR><TD> <B>x</B><BR>
+	<B>y</B>
+<TD> Specify the x and y coordinates.
+
+<TR><TD> <B>subimage_width</B>
+<TD> Specifies the width of the new subimage, in pixels.
+
+<TR><TD> <B>subimage_height</B>
+<TD> Specifies the height of the new subimage, in pixels.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XSubImage()</B>
+function creates a new image that is a subsection of an existing one.
+It allocates the memory necessary for the new
+<A HREF="../graphics/images.html#XImage">XImage</A>
+structure
+and returns a pointer to the new image.
+The data is copied from the source image,
+and the image must contain the rectangle defined by <B>x</B>, <B>y</B>, <B>subimage_width</B>,
+and <B>subimage_height</B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XAddPixel.html">XAddPixel()</A></B>,
+<B><A HREF="XCreateImage.html">XCreateImage()</A></B>,
+<B><A HREF="XDestroyImage.html">XDestroyImage()</A></B>,
+<B><A HREF="XGetPixel.html">XGetPixel()</A></B>,
+<B><A HREF="XPutPixel.html">XPutPixel()</A></B>,
+"<A HREF="manipulating-images.html">Manipulating Images</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

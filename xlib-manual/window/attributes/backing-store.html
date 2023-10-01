@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Window Attributes: Backing Store</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>3.2.4 Backing Store Attribute</H1>
+
+Some implementations of the X server may choose to maintain the contents of 
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+windows.
+If the X server maintains the contents of a window, 
+the off-screen saved pixels
+are known as backing store.
+The backing store advises the X server on what to do 
+with the contents of a window.
+The backing-store attribute can be set to
+<B>NotUseful</B>
+(default),
+<B>WhenMapped</B>,
+or
+<B>Always</B>.
+
+<P>
+
+A backing-store attribute of 
+<B>NotUseful</B>
+advises the X server that 
+maintaining contents is unnecessary, 
+although some X implementations may
+still choose to maintain contents and, therefore, not generate 
+<B><A HREF="../../events/exposure/expose.html">Expose</A></B>
+events.
+A backing-store attribute of 
+<B>WhenMapped</B>
+advises the X server that maintaining contents of 
+obscured regions when the window is mapped would be beneficial.
+In this case,
+the server may generate an 
+<B><A HREF="../../events/exposure/expose.html">Expose</A></B> 
+event when the window is created.
+A backing-store attribute of 
+<B>Always</B>
+advises the X server that maintaining contents even when 
+the window is unmapped would be beneficial.  
+Even if the window is larger than its parent, 
+this is a request to the X server to maintain complete contents, 
+not just the region within the parent window boundaries.  
+While the X server maintains the window's contents, 
+<B><A HREF="../../events/exposure/expose.html">Expose</A></B> 
+events normally are not generated, 
+but the X server may stop maintaining 
+contents at any time.  
+
+<P>
+
+When the contents of obscured regions of a window are being maintained,
+regions obscured by noninferior windows are included in the destination
+of graphics requests (and source, when the window is the source).
+However, regions obscured by inferior windows are not included.
+
+<H5 ALIGN=right><I>Next: <A HREF="save-under.html">Save Under Flag</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

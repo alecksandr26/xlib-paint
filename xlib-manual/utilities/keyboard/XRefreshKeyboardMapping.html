@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XRefreshKeyboardMapping</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XRefreshKeyboardMapping</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XRefreshKeyboardMapping" "" "@DEF@">
+
+<CODE><PRE>
+XRefreshKeyboardMapping(<B>event_map</B>)
+      <A HREF="../../events/window-state-change/mapping.html#XMappingEvent">XMappingEvent</A> *<B>event_map</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>event_map</B>
+<TD> Specifies the mapping event that is to be used.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XRefreshKeyboardMapping()</B>
+function refreshes the stored modifier and keymap information.
+You usually call this function when a
+<B><A HREF="../../events/window-state-change/mapping.html">MappingNotify</A></B>
+event with a request member of
+<B>MappingKeyboard</B>
+or
+<B>MappingModifier</B>
+occurs.
+The result is to update Xlib's knowledge of the keyboard.
+
+<H2>See also</H2>
+
+<B><A HREF="XLookupKeysym.html">XLookupKeysym()</A></B>,
+<B><A HREF="../XLookupString.html">XLookupString()</A></B>,
+<B><A HREF="../XRebindKeysym.html">XRebindKeysym()</A></B>,
+<B><A HREF="XStringToKeysym.html">XStringToKeysym()</A></B>,
+<A HREF="../../events/keyboard-pointer/keyboard-pointer.html#XButtonEvent">XButtonEvent</A>,
+<A HREF="../../events/window-state-change/map.html#XMapEvent">XMapEvent</A>,
+<A HREF="./">Keyboard Utility Functions</A>.
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

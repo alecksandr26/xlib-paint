@@ -1,0 +1,109 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XConvertSelection</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XConvertSelection</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Selection" "converting">
+<!.IN "XConvertSelection" "" "@DEF@">
+
+<CODE><PRE>
+XConvertSelection(<B>display</B>, <B>selection</B>, <B>target</B>, <B>property</B>, <B>requestor</B>, <B>time</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="properties-and-atoms.html">Atom</A> <B>selection</B>, <B>target</B>;
+      <A HREF="properties-and-atoms.html">Atom</A> <B>property</B>;
+      <A HREF="../window/">Window</A> <B>requestor</B>;
+      <A HREF="../Time.html">Time</A> <B>time</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>selection</B>
+<TD> Specifies the selection atom.
+
+<TR><TD> <B>target</B>
+<TD> Specifies the target atom.
+
+<TR><TD> <B>property</B>
+<TD> Specifies the property name.
+You also can pass 
+<B>None</B> .
+
+<TR><TD> <B>requestor</B>
+<TD> Specifies the requestor.
+
+<TR><TD> <B>time</B>
+<TD> Specifies the time.
+You can pass either a timestamp or
+<B>CurrentTime</B>.
+
+</TABLE>
+
+<H2>Description</H2>
+
+<B>XConvertSelection()</B>
+requests that the specified selection be converted to the specified target
+type:
+
+<UL>
+
+<P><LI>
+If the specified selection has an owner, the X server sends a
+.PN SelectionRequest
+event to that owner.
+
+<P><LI>
+If no owner for the specified
+selection exists, the X server generates a
+<B><A HREF="../events/client-communication/selection-notify.html">SelectionNotify</A></B>
+event to the
+requestor with property
+<B>None</B>.
+
+</UL>
+
+<P>
+
+The arguments are passed on unchanged in either of the events.
+There are two predefined selection atoms: PRIMARY and SECONDARY.
+
+<P>
+
+<B>XConvertSelection()</B>
+can generate
+<B>BadAtom</B>
+and
+<B>BadWindow</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAtom</B>
+<TD> A value for an Atom argument does not name a
+     defined Atom.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XGetSelectionOwner.html">XGetSelectionOwner()</A></B>,
+<B><A HREF="XSetSelectionOwner.html">XSetSelectionOwner()</A></B>,
+"<A HREF="selection.html">Selections</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

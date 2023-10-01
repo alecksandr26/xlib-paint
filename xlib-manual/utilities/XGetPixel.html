@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetPixel</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetPixel</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetPixel" "" "@DEF@">
+
+<CODE><PRE>
+unsigned long XGetPixel(<B>ximage</B>, <B>x</B>, <B>y</B>)
+      <A HREF="../graphics/images.html#XImage">XImage</A> *<B>ximage</B>;
+      int <B>x</B>;
+      int <B>y</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>ximage</B>
+<TD> Specifies the image.
+
+<TR><TD> <B>x</B><BR>
+	<B>y</B>
+<TD> Specify the x and y coordinates.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetPixel()</B>
+function returns the specified pixel from the named image.
+The pixel value is returned in normalized format (that is,
+the least-significant byte of the long is the least-significant byte
+of the pixel).
+The image must contain the x and y coordinates.
+
+<H2>See also</H2>
+
+<B><A HREF="XAddPixel.html">XAddPixel()</A></B>,
+<B><A HREF="XCreateImage.html">XCreateImage()</A></B>,
+<B><A HREF="XDestroyImage.html">XDestroyImage()</A></B>,
+<B><A HREF="XPutPixel.html">XPutPixel()</A></B>,
+<B><A HREF="XSubImage.html">XSubImage()</A></B>,
+"<A HREF="manipulating-images.html">Manipulating Images</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

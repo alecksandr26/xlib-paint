@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XcmsAddColorSpace</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XcmsAddColorSpace</H1>
+
+<H2>Syntax</H2>
+
+<!.IN  "XcmsAddColorSpace" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../conversion-contexts-and-gamut-mapping.html#cmsStatus">Status</A></B> XcmsAddColorSpace(<B>color_space</B>)
+      <A HREF="creating-additional-spaces.html#XcmsColorSpace">XcmsColorSpace</A> *<B>color_space</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>color_space</B>
+<TD> Specifies the device-independent color space to add.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XcmsAddColorSpace()</B>
+function makes a device-independent color space (actually an
+<B><A HREF="creating-additional-spaces.html#XcmsColorSpace">XcmsColorSpace</A></B>
+structure) accessible by the color management system.
+Because format values for unregistered color spaces are assigned at run time,
+they should be treated as private to the client.
+If references to an unregistered color space must be made
+outside the client (for example, storing color specifications 
+in a file using the unregistered color space), 
+then reference should be made by color space prefix
+(see
+<B><A HREF="XcmsFormatOfPrefix.html">XcmsFormatOfPrefix()</A></B>
+and
+<B><A HREF="XcmsPrefixOfFormat.html">XcmsPrefixOfFormat()</A></B>).
+
+<P>
+
+If the 
+<B><A HREF="creating-additional-spaces.html#XcmsColorSpace">XcmsColorSpace</A></B>
+structure is already accessible in the color management system, 
+<B>XcmsAddColorSpace()</B>
+returns 
+<B><A HREF="../conversion-contexts-and-gamut-mapping.html#cmsStatus">XcmsSuccess</A></B> .
+
+<P>
+
+Note that added 
+<B><A HREF="creating-additional-spaces.html#XcmsColorSpace">XcmsColorSpace</A>s</B>
+must be retained for reference by Xlib.
+
+<H2>See also</H2>
+
+"<A HREF="adding-dev-indepedent-spaces.html">Adding Device-Independent Color Spaces</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,224 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Window Attributes</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>3.2 Window Attributes</H1>
+<!.IN "Window">
+<!.IN "Window" "attributes">
+All 
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+windows have a border width of zero or more pixels, an optional background, 
+an event suppression mask (which suppresses propagation of events from 
+children), and a property list (see "<A HREF="../../window-information/properties-and-atoms.html">Properties and Atoms</A>").
+The window border and background can be a solid color or a pattern, called
+a tile.
+All windows except the root have a parent and are clipped by their parent.
+If a window is stacked on top of another window, it obscures that other
+window for the purpose of input.
+If a window has a background (almost all do), it obscures the other
+window for purposes of output.
+Attempts to output to the obscured area do nothing, 
+and no input events (for example, pointer motion) are generated for the 
+obscured area.
+
+<P>
+
+Windows also have associated property lists (see "<A HREF="../../window-information/properties-and-atoms.html">Properties and Atoms</A>").
+
+<P>
+
+Both
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+and
+<B><A HREF="../create.html#InputClass">InputOnly</A></B>
+windows have the following common attributes,
+which are the only attributes of an
+<B><A HREF="../create.html#InputClass">InputOnly</A></B>
+window:
+<UL>
+
+<P><LI>
+<A HREF="gravity.html">win-gravity</A>
+
+<P><LI>
+<A HREF="event-and-do-not-propagate.html">event-mask</A>
+
+<P><LI>
+<A HREF="event-and-do-not-propagate.html">do-not-propagate-mask</A>
+
+<P><LI>
+<A HREF="override-redirect.html">override-redirect</A>
+
+<P><LI>
+<A HREF="cursor.html">cursor</A>
+</UL>
+<P>
+
+If you specify any other attributes for an
+<B><A HREF="../create.html#InputClass">InputOnly</A></B>
+window,
+a
+<B>BadMatch</B>
+error results.
+
+<P>
+
+<B><A HREF="../create.html#InputClass">InputOnly</A></B>
+windows are used for controlling input events in situations where
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+windows are unnecessary.
+<B><A HREF="../create.html#InputClass">InputOnly</A></B>
+windows are invisible; can only be used to control such things as
+cursors, input event generation, and grabbing;
+and cannot be used in any graphics requests.
+Note that
+<B><A HREF="../create.html#InputClass">InputOnly</A></B>
+windows cannot have
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+windows as inferiors.
+
+<P>
+
+Windows have borders of a programmable width and pattern
+as well as a background pattern or tile.
+<!.IN "Tile" "pixmaps">
+Pixel values can be used for solid colors.
+<!.IN "Resource IDs" "freeing">
+<!.IN "Freeing" "resources">
+The background and border pixmaps can be destroyed immediately after
+creating the window if no further explicit references to them
+are to be made.
+<!.IN "Tile" "mode" >
+The pattern can either be relative to the parent 
+or absolute.
+If
+<B>ParentRelative</B>,
+the parent's background is used.
+
+<P>
+
+When windows are first created, 
+they are not visible (not mapped) on the screen.
+Any output to a window that is not visible on the screen 
+and that does not have backing store will be discarded.
+<!.IN "Window" "mapping">
+An application may wish to create a window long before it is
+mapped to the screen.
+When a window is eventually mapped to the screen 
+(using
+<B><A HREF="../XMapWindow.html">XMapWindow()</A></B>),
+<!.IN "XMapWindow">
+the X server generates an 
+<B><A HREF="../../events/exposure/expose.html">Expose</A></B> 
+event for the window if backing store has not been maintained.
+
+<P>
+
+A window manager can override your choice of size, 
+border width, and position for a top-level window.
+Your program must be prepared to use the actual size and position
+of the top window.
+It is not acceptable for a client application to resize itself
+unless in direct response to a human command to do so.
+Instead, either your program should use the space given to it,
+or if the space is too small for any useful work, your program
+might ask the user to resize the window.
+The border of your top-level window is considered fair game 
+for window managers.
+
+<A NAME="XSetWindowAttributes"></A>
+<P>
+
+To set an attribute of a window,
+set the appropriate member of the
+<B>XSetWindowAttributes</B>
+structure and OR in the corresponding value bitmask in your subsequent calls to
+<B><A HREF="../XCreateWindow.html">XCreateWindow()</A></B>
+and
+<B><A HREF="../XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>,
+or use one of the other convenience functions that set the appropriate 
+attribute.
+The symbols for the value mask bits and the
+<B>XSetWindowAttributes</B>
+structure are:
+
+<P>
+
+<CODE><PRE>
+/* Window attribute value mask bits */
+
+#define <B>CWBackPixmap</B>		(1L<<0)
+#define <B>CWBackPixel</B>		(1L<<1)
+#define <B>CWBorderPixmap</B>		(1L<<2)
+#define <B>CWBorderPixel</B>		(1L<<3)
+#define <B>CWBitGravity</B>		(1L<<4)
+#define <B>CWWinGravity</B>		(1L<<5)
+#define <B>CWBackingStore</B>		(1L<<6)
+#define <B>CWBackingPlanes</B>		(1L<<7)
+#define <B>CWBackingPixel</B>		(1L<<8)
+#define <B>CWOverrideRedirect</B>	(1L<<9)
+#define <B>CWSaveUnder</B>		(1L<<10)
+#define <B>CWEventMask</B>		(1L<<11)
+#define <B>CWDontPropagate</B>		(1L<<12)
+#define <B>CWColormap</B>		(1L<<13)
+#define <B>CWCursor</B>		(1L<<14)
+
+<!.IN "XSetWindowAttributes" "" "@DEF@">
+/* Values */
+
+typedef struct {
+	Pixmap background_pixmap;	/* background, <B>None</B>, or <B>ParentRelative</B> */
+	unsigned long background_pixel;	/* background pixel */
+	Pixmap border_pixmap;		/* border of the window or <B>CopyFromParent</B> */
+	unsigned long border_pixel;	/* border pixel value */
+	int bit_gravity;		/* one of bit gravity values */
+	int win_gravity;		/* one of the window gravity values */
+	int backing_store;		/* <B>NotUseful</B>, <B>WhenMapped</B>, <B>Always</B> */
+	unsigned long backing_planes;	/* planes to be preserved if possible */
+	unsigned long backing_pixel;	/* value to use in restoring planes */
+	Bool save_under;		/* should bits under be saved? (popups) */
+	long event_mask;		/* set of events that should be saved */
+	long do_not_propagate_mask;	/* set of events that should not propagate */
+	Bool override_redirect;		/* boolean value for override_redirect */
+	Colormap colormap;		/* color map to be associated with window */
+	Cursor cursor;			/* cursor to be displayed (or <B>None</B>) */
+} XSetWindowAttributes;
+</PRE></CODE>
+
+<P>
+
+The following lists the defaults for each window attribute and indicates
+whether the attribute is applicable to
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+and
+<B><A HREF="../create.html#InputClass">InputOnly</A></B>
+windows:
+<TABLE>
+<TR><TD COLSPAN=4><HR>
+<TR><TH>Attribute						<TH>Default			<TH><B><A HREF="../create.html#InputClass">InputOutput</A></B>	<TH><B><A HREF="../create.html#InputClass">InputOnly</A></B>
+<TR><TD COLSPAN=4><HR>
+<TR><TD><A HREF="background.html">background-pixmap</A>		<TD><B>None</B>			<TD>Yes		<TD>No
+<TR><TD><A HREF="background.html">background-pixel</A>		<TD>Undefined			<TD>Yes		<TD>No
+<TR><TD><A HREF="border.html">border-pixmap</A>			<TD><B>CopyFromParent</B>	<TD>Yes		<TD>No
+<TR><TD><A HREF="border.html">border-pixel</A>			<TD>Undefined			<TD>Yes		<TD>No
+<TR><TD><A HREF="gravity.html">bit-gravity</A>			<TD><B>ForgetGravity</B>	<TD>Yes		<TD>No
+<TR><TD><A HREF="gravity.html">win-gravity</A>			<TD><B>NorthWestGravity</B>	<TD>Yes		<TD>Yes
+<TR><TD><A HREF="backing-store.html">backing-store</A>		<TD><B>NotUseful</B>		<TD>Yes		<TD>No
+<TR><TD><A HREF="backing.html">backing-planes</A>	<TD>All ones			<TD>Yes		<TD>No
+<TR><TD><A HREF="backing.html">backing-pixel</A>		<TD>zero			<TD>Yes		<TD>No
+<TR><TD><A HREF="save-under.html">save-under</A>		<TD><B>False</B>		<TD>Yes		<TD>No
+<TR><TD><A HREF="event-and-do-not-propagate.html">event-mask</A>		<TD>empty set			<TD>Yes		<TD>Yes
+<TR><TD><A HREF="event-and-do-not-propagate.html">do-not-propagate-mask</A>	<TD>empty set		<TD>Yes		<TD>Yes
+<TR><TD><A HREF="override-redirect.html">override-redirect</A>	<TD><B>False</B>		<TD>Yes		<TD>Yes
+<TR><TD><A HREF="colormap.html">colormap</A>			<TD><B>CopyFromParent</B>	<TD>Yes		<TD>No
+<TR><TD><A HREF="cursor.html">cursor</A>			<TD><B>None</B>			<TD>Yes		<TD>Yes
+<TR><TD COLSPAN=4><HR>
+</TABLE>
+
+<H5 ALIGN=right><I>Next: <A HREF="background.html">Background Attribute</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Closing the Display</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XCloseDisplay</H1>
+
+<H2>Syntax</H2>
+
+<CODE><PRE>
+XCloseDisplay(<B>display</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+</PRE></CODE>
+<TABLE>
+
+<H2>Arguments</H2>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XCloseDisplay()</B>
+function closes the connection to the X server for the display specified in the
+<A HREF="opening.html#Display">Display</A>
+structure and destroys all windows, resource IDs
+(<B><A HREF="../introduction/overview.html#XID">Window</A></B>,
+<B><A HREF="../introduction/overview.html#XID">Font</A></B>,
+<B><A HREF="../introduction/overview.html#XID">Pixmap</A></B>,
+<B><A HREF="../introduction/overview.html#XID">Colormap</A></B>,
+<B><A HREF="../introduction/overview.html#XID">Cursor</A></B>,
+and
+<B><A HREF="../introduction/overview.html#XID">GContext</A></B>),
+or other resources that the client has created
+on this display, unless the close-down mode of the resource has been changed
+(see
+<B><A HREF="XSetCloseDownMode.html">XSetCloseDownMode()</A></B>).
+Therefore, these windows, resource IDs, and other resources should never be 
+referenced again or an error will be generated.
+Before exiting, you should call
+<B>XCloseDisplay()</B>
+explicitly so that any pending errors are reported as
+<B>XCloseDisplay()</B>
+performs a final
+<B><A HREF="../event-handling/XSync.html">XSync()</A></B>
+operation.
+<!.IN "Resource IDs">
+<!.IN "XCloseDisplay">
+
+<H2>Diagnostics</H2>
+
+<B>XCloseDisplay()</B>
+can generate a
+<B>BadGC</B>
+error.
+
+<H2>See also</H2>
+
+<B><A HREF="../event-handling/XFlush.html">XFlush()</A></B>,
+<B><A HREF="XSetCloseDownMode.html">XSetCloseDownMode()</A></B>, The
+Xlib Programming manual:  "<A HREF="closing.html">Closing the Display</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

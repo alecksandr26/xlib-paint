@@ -1,0 +1,106 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XCreateBitmapFromData</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XCreateBitmapFromData</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XCreateBitmapFromData" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="../pixmap-and-cursor/pixmap.html">Pixmap</A> XCreateBitmapFromData(<B>display</B>, <B>d</B>, <B>data</B>, <B>width</B>, <B>height</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Drawable <B>d</B>;
+      char *<B>data</B>;
+      unsigned int <B>width</B>, <B>height</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>d</B>
+<TD> Specifies the drawable that indicates the screen. 
+
+<TR><TD> <B>data</B>
+<TD> Specifies the location of the bitmap data.
+
+<TR><TD> <B>width</B><BR>
+	<B>height</B>
+<TD> Specify the width and height.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XCreateBitmapFromData()</B>
+function allows you to include in your C program (using
+<B>#include</B>)
+a bitmap file that was written out by
+<B><A HREF="XWriteBitmapFile.html">XWriteBitmapFile()</A></B>
+(X version 11 format only) without reading in the bitmap file.
+The following example creates a gray bitmap:
+
+<P>
+
+<PRE><CODE>
+#include "gray.bitmap"
+
+Pixmap bitmap;
+bitmap = XCreateBitmapFromData(display, window, gray_bits, gray_width, gray_height);
+</PRE></CODE>
+
+<P>
+
+If insufficient working storage was allocated,
+<B>XCreateBitmapFromData()</B>
+returns
+<B>None</B>.
+It is your responsibility to free the
+bitmap using
+<B><A HREF="../pixmap-and-cursor/XFreePixmap.html">XFreePixmap()</A></B>
+when finished.
+
+<P>
+
+<B>XCreateBitmapFromData()</B>
+can generate a
+<B>BadAlloc</B>
+and
+<B>BadGC</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../my-own/gcontext.html">GContext</A></B> 
+	argument does not name a defined 
+	<B><A HREF="../my-own/gcontext.html">GContext</A></B>.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../pixmap-and-cursor/XCreatePixmap.html">XCreatePixmap()</A></B>,
+<B><A HREF="XCreatePixmapFromBitmapData.html">XCreatePixmapFromBitmapData()</A></B>,
+<B><A HREF="../graphics/XPutImage.html">XPutImage()</A></B>,
+<B><A HREF="XReadBitmapFile.html">XReadBitmapFile()</A></B>,
+<B><A HREF="XWriteBitmapFile.html">XWriteBitmapFile()</A></B>,
+"<A HREF="manipulating-bitmaps.html">Manipulating Bitmaps</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

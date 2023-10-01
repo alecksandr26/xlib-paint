@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Event Handling Functions</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>Chapter 11: Event Handling Functions</H1>
+
+This chapter discusses the Xlib functions you can use to:
+
+<UL>
+
+<P><LI>
+<A HREF="selecting.html">Select events</A>
+
+<P><LI>
+<A HREF="handling-output-buffer.html">Handle the output buffer and the event queue</A>
+
+<P><LI>
+<A HREF="event-queue-management.html">Select events from the event queue</A>
+
+<P><LI>
+<A HREF="manipulating-event-queue/">Send and get events</A>
+
+<P><LI>
+<A HREF="protocol-errors/">Handle protocol errors</A>
+
+</UL>
+
+<BLOCKQUOTE>
+<P ALIGN=center>Note
+<P>
+Some toolkits use their own event-handling functions
+and do not allow you to interchange these event-handling functions
+with those in Xlib.
+For further information, 
+see the documentation supplied with the toolkit.
+</BLOCKQUOTE>
+
+<P>
+
+Most applications simply are event loops:
+they wait for an event, decide what to do with it,
+execute some amount of code that results in changes to the display,
+and then wait for the next event.
+
+<H5 ALIGN=right><I>Next: <A HREF="selecting.html">Selecting Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

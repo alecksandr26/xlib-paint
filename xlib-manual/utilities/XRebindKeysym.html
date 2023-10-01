@@ -1,0 +1,76 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XRebindKeysym</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XRebindKeysym</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XRebindKeysym" "" "@DEF@">
+
+<CODE><PRE>
+XRebindKeysym(<B>display</B>, <B>keysym</B>, <B>list</B>, <B>mod_count</B>, <B>string</B>, <B>num_bytes</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="../input/keyboard-encoding.html#KeySym">KeySym</A> <B>keysym</B>;
+      <A HREF="../input/keyboard-encoding.html#KeySym">KeySym</A> <B>list</B>[];
+      int <B>mod_count</B>;
+      unsigned char *<B>string</B>;
+      int <B>num_bytes</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>keysym</B>
+<TD> Specifies the KeySym that is to be rebound.
+
+<TR><TD> <B>list</B>
+<TD> Specifies the KeySyms to be used as modifiers.
+
+<TR><TD> <B>mod_count</B>
+<TD> Specifies the number of modifiers in the modifier list.
+
+<TR><TD> <B>string</B>
+<TD> Specifies the string that is copied and will be returned by 
+<B><A HREF="XLookupString.html">XLookupString()</A></B>.
+
+<TR><TD> <B>num_bytes</B>
+<TD> Specifies the number of bytes in the string argument.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XRebindKeysym()</B>
+function can be used to rebind the meaning of a KeySym for the client.
+It does not redefine any key in the X server but merely
+provides an easy way for long strings to be attached to keys.
+<B><A HREF="XLookupString.html">XLookupString()</A></B>
+returns this string when the appropriate set of
+modifier keys are pressed and when the KeySym would have been used for
+the translation.
+No text conversions are performed;
+the client is responsible for supplying appropriately encoded strings.
+Note that you can rebind a KeySym that may not exist.
+
+<H2>See also</H2>
+
+<B><A HREF="keyboard/XLookupKeysym.html">XLookupKeysym()</A></B>,
+<B><A HREF="XLookupString.html">XLookupString()</A></B>,
+<B><A HREF="keyboard/XRefreshKeyboardMapping.html">XRefreshKeyboardMapping()</A></B>,
+<B><A HREF="keyboard/XStringToKeysym.html">XStringToKeysym()</A></B>
+<A HREF="../events/keyboard-pointer/keyboard-pointer.html#XButtonEvent">XButtonEvent</A>,
+<A HREF="../events/window-state-change/map.html#XMapEvent">XMapEvent</A>,
+"<A HREF="latin-keyboard.html">Latin-1 Keyboard Event Functions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

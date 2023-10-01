@@ -1,0 +1,83 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Naming and Argument Conventions</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>1.5. Naming and Argument Conventions within Xlib</H1>
+
+<P>
+
+Xlib follows a number of conventions for the naming and syntax of the functions.
+Given that you remember what information the function requires,
+these conventions are intended to make the syntax of the functions more 
+predictable.
+
+<P>
+
+The major naming conventions are:
+
+<UL>
+<P><LI>
+To differentiate the X symbols from the other symbols,
+the library uses mixed case for external symbols.
+It leaves lowercase for variables and all uppercase for user macros,
+as per existing convention.
+
+<P><LI>
+All Xlib functions begin with a capital X.
+
+<P><LI>
+The beginnings of all function names and symbols are capitalized.
+
+<P><LI>
+All user-visible data structures begin with a capital X.
+More generally,
+anything that a user might dereference begins with a capital X.
+
+<P><LI>
+Macros and other symbols do not begin with a capital X.
+To distinguish them from all user symbols,
+each word in the macro is capitalized.
+
+<P><LI>
+All elements  of or variables in a data structure are in lowercase.
+Compound words, where needed, are constructed with underscores (_).
+
+<P><LI>
+The display argument, where used, is always first in the argument list.
+
+<P><LI>
+All resource objects, where used, occur at the beginning of the argument list
+immediately after the display argument.
+
+<P><LI>
+When a  graphics context is present together with
+another type of resource (most commonly, a drawable), the
+graphics context occurs in the argument list after the other
+resource.
+Drawables outrank all other resources.
+
+<P><LI>
+Source arguments always precede the destination arguments in the argument list.
+
+<P><LI>
+The x argument always precedes the y argument in the argument list.
+
+<P><LI>
+The width argument always precedes the height argument in the argument list.
+
+<P><LI>
+Where the x, y, width, and height arguments are used together,
+the x and y arguments always precede the width and height arguments.
+
+<P><LI>
+Where a mask is accompanied with a structure,
+the mask always precedes the pointer to the structure in the argument list.
+</UL>
+
+<H5 ALIGN=right><I>Next: <A HREF="programming.html">Programming Considerations</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

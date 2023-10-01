@@ -1,0 +1,116 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetTextProperty</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetTextProperty</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetTextProperty" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../../introduction/errors.html#Status">Status</A></B> XGetTextProperty(<B>display</B>, <B>w</B>, <B>text_prop_return</B>, <B>property</B>)
+       <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+       Window <B>w</B>;
+       <A HREF="converting-string-lists.html">XTextProperty</A> *<B>text_prop_return</B>;
+       Atom <B>property</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>text_prop_return</B>
+<TD> Returns the
+<A HREF="converting-string-lists.html">XTextProperty</A>
+structure.
+
+<TR><TD> <B>property</B>
+<TD> Specifies the property name.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetTextProperty()</B>
+function reads the specified property from the window
+and stores the data in the returned
+<A HREF="converting-string-lists.html">XTextProperty</A>
+structure.
+It stores the data in the value field,
+the type of the data in the encoding field,
+the format of the data in the format field, 
+and the number of items of data in the nitems field.
+An extra byte containing null (which is not included in the nitems member) 
+is stored at the end of the value field of text_prop_return.
+The particular interpretation of the property's encoding 
+and data as text is left to the calling application.
+If the specified property does not exist on the window,
+<B>XGetTextProperty()</B>
+sets the value field to NULL, 
+the encoding field to
+<B>None</B> , 
+the format field to zero, 
+and the nitems field to zero.
+
+<P>
+
+If it was able to read and store the data in the
+<A HREF="converting-string-lists.html">XTextProperty</A>
+structure,
+<B>XGetTextProperty()</B>
+returns a nonzero status; 
+otherwise, it returns a zero status.
+
+<P>
+
+<B>XGetTextProperty()</B>
+can generate
+<B>BadAtom</B> 
+and 
+<B>BadWindow</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAtom</B>
+<TD> A value for an Atom argument does not name a
+     defined Atom.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocClassHint.html">XAllocClassHint()</A></B>,
+<B><A HREF="XAllocIconSize.html">XAllocIconSize()</A></B>,
+<B><A HREF="XAllocSizeHints.html">XAllocSizeHints()</A></B>,
+<B><A HREF="XAllocWMHints.html">XAllocWMHints()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetCommand.html">XSetCommand()</A></B>,
+<B><A HREF="XSetTextProperty.html">XSetTextProperty()</A></B>,
+<B><A HREF="XSetTransientForHint.html">XSetTransientForHint()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetWMClientMachine.html">XSetWMClientMachine()</A></B>,
+<B><A HREF="XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B>,
+<B><A HREF="XSetWMIconName.html">XSetWMIconName()</A></B>,
+<B><A HREF="XSetWMName.html">XSetWMName()</A></B>,
+<B><A HREF="XSetWMProperties.html">XSetWMProperties()</A></B>,
+<B><A HREF="XSetWMProtocols.html">XSetWMProtocols()</A></B>,
+<B><A HREF="XStringListToTextProperty.html">XStringListToTextProperty()</A></B>,
+"<A HREF="text.html">Setting and Reading Text Properties</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

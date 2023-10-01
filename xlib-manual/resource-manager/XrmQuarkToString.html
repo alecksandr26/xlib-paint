@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmQuarkToString</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmQuarkToString</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XrmQuarkToString" "" "@DEF@">
+
+<CODE><PRE>
+#define XrmNameToString(name) XrmQuarkToString(name)
+#define XrmClassToString(class) XrmQuarkToString(class)
+#define XrmRepresentationToString(type) XrmQuarkToString(type)
+
+char *XrmQuarkToString(<B>quark</B>)
+     <B><A HREF="quarks.html">XrmQuark</A></B> <B>quark</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>quark</B>
+<TD> Specifies the quark for which the equivalent string is desired.
+
+</TABLE>
+
+<H2>Description</H2>
+
+These functions can be used to convert from quark representation to string.
+The string pointed to by the return value must not be modified or freed.
+The returned string is byte-for-byte equal to the original
+string passed to one of the string-to-quark routines.
+If no string exists for that quark,
+<B>XrmQuarkToString()</B>
+returns NULL.
+For any given quark, if
+<B>XrmQuarkToString()</B>
+returns a non-NULL value,
+all future calls will return the same value (identical address).
+
+<H2>See also</H2>
+
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>,
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmMergeDatabases.html">XrmMergeDatabases()</A></B>,
+<B><A HREF="XrmPermStringToQuark.html">XrmPermStringToQuark()</A></B>,
+<B><A HREF="XrmPutResource.html">XrmPutResource()</A></B>,
+<B><A HREF="XrmStringToBindingQuarkList.html">XrmStringToBindingQuarkList()</A></B>,
+<B><A HREF="XrmStringToQuark.html">XrmStringToQuark()</A></B>,
+<B><A HREF="XrmStringToQuarkList.html">XrmStringToQuarkList()</A></B>,
+<B><A HREF="XrmUniqueQuark.html">XrmUniqueQuark()</A></B>,
+"<A HREF="quarks.html">Quarks</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

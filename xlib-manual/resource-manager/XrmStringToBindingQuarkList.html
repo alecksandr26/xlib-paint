@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmStringToBindingQuarkList</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmStringToBindingQuarkList</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XrmStringToBindingQuarkList" "" "@DEF@">
+
+<CODE><PRE>
+XrmStringToBindingQuarkList(<B>string</B>, <B>bindings_return</B>, <B>quarks_return</B>)
+     char *<B>string</B>;
+     <A HREF="quarks.html#XrmBindingList">XrmBindingList</A> <B>bindings_return</B>;
+     <B><A HREF="quarks.html#XrmQuark">XrmQuarkList</A></B> <B>quarks_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>string</B>
+<TD> Specifies the string for which a quark list is to be allocated.
+
+<TR><TD> <B>bindings_return</B>
+<TD> Returns the binding list.
+The caller must allocate sufficient space for the binding list before calling 
+<B>XrmStringToBindingQuarkList()</B>.
+
+<TR><TD> <B>quarks_return</B>
+<TD> Returns the list of quarks.
+The caller must allocate sufficient space for the quarks list before calling 
+<B>XrmStringToBindingQuarkList()</B>.
+
+</TABLE>
+
+<H2>Description</H2>
+
+Component names in the list are separated by a period or 
+an asterisk character.
+The string must be in the format of a valid ResourceName (see "<A HREF="file-syntax.html">Resource File Syntax</A>").
+If the string does not start with a period or an asterisk, 
+a tight binding is assumed.
+For example, the string ``*a.b*c'' becomes:
+
+<P>
+
+<TABLE>
+<TR><TD><B>quarks:		<TD ALIGN=center>a	<TD ALIGN=center>b	<TD ALIGN=center>c
+<TR><TD><B>bindings:		<TD ALIGN=center>loose	<TD ALIGN=center>tight	<TD ALIGN=center>loose
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>,
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmMergeDatabases.html">XrmMergeDatabases()</A></B>,
+<B><A HREF="XrmPermStringToQuark.html">XrmPermStringToQuark()</A></B>,
+<B><A HREF="XrmPutResource.html">XrmPutResource()</A></B>,
+<B><A HREF="XrmQuarkToString.html">XrmQuarkToString()</A></B>,
+<B><A HREF="XrmStringToBindingQuarkList.html">XrmStringToBindingQuarkList()</A></B>,
+<B><A HREF="XrmStringToQuark.html">XrmStringToQuark()</A></B>,
+<B><A HREF="XrmUniqueQuark.html">XrmUniqueQuark()</A></B>,
+"<A HREF="quarks.html">Quarks</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

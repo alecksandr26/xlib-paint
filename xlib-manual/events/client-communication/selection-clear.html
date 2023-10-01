@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: SelectionClear Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.13.3 SelectionClear Events</H1>
+
+<!.IN "Events" "SelectionClear" >
+<!.IN "SelectionClear" "" "@DEF@">
+
+The X server reports
+<B>SelectionClear</B>
+events to the client losing ownership of a selection.
+The X server generates this event type when another client
+asserts ownership of the selection by calling
+<B><A HREF="../../window-information/XSetSelectionOwner.html">XSetSelectionOwner()</A></B>.
+
+<A NAME="XSelectionClearEvent"></A>
+<P>
+
+The structure for this event type contains:
+
+<P>
+
+<!.IN "XSelectionClearEvent" "" "@DEF@">
+
+<PRE><CODE>
+typedef struct {
+	int type;		/* SelectionClear */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Window window;
+	Atom selection;
+	Time time;
+} XSelectionClearEvent;
+</PRE></CODE>
+
+<P>
+
+The <B>selection</B> member is set to the selection atom.
+The <B>time</B> member is set to the last change time recorded for the 
+selection.
+The <B>window</B> member is the window that was specified by the current owner
+(the owner losing the selection) in its
+<B><A HREF="../../window-information/XSetSelectionOwner.html">XSetSelectionOwner()</A></B>
+call.
+
+<H5 ALIGN=right><I>Next: <A HREF="selection-request.html">SelectionRequest Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

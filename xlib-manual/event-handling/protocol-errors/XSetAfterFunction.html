@@ -1,0 +1,46 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetAfterFunction</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetAfterFunction</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XSetAfterFunction" "" "@DEF@">
+
+<CODE><PRE>
+int (*XSetAfterFunction(<B>display</B>, <B>procedure</B>))()
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      int (*<B>procedure</B>)();
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>procedure</B>
+<TD> Specifies the procedure to be called.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The specified procedure is called with only a display pointer.
+<B>XSetAfterFunction()</B>
+returns the previous after function.
+
+<H2>See also</H2>
+
+<B><A HREF="XSetErrorHandler.html">XSetErrorHandler()</A></B>,
+<B><A HREF="XSynchronize.html">XSynchronize()</A></B>,
+"<A HREF="synchronization.html">Enabling or Disabling Synchronization</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

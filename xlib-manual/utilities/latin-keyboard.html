@@ -1,0 +1,35 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Latin-1 Keyboard Event Functions</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>16.2 Latin-1 Keyboard Event Functions</H1>
+
+"<A HREF="../localization/">Locales and Internationalized Text Functions</A>"
+describes internationalized text input facilities,
+but sometimes it is expedient to write an application that
+only deals with Latin-1 characters and ASCII controls,
+so Xlib provides a simple function for that purpose.
+<B><A HREF="XLookupString.html">XLookupString()</A></B>
+handles the standard modifier semantics described in "<A HREF="../input/keyboard-encoding.html">Keyboard Encoding</A>".
+This function does not use any of the input method facilities
+described in "<A HREF="../localization/">Locales and Internationalized Text Functions</A>" and does not depend on the current locale.
+
+<P>
+
+To map a key event to an ISO Latin-1 string, use
+<B><A HREF="XLookupString.html">XLookupString()</A></B>.
+
+<P>
+
+To rebind the meaning of a KeySym for
+<B><A HREF="XLookupString.html">XLookupString()</A></B>,
+use
+<B><A HREF="XRebindKeysym.html">XRebindKeysym()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="allocating-permanent-storage.html">Allocating Permanent Storage</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

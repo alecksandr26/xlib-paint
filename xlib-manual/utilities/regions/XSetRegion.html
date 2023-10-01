@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetRegion</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetRegion</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XSetRegion" "" "@DEF@">
+
+<CODE><PRE>
+XSetRegion(<B>display</B>, <B>gc</B>, <B>r</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="../../GC/manipulating.html">GC</A> <B>gc</B>;
+      <A HREF="./">Region</A> <B>r</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>r</B>
+<TD> Specifies the region.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B><A HREF="XSetRegion.html">XSetRegion()</A></B>
+function sets the <A HREF="../../GC/manipulating.html#clip-mask">clip-mask</A> in the GC to the specified region.
+The region is specified relative to the drawable's origin.
+The resulting GC clip origin is implementation dependent.
+Once it is set in the GC,
+the region can be destroyed.
+
+<H2>See also</H2>
+
+<B><A HREF="XCreateRegion.html">XCreateRegion()</A></B>,
+<B><A HREF="XDestroyRegion.html">XDestroyRegion()</A></B>,
+<B><A HREF="XEmptyRegion.html">XEmptyRegion()</A></B>,
+<B><A HREF="XIntersectRegion.html">XIntersectRegion()</A></B>,
+"<A HREF="creating-copying-destroying.html">Creating, Copying, or Destroying Regions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

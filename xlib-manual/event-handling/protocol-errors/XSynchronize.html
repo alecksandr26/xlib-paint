@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSynchronize</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSynchronize</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Debugging" "synchronous mode">
+<!.IN "XSynchronize" "" "@DEF@">
+
+<CODE><PRE>
+int (*XSynchronize(<B>display</B>, <B>onoff</B>))()
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Bool <B>onoff</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>onoff</B>
+<TD> Specifies a Boolean value that indicates whether to enable 
+or disable synchronization.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XSynchronize()</B>
+function returns 
+the previous after function.
+If onoff is 
+<B>True</B> , 
+<B>XSynchronize()</B>
+turns on synchronous behavior.
+If onoff is
+<B>False</B> ,
+<B>XSynchronize()</B>
+turns off synchronous behavior.
+
+<H2>See also</H2>
+
+<B><A HREF="XSetAfterFunction.html">XSetAfterFunction()</A></B>,
+<B><A HREF="XSetErrorHandler.html">XSetErrorHandler()</A></B>,
+"<A HREF="synchronization.html">Enabling or Disabling Synchronization</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

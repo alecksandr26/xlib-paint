@@ -1,0 +1,858 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Display Macros</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>2.2.1. Display Macros</H1>
+
+<P>
+
+Applications should not directly modify any part of the
+<A HREF="opening.html#Display">Display</A>
+and
+<A HREF="screen-information.html">Screen</A>
+structures.
+The members should be considered read-only,
+although they may change as the result of other operations on the display.
+
+<P>
+ 
+The following lists the C language macros,
+their corresponding function equivalents that are for other language bindings,
+and what data they both can return.
+
+<H2>AllPlanes</H2>
+<A NAME="AllPlanes"></A>
+<A NAME="XAllPlanes"></A>
+
+<P>
+
+<PRE><CODE>
+AllPlanes
+
+unsigned long XAllPlanes() 
+</PRE></CODE>
+
+<P>
+
+<!.IN "AllPlanes" "" "@DEF@">
+<!.IN "XAllPlanes" "" "@DEF@">
+Both return a value with all bits set to 1 suitable for use in a plane argument to
+a procedure.
+
+<H2>BlackPixel, WhitePixel</H2>
+
+<A NAME="BlackPixel"></A>
+<A NAME="WhitePixel"></A>
+
+<P>
+
+Both 
+<B>BlackPixel()</B> 
+and 
+<B>WhitePixel()</B>
+can be used in implementing a monochrome application.
+These pixel values are for permanently allocated entries in the default
+colormap.
+The actual RGB (red, green, and blue) values are settable on some screens 
+and, in any case, may not actually be black or white.
+The names are intended to convey the expected relative intensity of the colors.
+
+<PRE><CODE>
+BlackPixel(<B>display</B>, <B>screen_number</B>)
+
+unsigned long XBlackPixel(<B>display</B>, <B>screen_number</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen_number</B>;
+</CODE></PRE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the appropriate screen number on the host server.
+</TABLE>
+
+<P>
+
+<!.IN "BlackPixel" "" "@DEF@">
+<!.IN "XBlackPixel" "" "@DEF@">
+Both return the black pixel value for the specified screen.
+
+<P>
+
+<CODE><PRE>
+WhitePixel(<B>display</B>, <B>screen_number</B>)
+
+unsigned long XWhitePixel(<B>display</B>, <B>screen_number</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen_number</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the appropriate screen number on the host server.
+</TABLE>
+<P>
+
+<!.IN "WhitePixel" "" "@DEF@">
+<!.IN "XWhitePixel" "" "@DEF@">
+Both return the white pixel value for the specified screen. 
+
+<P>
+
+<A NAME="ConnectionNumber"></A>
+<H2>ConnectionNumber</H2>
+
+<CODE><PRE>
+ConnectionNumber(<B>display</B>)
+
+int XConnectionNumber(<B>display</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+</PRE></CODE>
+
+<TABLE>
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<!.IN "ConnectionNumber" "" "@DEF@">
+<!.IN "XConnectionNumber" "" "@DEF@">
+Both return a connection number for the specified display.
+On a POSIX-conformant system,
+this is the file descriptor of the connection.
+
+<A NAME="DefaultColormap">
+<H2>DefaultColormap</H2>
+
+<CODE><PRE>
+DefaultColormap(<B>display</B>, <B>screen_number</B>)
+
+Colormap XDefaultColormap(<B>display</B>, <B>screen_number</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen_number</B>;
+
+</PRE></CODE>
+
+<TABLE>
+<TR><TD><B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the appropriate screen number on the host server.
+</TABLE>
+
+<P>
+
+<!.IN "DefaultColormap" "" "@DEF@">
+<!.IN "XDefaultColormap" "" "@DEF@">
+Both return the default colormap ID for allocation on the specified screen.
+Most routine allocations of color should be made out of this colormap.
+
+<A NAME="DefaultDepth"></A>
+<H2>DefaultDepth</H2>
+
+<CODE><PRE>
+DefaultDepth(<B>display</B>, <B>screen_number</B>)
+
+int XDefaultDepth(<B>display</B>, <B>screen_number</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen_number</B>;
+
+</PRE></CODE>
+
+<TABLE>
+<TR><TD><B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the appropriate screen number on the host server.
+</TABLE>
+
+<!.IN "DefaultDepth" "" "@DEF@">
+<!.IN "XDefaultDepth" "" "@DEF@">
+Both return the depth (number of planes) of the default root window for the
+specified screen.
+Other depths may also be supported on this screen (see
+.PN XMatchVisualInfo ).
+
+<P>
+
+<A NAME="XListDepths"></A>
+<H2>XListDepths</H2>
+
+
+<!.IN "XListDepths" "" "@DEF@">
+To determine the number of depths that are available on a given screen, use
+<B>XListDepths()</B>.
+
+<CODE><PRE>
+int *XListDepths(<B>display</B>, <B>screen_number</B>, <B>count_return</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen_number</B>;
+      int *<B>count_return</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the appropriate screen number on the host server.
+
+<TR><TD> <B>count_return</B>
+<TD> Returns the number of depths
+
+</TABLE>
+
+<P>
+
+The
+<B>XListDepths()</B>
+function returns the array of depths 
+that are available on the specified screen.
+If the specified <B>screen_number</B> is valid and sufficient memory for the array
+can be allocated,
+<B>XListDepths()</B>
+sets <B>count_return</B> to the number of available depths.
+Otherwise, it does not set count_return and returns NULL.
+To release the memory allocated for the array of depths, use
+<B><A HREF="XFree.html">XFree()</A></B>.
+
+<P>
+
+<A NAME="DefaultGC"></A>
+<H2>DefaultGC</H2>
+
+
+<CODE><PRE>
+DefaultGC(<B>display</B>, <B>screen_number</B>)
+
+GC XDefaultGC(<B>display</B>, <B>screen_number</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen_number</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the appropriate screen number on the host server.
+
+</TABLE>
+
+<P>
+
+<!.IN "DefaultGC" "" "@DEF@">
+<!.IN "XDefaultGC" "" "@DEF@">
+Both return the default graphics context for the root window of the 
+specified screen.
+This GC is created for the convenience of simple applications
+and contains the default GC components with the foreground and
+background pixel values initialized to the black and white
+pixels for the screen, respectively.
+You can modify its contents freely because it is not used in any Xlib
+function.
+This GC should never be freed.
+
+<P>
+
+<A NAME="DefaultRootWindow"></A>
+<H2>DefaultRootWindow</H2>
+
+<CODE><PRE>
+DefaultRootWindow(<B>display</B>)
+
+Window XDefaultRootWindow(<B>display</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<P>
+
+<!.IN "DefaultRootWindow" "" "@DEF@">
+<!.IN "XDefaultRootWindow" "" "@DEF@">
+Both return the root window for the default screen.
+
+<P>
+
+<A NAME="DefaultScreenOfDisplay"></A>
+<H2>DefaultScreenOfDisplay</H2>
+
+<CODE><PRE>
+DefaultScreenOfDisplay(<B>display</B>)
+
+Screen *XDefaultScreenOfDisplay(<B>display</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<P>
+
+<!.IN "DefaultScreenOfDisplay" "" "@DEF@">
+<!.IN "XDefaultScreenOfDisplay" "" "@DEF@">
+Both return a pointer to the default screen.
+
+<P>
+
+<A NAME="ScreensOfDisplay"></A>
+<H2>ScreensOfDisplay</H2>
+
+<CODE><PRE>
+ScreenOfDisplay(<B>display</B>, <B>screen_number</B>)
+
+Screen *XScreenOfDisplay(<B>display</B>, <B>screen_number</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen_number</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the appropriate screen number on the host server.
+
+</TABLE>
+
+<P>
+
+<!.IN "ScreenOfDisplay" "" "@DEF@">
+<!.IN "XScreenOfDisplay" "" "@DEF@">
+Both return a pointer to the indicated screen.
+
+<P>
+
+<A NAME="DefaultScreen"></A>
+<H2>DefaultScreen</H2>
+
+<CODE><PRE>
+DefaultScreen(<B>display</B>)
+
+int XDefaultScreen(<B>display</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<P>
+
+<!.IN "DefaultScreen" "" "@DEF@">
+<!.IN "XDefaultScreen" "" "@DEF@">
+Both return the default screen number referenced by the 
+<B><A HREF="opening.html">XOpenDisplay()</A></B>
+function. 
+This macro or function should be used to retrieve the screen number 
+in applications that will use only a single screen.
+
+<P>
+
+<A NAME="DefaultVisual"></A>
+<H2>DefaultVisual</H2>
+
+<CODE><PRE>
+DefaultVisual(<B>display</B>, <B>screen_number</B>)
+
+Visual *XDefaultVisual(<B>display</B>, <B>screen_number</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen_number</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the appropriate screen number on the host server.
+
+</TABLE>
+
+<P>
+
+<!.IN "DefaultVisual" "" "@DEF@">
+<!.IN "XDefaultVisual" "" "@DEF@">
+Both return the default visual type for the specified screen.
+For further information about visual types,
+see section 3.1.
+
+<P>
+
+<A NAME="DisplayCells"></A>
+<H2>DisplayCells</H2>
+
+<CODE><PRE>
+DisplayCells(<B>display</B>, <B>screen_number</B>)
+
+int XDisplayCells(<B>display</B>, <B>screen_number</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen_number</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the appropriate screen number on the host server.
+
+</TABLE>
+
+<P>
+
+<!.IN "DisplayCells" "" "@DEF@">
+<!.IN "XDisplayCells" "" "@DEF@">
+Both return the number of entries in the default colormap.
+
+<P>
+
+<A NAME="DisplayPlanes"></A>
+<H2>DisplayPlanes</H2>
+
+<CODE><PRE>
+DisplayPlanes(<B>display</B>, <B>screen_number</B>)
+
+int XDisplayPlanes(<B>display</B>, <B>screen_number</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen_number</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the appropriate screen number on the host server.
+
+</TABLE>
+
+<P>
+
+<!.IN "DisplayPlanes" "" "@DEF@">
+<!.IN "XDisplayPlanes" "" "@DEF@">
+Both return the depth of the root window of the specified screen.
+For an explanation of depth,
+see the <A HREF="../glossary/">glossary</A>.
+
+<P>
+
+<A NAME="DisplayString"></A>
+<H2>DisplayString</H2>
+
+<CODE><PRE>
+DisplayString(<B>display</B>)
+
+char *XDisplayString(<B>display</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<P>
+
+<!.IN "DisplayString" "" "@DEF@">
+<!.IN "XDisplayString" "" "@DEF@">
+Both return the string that was passed to 
+<B><A HREF="opening.html">XOpenDisplay()</A></B>
+when the current display was opened. 
+On POSIX-conformant systems, 
+if the passed string was NULL, these return the value of
+the DISPLAY environment variable when the current display was opened.
+<!.IN "POSIX System Call" "fork">
+These are useful to applications that invoke the 
+<B>fork</B>
+system call and want to open a new connection to the same display from the 
+child process as well as for printing error messages.
+
+<P>
+
+<A NAME="XExtendedMaxRequestSize"></A>
+<H2>XExtendedMaxRequestSize</H2>
+
+<CODE><PRE>
+long XExtendedMaxRequestSize(<B>display</B>)
+	<A HREF="opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<P>
+
+<!.IN "XExtendedMaxRequestSize" "" "@DEF@">
+The
+<B>XExtendedMaxRequestSize()</B>
+function returns zero if the specified display does not support an
+extended-length protocol encoding; otherwise,
+it returns the maximum request size (in 4-byte units) supported
+by the server using the extended-length encoding.
+The Xlib functions
+<B><A HREF="../graphics/drawing/XDrawLines.html">XDrawLines()</A></B>,
+<B><A HREF="../graphics/drawing/XDrawArcs.html">XDrawArcs()</A></B>,
+<B><A HREF="../graphics/filling-areas/XFillPolygon.html">XFillPolygon()</A></B>,
+<B><A HREF="../window-information/XChangeProperty.html">XChangeProperty()</A></B>,
+<B><A HREF="../GC/convenience-functions/XSetClipRectangles.html">XSetClipRectangles()</A></B>,
+and
+<B><A HREF="../utilities/regions/XSetRegion.html">XSetRegion()</A></B>
+will use the extended-length encoding as necessary, if supported
+by the server.  Use of the extended-length encoding in other Xlib
+functions (for example,
+<B><A HREF="../graphics/drawing/XDrawPoints.html">XDrawPoints()</A></B>,
+<B><A HREF="../graphics/drawing/XDrawRectangles.html">XDrawRectangles()</A></B>,
+<B><A HREF="../graphics/drawing/XDrawSegments.html">XDrawSegments()</A></B>,
+<B><A HREF="../graphics/filling-areas/XFillArcs.html">XFillArcs()</A></B>,
+<B><A HREF="../graphics/filling-areas/XFillRectangles.html">XFillRectangles()</A></B>,
+<B><A HREF="../graphics/XPutImage.html">XPutImage()</A></B>)
+is permitted but not required; an Xlib implementation may choose to
+split the data across multiple smaller requests instead.
+
+<P>
+
+<A NAME="XMaxRequestSize"></A>
+<H2>XMaxRequestSize</H2>
+
+<CODE><PRE>
+long XMaxRequestSize(<B>display</B>)
+	<A HREF="opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<P>
+
+<!.IN "XMaxRequestSize" "" "@DEF@">
+The
+<B>XMaxRequestSize()</B>
+function returns the maximum request size (in 4-byte units) supported
+by the server without using an extended-length protocol encoding.
+Single protocol requests to the server can be no larger than this size
+unless an extended-length protocol encoding is supported by the server.
+The protocol guarantees the size to be no smaller than 4096 units
+(16384 bytes).
+Xlib automatically breaks data up into multiple protocol requests
+as necessary for the following functions:
+<B><A HREF="../graphics/drawing/XDrawPoints.html">XDrawPoints()</A></B>,
+<B><A HREF="../graphics/drawing/XDrawRectangles.html">XDrawRectangles()</A></B>,
+<B><A HREF="../graphics/drawing/XDrawSegments.html">XDrawSegments()</A></B>,
+<B><A HREF="../graphics/filling-areas/XFillArcs.html">XFillArcs()</A></B>,
+<B><A HREF="../graphics/filling-areas/XFillRectangles.html">XFillRectangles()</A></B>,
+and 
+<B><A HREF="../graphics/XPutImage.html">XPutImage()</A></B>.
+
+<P>
+
+<A NAME="LastKnownRequestProcessed"></A>
+<H2>LastKnownRequestProcessed</H2>
+
+<CODE><PRE>
+LastKnownRequestProcessed(<B>display</B>)
+
+unsigned long XLastKnownRequestProcessed(<B>display</B>)
+     <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<P>
+
+<!.IN "LastKnownRequestProcessed" "" "@DEF@">
+<!.IN "XLastKnownRequestProcessed" "" "@DEF@">
+Both extract the full serial number of the last request known by Xlib
+to have been processed by the X server.
+Xlib automatically sets this number when replies, events, and errors
+are received.
+
+<P>
+
+<A NAME="NextRequest"></A>
+<H2>NextRequest</H2>
+
+<CODE><PRE>
+NextRequest(<B>display</B>)
+
+unsigned long XNextRequest(<B>display</B>)
+     <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<P>
+
+<!.IN "NextRequest" "" "@DEF@">
+<!.IN "XNextRequest" "" "@DEF@">
+Both extract the full serial number that is to be used for the next
+request.
+Serial numbers are maintained separately for each display connection.
+
+<P>
+
+<A NAME="ProtocolVersion"></A>
+<H2>ProtocolVersion</H2>
+
+<CODE><PRE>
+ProtocolVersion(<B>display</B>)
+
+int XProtocolVersion(<B>display</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<P>
+
+<!.IN "ProtocolVersion" "" "@DEF@">
+<!.IN "XProtocolVersion" "" "@DEF@">
+Both return the major version number (11) of the X protocol associated with 
+the connected display.
+
+<P>
+
+<A NAME="ProtocolRevision"></A>
+<H2>ProtocolRevision</H2>
+
+<CODE><PRE>
+ProtocolRevision(<B>display</B>)
+
+int XProtocolRevision(<B>display</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<P>
+
+<!.IN "ProtocolRevision" "" "@DEF@">
+<!.IN "XProtocolRevision" "" "@DEF@">
+Both return the minor protocol revision number of the X server.
+
+<P>
+
+<A NAME="QLength"></A>
+<H2>QLength</H2>
+
+<CODE><PRE>
+QLength(<B>display</B>)
+
+int XQLength(<B>display</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<P>
+
+<!.IN "QLength" "" "@DEF@">
+<!.IN "XQLength" "" "@DEF@">
+Both return the length of the event queue for the connected display.
+Note that there may be more events that have not been read into
+the queue yet (see
+<B><A HREF="../event-handling/XEventsQueued.html">XEventsQueued()</A></B>).
+
+<P>
+
+<A NAME="RootWindow"></A>
+<H2>RootWindow</H2>
+
+<CODE><PRE>
+RootWindow(<B>display</B>, <B>screen_number</B>)
+
+Window XRootWindow(<B>display</B>, <B>screen_number</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen_number</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the appropriate screen number on the host server.
+
+</TABLE>
+
+<P>
+
+<!.IN "Window" "RootWindow">
+<!.IN "RootWindow" "" "@DEF@">
+<!.IN "Window" "XRootWindow">
+<!.IN "XRootWindow" "" "@DEF@">
+Both return the root window.
+These are useful with functions that need a drawable of a particular screen
+and for creating top-level windows.
+
+<P>
+
+<A NAME="ScreenCount"></A>
+<H2>ScreenCount</H2>
+
+<CODE><PRE>
+ScreenCount(<B>display</B>)
+
+int XScreenCount(<B>display</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<P>
+
+<!.IN "ScreenCount" "" "@DEF@">
+<!.IN "XScreenCount" "" "@DEF@">
+Both return the number of available screens.
+
+<P>
+
+<A NAME="ServerVendor"></A>
+<H2>ServerVendor</H2>
+
+<CODE><PRE>
+ServerVendor(<B>display</B>)
+
+char *XServerVendor(<B>display</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<P>
+
+<!.IN "ServerVendor" "" "@DEF@">
+<!.IN "XServerVendor" "" "@DEF@">
+Both return a pointer to a null-terminated string that provides
+some identification of the owner of the X server implementation.
+If the data returned by the server is in the Latin Portable Character Encoding,
+then the string is in the Host Portable Character Encoding.
+Otherwise, the contents of the string are implementation dependent.
+
+<P>
+
+<A NAME="VendorRelease"></A>
+<H2>VendorRelease</H2>
+
+<CODE><PRE>
+VendorRelease(<B>display</B>)
+
+int XVendorRelease(<B>display</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<P>
+
+<!.IN "VendorRelease" "" "@DEF@">
+<!.IN "XVendorRelease" "" "@DEF@">
+Both return a number related to a vendor's release of the X server.
+
+<H5 ALIGN=right><I>Next: <A HREF="image-format-macros.html">Image Format Functions and Macros</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

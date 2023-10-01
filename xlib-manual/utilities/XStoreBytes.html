@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XStoreBytes</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XStoreBytes</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XStoreBytes" "" "@DEF@">
+
+<CODE><PRE>
+XStoreBytes(<B>display</B>, <B>bytes</B>, <B>nbytes</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      char *<B>bytes</B>;
+      int <B>nbytes</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>bytes</B>
+<TD> Specifies the bytes, which are not necessarily ASCII or null-terminated.
+
+<TR><TD> <B>nbytes</B>
+<TD> Specifies the number of bytes to be stored.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The data can have embedded null characters
+and need not be null-terminated.
+The cut buffer's contents can be retrieved later by
+any client calling
+<B><A HREF="XFetchBytes.html">XFetchBytes()</A></B>.
+
+<P>
+
+<B>XStoreBytes()</B>
+can generate a
+<B>BadAlloc</B>
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XFetchBuffer.html">XFetchBuffer()</A></B>,
+<B><A HREF="XFetchBytes.html">XFetchBytes()</A></B>,
+<B><A HREF="XRotateBuffers.html">XRotateBuffers()</A></B>,
+<B><A HREF="XStoreBuffer.html">XStoreBuffer()</A></B>,
+"<A HREF="using-cut-buffers.html">Using Cut Buffers</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

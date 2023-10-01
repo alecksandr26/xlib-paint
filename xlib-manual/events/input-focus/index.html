@@ -1,0 +1,132 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Input Focus Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.7 Input Focus Events</H1>
+
+<A NAME="FocusIn"></A>
+<A NAME="FocusOut"></A>
+<P>
+
+<!.IN "Events" "FocusIn">
+<!.IN "Events" "FocusOut">
+This section describes the processing that occurs for the input focus events
+<B>FocusIn</B>
+and
+<B>FocusOut</B>.
+<!.IN "FocusIn" "" "@DEF@">
+<!.IN "FocusOut" "" "@DEF@">
+The X server can report
+<B>FocusIn</B>
+or
+<B>FocusOut</B>
+events to clients wanting information about when the input focus changes.
+The keyboard is always attached to some window 
+(typically, the root window or a top-level window), 
+which is called the focus window.
+The focus window and the position of the pointer determine the window that
+receives keyboard input.
+Clients may need to know when the input focus changes
+to control highlighting of areas on the screen.
+
+<P>
+
+To receive
+<B>FocusIn</B>
+or
+<B>FocusOut</B>
+events, set the
+<B>FocusChangeMask</B>
+bit in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the window. 
+
+<P>
+
+The structure for these event types contains:
+
+<A NAME="XFocusChangeEvent"></A>
+<A NAME="XFocusInEvent"></A>
+<A NAME="XFocusOutEvent"></A>
+<P>
+
+<!.IN "XFocusChangeEvent" "" "@DEF@">
+<!.IN "XFocusInEvent" "" "@DEF@">
+<!.IN "XFocusOutEvent" "" "@DEF@">
+
+<PRE><CODE>
+
+typedef struct {
+	int type;		/* FocusIn or FocusOut */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Window window;		/* window of event */
+	int mode;		/* NotifyNormal, NotifyGrab, NotifyUngrab */
+	int detail;
+		/*
+	 	* NotifyAncestor, NotifyVirtual, NotifyInferior, 
+	 	* NotifyNonlinear,NotifyNonlinearVirtual, NotifyPointer,
+	 	* NotifyPointerRoot, NotifyDetailNone 
+	 	*/
+} XFocusChangeEvent;
+typedef XFocusChangeEvent XFocusInEvent;
+typedef XFocusChangeEvent XFocusOutEvent;
+</PRE></CODE>
+
+<P>
+
+The <B>window</B> member is set to the window on which the
+<B>FocusIn</B>
+or
+<B>FocusOut</B>
+event was generated.
+This is the window used by the X server to report the event. 
+The <B>mode</B> member is set to indicate whether the focus events 
+are normal focus events, 
+focus events while grabbed,
+focus events
+when a grab activates, or focus events when a grab deactivates.
+The X server can set the mode member to 
+<B>NotifyNormal</B>,
+<B>NotifyWhileGrabbed</B>,
+<B>NotifyGrab</B>,
+or
+<B>NotifyUngrab</B>.
+
+<P>
+
+All 
+<B>FocusOut</B>
+events caused by a window unmap are generated after any
+<B>UnmapNotify</B>
+event; however, the X protocol does not constrain the ordering of 
+<B>FocusOut</B>
+events with respect to
+generated 
+<B><A HREF="../window-entry-exit/">EnterNotify</A></B>,
+<B><A HREF="../window-entry-exit/">LeaveNotify</A></B>,
+<B><A HREF="../window-state-change/visibility.html">VisibilityNotify</A></B>,
+and
+<B><A HREF="../exposure/expose.html">Expose</A></B>
+events.
+
+<P>
+
+Depending on the event mode,
+the <B>detail</B> member is set to indicate the notify detail and can be
+<B>NotifyAncestor</B>,
+<B>NotifyVirtual</B>,
+<B>NotifyInferior</B>,
+<B>NotifyNonlinear</B>,
+<B>NotifyNonlinearVirtual</B>,
+<B>NotifyPointer</B>,
+<B>NotifyPointerRoot</B>,
+or
+<B>NotifyDetailNone</B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="normal-and-grabbed.html">Normal Focus Events and Focus Events While Grabbed</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

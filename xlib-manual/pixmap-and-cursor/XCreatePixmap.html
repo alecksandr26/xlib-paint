@@ -1,0 +1,106 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XCreatePixmap</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XCreatePixmap</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XCreatePixmap" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="pixmap.html">Pixmap</A> XCreatePixmap(<B>display</B>, <B>d</B>, <B>width</B>, <B>height</B>, <B>depth</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Drawable <B>d</B>;
+      unsigned int <B>width</B>, <B>height</B>;
+      unsigned int <B>depth</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>d</B>
+<TD> Specifies which screen the pixmap is created on. 
+
+<TR><TD> <B>width</B><BR>
+	<B>height</B>
+<TD> Specify the width and height, which define the dimensions of the pixmap.
+
+<TR><TD> <B>depth</B>
+<TD> Specifies the depth of the pixmap.
+</TABLE>
+
+<H2>Description</H2>
+ 
+The
+<B>XCreatePixmap()</B>
+function creates a pixmap of the width, height, and depth you specified
+and returns a pixmap ID that identifies it.
+It is valid to pass an 
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window to the drawable argument.
+The width and height arguments must be nonzero,
+or a 
+<B>BadValue</B>
+error results.
+The depth argument must be one of the depths supported by the screen
+of the specified drawable,
+or a
+<B>BadValue</B>
+error results.
+
+<P>
+
+The server uses the specified drawable to determine on which screen
+to create the pixmap.
+The pixmap can be used only on this screen
+and only with other drawables of the same depth (see
+<B><A HREF="../graphics/XCopyPlane.html">XCopyPlane()</A></B>
+for an exception to this rule).
+The initial contents of the pixmap are undefined.
+
+<P>
+
+<B>XCreatePixmap()</B>
+can generate
+<B>BadAlloc</B> ,
+<B>BadDrawable</B> ,
+and
+<B>BadValue</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../graphics/XCopyArea.html">XCopyArea()</A></B>, 
+<B><A HREF="XFreePixmap.html">XFreePixmap()</A></B>,
+"<A HREF="pixmap.html">Creating and Freeing Pixmaps</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

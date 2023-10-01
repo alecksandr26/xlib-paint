@@ -1,0 +1,48 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XClipBox</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XClipBox</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XClipBox" "" "@DEF@">
+
+<CODE><PRE>
+XClipBox(<B>r</B>, <B>rect_return</B>)
+      <A HREF="./">Region</A> <B>r</B>;
+      <A HREF="../../graphics/drawing/#XRectangle">XRectangle</A> *<B>rect_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>r</B>
+<TD> Specifies the region.
+
+<TR><TD> <B>rect_return</B>
+<TD> Returns the smallest enclosing rectangle.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XClipBox()</B>
+function returns the smallest rectangle enclosing the specified region.
+
+<H2>See also</H2>
+
+<B><A HREF="../../GC/XCreateGC.html">XCreateGC()</A></B>,
+<B><A HREF="../../graphics/drawing/XDrawPoint.html">XDrawPoint()</A></B>,
+<B><A HREF="../../graphics/drawing/XDrawRectangle.html">XDrawRectangle()</A></B>,
+<B><A HREF="XPolygonRegion.html">XPolygonRegion()</A></B>,
+"<A HREF="computing.html">Computing with Regions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

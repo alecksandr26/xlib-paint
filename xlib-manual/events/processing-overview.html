@@ -1,0 +1,334 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Event Processing Overview</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.4 Event Processing Overview</H1>
+
+The event reported to a client application during event processing
+depends on which event masks you provide as the <A HREF="../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute 
+for a window.
+For some event masks, there is a one-to-one correspondence between
+the event mask constant and the event type constant.
+For example, if you pass the event mask
+<B>ButtonPressMask</B>,
+the X server sends back only
+<B><A HREF="keyboard-pointer/keyboard-pointer.html">ButtonPress</A></B>
+events.
+<!.IN "CurrentTime">
+Most events contain a time member,
+which is the time at which an event occurred.
+
+<P>
+
+In other cases, one event mask constant can map to several event type constants.
+For example, if you pass the event mask
+<B>SubstructureNotifyMask</B>,
+the X server can send back
+<B><A HREF="window-state-change/circulate.html">CirculateNotify</A></B>,
+<B><A HREF="window-state-change/configure.html">ConfigureNotify</A></B>,
+<B><A HREF="window-state-change/create.html">CreateNotify</A></B>,
+<B><A HREF="window-state-change/destroy.html">DestroyNotify</A></B>,
+<B><A HREF="window-state-change/gravity.html">GravityNotify</A></B>,
+<B><A HREF="window-state-change/map.html">MapNotify</A></B>,
+<B><A HREF="window-state-change/reparent.html">ReparentNotify</A></B>,
+or
+<B><A HREF="window-state-change/unmap.html">UnmapNotify</A></B>
+events.
+
+<P>
+
+In another case, 
+two event masks can map to one event type.
+For example, 
+if you pass either
+<B>PointerMotionMask</B>
+or
+<B>ButtonMotionMask</B>,
+the X server sends back
+a
+<B><A HREF="keyboard-pointer/keyboard-pointer.html">MotionNotify</A></B>
+event.
+
+<P>
+
+The following table 
+lists the event mask, 
+its associated event type or types, 
+and the structure name associated with the event type.
+Some of these structures actually are typedefs to a generic structure
+that is shared between two event types.
+Note that N.A. appears in columns for which the information is not applicable.
+
+<P>
+
+<TABLE>
+<TR><TD COLSPAN=4><HR>
+<TR><TD><B>Event Mask	<TD><B>Event Type	<TD><B>Structure	<TD><B>Generic Structure
+<TR><TD COLSPAN=4><HR>
+
+<TR><TD><A NAME="ButtonMotionMask">ButtonMotionMask</A>
+	<TD><B><A HREF="keyboard-pointer/keyboard-pointer.html">MotionNotify</A></B>
+	<TD>XPointerMovedEvent	
+	<TD><A HREF="keyboard-pointer/keyboard-pointer.html#XMotionEvent">XMotionEvent</A>
+<TR><TD><A NAME="Button1MotionMask">Button1MotionMask</A>		<TD COLSPAN=3>
+<TR><TD><A NAME="Button2MotionMask">Button2MotionMask</A>		<TD COLSPAN=3>
+<TR><TD><A NAME="Button3MotionMask">Button3MotionMask</A>		<TD COLSPAN=3>
+<TR><TD><A NAME="Button4MotionMask">Button4MotionMask</A>		<TD COLSPAN=3>
+<TR><TD><A NAME="Button5MotionMask">Button5MotionMask</A>		<TD COLSPAN=3>
+
+<TR><TD COLSPAN=4>
+<TR><TD><A NAME="ButtonPressMask">ButtonPressMask</A>
+	<TD><B><A HREF="keyboard-pointer/keyboard-pointer.html">ButtonPress</A></B>
+	<TD>XButtonPressedEvent
+	<TD><A HREF="keyboard-pointer/keyboard-pointer.html#XButtonEvent">XButtonEvent</A>
+
+<TR><TD COLSPAN=4>
+<TR><TD><A NAME="ButtonReleaseMask">ButtonReleaseMask</A>	
+	<TD><B><A HREF="keyboard-pointer/keyboard-pointer.html">ButtonRelease</A></B>
+	<TD>XButtonReleasedEvent
+	<TD><A HREF="keyboard-pointer/keyboard-pointer.html#XButtonEvent">XButtonEvent</A>
+
+<TR><TD COLSPAN=4>
+<TR><TD><A NAME="ColormapChangeMask">ColormapChangeMask</A>
+	<TD><B><A HREF="colormap-state.html">ColormapNotify</A></B>
+	<TD><A HREF="colormap-state.html#XColormapEvent">XColormapEvent</A>
+	<TD>
+
+<TR><TD COLSPAN=4>
+<TR><TD><A NAME="EnterWindowMask">EnterWindowMask</A>
+	<TD><B><A HREF="window-entry-exit/">EnterNotify</A></B>
+	<TD>XEnterWindowEvent
+	<TD><A HREF="window-entry-exit/#XCrossingEvent">XCrossingEvent</A>
+
+<TR><TD COLSPAN=4>
+<TR><TD><A NAME="LeaveWindowMask">LeaveWindowMask</A>
+	<TD><B><A HREF="window-entry-exit/">LeaveNotify</A></B>
+	<TD>XLeaveWindowEvent
+	<TD><A HREF="window-entry-exit/#XCrossingEvent">XCrossingEvent</A>
+
+<TR><TD COLSPAN=4>
+<TR><TD><A NAME="ExposureMask">ExposureMask</A>	
+	<TD><B><A HREF="exposure/expose.html">Expose</A></B>
+	<TD><A HREF="exposure/expose.html#XExposeEvent">XExposeEvent</A>
+	<TD>
+<TR><TD><A HREF="../GC/manipulating.html#graphics-exposure">GCGraphicsExposures</A> in GC
+	<TD><B><A HREF="exposure/graphics-expose-and-no-expose.html">GraphicsExpose</A></B>
+	<TD><A HREF="exposure/graphics-expose-and-no-expose.html#XGraphicsExposeEvent">XGraphicsExposeEvent</A>
+	<TD>
+<TR><TD>
+	<TD><B><A HREF="exposure/graphics-expose-and-no-expose.html">NoExpose</A></B>
+	<TD><A HREF="exposure/graphics-expose-and-no-expose.html#XNoExposeEvent">XNoExposeEvent</A>
+	<TD>
+
+<TR><TD COLSPAN=4>
+<TR><TD><A NAME="FocusChangeMask">FocusChangeMask</A>
+	<TD><B><A HREF="input-focus/">FocusIn</A></B>
+	<TD>XFocusInEvent
+	<TD><A HREF="input-focus/#XFocusChangeEvent">XFocusChangeEvent</A>
+<TR><TD>
+	<TD><B><A HREF="input-focus/">FocusOut</A></B>
+	<TD>XFocusOutEvent
+	<TD><A HREF="input-focus/#XFocusChangeEvent">XFocusChangeEvent</A>
+
+<TR><TD COLSPAN=4>
+<TR><TD><A NAME="KeymapStateMask">KeymapStateMask</A>
+	<TD><B><A HREF="key-map.html">KeymapNotify</A></B>
+	<TD><A HREF="key-map.html#XKeymapEvent">XKeymapEvent</A>
+	<TD>
+
+<TR><TD COLSPAN=4>
+<TR><TD><A NAME="KeyPressMask">KeyPressMask</A>
+	<TD><B><A HREF="keyboard-pointer/keyboard-pointer.html">KeyPress</A></B>
+	<TD>XKeyPressedEvent
+	<TD><A HREF="keyboard-pointer/keyboard-pointer.html#XKeyEvent">XKeyEvent</A>
+<TR><TD><A NAME="KeyReleaseMask">KeyReleaseMask</A>
+	<TD><B><A HREF="keyboard-pointer/keyboard-pointer.html">KeyRelease</A></B>
+	<TD>XKeyReleasedEvent
+	<TD><A HREF="keyboard-pointer/keyboard-pointer.html#XKeyEvent">XKeyEvent</A>
+
+<TR><TD COLSPAN=4>
+<TR><TD><A NAME="OwnerGrabButtonMask">OwnerGrabButtonMask</A>	
+	<TD>N.A.	
+	<TD>N.A.
+	<TD>
+
+<TR><TD COLSPAN=4>
+<TR><TD><A NAME="PointerMotionMask">PointerMotionMask</A>
+	<TD><B><A HREF="keyboard-pointer/keyboard-pointer.html">MotionNotify</A></B>
+	<TD>XPointerMovedEvent
+	<TD><A HREF="keyboard-pointer/keyboard-pointer.html#XMotionEvent">XMotionEvent</A>
+<TR><TD><A NAME="PointerMotionHintMask">PointerMotionHintMask</A>
+	<TD>N.A.
+	<TD>N.A.
+	<TD>
+
+<TR><TD COLSPAN=4>
+<TR><TD><A NAME="PropertyChangeMask">PropertyChangeMask</A>
+	<TD><B><A HREF="client-communication/property.html">PropertyNotify</A></B>
+	<TD><A HREF="client-communication/property.html#XPropertyEvent">XPropertyEvent</A>
+	<TD>
+
+<TR><TD COLSPAN=4>
+<TR><TD><A NAME="ResizeRedirectMask">ResizeRedirectMask</A>
+	<TD><B><A HREF="structure-control/resize.html">ResizeRequest</A></B>
+	<TD><A HREF="structure-control/resize.html#XResizeRequestEvent">XResizeRequestEvent</A>
+	<TD>
+
+<TR><TD COLSPAN=4>
+<TR><TD><A NAME="StructureNotifyMask">StructureNotifyMask</A>
+	<TD><B><A HREF="window-state-change/circulate.html">CirculateNotify</A></B>
+	<TD><A HREF="window-state-change/circulate.html#XCirculateEvent">XCirculateEvent</A>
+	<TD>
+<TR><TD>
+	<TD><B><A HREF="window-state-change/configure.html">ConfigureNotify</A></B>
+	<TD><A HREF="window-state-change/configure.html#XConfigureEvent">XConfigureEvent</A>
+	<TD>
+<TR><TD>
+	<TD><B><A HREF="window-state-change/destroy.html">DestroyNotify</A></B>
+	<TD><A HREF="window-state-change/destroy.html#XDestroyWindowEvent">XDestroyWindowEvent</A>
+	<TD>
+<TR><TD>
+	<TD><B><A HREF="window-state-change/gravity.html">GravityNotify</A></B>
+	<TD><A HREF="window-state-change/gravity.html#XGravityEvent">XGravityEvent</A>
+	<TD>
+<TR><TD>
+	<TD><B><A HREF="window-state-change/map.html">MapNotify</A></B>
+	<TD><A HREF="window-state-change/map.html#XMapEvent">XMapEvent</A>
+	<TD>
+<TR><TD>
+	<TD><B><A HREF="window-state-change/reparent.html">ReparentNotify</A></B>
+	<TD><A HREF="window-state-change/reparent.html#XReparentEvent">XReparentEvent</A>
+	<TD>
+<TR><TD>
+	<TD><B><A HREF="window-state-change/unmap.html">UnmapNotify</A></B>
+	<TD><A HREF="window-state-change/unmap.html#XUnmapEvent">XUnmapEvent</A>
+	<TD>
+
+<TR><TD COLSPAN=4>
+<TR><TD><A NAME="SubstructureNotifyMask">SubstructureNotifyMask</A>
+	<TD><B><A HREF="window-state-change/circulate.html">CirculateNotify</A></B>
+	<TD><A HREF="window-state-change/circulate.html#XCirculateEvent">XCirculateEvent</A>
+	<TD>
+<TR><TD>
+	<TD><B><A HREF="window-state-change/configure.html">ConfigureNotify</A></B>
+	<TD><A HREF="window-state-change/configure.html#XConfigureEvent">XConfigureEvent</A>
+	<TD>
+<TR><TD>
+	<TD><B><A HREF="window-state-change/create.html">CreateNotify</A></B>
+	<TD><A HREF="window-state-change/create.html#XCreateWindowEvent">XCreateWindowEvent</A>
+	<TD>
+<TR><TD>
+	<TD><B><A HREF="window-state-change/destroy.html">DestroyNotify</A></B>
+	<TD><A HREF="window-state-change/destroy.html#XDestroyWindowEvent">XDestroyWindowEvent</A>
+	<TD>
+<TR><TD>
+	<TD><B><A HREF="window-state-change/gravity.html">GravityNotify</A></B>
+	<TD><A HREF="window-state-change/gravity.html#XGravityEvent">XGravityEvent</A>
+	<TD>
+<TR><TD>
+	<TD><B><A HREF="window-state-change/map.html">MapNotify</A></B>
+	<TD><A HREF="window-state-change/map.html#XMapEvent">XMapEvent</A>
+	<TD>
+<TR><TD>
+	<TD><B><A HREF="window-state-change/reparent.html">ReparentNotify</A></B>
+	<TD><A HREF="window-state-change/reparent.html#XReparentEvent">XReparentEvent</A>
+	<TD>
+<TR><TD>
+	<TD><B><A HREF="window-state-change/unmap.html">UnmapNotify</A></B>
+	<TD><A HREF="window-state-change/unmap.html#XUnmapEvent">XUnmapEvent</A>
+	<TD>
+
+<TR><TD COLSPAN=4>
+<TR><TD><A NAME="SubstructureRedirectMask">SubstructureRedirectMask</A>
+	<TD><B><A HREF="structure-control/circulate.html">CirculateRequest</A></B>
+	<TD><A HREF="structure-control/circulate.html#XCirculateRequestEvent">XCirculateRequestEvent</A>
+	<TD>
+<TR><TD>
+	<TD><B><A HREF="structure-control/configure.html">ConfigureRequest</A></B>
+	<TD><A HREF="structure-control/configure.html#XConfigureRequestEvent">XConfigureRequestEvent</A>
+	<TD>
+<TR><TD>
+	<TD><B><A HREF="structure-control/map.html">MapRequest</A></B>
+	<TD><A HREF="structure-control/map.html#XMapRequestEvent">XMapRequestEvent</A>
+	<TD>
+
+<TR><TD COLSPAN=4>
+<TR><TD>N.A.
+	<TD><B><A HREF="client-communication/client-message.html">ClientMessage</A></B>
+	<TD><A HREF="client-communication/client-message.html#XClientMessageEvent">XClientMessageEvent</A>
+	<TD>
+
+<TR><TD COLSPAN=4>
+<TR><TD>N.A.
+	<TD><B><A HREF="window-state-change/mapping.html">MappingNotify</A></B>
+	<TD><A HREF="window-state-change/mapping.html#XMappingEvent">XMappingEvent</A>
+	<TD>
+
+<TR><TD COLSPAN=4>
+<TR><TD>N.A.
+	<TD><B><A HREF="client-communication/selection-clear.html">SelectionClear</A></B>
+	<TD><A HREF="client-communication/selection-clear.html#XSelectionClearEvent">XSelectionClearEvent</A>
+	<TD>
+
+<TR><TD COLSPAN=4>
+<TR><TD>N.A.
+	<TD><B><A HREF="client-communication/selection.html">SelectionNotify</A></B>
+	<TD><A HREF="client-communication/selection.html#XSelectionEvent">XSelectionEvent</A>
+	<TD>
+
+<TR><TD COLSPAN=4>
+<TR><TD>N.A.
+	<TD><B><A HREF="client-communication/selection-request.html">SelectionRequest</A></B>
+	<TD><A HREF="client-communication/selection-request.html#XSelectionRequestEvent">XSelectionRequestEvent</A>
+	<TD>
+
+<TR><TD COLSPAN=4>
+<TR><TD><A NAME="VisibilityChangeMask">VisibilityChangeMask</A>
+	<TD><B><A HREF="window-state-change/visibility.html">VisibilityNotify</A></B>
+	<TD><A HREF="window-state-change/visibility.html#XVisibilityEvent">XVisibilityEvent</A>
+	<TD>
+<TR><TD COLSPAN=4><HR>
+</TABLE>
+
+<P>
+
+The sections that follow describe the processing that occurs 
+when you select the different event masks.
+The sections are organized according to these processing categories:
+<UL>
+
+<P><LI>
+<A HREF="keyboard-pointer/">Keyboard and pointer events</A>
+
+<P><LI>
+<A HREF="window-entry-exit/">Window crossing events</A>
+
+<P><LI>
+<A HREF="input-focus/">Input focus events</A>
+
+<P><LI>
+<A HREF="key-map.html">Keymap state notification events</A>
+
+<P><LI>
+<A HREF="exposure/">Exposure events</A>
+
+<P><LI>
+<A HREF="window-state-change/">Window state notification events</A>
+
+<P><LI>
+<A HREF="structure-control/">Structure control events</A>
+
+<P><LI>
+<A HREF="colormap-state.html">Colormap state notification events</A>
+
+<P><LI>
+<A HREF="client-communication/">Client communication events</A>
+</UL>
+
+<H5 ALIGN=right><I>Next: <A HREF="keyboard-pointer/">Keyboard and Pointer Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

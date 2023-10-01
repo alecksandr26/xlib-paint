@@ -1,0 +1,98 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Grab and Ungrab Entry/Exit Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.6.2 Grab and Ungrab Entry/Exit Events</H1>
+
+Pseudo-motion mode
+<B><A HREF="./">EnterNotify</A></B>
+and
+<B><A HREF="./">LeaveNotify</A></B>
+events are generated when a pointer grab activates or deactivates.
+Events in which the pointer grab activates
+are identified by
+<A HREF="./#XCrossingEvent">XEnterWindowEvent</A>
+or
+<A HREF="./#XCrossingEvent">XLeaveWindowEvent</A>
+structures whose <B>mode</B> member is set to 
+<B>NotifyGrab</B>.
+Events in which the pointer grab deactivates
+are identified by
+<A HREF="./#XCrossingEvent">XEnterWindowEvent</A>
+or
+<A HREF="./#XCrossingEvent">XLeaveWindowEvent</A>
+structures whose <B>mode</B> member is set to 
+<B>NotifyUngrab</B>
+(see
+<B><A HREF="../../window-and-session-manager/XGrabPointer.html">XGrabPointer()</A></B>).
+
+<UL>
+
+<P><LI>
+When a pointer grab activates after any initial warp into a confine_to
+window and before generating any actual
+<B><A HREF="../keyboard-pointer/keyboard-pointer.html">ButtonPress</A></B> 
+event that activates the grab, 
+G is the grab_window for the grab, 
+and P is the window the pointer is in, 
+the X server does the following:
+
+<UL>
+
+<P><LI>
+It generates
+<B><A HREF="./">EnterNotify</A></B>
+and
+<B><A HREF="./">LeaveNotify</A></B>
+events (see "<A HREF="normal.html">Normal Entry/Exit Events</A>")
+with the <B>mode</B> members of the 
+<A HREF="./#XCrossingEvent">XEnterWindowEvent</A>
+and
+<A HREF="./#XCrossingEvent">XLeaveWindowEvent</A>
+structures set to 
+<B>NotifyGrab</B>.
+These events are generated
+as if the pointer were to suddenly warp from
+its current position in P to some position in G.
+However, the pointer does not warp, and the X server uses the pointer position 
+as both the initial and final positions for the events.
+</UL>
+
+<P><LI>
+When a pointer grab deactivates after generating any actual
+<B><A HREF="../keyboard-pointer/keyboard-pointer.html">ButtonRelease</A></B>
+event that deactivates the grab, 
+G is the grab_window for the grab,
+and P is the window the pointer is in, 
+the X server does the following:
+
+<UL>
+
+<P><LI>
+It generates
+<B><A HREF="./">EnterNotify</A></B>
+and
+<B><A HREF="./">LeaveNotify</A></B>
+events (see "<A HREF="normal.html">Normal Entry/Exit Events</A>")
+with the <B>mode</B> members of the
+<A HREF="./#XCrossingEvent">XEnterWindowEvent</A>
+and
+<A HREF="./#XCrossingEvent">XLeaveWindowEvent</A>
+structures set to 
+<B>NotifyUngrab</B>.
+These events are generated as if the pointer were to suddenly warp from
+some position in G to its current position in P.
+However, the pointer does not warp, and the X server uses the
+current pointer position as both the
+initial and final positions for the events.
+</UL>
+
+</UL>
+
+<H5 ALIGN=right><I>Next: <A HREF="../input-focus/">Input Focus Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmPutLineResource</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmPutLineResource</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XrmPutLineResource" "" "@DEF@">
+
+<CODE><PRE>
+void XrmPutLineResource(<B>database</B>, <B>line</B>)
+     <B><A HREF="creating-and-storing-databases.html">XrmDatabase</A></B> *<B>database</B>;
+     char *<B>line</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>database</B>
+<TD> Specifies the resource database.
+
+<TR><TD> <B>line</B>
+<TD> Specifies the resource name and value pair as a single string.
+
+</TABLE>
+
+<H2>Description</H2>
+
+If database contains NULL,
+<B>XrmPutLineResource()</B>
+creates a new database and returns a pointer to it.
+<B>XrmPutLineResource()</B>
+adds a single resource entry to the specified database.
+The line should be in valid ResourceLine format (see section 15.1)
+terminated by a newline or null character;
+the database that results from using a string
+with incorrect syntax is implementation dependent.
+The string is parsed in the locale of the database.
+If the
+<B>ResourceName</B>
+is not in the Host Portable Character Encoding,
+the result is implementation dependent.
+Note that comment lines are not stored.
+
+<H2>See also</H2>
+
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>,
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmMergeDatabases.html">XrmMergeDatabases()</A></B>,
+<B><A HREF="XrmPutResource.html">XrmPutResource()</A></B>,
+<B><A HREF="XrmPutStringResource.html">XrmPutStringResource()</A></B>,
+<B><A HREF="XrmQPutResource.html">XrmQPutResource()</A></B>,
+<B><A HREF="XrmQPutStringResource.html">XrmQPutStringResource()</A></B>,
+<B><A HREF="XrmUniqueQuark.html">XrmUniqueQuark()</A></B>,
+"<A HREF="storing.html">Storing Into a Resource Database</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

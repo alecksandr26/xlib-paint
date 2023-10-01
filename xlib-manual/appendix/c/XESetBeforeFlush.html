@@ -1,0 +1,81 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Extensions: XESetBeforeFlush</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XESetBeforeFlush</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XESetBeforeFlush" "" "@DEF@">
+
+<CODE><PRE>
+int (*XESetBeforeFlush(<B>display</B>, <B>extension</B>, <B>proc</B>))()
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      int <B>extension</B>;
+      int *(*<B>proc</B>)();
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>extension</B>
+<TD> Specifies the extension number.
+
+<TR><TD> <B>proc</B>
+<TD> Specifies the procedure to call when a buffer is flushed.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XESetBeforeFlush()</B>
+function defines a procedure to be called when data is about to be
+sent to the server.  When data is about to be sent, your procedure is  
+called one or more times with these arguments:
+
+<P>
+
+<PRE><CODE>
+void (*<B>proc</B>)(<B>display</B>, <B>codes</B>, <B>data</B>, <B>len</B>)
+	<A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+	<A HREF="hooking-into-xlib.html#XExtCodes">XExtCodes</A> *<B>codes</B>;
+	char *<B>data</B>;
+	long <B>len</B>;
+</PRE></CODE>
+
+<P>
+
+The <B>data</B> argument specifies a portion of the outgoing data buffer,
+and its <B>length</B> in bytes is specified by the len argument.
+Your procedure must not alter the contents of the data, and must not
+do additional protocol requests to the same display.
+
+<H2>See also</H2>
+
+<B><A HREF="XESetCloseDisplay.html">XESetCloseDisplay()</A></B>,
+<B><A HREF="XESetCopyGC.html">XESetCopyGC()</A></B>,
+<B><A HREF="XESetCreateFont.html">XESetCreateFont()</A></B>,
+<B><A HREF="XESetCreateGC.html">XESetCreateGC()</A></B>,
+<B><A HREF="XESetError.html">XESetError()</A></B>,
+<B><A HREF="XESetErrorString.html">XESetErrorString()</A></B>,
+<B><A HREF="XESetEventToWire.html">XESetEventToWire()</A></B>,
+<B><A HREF="XESetFlushGC.html">XESetFlushGC()</A></B>,
+<B><A HREF="XESetFreeFont.html">XESetFreeFont()</A></B>,
+<B><A HREF="XESetFreeGC.html">XESetFreeGC()</A></B>,
+<B><A HREF="XESetPrintErrorValues.html">XESetPrintErrorValues()</A></B>,
+<B><A HREF="XESetWireToError.html">XESetWireToError()</A></B>,
+<B><A HREF="XESetWireToEvent.html">XESetWireToEvent()</A></B>,
+<B><A HREF="_XSetLastRequestRead.html">_XSetLastRequestRead()</A></B>,
+"<A HREF="hooks-into-the-library.html">Hooks into the Library</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

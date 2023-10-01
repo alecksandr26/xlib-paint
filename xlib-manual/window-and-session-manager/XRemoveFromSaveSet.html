@@ -1,0 +1,76 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XRemoveFromSaveSet</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XRemoveFromSaveSet</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XRemoveFromSaveSet" "" "@DEF@">
+
+<CODE><PRE>
+XRemoveFromSaveSet(<B>display</B>, <B>w</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window that you want to delete from the client's save-set.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XRemoveFromSaveSet()</B>
+function removes the specified window from the client's save-set.
+The specified window must have been created by some other client,
+or a
+<B>BadMatch</B>
+error results.
+
+<P>
+
+<B>XRemoveFromSaveSet()</B>
+can generate
+<B>BadMatch</B> 
+and
+<B>BadWindow</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAddToSaveSet.html">XAddToSaveSet()</A></B>,
+<B><A HREF="XChangeSaveSet.html">XChangeSaveSet()</A></B>,
+<B><A HREF="XReparentWindow.html">XReparentWindow()</A></B>,
+"<A HREF="controlling-window-lifetime.html">Controlling the Lifetime of a Window</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XAllocWMHints</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XAllocWMHints</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XAllocWMHints" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="wm-hints.html#XWMHints">XWMHints</A></B> *XAllocWMHints()
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XAllocWMHints()</B>
+function allocates and returns a pointer to a
+<B><A HREF="wm-hints.html#XWMHints">XWMHints</A></B>
+structure.
+Note that all fields in the
+<B><A HREF="wm-hints.html#XWMHints">XWMHints</A></B>
+structure are initially set to zero.
+If insufficient memory is available, 
+<B>XAllocWMHints()</B>
+returns NULL.
+To free the memory allocated to this structure,
+use
+<B><A HREF="../../display/XFree.html">XFree()</A></B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocClassHint.html">XAllocClassHint()</A></B>,
+<B><A HREF="XAllocIconSize.html">XAllocIconSize()</A></B>,
+<B><A HREF="XAllocSizeHints.html">XAllocSizeHints()</A></B>,
+<B><A HREF="../../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XGetWMHints.html">XGetWMHints()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetCommand.html">XSetCommand()</A></B>,
+<B><A HREF="XSetTextProperty.html">XSetTextProperty()</A></B>,
+<B><A HREF="XSetTransientForHint.html">XSetTransientForHint()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetWMClientMachine.html">XSetWMClientMachine()</A></B>,
+<B><A HREF="XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B>,
+<B><A HREF="XSetWMHints.html">XSetWMHints()</A></B>,
+<B><A HREF="XSetWMIconName.html">XSetWMIconName()</A></B>,
+<B><A HREF="XSetWMName.html">XSetWMName()</A></B>,
+<B><A HREF="XSetWMProperties.html">XSetWMProperties()</A></B>,
+<B><A HREF="XSetWMProtocols.html">XSetWMProtocols()</A></B>,
+<B><A HREF="XStringListToTextProperty.html">XStringListToTextProperty()</A></B>,
+"<A HREF="wm-hints.html">Setting and Reading the WM_HINTS Property</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

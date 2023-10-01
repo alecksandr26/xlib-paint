@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Setting and Reading the WM_ICON_SIZE Property</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>14.1.12 Setting and Reading the WM_ICON_SIZE Property</H1>
+
+Xlib provides functions that you can use to set and read 
+the <A HREF="/gui/x/icccm/sec-4.html#WM_ICON_SIZE">WM_ICON_SIZE</A> property for a given window.
+These functions use the 
+<B>XIconSize</B>
+<!.IN "XIconSize">
+structure, which is defined in the
+<B><TT>X11/Xutil.h</TT></B>
+header file.
+
+<P>
+
+To allocate an
+<B>XIconSize</B>
+structure, use
+<B><A HREF="XAllocIconSize.html">XAllocIconSize()</A></B>.
+
+<A NAME="XIconSize"></A>
+<P>
+
+The
+<B>XIconSize</B>
+structure contains:
+
+<P>
+
+<!.IN "XIconSize" "" "@DEF@">
+<PRE><CODE>
+typedef struct {
+	int min_width, min_height;
+	int max_width, max_height;
+	int width_inc, height_inc;
+} XIconSize;
+</PRE></CODE>
+
+<P>
+
+The <B>width_inc</B> and <B>height_inc</B> members define an arithmetic progression of
+sizes (minimum to maximum) that represent the supported icon sizes.
+
+<P>
+
+To set a window's <A HREF="/gui/x/icccm/sec-4.html#WM_ICON_SIZE">WM_ICON_SIZE</A> property, use
+<B><A HREF="XSetIconSizes.html">XSetIconSizes()</A></B>.
+
+<P>
+
+To read a window's <A HREF="/gui/x/icccm/sec-4.html#WM_ICON_SIZE">WM_ICON_SIZE</A> property, use
+<B><A HREF="XGetIconSizes.html">XGetIconSizes()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="using-convenience-functions.html">Using Window Manager Convenience Functions</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

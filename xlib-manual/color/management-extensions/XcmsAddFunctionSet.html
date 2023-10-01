@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XcmsAddFunctionSet</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XcmsAddFunctionSet</H1>
+
+<H2>Syntax</H2>
+
+<!.IN  "XcmsAddFunctionSet" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../conversion-contexts-and-gamut-mapping.html#cmsStatus">Status</A></B> XcmsAddFunctionSet(<B>function_set</B>)
+      <A HREF="creating-additional-function-sets.html#XcmsFunctionSet">XcmsFunctionSet</A> *<B>function_set</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>function_set</B>
+<TD> Specifies the function set to add.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XcmsAddFunctionSet()</B>
+function adds a function set to the color management system.
+If the function set uses device-dependent 
+<B><A HREF="creating-additional-spaces.html#XcmsColorSpace">XcmsColorSpace</A></B>
+structures not accessible in the color management system,
+<B>XcmsAddFunctionSet()</B>
+adds them.
+If an added
+<B><A HREF="creating-additional-spaces.html#XcmsColorSpace">XcmsColorSpace</A></B>
+structure is for a device-dependent color space not registered
+with the X Consortium,
+they should be treated as private to the client
+because format values for unregistered color spaces are assigned at run time.
+If references to an unregistered color space must be made outside the
+client (for example, storing color specifications in a file
+using the unregistered color space),
+then reference should be made by color space prefix
+(see 
+<B><A HREF="XcmsFormatOfPrefix.html">XcmsFormatOfPrefix()</A></B>
+and
+<B><A HREF="XcmsPrefixOfFormat.html">XcmsPrefixOfFormat()</A></B>).
+
+<P>
+
+Additional function sets should be added before any calls to other
+Xlib routines are made.
+If not, the 
+<B>XcmsPerScrnInfo</B>
+member of a previously created 
+<A HREF="../CCC/macros.html">XcmsCCC</A>
+does not have the opportunity to initialize
+with the added function set.
+
+<H2>See Also</H2>
+
+"<A HREF="adding-function-sets.html">Adding Function Sets</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

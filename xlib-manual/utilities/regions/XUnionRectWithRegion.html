@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XUnionRectWithRegion</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XUnionRectWithRegion</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XUnionRectWithRegion" "" "@DEF@">
+
+<CODE><PRE>
+XUnionRectWithRegion(<B>rectangle</B>, <B>src_region</B>, <B>dest_region_return</B>)
+     XRectangle *<B>rectangle</B>;
+     Region <B>src_region</B>;
+     Region <B>dest_region_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>rectangle</B>
+<TD> Specifies the rectangle.
+
+<TR><TD> <B>src_region</B>
+<TD> Specifies the source region to be used.
+
+<TR><TD> <B>dest_region_return</B>
+<TD> Returns the destination region.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XUnionRectWithRegion()</B>
+function updates the destination region from a union of the specified rectangle
+and the specified source region.
+
+<H2>See also</H2>
+
+<B><A HREF="XCreateRegion.html">XCreateRegion()</A></B>,
+<B><A HREF="../../graphics/drawing/XDrawRectangle.html">XDrawRectangle()</A></B>,
+<B><A HREF="XEmptyRegion.html">XEmptyRegion()</A></B>,
+<B><A HREF="XIntersectRegion.html">XIntersectRegion()</A></B>,
+<B><A HREF="XOffsetRegion.html">XOffsetRegion()</A></B>,
+<B><A HREF="XShrinkRegion.html">XShrinkRegion()</A></B>,
+<B><A HREF="XSubtractRegion.html">XSubtractRegion()</A></B>,
+<B><A HREF="XUnionRegion.html">XUnionRegion()</A></B>,
+<B><A HREF="XXorRegion.html">XXorRegion()</A></B>,
+"<A HREF="computing.html">Computing with Regions</A>".
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

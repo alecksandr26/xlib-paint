@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmPutStringResource</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmPutStringResource</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XrmPutStringResource" "" "@DEF@">
+
+<CODE><PRE>
+void XrmPutStringResource(<B>database</B>, <B>specifier</B>, <B>value</B>)
+     <B><A HREF="creating-and-storing-databases.html">XrmDatabase</A></B> *<B>database</B>;
+     char *<B>specifier</B>;
+     char *<B>value</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>database</B>
+<TD> Specifies the resource database.
+
+<TR><TD> <B>specifier</B>
+<TD> Specifies a complete or partial specification of the resource.
+
+<TR><TD> <B>value</B>
+<TD> Specifies the value of the resource, which is specified as a string.
+
+</TABLE>
+
+<H2>Description</H2>
+
+If database contains NULL,
+<B>XrmPutStringResource()</B>
+creates a new database and returns a pointer to it.
+<B>XrmPutStringResource()</B>
+adds a resource with the specified value to the specified database.
+<B>XrmPutStringResource()</B>
+is a convenience function that first calls
+<B><A HREF="XrmStringToBindingQuarkList.html">XrmStringToBindingQuarkList()</A></B>
+on the specifier and then calls
+<B><A HREF="XrmQPutResource.html">XrmQPutResource()</A></B>,
+using a ``String'' representation type.
+If the specifier is not in the Host Portable Character Encoding,
+the result is implementation dependent.
+The value is stored in the database without modification.
+
+<H2>See also</H2>
+
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>,
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmMergeDatabases.html">XrmMergeDatabases()</A></B>,
+<B><A HREF="XrmPutLineResource.html">XrmPutLineResource()</A></B>,
+<B><A HREF="XrmPutResource.html">XrmPutResource()</A></B>,
+<B><A HREF="XrmQPutResource.html">XrmQPutResource()</A></B>,
+<B><A HREF="XrmQPutStringResource.html">XrmQPutStringResource()</A></B>,
+<B><A HREF="XrmUniqueQuark.html">XrmUniqueQuark()</A></B>,
+"<A HREF="storing.html">Storing Into a Resource Database</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

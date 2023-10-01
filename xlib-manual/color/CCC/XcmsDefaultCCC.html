@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XcmsDefaultCCC</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XcmsDefaultCCC</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XcmsDefaultCCC" "" "@DEF@">
+<!.IN "Color Conversion Context" "default">
+<!.IN "CCC" "default">
+
+<CODE><PRE>
+      <A HREF="macros.html">XcmsCCC</A> XcmsDefaultCCC(<B>display</B>, <B>screen_number</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen_number</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the appropriate screen number on the host server.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XcmsDefaultCCC()</B>
+function returns the default CCC for the specified screen.
+Its visual is the default visual of the screen.
+Its initial gamut compression and white point
+adjustment procedures as well as the associated client data are implementation
+specific.
+
+<H2>See also</H2>
+
+<B><A HREF="macros.html#DisplayOfCCC">DisplayOfCCC()</A></B>,
+<B><A HREF="XcmsCCCOfColormap.html">XcmsCCCOfColormap()</A></B>,
+<B><A HREF="../XcmsConvertColors.html">XcmsConvertColors()</A></B>,
+<B><A HREF="XcmsCreateCCC.html">XcmsCreateCCC()</A></B>,
+<B><A HREF="XcmsSetWhitePoint.html">XcmsSetWhitePoint()</A></B>,
+"<A HREF="obtaining.html">Obtaining the Default Color Conversion Context</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

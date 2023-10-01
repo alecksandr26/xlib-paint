@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Managing Installed Colormaps</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>9.3 Managing Installed Colormaps</H1>
+
+The X server maintains a list of installed colormaps.
+Windows using these colormaps are guaranteed to display with
+correct colors; windows using other colormaps may or may not display
+with correct colors.
+Xlib provides functions that you can use to install a colormap, 
+uninstall a colormap, and obtain a list of installed colormaps.
+
+<P>
+
+At any time,
+there is a subset of the installed maps that is viewed as an ordered list
+and is called the required list.
+The length of the required list is at most M,
+where M is the minimum number of installed colormaps specified for the screen
+in the connection setup.
+The required list is maintained as follows.
+When a colormap is specified to
+<B><A HREF="XInstallColormap.html">XInstallColormap()</A></B>,
+it is added to the head of the list;
+the list is truncated at the tail, if necessary, to keep its length to 
+at most M.
+When a colormap is specified to
+<B><A HREF="XUninstallColormap.html">XUninstallColormap()</A></B>
+and it is in the required list,
+it is removed from the list.
+A colormap is not added to the required list when it is implicitly installed
+by the X server,
+and the X server cannot implicitly uninstall a colormap that is in the
+required list.
+
+<P>
+
+To install a colormap, use
+<B><A HREF="XInstallColormap.html">XInstallColormap()</A></B>.
+
+<P>
+
+To uninstall a colormap, use
+<B><A HREF="XUninstallColormap.html">XUninstallColormap()</A></B>.
+
+<P>
+
+To obtain a list of the currently installed colormaps for a given screen, use
+<B><A HREF="XListInstalledColormaps.html">XListInstalledColormaps()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="font-search-path.html">Setting and Retrieving the Font Search Path</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

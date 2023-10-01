@@ -1,0 +1,83 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Extensions: XQueryExtension</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XQueryExtension</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XQueryExtension" "" "@DEF@">
+
+<CODE><PRE>
+Bool XQueryExtension(<B>display</B>, <B>name</B>, <B>major_opcode_return</B>, <B>first_event_return</B>, <B>first_error_return</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      char *<B>name;</B>
+      int *<B>major_opcode_return</B>;
+      int *<B>first_event_return</B>;
+      int *<B>first_error_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>name</B>
+<TD> Specifies the extension name.
+
+<TR><TD> <B>major_opcode_return</B>
+<TD> Returns the major opcode.
+
+<TR><TD> <B>first_event_return</B>
+<TD> Returns the first event code, if any.
+
+<TR><TD> <B></B>
+<TD> Specifies the extension list.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XQueryExtension()</B>
+function determines if the named extension is present.  
+If the extension is not present,
+<B>XQueryExtension()</B>
+returns
+<B>False</B>;
+otherwise, it returns
+<B>True</B>.
+If the extension is present,
+<B>XQueryExtension()</B>
+returns the major opcode for the extension to major_opcode_return;
+otherwise,
+it returns zero.
+Any minor opcode and the request formats are specific to the
+extension.  
+If the extension involves additional event types, 
+<B>XQueryExtension()</B>
+returns the base event type code to first_event_return;
+otherwise, 
+it returns zero.  
+The format of the events is specific to the extension.  
+If the extension involves additional error codes, 
+<B>XQueryExtension()</B>
+returns the base error code to first_error_return;
+otherwise, 
+it returns zero.  
+The format of additional data in the errors is specific to the extension.
+
+<H2>See also</H2>
+
+<B><A HREF="XFreeExtensionList.html">XFreeExtensionList()</A></B>,
+<B><A HREF="XListExtensions.html">XListExtensions()</A></B>,
+"<A HREF="basic-protocol-support.html">Basic Protocol Support Routines</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

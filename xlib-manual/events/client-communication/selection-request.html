@@ -1,0 +1,76 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: SelectionRequest Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.13.4 SelectionRequest Events</H1>
+
+<!.IN "Events" "SelectionRequest">
+<!.IN "SelectionRequest" "" "@DEF@">
+
+The X server reports
+<B>SelectionRequest</B>
+events to the owner of a selection.
+The X server generates this event whenever a client 
+requests a selection conversion by calling 
+<B><A HREF="../../window-information/XConvertSelection.html">XConvertSelection()</A></B>
+for the owned selection.
+
+<A NAME="XSelectionRequestEvent"></A>
+<P>
+
+The structure for this event type contains:
+
+<P>
+
+<!.IN "XSelectionRequestEvent" "" "@DEF@">
+
+<PRE><CODE>
+typedef struct {
+	int type;		/* SelectionRequest */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Window owner;
+	Window requestor;
+	Atom selection;
+	Atom target;
+	Atom property;
+	Time time;
+} XSelectionRequestEvent;
+</PRE></CODE>
+
+<P>
+
+The <B>owner</B> member is set to the window
+that was specified by the current owner in its
+<B><A HREF="../../window-information/XSetSelectionOwner.html">XSetSelectionOwner()</A></B>
+call.
+The <B>requestor</B> member is set to the window requesting the selection.
+The <B>selection</B> member is set to the atom that names the selection.
+For example, PRIMARY is used to indicate the primary selection.
+The <B>target</B> member is set to the atom that indicates the type
+the selection is desired in.
+The <B>property</B> member can be a property name or 
+<B>None</B>.
+The <B>time</B> member is set to the timestamp or 
+<B>CurrentTime</B>
+value from the
+<B>ConvertSelection</B>
+request.
+
+<P>
+
+The owner should convert the selection based on the specified target type
+and send a
+<B><A HREF="selection.html">SelectionNotify</A></B>
+event back to the requestor.
+A complete specification for using selections is given in the X Consortium
+standard <A HREF="/gui/x/icccm/"><I>Inter-Client Communication Conventions Manual</I></A>.
+
+<H5 ALIGN=right><I>Next: <A HREF="selection.html">SelectionNotify Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

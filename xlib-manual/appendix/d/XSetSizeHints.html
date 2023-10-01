@@ -1,0 +1,88 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetSizeHints</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetSizeHints</H1>
+
+This function has been superseded by
+<B><A HREF="../../ICC/client-to-window-manager/XSetWMSizeHints.html">XSetWMSizeHints()</A></B>.
+
+<H2>Syntax</H2>
+
+<!.IN "XSetSizeHints" "" "@DEF@">
+
+<CODE><PRE>
+XSetSizeHints(<I>display</I>, <I>w</I>, <I>hints</I>, <I>property</I>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<I>display</I>;
+      Window <I>w</I>;
+      <A HREF="../../ICC/client-to-window-manager/wm-normal-hints.html#XSizeHints">XSizeHints</A> *<I>hints</I>;
+      Atom <I>property</I>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <I>display</I>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <I>w</I>
+<TD> Specifies the window.
+
+<TR><TD> <I>hints</I>
+<TD> Specifies a pointer to the size hints.
+
+<TR><TD> <I>property</I>
+<TD> Specifies the property name.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XSetSizeHints()</B>
+function sets the
+<A HREF="../../ICC/client-to-window-manager/wm-normal-hints.html#XSizeHints">XSizeHints</A>
+structure for the named property and the specified window.
+This is used by
+<B>XSetNormalHints()</B>
+and
+<B>XSetZoomHints()</B>,
+and can be used to set the value of any property of type WM_SIZE_HINTS.
+Thus, it may be useful if other properties of that type get defined.
+
+<P>
+
+<B>XSetSizeHints()</B>
+can generate
+<B>BadAlloc</B>,
+<B>BadAtom</B> ,
+and
+<B>BadWindow</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadAtom</B>
+<TD> A value for an Atom argument does not name a
+     defined Atom.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+"<A HREF="d.html">Compatibility Functions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

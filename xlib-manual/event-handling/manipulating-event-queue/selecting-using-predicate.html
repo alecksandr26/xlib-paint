@@ -1,0 +1,83 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Selecting Events Using a Predicate Procedure</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>11.4.2 Selecting Events Using a Predicate Procedure</H1>
+
+Each of the functions discussed in this section requires you to
+pass a predicate procedure that determines if an event matches 
+what you want.
+Your predicate procedure must decide if the event is useful
+without calling any Xlib functions.
+If the predicate directly or indirectly causes the state of the event queue
+to change, the result is not defined.
+If Xlib has been initialized for threads, the predicate is called with
+the display locked and the result of a call by the predicate to any
+Xlib function that locks the display is not defined unless the caller
+has first called
+<B><A HREF="../../display/XLockDisplay.html">XLockDisplay()</A></B>.
+
+<A NAME="predicate"></A>
+<P>
+
+The predicate procedure and its associated arguments are:
+
+<CODE><PRE>
+Bool (*<B>predicate</B>)(<B>display</B>, <B>event</B>, <B>arg</B>)
+     <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+     <A HREF="../../events/structures.html#XEvent">XEvent</A> *<B>event</B>;
+     XPointer <B>arg</B>;
+</PRE></CODE>
+
+<TABLE>
+<TR><TD> <B>display</B>
+<TD>Specifies the connection to the X server.
+
+<TR><TD> <B>event</B>
+<TD>Specifies the
+<A HREF="../../events/structures.html#XEvent">XEvent</A>
+structure.
+
+<TR><TD> <B>arg</B>
+<TD>Specifies the argument passed in from the 
+<B><A HREF="XIfEvent.html">XIfEvent()</A></B>,
+<B><A HREF="XCheckIfEvent.html">XCheckIfEvent()</A></B>,
+or
+<B><A HREF="XPeekIfEvent.html">XPeekIfEvent()</A></B>
+function.
+
+</TABLE>
+
+<P>
+
+The predicate procedure is called once for each
+event in the queue until it finds a match. 
+After finding a match, the predicate procedure must return 
+<B>True</B>.
+If it did not find a match, it must return
+<B>False</B>.
+
+<P>
+
+To check the event queue for a matching event
+and, if found, remove the event from the queue, use
+<B><A HREF="XIfEvent.html">XIfEvent()</A></B>.
+
+<P>
+
+To check the event queue for a matching event without blocking, use
+<B><A HREF="XCheckIfEvent.html">XCheckIfEvent()</A></B>.
+
+<P>
+
+To check the event queue for a matching event
+without removing the event from the queue, use
+<B><A HREF="XPeekIfEvent.html">XPeekIfEvent()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="selecting-using-window-or-event-mask.html">Selecting Events Using a Window or Event Mask</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

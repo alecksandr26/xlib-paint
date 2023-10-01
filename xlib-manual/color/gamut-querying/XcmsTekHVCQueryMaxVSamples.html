@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Extensions: XcmsTekHVCQueryMaxVSamples</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XcmsTekHVCQueryMaxVSamples</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Chroma">
+<!.IN "Value">
+<!.IN "Chroma"  "maximum">
+<!.IN "Value" "maximum">
+<!.IN "XcmsTekHVCQueryMaxVSamples" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../conversion-contexts-and-gamut-mapping.html#cmsStatus">Status</A></B> XcmsTekHVCQueryMaxVSamples(<B>ccc</B>, <B>hue</B>, <B>colors_return</B>, <B>nsamples</B>)
+      <A HREF="../CCC/macros.html">XcmsCCC</A> <B>ccc</B>;
+      XcmsFloat <B>hue</B>;
+      <A HREF="../structures.html#XcmsColor">XcmsColor</A> <B>colors_return[]</B>;
+      unsigned int <B>nsamples</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>ccc</B>
+<TD> Specifies the <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>.
+The <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>'s Client White Point and white point adjustment procedures
+are ignored.
+
+<TR><TD> <B>hue</B>
+<TD> Specifies the Hue for maximum Chroma/Value samples.
+
+<TR><TD> <B>nsamples</B>
+<TD> Specifies the number of samples.
+
+<TR><TD> <B>colors_return</B>
+<TD> Returns nsamples of color specifications in XcmsTekHVC
+such that the Chroma is the maximum attainable for the Value and Hue.
+The white point associated with the returned
+color specification is the Screen White Point.
+The value returned in the pixel member is undefined.
+
+</TABLE>
+
+<H2>Description</H2>
+ 
+The
+<B>XcmsTekHVCQueryMaxVSamples()</B>
+returns nsamples of maximum Value, the Chroma at which that maximum Value
+is reached, and the actual Hue for which the maximum Chroma was found.
+These sample points may then be used to plot the maximum Value/Chroma
+boundary of the screen's color gamut for the specified Hue in TekHVC color
+space.
+
+<H2>See also</H2>
+
+<B><A HREF="XcmsCIELabQueryMaxC.html">XcmsCIELabQueryMaxC()</A></B>,
+<B><A HREF="XcmsCIELuvQueryMaxC.html">XcmsCIELuvQueryMaxC()</A></B>,
+<B><A HREF="XcmsQueryBlack.html">XcmsQueryBlack()</A></B>,
+<B><A HREF="XcmsTekHVCQueryMaxC.html">XcmsTekHVCQueryMaxC()</A></B>,
+<B><A HREF="XcmsTekHVCQueryMaxV.html">XcmsTekHVCQueryMaxV()</A></B>,
+<B><A HREF="XcmsTekHVCQueryMaxVC.html">XcmsTekHVCQueryMaxVC()</A></B>,
+<B><A HREF="XcmsTekHVCQueryMinV.html">XcmsTekHVCQueryMinV()</A></B>,
+"<A HREF="tekhvc.html">TekHVC Queries</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

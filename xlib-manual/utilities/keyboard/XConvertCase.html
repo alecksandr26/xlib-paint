@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XConvertCase</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XConvertCase</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XConvertCase" "" "@DEF@">
+
+<CODE><PRE>
+void XConvertCase(<B>keysym</B>, <B>lower_return</B>, <B>upper_return</B>)
+      <A HREF="../../input/keyboard-encoding.html#KeySym">KeySym</A> <B>keysym</B>;
+      <A HREF="../../input/keyboard-encoding.html#KeySym">KeySym</A> *<B>lower_return</B>;
+      <A HREF="../../input/keyboard-encoding.html#KeySym">KeySym</A> *<B>upper_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>keysym</B>
+<TD> Specifies the KeySym that is to be converted.
+
+<TR><TD> <B>lower_return</B>
+<TD> Returns the lowercase form of keysym, or keysym.
+
+<TR><TD> <B>upper_return</B>
+<TD> Returns the uppercase form of keysym, or keysym.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XConvertCase()</B>
+function returns the uppercase and lowercase forms of the specified Keysym,
+if the KeySym is subject to case conversion;
+otherwise, the specified KeySym is returned to both lower_return and
+upper_return.
+Support for conversion of other than Latin and Cyrillic KeySyms is
+implementation dependent.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XKeycodeToKeysym.html">XKeycodeToKeysym()</A></B>,
+<B><A HREF="XKeysymToString.html">XKeysymToString()</A></B>,
+<B><A HREF="XLookupKeysym.html">XLookupKeysym()</A></B>,
+<B><A HREF="XStringToKeysym.html">XStringToKeysym()</A></B>,
+<A HREF="./">Keyboard Utility Functions</A>.
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

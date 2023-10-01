@@ -1,0 +1,79 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XDestroySubwindows</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XDestroySubwindows</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XDestroySubwindows" "" "@DEF@">
+
+<CODE><PRE>
+XDestroySubwindows(<B>display</B>, <B>w</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XDestroySubwindows()</B>
+function destroys all inferior windows of the specified window, 
+in bottom-to-top stacking order.
+It causes the X server to generate a
+<B><A HREF="../events/window-state-change/destroy.html">DestroyNotify</A></B>
+event for each window.
+If any mapped
+subwindows were actually destroyed,
+<B>XDestroySubwindows()</B>
+causes the X server to generate 
+<B><A HREF="../events/exposure/expose.html">Expose</A></B> 
+events on the specified window.
+This is much more efficient than deleting many windows
+one at a time because much of the work need be performed only once for all
+of the windows, rather than for each window.
+The subwindows should never be referenced again.  
+
+<P>
+
+<B>XDestroySubwindows()</B>
+can generate a
+<B>BadWindow</B>
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>,
+<B><A HREF="XConfigureWindow.html">XConfigureWindow()</A></B>,
+<B><A HREF="XCreateWindow.html">XCreateWindow()</A></B>,
+<B><A HREF="XDestroyWindow.html">XDestroyWindow()</A></B>,
+<B><A HREF="XMapWindow.html">XMapWindow()</A></B>,
+<B><A HREF="XRaiseWindow.html">XRaiseWindow()</A></B>,
+<B><A HREF="XUnmapWindow.html">XUnmapWindow()</A></B>,
+"<A HREF="destroy.html">Destroying Windows</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

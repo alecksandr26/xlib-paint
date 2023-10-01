@@ -1,0 +1,76 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Controlling Host Access</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>9.8 Controlling Host Access</H1>
+
+<P>
+
+This section discusses how to:
+
+<UL>
+<P><LI>
+<A HREF="hosts.html">Add, get, or remove hosts from the access control list</A>
+
+<P><LI>
+<A HREF="access.html">Change, enable, or disable access</A>
+</UL>
+
+<P>
+
+<!.IN "Access control list">
+<!.IN "Authentication">
+X does not provide any protection on a per-window basis.
+If you find out the resource ID of a resource, you can manipulate it.
+To provide some minimal level of protection, however,
+connections are permitted only from machines you trust.
+This is adequate on single-user workstations but obviously
+breaks down on timesharing machines.
+Although provisions exist in the X protocol for proper connection
+authentication, the lack of a standard authentication server
+leaves host-level access control as the only common mechanism.
+
+<P>
+
+<!.IN "Default Protection">
+The initial set of hosts allowed to open connections typically consists of:
+
+<UL>
+<P><LI>
+The host the window system is running on.
+
+<P><LI>
+On POSIX-conformant systems, each host listed in the
+<B>/etc/X?.hosts</B>
+file.
+The ? indicates the number of the
+display.
+<!.IN "Files" "/etc/X?.hosts">
+This file should consist of host names separated by newlines.
+DECnet nodes must terminate in :: to distinguish them from Internet hosts.
+</UL>
+
+<P>
+
+If a host is not in the access control list when the access control 
+mechanism is enabled and if the host attempts to establish a connection,
+the server refuses the connection.
+To change the access list,
+the client must reside on the same host as the server and/or must
+have been granted permission in the initial authorization at connection
+setup.
+
+<P>
+
+Servers also can implement other access control policies in addition to
+or in place of this host access facility.
+For further information about other access control implementations,
+see ``X Window System Protocol.''
+
+<H5 ALIGN=right><I>Next: <A HREF="hosts.html">Adding, Getting, or Removing Hosts</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

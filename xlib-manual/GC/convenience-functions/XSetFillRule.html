@@ -1,0 +1,86 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetFillRule</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetFillRule</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XSetFillRule" "" "@DEF@">
+
+<CODE><PRE>
+XSetFillRule(<B>display</B>, <B>gc</B>, <B>fill_rule</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="../manipulating.html">GC</A> <B>gc</B>;
+      int <B>fill_rule</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>fill_rule</B>
+<TD> Specifies the fill-rule you want to set for the specified GC.
+You can pass 
+<B>EvenOddRule</B>
+or
+<B>WindingRule</B>.
+
+</TABLE>
+
+<H2>Description</H2>
+
+<B>XSetFillRule()</B>
+can generate
+<B>BadAlloc</B>,
+<B>BadGC</B>,
+and
+<B>BadValue</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../GContext.html">GContext</A></B> 
+	argument does not name a defined 
+	<B><A HREF="../GContext.html">GContext</A></B>.
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../XCreateGC.html">XCreateGC()</A></B>,
+<B><A HREF="XQueryBestSize.html">XQueryBestSize()</A></B>,
+<B><A HREF="XSetArcMode.html">XSetArcMode()</A></B>,
+<B><A HREF="XSetClipOrigin.html">XSetClipOrigin()</A></B>,
+<B><A HREF="XSetFillRule.html">XSetFillRule()</A></B>,
+<B><A HREF="XSetFillStyle.html">XSetFillStyle()</A></B>,
+<B><A HREF="XSetFont.html">XSetFont()</A></B>,
+<B><A HREF="XSetLineAttributes.html">XSetLineAttributes()</A></B>,
+<B><A HREF="XSetState.html">XSetState()</A></B>,
+<B><A HREF="XSetTile.html">XSetTile()</A></B>,
+"<A HREF="fill-style-and-rule.html">Setting the Fill Style and Fill Rule</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

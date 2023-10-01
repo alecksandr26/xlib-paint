@@ -1,0 +1,154 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Window Functions: Visual Types</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>3.1 Visual Types</H1>
+
+<!.IN "Visual Type" "" "@DEF@">
+On some display hardware, 
+it may be possible to deal with color resources in more than one way.
+For example, you may be able to deal with a screen of either 12-bit depth
+with arbitrary mapping of pixel to color (pseudo-color) or 24-bit depth
+with 8 bits of the pixel dedicated to each of red, green, and blue.
+These different ways of dealing with the visual aspects of the screen
+are called visuals.
+For each screen of the display, there may be a list of valid visual types
+supported at different depths of the screen.
+Because default windows and visual types are defined for each screen,
+most simple applications need not deal with this complexity.
+Xlib provides macros and functions that return the default root window, 
+the default depth of the default root window, and the default visual type
+(see "<A HREF="../display/display-macros.html">Display Macros</A>" and "<A HREF="../utilities/visual.html">Determining the Appropriate Visual Type</A>").
+
+<A NAME="Visual"></A>
+<P>
+
+Xlib uses an opaque 
+<B>Visual</B>
+<!.IN "Visual" "" "@DEF@">
+structure that contains information about the possible color mapping.
+The visual utility functions (see "<A HREF="../utilities/visual.html">Determining the Appropriate Visual Type</A>") use an
+<A HREF="../utilities/visual.html#XVisualInfo">XVisualInfo</A>
+structure to return this information to an application.
+The members of this structure pertinent to this discussion are class, red_mask,
+green_mask, blue_mask, bits_per_rgb, and colormap_size.
+The class member specifies one of the possible visual classes of the screen
+and can be 
+<!.IN "Visual Classes" "StaticGray">
+<!.IN "Visual Classes" "StaticColor">
+<!.IN "Visual Classes" "TrueColor">
+<!.IN "Visual Classes" "StaticColor">
+<!.IN "Visual Classes" "GrayScale">
+<!.IN "Visual Classes" "PseudoColor">
+<B>StaticGray</B>,
+<B>StaticColor</B>,
+<B>TrueColor</B>,
+<B>GrayScale</B>,
+<B>PseudoColor</B>,
+or
+<B>DirectColor</B>.
+
+<P>
+
+The following concepts may serve to make the explanation of
+visual types clearer. 
+The screen can be color or grayscale,
+can have a colormap that is writable or read-only,
+and can also have a colormap whose indices are decomposed into separate 
+RGB pieces, provided one is not on a grayscale screen.
+This leads to the following diagram:
+
+<P>
+<CENTER>
+<TABLE BORDER>
+<TR ALIGN=center><TD>				<TD COLSPAN=2>Color				<TD COLSPAN=2>Gray-scale
+<TR ALIGN=center><TD>				<TD>R/O			<TD>R/W			<TD>R/O		<TD>R/W
+<TR ALIGN=center><TD>Undecomposed Colormap	<TD>Static Color	<TD>Pseudo Color	<TD>Static Gray	<TD>Gray Scale
+<TR ALIGN=center><TD>Decomposed Colormap	<TD>True Color		<TD>Direct Color	<TD COLSPAN=2>
+</TABLE>
+</CENTER>
+
+<P>
+
+Conceptually, 
+as each pixel is read out of video memory for display on the screen,
+it goes through a look-up stage by indexing into a colormap.
+Colormaps can be manipulated arbitrarily on some hardware, 
+in limited ways on other hardware, and not at all on other hardware.  
+The visual types affect the colormap and 
+the RGB values in the following ways:
+
+<UL>
+
+<P><LI> For 
+<B>PseudoColor</B>, 
+a pixel value indexes a colormap to produce
+independent RGB values, and the RGB values can be changed dynamically.
+
+<P><LI> <B>GrayScale</B>
+is treated the same way as 
+<B>PseudoColor</B>
+except that the primary that drives the screen is undefined. 
+Thus, the client should always store the
+same value for red, green, and blue in the colormaps.  
+
+<P><LI> For 
+<B>DirectColor</B>,
+a pixel value is decomposed into separate RGB subfields, and each
+subfield separately indexes the colormap for the corresponding value.
+The RGB values can be changed dynamically.  
+
+<P><LI> <B>TrueColor</B>
+is treated the same way as 
+<B>DirectColor</B>
+except that the colormap has predefined, read-only RGB values.
+These RGB values are server-dependent but provide linear or near-linear
+ramps in each primary.  
+
+<P><LI> <B>StaticColor</B>
+is treated the same way as 
+<B>PseudoColor</B>
+except that the colormap has predefined, 
+read-only, server-dependent RGB values.
+
+<P><LI> <B>StaticGray</B>
+is treated the same way as 
+<B>StaticColor</B>
+except that the RGB values are equal for any single pixel
+value, thus resulting in shades of gray.  
+<B>StaticGray</B>
+with a two-entry
+colormap can be thought of as monochrome.
+
+</UL>
+
+The red_mask, green_mask, and blue_mask members are only defined for
+<B>DirectColor</B>
+and 
+<B>TrueColor</B>. 
+Each has one contiguous set of bits with no
+intersections.
+The bits_per_rgb member specifies the log base 2 of the
+number of distinct color values (individually) of red, green, and blue.
+Actual RGB values are unsigned 16-bit numbers.
+The colormap_size member defines the number of available colormap entries
+in a newly created colormap.  
+For 
+<B>DirectColor</B>
+and 
+<B>TrueColor</B>, 
+this is the size of an individual pixel subfield.
+
+<P>
+To obtain the visual ID from a 
+<A HREF="#Visual">Visual</A> ,
+use
+<B><A HREF="XVisualIDFromVisual.html">XVisualIDFromVisual()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="attributes/">Window Attributes</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

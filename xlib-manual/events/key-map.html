@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Key Map State Notification Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.8 Key Map State Notification Events</H1>
+
+<A NAME="KeymapNotify"></A>
+
+<!.IN "Events" "KeymapNotify">
+<!.IN "KeymapNotify" "" "@DEF@">
+The X server can report
+<B>KeymapNotify</B>
+events to clients that want information about changes in their keyboard state.
+
+<P>
+
+To receive
+<B>KeymapNotify</B>
+events, set the
+<B>KeymapStateMask</B>
+bit in the <A HREF="../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the window. 
+The X server generates this event immediately after every
+<B><A HREF="window-entry-exit/">EnterNotify</A></B>
+and
+<B><A HREF="input-focus/">FocusIn</A></B>
+event.
+
+<P>
+
+The structure for this event type contains:
+
+<A NAME="XKeymapEvent"></A>
+<P>
+
+<!.IN "XKeymapEvent" "" "@DEF@">
+
+<CODE><PRE>
+
+/* generated on EnterWindow and FocusIn when KeymapState selected */
+typedef struct {
+	int type;		/* KeymapNotify */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Window window;
+	char key_vector[32];
+} XKeymapEvent;	
+</PRE></CODE>
+
+<P>
+
+The <B>window</B> member is not used but is present to aid some toolkits.
+The <B>key_vector</B> member is set to the bit vector of the keyboard.
+Each bit set to 1 indicates that the corresponding key 
+is currently pressed.
+The vector is represented as 32 bytes.
+Byte N (from 0) contains the bits for keys 8N to 8N + 7 
+with the least-significant bit in the byte representing key 8N.
+
+<H5 ALIGN=right><I>Next: <A HREF="exposure/">Exposure events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

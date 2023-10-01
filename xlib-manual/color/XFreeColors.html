@@ -1,0 +1,140 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XFreeColors</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XFreeColors</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XFreeColors" "" "@DEF@">
+<!.IN "Color" "deallocation">
+
+<CODE><PRE>
+XFreeColors(<B>display</B>, <B>colormap</B>, <B>pixels</B>, <B>npixels</B>, <B>planes</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="./#colormap">Colormap</A> <B>colormap</B>;
+      unsigned long <B>pixels</B>[];
+      int <B>npixels</B>;
+      unsigned long <B>planes</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>colormap</B>
+<TD> Specifies the colormap.
+
+<TR><TD> <B>pixels</B>
+<TD> Specifies an array of pixel values that map to the cells in the specified colormap. 
+
+<TR><TD> <B>npixels</B>
+<TD> Specifies the number of pixels. 
+
+<TR><TD> <B>planes</B>
+<TD> Specifies the planes you want to free.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XFreeColors()</B>
+function frees the cells represented by pixels whose values are in the
+pixels array.
+The planes argument should not have any bits set to 1 in common with any of the
+pixels. 
+The set of all pixels is produced by ORing together subsets of
+the planes argument with the pixels.
+The request frees all of these pixels that
+were allocated by the client (using 
+<!.IN XAllocColor>
+<!.IN XAllocNamedColor>
+<!.IN XAllocColorCells>
+<!.IN XAllocColorPlanes>
+<B><A HREF="XAllocColor.html">XAllocColor()</A></B>, 
+<B><A HREF="XAllocNamedColor.html">XAllocNamedColor()</A></B>,
+<B><A HREF="XAllocColorCells.html">XAllocColorCells()</A></B>,
+and 
+<B><A HREF="XAllocColorPlanes.html">XAllocColorPlanes()</A></B>).
+Note that freeing an
+individual pixel obtained from 
+<B><A HREF="XAllocColorPlanes.html">XAllocColorPlanes()</A></B>
+may not actually allow
+it to be reused until all of its related pixels are also freed.
+Similarly,
+a read-only entry is not actually freed until it has been freed by all clients,
+and if a client allocates the same read-only entry multiple times,
+it must free the entry that many times before the entry is actually freed.
+
+<P>
+
+All specified pixels that are allocated by the client in the colormap are
+freed, even if one or more pixels produce an error. 
+If a specified pixel is not a valid index into the colormap, a 
+<B>BadValue</B>
+error results.
+If a specified pixel is not allocated by the
+client (that is, is unallocated or is only allocated by another client)
+or if the colormap was created with all entries writable (by passing
+<B>AllocAll</B>
+to
+<B><A HREF="XCreateColormap.html">XCreateColormap()</A></B>),
+a
+<B>BadAccess</B>
+error results. 
+If more than one pixel is in error, 
+the one that gets reported is arbitrary.
+
+<P>
+
+<B>XFreeColors()</B>
+can generate
+<B>BadAccess</B> ,
+<B>BadColor</B> ,
+and
+<B>BadValue</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAccess</B>
+<TD> A client attempted to free a color map entry that
+it did not already allocate.
+<TR><TD><B>BadAccess</B>
+<TD> A client attempted to store into a read-only color
+     map entry.
+
+<TR><TD><B>BadColor</B>
+<TD>  A value for a Colormap argument does not name a
+      defined Colormap.
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocColor.html">XAllocColor()</A></B>,
+<B><A HREF="XAllocColorCells.html">XAllocColorCells()</A></B>,
+<B><A HREF="XAllocColorPlanes.html">XAllocColorPlanes()</A></B>,
+<B><A HREF="XAllocNamedColor.html">XAllocNamedColor()</A></B>,
+<B><A HREF="XCreateColormap.html">XCreateColormap()</A></B>,
+<B><A HREF="XQueryColor.html">XQueryColor()</A></B>,
+<B><A HREF="XStoreColors.html">XStoreColors()</A></B>,
+"<A HREF="cell.html">Allocating and Freeing Color Cells</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

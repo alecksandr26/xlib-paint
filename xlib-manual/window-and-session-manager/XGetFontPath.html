@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetFontPath</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetFontPath</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetFontPath" "" "@DEF@">
+
+<CODE><PRE>
+char **XGetFontPath(<B>display</B>, <B>npaths_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      int *<B>npaths_return</B>;
+
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>npaths_return</B>
+<TD> Returns the number of strings in the font path array.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetFontPath()</B>
+function allocates and returns an array of strings containing the search path.
+The contents of these strings are implementation dependent
+and are not intended to be interpreted by client applications.
+When it is no longer needed,
+the data in the font path should be freed by using
+<B><A HREF="XFreeFontPath.html">XFreeFontPath()</A></B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XSetFontPath.html">XSetFontPath()</A></B>,
+<B><A HREF="XFreeFontPath.html">XFreeFontPath()</A></B>,
+<B><A HREF="../graphics/font-metrics/XListFonts.html">XListFonts()</A></B>,
+<B><A HREF="../graphics/font-metrics/XLoadFont.html">XLoadFont()</A></B>,
+"<A HREF="font-search-path.html">Setting and Retrieving the Font Search Path</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

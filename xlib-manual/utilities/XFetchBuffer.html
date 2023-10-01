@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XFetchBuffer</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XFetchBuffer</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XFetchBuffer" "" "@DEF@">
+
+<CODE><PRE>
+char *XFetchBuffer(<B>display</B>, <B>nbytes_return</B>, <B>buffer</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      int *<B>nbytes_return</B>;
+      int <B>buffer</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>nbytes_return</B>
+<TD> Returns the number of bytes in the buffer.
+
+<TR><TD> <B>buffer</B>
+<TD> Specifies the buffer from which you want the stored data returned.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XFetchBuffer()</B>
+function returns zero to the nbytes_return argument 
+if there is no data in the buffer or if an invalid
+buffer is specified.
+
+<H2>See also</H2>
+
+<B><A HREF="XFetchBytes.html">XFetchBytes()</A></B>,
+<B><A HREF="XRotateBuffers.html">XRotateBuffers()</A></B>,
+<B><A HREF="XStoreBuffer.html">XStoreBuffer()</A></B>,
+<B><A HREF="XStoreBytes.html">XStoreBytes()</A></B>,
+"<A HREF="using-cut-buffers.html">Using Cut Buffers</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

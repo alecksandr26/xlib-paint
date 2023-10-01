@@ -1,0 +1,150 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XCopyArea</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XCopyArea</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Areas" "copying">
+<!.IN "Copying" "areas">
+<!.IN "XCopyArea" "" "@DEF@">
+
+<CODE><PRE>
+XCopyArea(<B>display</B>, <B>src</B>, <B>dest</B>, <B>gc</B>, <B>src_x</B>, <B>src_y</B>, <B>width</B>, <B>height</B>,  <B>dest_x</B>, <B>dest_y</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Drawable <B>src</B>, <B>dest</B>;
+      <A HREF="../GC/manipulating.html">GC</A> <B>gc</B>;
+      int <B>src_x</B>, <B>src_y</B>;
+      unsigned int <B>width</B>, <B>height</B>;
+      int <B>dest_x</B>, <B>dest_y</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>src</B><BR>
+	<B>dest</B>
+<TD> Specify the source and destination rectangles to be combined. 
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>src_x</B><BR>
+	<B>src_y</B>
+<TD> Specify the x and y coordinates, 
+which are relative to the origin of the source rectangle
+and specify its upper-left corner.
+
+<TR><TD> <B>width</B>
+<TR><TD> <B>height</B>
+<TD> Specify the width and height, which are the dimensions of both the source and destination rectangles.
+
+<TR><TD> <B>dest_x</B><BR>
+	<B>dest_y</B>
+<TD> Specify the x and y coordinates, which are relative to the origin of the destination rectangle and specify its upper-left corner
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XCopyArea()</B>
+function combines the specified rectangle of src with the specified rectangle 
+of dest.
+The drawables must have the same root and depth,
+or a
+<B>BadMatch</B>
+error results.
+
+<P>
+
+If regions of the source rectangle are obscured and have not been
+retained in backing store 
+or if regions outside the boundaries of the source drawable are specified, 
+those regions are not copied. 
+Instead, the 
+following occurs on all corresponding destination regions that are either
+visible or are retained in backing store.  
+If the destination is a window with a background other than 
+<B>None</B>, 
+corresponding regions
+of the destination are tiled with that background
+(with plane-mask of all ones and
+<B>GXcopy</B> 
+function).
+Regardless of tiling or whether the destination is a window or a pixmap,
+if graphics-exposures is 
+<B>True</B>,
+then
+<B><A HREF="../events/exposure/graphics-expose-and-no-expose.html">GraphicsExpose</A></B>
+events for all corresponding destination regions are generated.
+If graphics-exposures is 
+<B>True</B> 
+but no
+<B><A HREF="../events/exposure/graphics-expose-and-no-expose.html">GraphicsExpose</A></B>
+events are generated, a
+<B><A HREF="../events/exposure/graphics-expose-and-no-expose.html">NoExpose</A></B> 
+event is generated.
+Note that by default graphics-exposures is
+<B>True</B>
+in new GCs.
+
+<P>
+
+This function uses these GC components: <A HREF="../GC/manipulating.html#function">function</A>,
+<A HREF="../GC/manipulating.html#plane-mask">plane-mask</A>,
+<A HREF="../GC/manipulating.html#subwindow-mode">subwindow-mode</A>,
+<A HREF="../GC/manipulating.html#graphics-exposure">graphics-exposure</A>,
+<A HREF="../GC/manipulating.html#clip-mask">clip-x-origin</A>,
+<A HREF="../GC/manipulating.html#clip-mask">clip-y-origin</A>, 
+and
+<A HREF="../GC/manipulating.html#clip-mask">clip-mask</A>.
+
+<P>
+
+<B>XCopyArea()</B>
+can generate
+<B>BadDrawable</B>,
+<B>BadGC</B>,
+and
+<B>BadMatch</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../my-own/gcontext.html">GContext</A></B>
+	argument does not name a defined 
+	<B><A HREF="../my-own/gcontext.html">GContext</A></B>.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+</TABLE>
+      
+<H2>See also</H2>
+
+<B><A HREF="XClearArea.html">XClearArea()</A></B>,
+<B><A HREF="XCopyPlane.html">XCopyPlane()</A></B>,
+"<A HREF="copying-areas.html">Copying Areas</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

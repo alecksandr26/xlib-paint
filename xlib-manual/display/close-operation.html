@@ -1,0 +1,145 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: X Server Connection Close Operations</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>2.6. X Server Connection Close Operations</H1>
+
+When the X server's connection to a client is closed
+either by an explicit call to
+<B><A HREF="XCloseDisplay.html">XCloseDisplay()</A></B>
+or by a process that exits, the X server performs the following
+automatic operations:
+
+<UL>
+<P><LI>
+It disowns all selections owned by the client
+(see 
+<B><A HREF="../window-information/XSetSelectionOwner.html">XSetSelectionOwner()</A></B>).
+
+<P><LI>
+It performs an
+<B><A HREF="../input/XUngrabPointer.html">XUngrabPointer()</A></B>
+and
+<B><A HREF="../input/XUngrabKeyboard.html">XUngrabKeyboard()</A></B>
+if the client has actively grabbed the pointer 
+or the keyboard.
+
+<P><LI>
+It performs an
+<B><A HREF="../window-and-session-manager/XUngrabServer.html">XUngrabServer()</A></B>
+if the client has grabbed the server.
+
+<P><LI>
+It releases all <A HREF="passive-grabs">passive grabs</a> made by the client.  
+
+<P><LI>
+It marks all resources (including colormap entries) allocated 
+by the client either as permanent or temporary, 
+depending on whether the close-down mode is 
+<B>RetainPermanent</B>
+or
+<B>RetainTemporary</B>.
+However, this does not prevent other client applications from explicitly
+destroying the resources (see 
+<B><A HREF="XSetCloseDownMode.html">XSetCloseDownMode()</A></B>).
+</UL>
+
+<P>
+
+When the close-down mode is
+<B>DestroyAll</B>,
+the X server destroys all of a client's resources as follows:
+
+<UL>
+<P><LI>
+It examines each window in the client's save-set to determine if it is an inferior
+(subwindow) of a window created by the client.
+(The save-set is a list of other clients' windows, 
+which are referred to as save-set windows.)
+If so, the X server reparents the save-set window to the closest ancestor so
+that the save-set window is not an inferior of a window created by the client.
+The reparenting leaves unchanged the absolute coordinates (with respect to
+the root window) of the upper-left outer corner of the save-set
+window.
+
+<P><LI>
+It performs a
+<B>MapWindow</B>
+request on the save-set window if the save-set window is unmapped.
+The X server does this even if the save-set window was not an inferior of 
+a window created by the client.
+
+<P><LI>
+It destroys all windows created by the client.
+
+<P><LI>
+It performs the appropriate free request on each nonwindow resource created by
+the client in the server (for example, 
+<A HREF="../graphics/font-metrics/">Font</A>, 
+<A HREF="../pixmap-and-cursor/pixmap.html">Pixmap</A>, 
+<A HREF="../pixmap-and-cursor/cursor.html">Cursor</A>, 
+<A HREF="../color/#colormap">Colormap</A>, 
+and 
+<B><A HREF="../my-own/gcontext.html">GContext</A></B>).
+
+<P><LI>
+It frees all colors and colormap entries allocated by a client application.
+</UL>
+
+<P>
+
+Additional processing occurs when the last connection to the X server closes.
+An X server goes through a cycle of having no connections and having some
+connections.
+When the last connection to the X server closes as a result of a connection
+closing with the close_mode of
+<B>DestroyAll</B>,
+the X server does the following: 
+
+<UL>
+<P><LI>
+It resets its state as if it had just been
+started.  
+The X server begins by destroying all lingering resources from
+clients that have terminated in 
+<B>RetainPermanent</B>
+or
+<B>RetainTemporary</B>
+mode.
+
+<P><LI>
+It deletes all but the predefined atom identifiers.
+
+<P><LI>
+It deletes all properties on all root windows (see section "<A HREF="../window-information/properties-and-atoms.html">Properties and Atoms</A>").
+
+<P><LI>
+It resets all device maps and attributes 
+(for example, key click, bell volume, and acceleration) 
+as well as the access control list.
+
+<P><LI>
+It restores the standard root tiles and cursors.
+
+<P><LI>
+It restores the default font path.
+
+<P><LI>
+It restores the input focus to state
+<B>PointerRoot</B>.
+</UL>
+<P>
+
+However, the X server does not reset if you close a connection with a close-down
+mode set to
+<B>RetainPermanent</B>
+or
+<B>RetainTemporary</B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="threads.html">Using Xlib With Threads</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

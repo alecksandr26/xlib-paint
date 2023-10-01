@@ -1,0 +1,93 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetDefault</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetDefault</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetDefault" "" "@DEF@">
+
+<CODE><PRE>
+char *XGetDefault(<I>display</I>, <I>program</I>, <I>option</I>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<I>display</I>;
+      char *<I>program</I>;
+      char *<I>option</I>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <P>display</P>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <P>program</P>
+<TD> Specifies the program name for the Xlib defaults (usually argv[0] 
+of the main program).
+
+<TR><TD> <P>option</P>
+<TD> Specifies the option name.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetDefault()</B>
+function returns the value of the resource <I>prog</I>.<I>option</I>,
+where <I>prog</I> is the program argument with the directory prefix removed
+and <I>option</I> must be a single component.
+Note that multilevel resources cannot be used with
+<B>XGetDefault()</B>.
+The class "Program.Name" is always used for the resource lookup.
+If the specified option name does not exist for this program,
+<B>XGetDefault()</B>
+returns NULL.
+The strings returned by
+<B>XGetDefault()</B>
+are owned by Xlib and should not be modified or freed by the client.
+
+<P>
+
+If a database has been set with 
+<B><A HREF="../../resource-manager/XrmSetDatabase.html">XrmSetDatabase()</A></B>, 
+that database is used for the lookup.
+Otherwise, a database is created
+and is set in the display (as if by calling 
+<B><A HREF="../../resource-manager/XrmSetDatabase.html">XrmSetDatabase()</A></B>).
+The database is created in the current locale.
+To create a database,
+<B>XGetDefault()</B>
+uses resources from the RESOURCE_MANAGER property on the root
+window of screen zero.
+If no such property exists,
+a resource file in the user's home directory is used.
+On a POSIX-conformant system, 
+this file is
+<B>"$HOME/.Xdefaults"</B>.
+<!.IN "Files" "$HOME/.Xdefaults">
+
+After loading these defaults,
+<B>XGetDefault()</B>
+merges additional defaults specified by the XENVIRONMENT
+environment variable.
+If XENVIRONMENT is defined,
+it contains a full path name for the additional resource file.
+If XENVIRONMENT is not defined,
+<B>XGetDefault()</B>
+looks for
+<B>"$HOME/.Xdefaults-<I>name</I>"</B>,
+where <I>name</I> specifies the name of the machine on which the application
+is running.
+
+<H2>See also</H2>
+
+"<A HREF="d.html">Compatibility Functions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XTextWidth16</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XTextWidth16</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XTextWidth16" "" "@DEF@">
+
+<CODE><PRE>
+int XTextWidth16(<B>font_struct</B>, <B>string</B>, <B>count</B>)
+      <A HREF="./#XFontStruct">XFontStruct</A> *<B>font_struct</B>;
+      <A HREF="./#XChar2b">XChar2b</A> *<B>string</B>;
+      int <B>count</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>font_struct</B>
+<TD> Specifies the font used for the width computation.
+
+<TR><TD> <B>string</B>
+<TD> Specifies the character string.
+
+<TR><TD> <B>count</B>
+<TD> Specifies the character count in the specified string.
+
+</TABLE>
+
+<H2>Description</H2>
+
+<B>XTextWidth16()</B>
+determines the width of an 16-bit character string.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XTextWidth.html">XTextWidth()</A></B>,
+<B><A HREF="XLoadFont.html">XLoadFont()</A></B>,
+<B><A HREF="XTextExtents.html">XTextExtents()</A></B>,
+"<A HREF="computing-string-size.html">Computing Character String Sizes</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

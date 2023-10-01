@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetWMName</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetWMName</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XSetWMName" "" "@DEF@">
+
+<CODE><PRE>
+void XSetWMName(<B>display</B>, <B>w</B>, <B>text_prop</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      <A HREF="converting-string-lists.html">XTextProperty</A> *<B>text_prop</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>text_prop</B>
+<TD> Specifies the
+<A HREF="converting-string-lists.html">XTextProperty</A>
+structure to be used.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XSetWMName()</B>
+convenience function calls
+<B><A HREF="XSetTextProperty.html">XSetTextProperty()</A></B>
+to set the WM_NAME property.
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocClassHint.html">XAllocClassHint()</A></B>,
+<B><A HREF="XAllocIconSize.html">XAllocIconSize()</A></B>,
+<B><A HREF="XAllocSizeHints.html">XAllocSizeHints()</A></B>,
+<B><A HREF="XAllocWMHints.html">XAllocWMHints()</A></B>,
+<B><A HREF="XFetchName.html">XFetchName()</A></B>,
+<B><A HREF="../../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XGetWMName.html">XGetWMName()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetCommand.html">XSetCommand()</A></B>,
+<B><A HREF="XSetTextProperty.html">XSetTextProperty()</A></B>,
+<B><A HREF="XSetTransientForHint.html">XSetTransientForHint()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetWMClientMachine.html">XSetWMClientMachine()</A></B>,
+<B><A HREF="XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B>,
+<B><A HREF="XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B>,
+<B><A HREF="XSetWMIconName.html">XSetWMIconName()</A></B>,
+<B><A HREF="XSetWMIconName.html">XSetWMIconName()</A></B>,
+<B><A HREF="XSetWMProperties.html">XSetWMProperties()</A></B>,
+<B><A HREF="XSetWMProtocols.html">XSetWMProtocols()</A></B>,
+<B><A HREF="XStoreName.html">XStoreName()</A></B>,
+<B><A HREF="XStringListToTextProperty.html">XStringListToTextProperty()</A></B>,
+"<A HREF="text.html">Setting and Reading Text Properties</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

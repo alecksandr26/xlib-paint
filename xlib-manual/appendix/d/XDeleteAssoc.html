@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XDeleteAssoc</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XDeleteAssoc</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XDeleteAssoc" "" "@DEF@">
+
+<CODE><PRE>
+XDeleteAssoc(<I>display</I>, <I>table</I>, <I>x_id</I>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<I>display</I>;
+      <A HREF="d.html#XAssocTable">XAssocTable</A> *<I>table</I>;
+      XID <I>x_id</I>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>table</B>
+<TD> Specifies the assoc table. 
+
+<TR><TD> <B>x_id</B>
+<TD> Specifies the X resource ID.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XDeleteAssoc()</B>
+function deletes an association in an 
+<A HREF="d.html#XAssocTable">XAssocTable</A>
+keyed on its XID.
+Redundant deletes (and deletes of nonexistent XIDs) are ignored.
+Deleting associations in no way impairs the performance of an 
+<A HREF="d.html#XAssocTable">XAssocTable</A>.
+
+<H2>See also</H2>
+
+"<A HREF="d.html">Compatibility Functions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

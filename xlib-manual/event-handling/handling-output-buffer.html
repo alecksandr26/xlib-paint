@@ -1,0 +1,31 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Event Handling Functions: Handling the Output Buffer</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>11.2 Handling the Output Buffer</H1>
+
+The output buffer is an area used by Xlib to store requests.
+The functions described in this section flush the output buffer
+if the function would block or not return an event.
+That is, all requests residing in the output buffer that
+have not yet been sent are transmitted to the X server.
+These functions differ in the additional tasks they might perform.
+
+<P>
+
+To flush the output buffer, use 
+<B><A HREF="XFlush.html">XFlush()</A></B>.
+
+<P>
+
+To flush the output buffer and then wait until all requests have been processed,
+use 
+<B><A HREF="XSync.html">XSync()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="event-queue-management.html">Event Queue Management</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

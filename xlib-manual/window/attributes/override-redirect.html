@@ -1,0 +1,39 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Window Attributes: Override Redirect Flag</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>3.2.8 Override Redirect Flag</H1>
+
+To control window placement or to add decoration,
+a window manager often needs to intercept (redirect) any map or configure
+request.
+Pop-up windows, however, often need to be mapped without a window manager
+getting in the way.
+To control whether an
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+or
+<B><A HREF="../create.html#InputClass">InputOnly</A></B>
+window is to ignore these structure control facilities,
+use the override-redirect flag.
+
+<P>
+
+The override-redirect flag specifies whether map and configure requests 
+on this window should override a 
+<B><A HREF="../../events/processing-overview.html#SubstructureRedirectMask">SubstructureRedirectMask</A></B>
+on the parent.
+You can set the override-redirect flag to
+<B>True</B>
+or
+<B>False</B>
+(default).
+Window managers use this information to avoid tampering with pop-up windows
+(see also "<A HREF="../../ICC/">Inter-Client Communication Functions</A>").
+
+<H5 ALIGN=right><I>Next: <A HREF="colormap.html">Colormap Attribute</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

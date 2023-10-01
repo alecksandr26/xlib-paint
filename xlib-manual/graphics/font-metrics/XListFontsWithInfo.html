@@ -1,0 +1,90 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XListFontsWithInfo</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XListFontsWithInfo</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XListFontsWithInfo" "" "@DEF@">
+
+<CODE><PRE>
+char **XListFontsWithInfo(<B>display</B>, <B>pattern</B>, <B>maxnames</B>, <B>count_return</B>, <B>info_return</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      char *<B>pattern</B>;
+      int <B>maxnames</B>;
+      int *<B>count_return</B>;
+      <A HREF="./#XFontStruct">XFontStruct</A> **<B>info_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>pattern</B>
+<TD> Specifies the null-terminated pattern string that can contain wildcard 
+characters.
+
+<TR><TD> <B>maxnames</B>
+<TD> Specifies the maximum number of names to be returned.
+
+<TR><TD> <B>count_return</B>
+<TD> Returns the actual number of matched font names.
+
+<TR><TD> <B>info_return</B>
+<TD> Returns the font information.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XListFontsWithInfo()</B>
+function returns a list of font names that match the specified pattern and their
+associated font information.
+The list of names is limited to size specified by maxnames.
+The information returned for each font is identical to what
+<B><A HREF="XLoadQueryFont.html">XLoadQueryFont()</A></B>
+would return except that the per-character metrics are not returned.
+The pattern string can contain any characters,
+but each asterisk (*) is a wildcard for any number of characters,
+and each question mark (?) is a wildcard for a single character.
+If the pattern string is not in the Host Portable Character Encoding,
+the result is implementation dependent.
+Use of uppercase or lowercase does not matter.
+Each returned string is null-terminated.
+If the data returned by the server is in the Latin Portable Character Encoding,
+then the returned strings are in the Host Portable Character Encoding.
+Otherwise, the result is implementation dependent.
+If there are no matching font names,
+<B>XListFontsWithInfo()</B>
+returns NULL.
+
+<P>
+
+To free only the allocated name array,
+the client should call
+<B><A HREF="XFreeFontNames.html">XFreeFontNames()</A></B>.
+To free both the name array and the font information array
+or to free just the font information array,
+the client should call
+<B><A HREF="XFreeFontInfo.html">XFreeFontInfo()</A></B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XFreeFontInfo.html">XFreeFontInfo()</A></B>,
+<B><A HREF="XFreeFontNames.html">XFreeFontNames()</A></B>,
+<B><A HREF="XListFonts.html">XListFonts()</A></B>,
+<B><A HREF="XLoadFont.html">XLoadFont()</A></B>,
+<B><A HREF="../../window-and-session-manager/XSetFontPath.html">XSetFontPath()</A></B>,
+"<A HREF="names.html">Obtaining and Freeing Font Names and Information</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

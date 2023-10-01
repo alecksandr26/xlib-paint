@@ -1,0 +1,28 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming: GContext and GC</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>GContext and GC in Xlib</H1>
+
+Many Xlib functions will return and use an integer resource ID, which allows you to refer to objects stored
+on the X server (see 
+"<A HREF="../introduction/overview.html#XID">Overview of the X Window System</A>"),
+such as <A HREF="../window/">Window</A>, 
+<A HREF="../graphics/font-metrics/">Font</A>, 
+<A HREF="../pixmap-and-cursor/pixmap.html">Pixmap</A>, 
+<A HREF="../color/#colormap">Colormap</A> and 
+<A HREF="../pixmap-and-cursor/cursor.html">Cursor</A>. 
+<A HREF="../GC/manipulating.html">GCs</A> however, are references to
+opaque structures stored on the client side for efficiency
+reasons. For each <A HREF="../GC/manipulating.html">GC</A> there is a
+correponding XID, whose type is <B>GContext</B>.
+
+<H5 ALIGN=right><I><A HREF="../">Back to the Xlib programming
+manual</A></I></H5>
+This page is not a part of the Xlib Programming manual.
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

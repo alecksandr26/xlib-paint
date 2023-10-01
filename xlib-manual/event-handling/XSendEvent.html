@@ -1,0 +1,171 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSendEvent</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSendEvent</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XSendEvent" "" "@DEF@">
+
+<CODE><PRE>
+Status XSendEvent(<B>display</B>, <B>w</B>, <B>propagate</B>, <B>event_mask</B>, <B>event_send</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      Bool <B>propagate</B>;
+      long <B>event_mask</B>;
+      <A HREF="../events/structures.html#XEvent">XEvent</A> *<B>event_send</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window the event is to be sent to, or
+<B>PointerWindow</B>,
+or
+<B>InputFocus</B>.
+
+<TR><TD> <B>propagate</B>
+<TD> Specifies a Boolean value.
+
+<TR><TD> <B>event_mask</B>
+<TD> Specifies the event mask.
+
+<TR><TD> <B>event_send</B>
+<TD> Specifies the event that is to be sent.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XSendEvent()</B>
+function identifies the destination window, 
+determines which clients should receive the specified events, 
+and ignores any active grabs.
+This function requires you to pass an event mask.
+For a discussion of the valid event mask names,
+see section "<A HREF="../events/mask.html">Event Masks</A>".
+This function uses the w argument to identify the destination window as follows:
+
+<UL>
+
+
+<P><LI>
+If w is
+<B>PointerWindow</B>,
+the destination window is the window that contains the pointer.
+
+<P><LI>
+If w is
+<B>InputFocus</B> 
+and if the focus window contains the pointer, 
+the destination window is the window that contains the pointer; 
+otherwise, the destination window is the focus window.
+
+</UL>
+
+<P>
+
+To determine which clients should receive the specified events,
+<B>XSendEvent()</B>
+uses the propagate argument as follows:
+
+<UL>
+
+<P><LI>
+If event_mask is the empty set,
+the event is sent to the client that created the destination window.
+If that client no longer exists,
+no event is sent.
+
+<P><LI>
+If propagate is 
+<B>False</B>,
+the event is sent to every client selecting on destination any of the event
+types in the event_mask argument.
+
+<P><LI>
+If propagate is 
+<B>True</B> 
+and no clients have selected on destination any of
+the event types in <A HREF="../window/attributes/event-and-do-not-propagate.html">event-mask</A>, the destination is replaced with the
+closest ancestor of destination for which some client has selected a
+type in event-mask and for which no intervening window has that type in its
+<A HREF="../window/attributes/event-and-do-not-propagate.html">do-not-propagate-mask</A>. 
+If no such window exists or if the window is
+an ancestor of the focus window and 
+<B>InputFocus</B> 
+was originally specified
+as the destination, the event is not sent to any clients.
+Otherwise, the event is reported to every client selecting on the final
+destination any of the types specified in event_mask.
+
+</UL>
+
+<P>
+
+The event in the
+<A HREF="../events/structures.html#XEvent">XEvent</A>
+structure must be one of the core events or one of the events
+defined by an extension (or a 
+<B>BadValue</B>
+error results) so that the X server can correctly byte-swap 
+the contents as necessary.  
+The contents of the event are
+otherwise unaltered and unchecked by the X server except to force send_event to
+<B>True</B>
+in the forwarded event and to set the serial number in the event correctly;
+therefore these fields
+and the display field are ignored by
+<B>XSendEvent()</B>.
+
+<P>
+
+<B>XSendEvent()</B>
+returns zero if the conversion to wire protocol format failed
+and returns nonzero otherwise.
+
+<P>
+
+<B>XSendEvent()</B>
+can generate
+<B>BadValue</B>
+and 
+<B>BadWindow</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XDisplayMotionBufferSize.html">XDisplayMotionBufferSize()</A></B>,
+<B><A HREF="XGetMotionEvents.html">XGetMotionEvents()</A></B>,
+<B><A HREF="manipulating-event-queue/XIfEvent.html">XIfEvent()</A></B>,
+<B><A HREF="manipulating-event-queue/XNextEvent.html">XNextEvent()</A></B>,
+<B><A HREF="XPutBackEvent.html">XPutBackEvent()</A></B>,
+"<A HREF="sending-to-other-applications.html">Sending Events to Other Applications</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

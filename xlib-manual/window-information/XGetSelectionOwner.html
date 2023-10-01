@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetSelectionOwner</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetSelectionOwner</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Selection" "getting the owner">
+<!.IN "XGetSelectionOwner" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="../window/">Window</A> XGetSelectionOwner(<B>display</B>, <B>selection</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="properties-and-atoms.html">Atom</A> <B>selection</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>selection</B>
+<TD> Specifies the selection atom whose owner you want returned.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetSelectionOwner()</B>
+function
+returns the window ID associated with the window that currently owns the
+specified selection.
+If no selection was specified, the function returns the constant
+<B>None</B> .
+If
+<B>None</B>
+is returned,
+there is no owner for the selection.
+
+<P>
+
+<B>XGetSelectionOwner()</B>
+can generate a
+<B>BadAtom</B> 
+error.
+
+<P>
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAtom</B>
+<TD> A value for an Atom argument does not name a
+     defined Atom.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XConvertSelection.html">XConvertSelection()</A></B>,
+<B><A HREF="XSetSelectionOwner.html">XSetSelectionOwner()</A></B>,
+"<A HREF="selection.html">Selections</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

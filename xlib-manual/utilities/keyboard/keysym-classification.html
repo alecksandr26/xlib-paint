@@ -1,0 +1,111 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: KeySym Classification Macros</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>16.1.1 KeySym Classification Macros</H1>
+
+You may want to test if a KeySym is, for example, 
+on the keypad or on one of the function keys.
+You can use KeySym macros to perform the following tests.
+
+<A NAME="IsCursorKey"></A>
+<P>
+
+<CODE><PRE>
+IsCursorKey(<B>keysym</B>)
+</PRE></CODE>
+<B>keysym</B> Specifies the KeySym that is to be tested.
+<BR>
+<!.IN "IsCursorKey" "" "@DEF@">
+Returns
+<B>True</B>
+if the specified KeySym is a cursor key.
+
+<A NAME="IsFunctionKey"></A>
+<P>
+
+<CODE><PRE>
+IsFunctionKey(<B>keysym</B>)
+</PRE></CODE>
+<B>keysym</B>
+Specifies the KeySym that is to be tested.
+<BR>
+<!.IN "IsFunctionKey" "" "@DEF@">
+Returns 
+<B>True</B>
+if the specified KeySym is a function key.
+
+<A NAME="IsKeypadKey"></A>
+<P>
+
+<CODE><PRE>
+IsKeypadKey(<B>keysym</B>)
+</PRE></CODE>
+<B>keysym</B>
+Specifies the KeySym that is to be tested.
+<BR>
+<!.IN "IsKeypadKey" "" "@DEF@">
+Returns
+<B>True</B>
+if the specified KeySym is a standard keypad key.
+
+<!.IN "IsPrivateKeypadKey" "" "@DEF@">
+<A NAME="IsPrivateKeypadKey"></A>
+<P>
+
+<CODE><PRE>
+IsPrivateKeypadKey(<B>keysym</B>)
+</PRE></CODE>
+<B>keysym</B>
+Specifies the KeySym that is to be tested.
+<BR>
+Returns
+<B>True</B>
+if the specified KeySym is a vendor-private keypad key.
+
+<A NAME="IsMiscFunctionKey"></A>
+<!.IN "IsMiscFunctionKey" "" "@DEF@">
+<P>
+<CODE><PRE>
+IsMiscFunctionKey(<B>keysym</B>)
+</PRE></CODE>
+<B>keysym</B>
+Specifies the KeySym that is to be tested.
+<BR>
+Returns 
+<B>True</B>
+if the specified KeySym is a miscellaneous function key.
+
+<!.IN "IsModifierKey" "" "@DEF@">
+<P>
+<CODE><PRE>
+IsModifierKey(<B>keysym</B>)
+</PRE></CODE>
+<B>keysym</B>
+Specifies the KeySym that is to be tested.
+<BR>
+<A NAME="IsModifierKey"></A>
+Returns 
+<B>True</B>
+if the specified KeySym is a modifier key.
+
+<A NAME="IsPFKey"></A>
+<P>
+<CODE><PRE>
+IsPFKey(<B>keysym</B>)
+</PRE></CODE>
+<B>keysym</B>
+Specifies the KeySym that is to be tested.
+<BR>
+<!.IN "IsPFKey" "" "@DEF@">
+Returns 
+<B>True</B>
+if the specified KeySym is a PF key.
+
+<H5 ALIGN=right><I>Next: <A HREF="../latin-keyboard.html">Latin-1 Keyboard Event Functions</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XCheckIfEvent</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XCheckIfEvent</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XCheckIfEvent" "" "@DEF@">
+
+<CODE><PRE>
+Bool XCheckIfEvent(<B>display</B>, <B>event_return</B>, <B>predicate</B>, <B>arg</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="../../events/structures.html#XEvent">XEvent</A> *<B>event_return</B>;
+      Bool (*<B><A HREF="selecting-using-predicate.html#predicate">predicate</A></B>)();
+      XPointer <B>arg</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>event_return</B>
+<TD> Returns a copy of the matched event's associated structure.
+
+<TR><TD> <B>predicate</B>
+<TD> Specifies the procedure that is to be called to determine
+if the next event in the queue matches what you want.
+
+<TR><TD> <B>arg</B>
+<TD> Specifies the user-supplied argument that will be passed to the predicate procedure.
+
+</TABLE>
+
+<H2>Description</H2>
+
+When the predicate procedure finds a match,
+<B>XCheckIfEvent()</B>
+copies the matched event into the client-supplied
+<A HREF="../../events/structures.html#XEvent">XEvent</A>
+structure and returns 
+<B>True</B>.
+(This event is removed from the queue.)
+If the predicate procedure finds no match,
+<B>XCheckIfEvent()</B>
+returns
+<B>False</B>,
+and the output buffer will have been flushed.
+All earlier events stored in the queue are not discarded.
+
+<H2>See also</H2>
+
+<B><A HREF="XIfEvent.html">XIfEvent()</A></B>,
+<B><A HREF="XNextEvent.html">XNextEvent()</A></B>,
+<B><A HREF="XPeekIfEvent.html">XPeekIfEvent()</A></B>,
+<B><A HREF="../XPutBackEvent.html">XPutBackEvent()</A></B>,
+<B><A HREF="../XSendEvent.html">XSendEvent()</A></B>,
+"<A HREF="selecting-using-predicate.html">Selecting Events Using a Predicate Procedure</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

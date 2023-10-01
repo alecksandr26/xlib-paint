@@ -32,7 +32,6 @@ void init_canvas(void)
 
 void draw_canvas(GC gc, int x, int y)
 {
-	
 	LOG("Drawing %i - %i", x, y);
 	XDrawPoint(dp, pixm, gc, x, y);
 	XDrawPoint(dp, window, gc, x, y);

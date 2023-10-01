@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XAllocClassHint</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XAllocClassHint</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XAllocClassHint" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="wm-class.html#XClassHint">XClassHint</A> *XAllocClassHint()
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XAllocClassHint()</B>
+function allocates and returns a pointer to a
+<A HREF="wm-class.html#XClassHint">XClassHint</A>
+structure.
+Note that the pointer fields in the
+<A HREF="wm-class.html#XClassHint">XClassHint</A>
+structure are initially set to NULL.
+If insufficient memory is available, 
+<B>XAllocClassHint()</B>
+returns NULL.
+To free the memory allocated to this structure,
+use
+<B><A HREF="../../display/XFree.html">XFree()</A></B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocIconSize.html">XAllocIconSize()</A></B>,
+<B><A HREF="XAllocSizeHints.html">XAllocSizeHints()</A></B>,
+<B><A HREF="XAllocWMHints.html">XAllocWMHints()</A></B>,
+<B><A HREF="../../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XGetClassHint.html">XGetClassHint()</A></B>,
+<B><A HREF="XSetClassHint.html">XSetClassHint()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetCommand.html">XSetCommand()</A></B>,
+<B><A HREF="XSetTextProperty.html">XSetTextProperty()</A></B>,
+<B><A HREF="XSetTransientForHint.html">XSetTransientForHint()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetWMClientMachine.html">XSetWMClientMachine()</A></B>,
+<B><A HREF="XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B>,
+<B><A HREF="XSetWMIconName.html">XSetWMIconName()</A></B>,
+<B><A HREF="XSetWMName.html">XSetWMName()</A></B>,
+<B><A HREF="XSetWMNormalHints.html">XSetWMNormalHints()</A></B>, 
+<B><A HREF="XSetWMProperties.html">XSetWMProperties()</A></B>,
+<B><A HREF="XSetWMProtocols.html">XSetWMProtocols()</A></B>,
+<B><A HREF="XSetWMSizeHints.html">XSetWMSizeHints()</A></B>,
+<B><A HREF="XStringListToTextProperty.html">XStringListToTextProperty()</A></B>,
+"<A HREF="wm-class.html">Setting and Reading the WM_CLASS Property</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

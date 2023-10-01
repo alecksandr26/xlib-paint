@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Obtaining Information</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>2.2 Obtaining Information about the Display, Image Formats, or Screens</H1>
+
+<P>
+
+The Xlib library provides a number of useful macros 
+and corresponding functions that return data from the 
+<A HREF="opening.html#Display">Display</A> 
+structure.
+The macros are used for C programming, 
+and their corresponding function equivalents are for other language bindings.
+This section discusses the:
+
+<UL
+<P><LI>
+<A HREF="display-macros.html">Display macros</A>
+
+<P><LI>
+<A HREF="image-format-macros.html">Image format macros</A>
+
+<P><LI>
+<A HREF="screen-information.html">Screen macros</A>
+</UL>
+
+<P>
+
+<!.IN "Display" "data structure" >
+All other members of the 
+<A HREF="opening.html#Display">Display</A> 
+structure (that is, those for which no macros are defined) are private to Xlib 
+and must not be used.
+Applications must never directly modify or inspect these private members of the 
+<A HREF="opening.html#Display">Display</A> 
+structure.
+
+<BLOCKQUOTE>
+<P ALIGN=center>
+Note
+<P>
+The
+<B><A HREF="image-format-macros.html#DisplayWidth">XDisplayWidth()</A></B>,
+<B><A HREF="image-format-macros.html#DisplayHeight">XDisplayHeight()</A></B>,
+<B><A HREF="display-macros.html#DisplayCells">XDisplayCells()</A></B>,
+<B><A HREF="display-macros.html#DisplayPlanes">XDisplayPlanes()</A></B>,
+<B><A HREF="image-format-macros.html#DisplayWidthMM">XDisplayWidthMM()</A></B>,
+and
+<B><A HREF="image-format-macros.html#DisplayHeightMM">XDisplayHeightMM()</A></B>
+functions in the next sections are misnamed.
+These functions really should be named Screen<I>whatever</I> 
+and XScreen<I>whatever</I>, not Display<I>whatever</I> or XDisplay<I>whatever</I>.
+Our apologies for the resulting confusion.
+</BLOCKQUOTE>
+
+
+<H5 ALIGN=right><I>Next: <A HREF="display-macros.html">Display Macros</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

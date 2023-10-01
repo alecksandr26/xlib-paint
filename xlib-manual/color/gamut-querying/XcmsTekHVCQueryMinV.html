@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Extensions: XcmsTekHVCQueryMinV</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XcmsTekHVCQueryMinV</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Value">
+<!.IN "Value" "minimum">
+<!.IN "XcmsTekHVCQueryMinV" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../conversion-contexts-and-gamut-mapping.html#cmsStatus">Status</A></B> XcmsTekHVCQueryMinV(<B>ccc</B>, <B>hue</B>, <B>chroma</B>, <B>color_return</B>)
+      <A HREF="../CCC/macros.html">XcmsCCC</A> <B>ccc</B>;
+      XcmsFloat <B>hue</B>;
+      XcmsFloat <B>chroma</B>;
+      <A HREF="../structures.html#XcmsColor">XcmsColor</A> *<B>color_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>ccc</B>
+<TD> Specifies the <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>.
+The <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>'s Client White Point and white point adjustment procedures
+are ignored.
+
+<TR><TD> <B>hue</B>
+<TD> Specifies the Hue in which to find the minimum Value.
+
+<TR><TD> <B>value</B>
+<TD> Specifies the Value in which to find the minimum Value.
+
+<TR><TD> <B>color_return</B>
+<TD> Returns the minimum Value and the actual Hue and Chroma at which the minimum Value was found.
+The white point associated with the returned
+color specification is the Screen White Point.
+The value returned in the pixel member is undefined.
+
+</TABLE>
+
+<H2>Description</H2>
+ 
+The
+<B>XcmsTekHVCQueryMinV()</B>
+function, given a Hue and Chroma,
+determines the minimum Value in TekHVC color space displayable by the screen.
+It returns the minimum Value and the actual Hue and Chroma at which
+the minimum Value was found.
+
+<H2>See also</H2>
+
+<B><A HREF="XcmsCIELabQueryMaxC.html">XcmsCIELabQueryMaxC()</A></B>,
+<B><A HREF="XcmsCIELuvQueryMaxC.html">XcmsCIELuvQueryMaxC()</A></B>,
+<B><A HREF="XcmsQueryBlack.html">XcmsQueryBlack()</A></B>,
+<B><A HREF="XcmsTekHVCQueryMaxC.html">XcmsTekHVCQueryMaxC()</A></B>,
+<B><A HREF="XcmsTekHVCQueryMaxV.html">XcmsTekHVCQueryMaxV()</A></B>,
+<B><A HREF="XcmsTekHVCQueryMaxVC.html">XcmsTekHVCQueryMaxVC()</A></B>,
+<B><A HREF="XcmsTekHVCQueryMaxVSamples.html">XcmsTekHVCQueryMaxVSamples()</A></B>,
+"<A HREF="tekhvc.html">TekHVC Queries</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

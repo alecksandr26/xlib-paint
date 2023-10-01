@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Obtaining and Changing Window Properties</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>4.4 Obtaining and Changing Window Properties</H1>
+
+You can attach a property list to every window.
+Each property has a name, a type, and a value (see "<A HREF="properties-and-atoms.html">Properties and Atoms</A>").
+The value is an array of 8-bit, 16-bit, or 32-bit quantities,
+whose interpretation is left to the clients.  The type
+<B>char</B>
+is used to represent 8-bit quantities, the type
+<B>short</B>
+is used to represent 16-bit quantities, and the type
+<B>long</B>
+is used to represent 32-bit quantities.
+
+<P>
+
+Xlib provides functions that you can use to obtain, 
+change, update, or interchange window properties.
+In addition, Xlib provides other utility functions for inter-client
+communication (see "<A HREF="../ICC/">Inter-Client Communication Functions</A>").
+
+<P>
+
+To obtain the type, format, and value of a property of a given window, use 
+<B><A HREF="XGetWindowProperty.html">XGetWindowProperty()</A></B>.
+
+<P>
+
+To obtain a given window's property list, use 
+<B><A HREF="XListProperties.html">XListProperties()</A></B>.
+
+<P>
+
+To change a property of a given window, use
+<B><A HREF="XChangeProperty.html">XChangeProperty()</A></B>.
+
+<P>
+
+To rotate a window's property list, use
+<B><A HREF="XRotateWindowProperties.html">XRotateWindowProperties()</A></B>.
+
+<P>
+
+To delete a property on a given window, use 
+<B><A HREF="XDeleteProperty.html">XDeleteProperty()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="selection.html">Selections</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,94 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XAllocColor</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XAllocColor</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Allocation" "read-only colormap cells">
+<!.IN "Read-only colormap cells" "allocating">
+<!.IN "Color" "allocation">
+<!.IN "XAllocColor" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../introduction/errors.html#Status">Status</A></B> XAllocColor(<B>display</B>, <B>colormap</B>, <B>screen_in_out</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="./#colormap">Colormap</A> <B>colormap</B>;
+      <A HREF="structures.html">XColor</A> *<B>screen_in_out</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>colormap</B>
+<TD> Specifies the colormap.
+
+<TR><TD> <B>screen_in_out</B>
+<TD> Specifies and returns the values actually used in the colormap.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XAllocColor()</B>
+function allocates a read-only colormap entry corresponding to the closest
+RGB value supported by the hardware.
+<B>XAllocColor()</B>
+returns the pixel value of the color closest to the specified
+RGB elements supported by the hardware
+and returns the RGB value actually used.
+The corresponding colormap cell is read-only.
+In addition,
+<B>XAllocColor()</B>
+returns nonzero if it succeeded or zero if it failed.
+<!.IN "Color map">
+<!.IN "Color" "allocation">
+<!.IN "Allocation" "colormap">
+<!.IN "read-only colormap cells">
+Multiple clients that request the same effective RGB value can be assigned
+the same read-only entry, thus allowing entries to be shared.
+When the last client deallocates a shared cell, it is deallocated.
+<B>XAllocColor()</B>
+does not use or affect the flags in the
+<A HREF="structures.html">XColor</A>
+structure.
+
+<P>
+
+<B>XAllocColor()</B>
+can generate a
+<B>BadColor</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadColor</B>
+<TD>  A value for a Colormap argument does not name a
+      defined Colormap.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocColorCells.html">XAllocColorCells()</A></B>,
+<B><A HREF="XAllocColorPlanes.html">XAllocColorPlanes()</A></B>,
+<B><A HREF="XAllocNamedColor.html">XAllocNamedColor()</A></B>,
+<B><A HREF="XCreateColormap.html">XCreateColormap()</A></B>,
+<B><A HREF="XFreeColors.html">XFreeColors()</A></B>,
+<B><A HREF="XQueryColor.html">XQueryColor()</A></B>,
+<B><A HREF="XStoreColors.html">XStoreColors()</A></B>,
+"<A HREF="cell.html">Allocating and Freeing Color Cells</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

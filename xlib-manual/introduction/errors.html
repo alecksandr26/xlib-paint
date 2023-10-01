@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Errors</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>1.2. Errors</H1>
+
+Some functions return 
+<B>Status</B>, 
+an integer error indication.
+If the function fails, it returns a zero.
+If the function returns a status of zero,
+it has not updated the return arguments.
+<!.IN "Status">
+Because C does not provide multiple return values, 
+many functions must return their results by writing into client-passed storage. 
+<!.IN "Error" "handling">
+By default, errors are handled either by a standard library function
+or by one that you provide.
+Functions that return pointers to strings return NULL pointers if
+the string does not exist.
+
+<P>
+
+The X server reports protocol errors at the time that it detects them.
+If more than one error could be generated for a given request,
+the server can report any of them.
+
+<P>
+
+Because Xlib usually does not transmit requests to the server immediately
+(that is, it buffers them), errors can be reported much later than they
+actually occur.
+For debugging purposes, however,
+Xlib provides a mechanism for forcing synchronous behavior 
+(see "<A HREF="../event-handling/protocol-errors/synchronization.html">Enabling or Disabling Synchronization</A>").
+When synchronization is enabled, 
+errors are reported as they are generated.
+
+<P>
+
+When Xlib detects an error,
+it calls an error handler,
+which your program can provide.
+If you do not provide an error handler,
+the error is printed, and your program terminates.
+
+<H5 ALIGN=right><I>Next: <A HREF="header.html">Standard Header Files</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

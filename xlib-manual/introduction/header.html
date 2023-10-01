@@ -1,0 +1,148 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Standard Header Files</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>1.3. Standard Header Files</H1>
+<P>
+
+The following include files are part of the Xlib standard:
+<UL>
+<P><LI>
+<B><TT>X11/Xlib.h</TT></B>
+
+<P>
+
+This is the main header file for Xlib.
+The majority of all Xlib symbols are declared by including this file.
+This file also contains the preprocessor symbol
+<B>XlibSpecificationRelease</B>.
+<!.IN "XlibSpecificationRelease" "" "@DEF@">
+This symbol is defined to have the 6 in this release of the standard.
+(Release 5 of Xlib was the first release to have this symbol.)
+<P><LI>
+<B><TT>X11/X.h</TT></B>
+
+<P>
+
+This file declares types and constants for the X protocol that are
+to be used by applications.
+It is included automatically from
+<B><TT>X11/Xlib.h</TT></B>,
+so application code should never need to reference this file directly.
+<P><LI>
+<B><TT>X11/Xcms.h</TT></B>
+
+<P>
+
+This file contains symbols for much of the color management facilities
+described in "<A HREF="../color/">Color Management Functions</A>".
+All functions, types, and symbols with the prefix ``Xcms'',
+plus the Color Conversion Contexts macros, are declared in this file.
+<B><TT>X11/Xlib.h</TT></B>
+must be included before including this file.
+<P><LI>
+<B><TT>X11/Xutil.h</TT></B>
+
+<P>
+
+This file declares various functions, types, and symbols used for
+inter-client communication and application utility functions,
+which are described in
+"<A HREF="../ICC/">Inter-Client Communication Functions</A>"
+and "<A HREF="../utilities/">Application Utility Functions</A>".
+<B><TT>X11/Xlib.h</TT></B>
+must be included before including this file.
+<P><LI>
+<B><TT>X11/Xresource.h</TT></B>
+
+<P>
+
+This file declares all functions, types, and symbols for the
+resource manager facilities, which are described in 
+"<A HREF="../resource-manager/">Resource Manager Functions</A>".
+<B><TT>X11/Xlib.h</TT></B>
+must be included before including this file.
+<P><LI>
+<B><TT>X11/Xatom.h</TT></B>
+
+<P>
+
+This file declares all predefined atoms, 
+which are symbols with the prefix ``XA_''.
+<P><LI>
+<B><TT>X11/cursorfont.h</TT></B>
+
+<P>
+
+This file declares the cursor symbols for the standard cursor font,
+which are listed in <A HREF="../appendix/b/">X Font Cursors</A>.
+All cursor symbols have the prefix ``XC_''.
+<P><LI>
+<B><TT>X11/keysymdef.h</TT></B>
+
+<P>
+
+This file declares all standard KeySym values,
+which are symbols with the prefix ``XK_''.
+The KeySyms are arranged in groups, and a preprocessor symbol controls
+inclusion of each group.  The preprocessor symbol must be defined
+prior to inclusion of the file to obtain the associated values.
+The preprocessor symbols are XK_MISCELLANY, XK_LATIN1, XK_LATIN2,
+XK_LATIN3, XK_LATIN4, XK_KATAKANA, XK_ARABIC, XK_CYRILLIC, XK_GREEK,
+XK_TECHNICAL, XK_SPECIAL, XK_PUBLISHING, XK_APL, XK_HEBREW,
+XK_THAI, and XK_KOREAN.
+<P><LI>
+<B><TT>X11/keysym.h</TT></B>
+
+<P>
+
+This file defines the preprocessor symbols
+XK_MISCELLANY, XK_LATIN1, XK_LATIN2, XK_LATIN3, XK_LATIN4, and XK_GREEK
+and then includes
+<B><TT>X11/keysymdef.h</TT></B>.
+<P><LI>
+<B><TT>X11/Xlibint.h</TT></B>
+
+<P>
+
+This file declares all the functions, types, and symbols used for
+extensions, which are described in <A HREF="../appendix/c/">Extensions</A>.
+This file automatically includes
+<B><TT>X11/Xlib.h</TT></B>.
+<P><LI>
+<B><TT>X11/Xproto.h</TT></B>
+
+<P>
+
+This file declares types and symbols for the basic X protocol,
+for use in implementing extensions.
+It is included automatically from
+<B><TT>X11/Xlibint.h</TT></B>,
+so application and extension code should never need to
+reference this file directly.
+<P><LI>
+<B><TT>X11/Xprotostr.h</TT></B>
+
+<P>
+
+This file declares types and symbols for the basic X protocol,
+for use in implementing extensions.
+It is included automatically from
+<B><TT>X11/Xproto.h</TT></B>,
+so application and extension code should never need to
+reference this file directly.
+<P><LI>
+<B><TT>X11/X10.h</TT></B>
+
+</UL>
+
+This file declares all the functions, types, and symbols used for the
+X10 compatibility functions, which are described in <A HREF="../appendix/d/">Compatibility Functions</A>.
+
+<H5 ALIGN=right><I>Next: <A HREF="generic.html">Generic Values and Types</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

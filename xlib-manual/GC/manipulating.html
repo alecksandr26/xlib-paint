@@ -1,0 +1,734 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Manipulating Graphics Context/State</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>7.1 Manipulating Graphics Context/State</H1>
+
+Most attributes of graphics operations are stored in Graphic Contexts (GCs).
+These include line width, line style, plane mask, foreground, background,
+tile, stipple, clipping region, end style, join style, and so on.
+Graphics operations (for example, drawing lines) use these values
+to determine the actual drawing operation.
+Extensions to X may add additional components to GCs.
+The contents of a GC are private to Xlib.
+
+<P>
+
+Xlib implements a write-back cache for all elements of a GC that are not
+resource IDs to allow Xlib to implement the transparent coalescing of changes 
+to GCs.
+For example,
+a call to
+<B><A HREF="convenience-functions/XSetForeground.html">XSetForeground()</A></B>
+of a GC followed by a call to
+<B><A HREF="convenience-functions/XSetLineAttributes.html">XSetLineAttributes()</A></B>
+results in only a single-change GC protocol request to the server.
+GCs are neither expected nor encouraged to be shared between client 
+applications, so this write-back caching should present no problems.
+Applications cannot share GCs without external synchronization.
+Therefore,
+sharing GCs between applications is highly discouraged. 
+
+<A NAME="XGCValues"></A>
+<P>
+
+To set an attribute of a GC,
+set the appropriate member of the
+<B>XGCValues</B>
+structure and OR in the corresponding value bitmask in your subsequent calls to
+<B><A HREF="XCreateGC.html">XCreateGC()</A></B>.
+The symbols for the value mask bits and the
+<B>XGCValues</B>
+
+<P>
+
+<CODE><PRE>
+/* GC attribute value mask bits */
+
+#define <B>GCFunction</B>		(1L<<0)
+#define <B>GCPlaneMask</B>		(1L<<1)
+#define <B>GCForeground</B>		(1L<<2)
+#define <B>GCBackground</B>		(1L<<3)
+#define <B>GCLineWidth</B>		(1L<<4)
+#define <B>GCLineStyle</B>		(1L<<5)
+#define <B>GCCapStyle</B>		(1L<<6)
+#define <B>GCJoinStyle</B>		(1L<<7)
+#define <B>GCFillStyle</B>		(1L<<8)
+#define <B>GCFillRule</B>		(1L<<9)
+#define <B>GCTile</B>			(1L<<10)
+#define <B>GCStipple</B>		(1L<<11)
+#define <B>GCTileStipXOrigin</B>	(1L<<12)
+#define <B>GCTileStipYOrigin</B>	(1L<<13)
+#define <B>GCFont</B>			(1L<<14)
+#define <B>GCSubwindowMode</B>		(1L<<15)
+#define <B>GCGraphicsExposures</B>	(1L<<16)
+#define <B>GCClipXOrigin</B>		(1L<<17)
+#define <B>GCClipYOrigin</B>		(1L<<18)
+#define <B>GCClipMask</B>		(1L<<19)
+#define <B>GCDashOffset</B>		(1L<<20)
+#define <B>GCDashList</B>		(1L<<21)
+#define <B>GCArcMode</B>		(1L<<22)
+
+/* Values */
+
+typedef struct {
+	int function;			/* logical operation */
+	unsigned long plane_mask;	/* plane mask */
+	unsigned long foreground;	/* foreground pixel */
+	unsigned long background;	/* background pixel */
+	int line_width;			/* line width (in pixels) */
+	int line_style;			/* LineSolid, LineOnOffDash, LineDoubleDash */
+	int cap_style;			/* CapNotLast, CapButt, CapRound, CapProjecting */
+	int join_style;			/* JoinMiter, JoinRound, JoinBevel */
+	int fill_style;			/* FillSolid, FillTiled, FillStippled FillOpaqueStippled*/
+	int fill_rule;			/* EvenOddRule, WindingRule */
+	int arc_mode;			/* ArcChord, ArcPieSlice */
+	Pixmap tile;			/* tile pixmap for tiling operations */
+	Pixmap stipple;			/* stipple 1 plane pixmap for stippling */
+	int ts_x_origin;		/* offset for tile or stipple operations */
+	int ts_y_origin;
+	Font font;			/* default text font for text operations */
+	int subwindow_mode;		/* ClipByChildren, IncludeInferiors */
+	Bool graphics_exposures;	/* boolean, should exposures be generated */
+	int clip_x_origin;		/* origin for clipping */
+	int clip_y_origin;
+	Pixmap clip_mask;		/* bitmap clipping; other calls for rects */
+	int dash_offset;		/* patterned/dashed line information */
+	char dashes;
+} XGCValues;
+
+</PRE></CODE>
+
+<P>
+
+The default GC values are:
+
+<TABLE>
+<TR><TD COLSPAN=2><HR>
+<TR><TD><B>Component	<TD><B>Default
+<TR><TD COLSPAN=2><HR>
+
+<TR><TD>function	<TD><B>GXcopy</B>
+<TR><TD>plane_mask	<TD>All ones
+<TR><TD>foreground	<TD>0
+<TR><TD>background	<TD>1
+<TR><TD>line_width	<TD>0
+<TR><TD>line_style	<TD><B>LineSolid</B>
+<TR><TD>cap_style	<TD><B>CapButt</B>
+<TR><TD>join_style	<TD><B>JoinMiter</B>
+<TR><TD>fill_style	<TD><B>FillSolid</B>
+<TR><TD>fill_rule	<TD><B>EvenOddRule</B>
+<TR><TD>arc_mode	<TD><B>ArcPieSlice</B>
+<TR><TD>tile		<TD>Pixmap of unspecified size filled with foreground pixel
+			(that is, client specified pixel if any, else 0)
+			(subsequent changes to foreground do not affect this pixmap)
+<TR><TD>stipple		<TD>Pixmap of unspecified size filled with ones
+<TR><TD>ts_x_origin	<TD>0
+<TR><TD>ts_y_origin	<TD>0
+<TR><TD>font		<TD>&lt;implementation dependent&gt;
+<TR><TD>subwindow_mode	<TD><B>ClipByChildren</B>
+<TR><TD>graphics_exposures	<TD><B>True</B>
+<TR><TD>clip_x_origin	<TD>0
+<TR><TD>clip_y_origin	<TD>0
+<TR><TD>clip_mask	<TD><B>None</B>
+<TR><TD>dash_offset	<TD>0
+<TR><TD>dashes		<TD>4 (that is, the list [4, 4])
+
+<TR><TD COLSPAN=2><HR>
+</TABLE>
+
+<P>
+
+Note that foreground and background are not set to any values likely
+to be useful in a window.
+
+<A NAME="function"></A>
+<P>
+
+<!.IN "Display Functions" "" "@DEF@">
+<!.IN "Source" "" "@DEF@">
+<!.IN "Destination" "" "@DEF@">
+The function attributes of a GC are used when you update a section of
+a drawable (the destination) with bits from somewhere else (the source).  
+The function in a GC defines how the new destination bits are to be
+computed from the source bits and the old destination bits.
+<B>GXcopy</B>
+is typically the most useful because it will work on a color display,
+but special applications may use other functions,
+particularly in concert with particular planes of a color display.
+The 16 GC functions, defined in 
+<B><TT>X11/X.h</TT></B>,
+are:
+
+<TABLE>
+<TR><TD COLSPAN=3><HR>
+<TR><TD><B>Function Name</B>	<TD><B>Value</B>	<TD><B>Operation</B>
+<TR><TD COLSPAN=3><HR>
+
+<TR><TD><B>GXclear</B>		<TD>0x0	<TD>0
+<TR><TD><B>GXand</B>		<TD>0x1	<TD>src AND dst
+<TR><TD><B>GXandReverse</B>	<TD>0x2	<TD>src AND NOT dst
+<TR><TD><B>GXcopy</B>		<TD>0x3	<TD>src
+<TR><TD><B>GXandInverted</B>	<TD>0x4	<TD>(NOT src) AND dst
+<TR><TD><B>GXnoop</B>		<TD>0x5	<TD>dst
+<TR><TD><B>GXxor</B>		<TD>0x6	<TD>src XOR dst
+<TR><TD><B>GXor</B>		<TD>0x7	<TD>src OR dst
+<TR><TD><B>GXnor</B>		<TD>0x8	<TD>(NOT src) AND (NOT dst)
+<TR><TD><B>GXequiv</B>		<TD>0x9	<TD>(NOT src) XOR dst
+<TR><TD><B>GXinvert</B>		<TD>0xa	<TD>NOT dst
+<TR><TD><B>GXorReverse</B>	<TD>0xb	<TD>src OR (NOT dst)
+<TR><TD><B>GXcopyInverted</B>	<TD>0xc	<TD>NOT src
+<TR><TD><B>GXorInverted</B>	<TD>0xd	<TD>(NOT src) OR dst
+<TR><TD><B>GXnand</B>		<TD>0xe	<TD>(NOT src) OR (NOT dst)
+<TR><TD><B>GXset</B>		<TD>0xf	<TD>1
+<TR><TD COLSPAN=3><HR>
+</TABLE>
+
+<P>
+
+Many graphics operations depend on either pixel values or planes in a GC.
+<!.IN "Pixel value">
+The planes attribute is of type long, and it specifies which planes of the
+destination are to be modified, one bit per plane.
+<!.IN "Plane" "mask">
+A monochrome display has only one plane and
+will be the least-significant bit of the word.
+As planes are added to the display hardware, they will occupy more
+significant bits in the plane mask.
+
+<P>
+
+In graphics operations, given a source and destination pixel, 
+the result is computed bitwise on corresponding bits of the pixels.
+That is, a Boolean operation is performed in each bit plane.  
+The plane_mask restricts the operation to a subset of planes.
+A macro constant
+<B>AllPlanes()</B>
+can be used to refer to all planes of the screen simultaneously.
+The result is computed by the following:
+
+<P>
+
+<CODE><PRE>
+((src FUNC dst) AND plane-mask) OR (dst AND (NOT plane-mask))
+</PRE></CODE>
+
+<A NAME="foreground"></A>
+<A NAME="background"></A>
+<A NAME="foreground"></A>
+<A NAME="plane-mask"></A>
+<A NAME="line-width"></A>
+<P>
+
+Range checking is not performed on the values for foreground,
+background, or plane_mask.
+They are simply truncated to the appropriate
+number of bits.
+The line-width is measured in pixels and either can be greater than or equal to
+one (wide line) or can be the special value zero (thin line).
+
+<P>
+
+Wide lines are drawn centered on the path described by the graphics request.
+Unless otherwise specified by the join-style or cap-style,
+the bounding box of a wide line with endpoints [x1, y1], [x2, y2] and
+width w is a rectangle with vertices at the following real coordinates:
+
+<P>
+
+<CODE><PRE>
+[x1-(w*sn/2), y1+(w*cs/2)], [x1+(w*sn/2), y1-(w*cs/2)],
+[x2-(w*sn/2), y2+(w*cs/2)], [x2+(w*sn/2), y2-(w*cs/2)]
+</PRE></CODE>
+
+<P>
+
+Here sn is the sine of the angle of the line,
+and cs is the cosine of the angle of the line.
+A pixel is part of the line and so is drawn
+if the center of the pixel is fully inside the bounding box
+(which is viewed as having infinitely thin edges).
+If the center of the pixel is exactly on the bounding box,
+it is part of the line if and only if the interior is immediately to its right
+(x increasing direction).
+Pixels with centers on a horizontal edge are a special case and are part of
+the line if and only if the interior or the boundary is immediately below 
+(y increasing direction) and the interior or the boundary is immediately
+to the right (x increasing direction).
+
+<P>
+
+Thin lines (zero line-width) are one-pixel-wide lines drawn using an
+unspecified, device-dependent algorithm.
+There are only two constraints on this algorithm. 
+
+<OL>
+<LI>
+If a line is drawn unclipped from [x1,y1] to [x2,y2] and
+if another line is drawn unclipped from [x1+dx,y1+dy] to [x2+dx,y2+dy],
+a point [x,y] is touched by drawing the first line 
+if and only if the point [x+dx,y+dy] is touched by drawing the second line.
+<P><LI>
+The effective set of points comprising a line cannot be affected by clipping.
+That is, a point is touched in a clipped line if and only if the point 
+lies inside the clipping region and the point would be touched
+by the line when drawn unclipped.
+</OL>
+
+<P>
+
+A wide line drawn from [x1,y1] to [x2,y2] always draws the same pixels 
+as a wide line drawn from [x2,y2] to [x1,y1], not counting cap-style 
+and join-style.
+It is recommended that this property be true for thin lines, 
+but this is not required.
+A line-width of zero may differ from a line-width of one in which pixels are
+drawn.
+This permits the use of many manufacturers' line drawing hardware,
+which may run many times faster than the more precisely specified
+wide lines.
+
+<P>
+
+In general, 
+drawing a thin line will be faster than drawing a wide line of width one.
+However, because of their different drawing algorithms,
+thin lines may not mix well aesthetically with wide lines.
+If it is desirable to obtain precise and uniform results across all displays,
+a client should always use a line-width of one rather than a line-width of zero.
+
+<A NAME="line-style"></A>
+<P>
+
+The line-style defines which sections of a line are drawn:
+
+<TABLE>
+<TR><TD><B>LineSolid</B>
+<TD>The full path of the line is drawn.
+
+<TR><TD><B>LineDoubleDash</B>
+<TD>The full path of the line is drawn, 
+but the even dashes are filled differently 
+than the odd dashes (see fill-style) with
+
+<TR><TD><B>CapButt</B>
+<TD>style used where even and odd dashes meet.
+
+<TR><TD><B>LineOnOffDash</B>
+<TD>Only the even dashes are drawn,
+and cap-style applies to 
+all internal ends of the individual dashes,
+except 
+<B>CapNotLast</B>
+is treated as 
+<B>CapButt</B>. 
+</TABLE>
+
+<A NAME="cap-style"></A>
+<P>
+
+The cap-style defines how the endpoints of a path are drawn:
+<!.IN "Graphics context" "path">
+<TABLE>
+<TR><TD><B>CapNotLast</B>
+<TD>This is equivalent to 
+<B>CapButt</B>
+except that for a line-width of zero the final endpoint is not drawn.
+
+<TR><TD><B>CapButt</B>
+<TD>The line is square at the endpoint (perpendicular to the slope of the line)
+with no projection beyond.
+
+<TR><TD><B>CapRound</B>
+<TD>The line has a circular arc with the diameter equal to the line-width,
+centered on the endpoint.
+(This is equivalent to 
+<B>CapButt</B>
+for line-width of zero).
+
+<TR><TD><B>CapProjecting</B>
+<TD>The line is square at the end, but the path continues beyond the endpoint 
+for a distance equal to half the line-width.
+(This is equivalent to 
+<B>CapButt</B>
+for line-width of zero).
+</TABLE>
+
+<A NAME="join-style"></A>
+<P>
+
+The join-style defines how corners are drawn for wide lines:
+
+<TABLE>
+<TR><TD><B>JoinMiter</B>
+<TD>The outer edges of two lines extend to meet at an angle.
+However, if the angle is less than 11 degrees,
+then a
+<B>JoinBevel</B>
+join-style is used instead.
+
+<TR><TD><B>JoinRound</B>
+<TD>The corner is a circular arc with the diameter equal to the line-width, 
+centered on the joinpoint.
+
+<TR><TD><B>JoinBevel</B>
+<TD>The corner has
+<B>CapButt</B>
+endpoint styles with the triangular notch filled.
+</TABLE>
+
+<P>
+
+For a line with coincident endpoints (x1=x2, y1=y2), 
+when the cap-style is applied to both endpoints, 
+the semantics depends on the line-width and the cap-style:
+
+<TABLE>
+<TR><TD><B>CapNotLast</B>
+<TD>thin
+<TD>The results are device-dependent, 
+but the desired effect is that nothing is drawn.
+
+<TR><TD><B>CapButt</B>
+<TD>thin
+<TD>The results are device-dependent, 
+but the desired effect is that a single pixel is drawn.
+
+<TR><TD><B>CapRound</B>
+<TD>thin
+<TD>The results are the same as for
+<B>CapButt</B>/thin.
+
+<TR><TD><B>CapProjecting</B>
+<TD>thin
+<TD>The results are the same as for
+<B>CapButt</B>/thin.
+
+<TR><TD><B>CapButt</B>
+<TD>wide
+<TD>Nothing is drawn.
+
+<TR><TD><B>CapRound</B>
+<TD>wide
+<TD>The closed path is a circle, centered at the endpoint, and
+with the diameter equal to the line-width.
+
+<TR><TD><B>CapProjecting</B>
+<TD>wide
+<TD>The closed path is a square, aligned with the coordinate axes, centered at the
+endpoint, and with the sides equal to the line-width.
+
+</TABLE>
+
+<P>
+
+For a line with coincident endpoints (x1=x2, y1=y2), 
+when the join-style is applied at one or both endpoints, 
+the effect is as if the line was removed from the overall path.
+However, if the total path consists of or is reduced to a single point joined
+with itself, the effect is the same as when the cap-style is applied at both
+endpoints.
+
+<A NAME="tile"></A>
+<A NAME="stipple"></A>
+<A NAME="tile-stipple-x-origin"></A>
+<A NAME="tile-stipple-y-origin"></A>
+<P>
+
+The tile/stipple represents an infinite two-dimensional plane,
+with the tile/stipple replicated in all dimensions.
+When that plane is superimposed on the drawable
+for use in a graphics operation, the upper-left corner
+of some instance of the tile/stipple is at the coordinates within
+the drawable specified by the tile/stipple origin.
+The tile/stipple and clip origins are interpreted relative to the
+origin of whatever destination drawable is specified in a graphics
+request.
+The tile pixmap must have the same root and depth as the GC,
+or a
+<B>BadMatch</B>
+error results.
+The stipple pixmap must have depth one and must have the same root as the
+GC, or a 
+<B>BadMatch</B>
+error results.  
+For stipple operations where the fill-style is
+<B>FillStippled</B>
+but not 
+<B>FillOpaqueStippled</B>,
+the stipple pattern is tiled in a
+single plane and acts as an additional clip mask to be ANDed with the clip-mask.
+Although some sizes may be faster to use than others,
+any size pixmap can be used for tiling or stippling.
+
+<A NAME="fill-style"></A>
+<P>
+
+The fill-style defines the contents of the source for line, text, and
+fill requests.  
+For all text and fill requests (for example,
+<B><A HREF="../graphics/drawing-text/XDrawText.html">XDrawText()</A></B>, 
+<B><A HREF="../graphics/drawing-text/XDrawText16.html">XDrawText16()</A></B>,
+<B><A HREF="../graphics/filling-areas/XFillRectangle.html">XFillRectangle()</A></B>, 
+<B><A HREF="../graphics/filling-areas/XFillPolygon.html">XFillPolygon()</A></B>, 
+and
+<B><A HREF="../graphics/filling-areas/XFillArc.html">XFillArc()</A></B>);
+for line requests 
+with <A HREF="manipulating.html#line-style">line-style</A> 
+<B>LineSolid</B>
+(for example,
+<B><A HREF="../graphics/drawing/XDrawLine.html">XDrawLine()</A></B>,
+<B><A HREF="../graphics/drawing/XDrawSegments.html">XDrawSegments()</A></B>, 
+<B><A HREF="../graphics/drawing/XDrawRectangle.html">XDrawRectangle()</A></B>,
+<B><A HREF="../graphics/drawing/XDrawArc.html">XDrawArc()</A></B>);
+and for the even dashes for line requests with line-style 
+<B>LineOnOffDash</B>
+or 
+<B>LineDoubleDash</B>,
+the following apply:
+
+<TABLE>
+<TR><TD><B>FillSolid</B>
+<TD>Foreground
+
+<TR><TD><B>FillTiled</B>
+<TD>Tile
+
+<TR><TD><B>FillOpaqueStippled</B>
+<TD>A tile with the same width and height as stipple,
+but with background everywhere stipple has a zero
+and with foreground everywhere stipple has a one
+
+<TR><TD><B>FillStippled</B>
+<TD>Foreground masked by stipple
+</TABLE>
+
+<P>
+
+When drawing lines with line-style
+<B>LineDoubleDash</B>,
+the odd dashes are controlled by the fill-style in the following manner:
+
+<TABLE>
+<TR><TD><B>FillSolid</B>
+<TD>Background
+
+<TR><TD><B>FillTiled</B>
+<TD>Same as for even dashes
+
+<TR><TD><B>FillOpaqueStippled</B>
+<TD>Same as for even dashes
+
+<TR><TD><B>FillStippled</B>
+<TD>Background masked by stipple
+</TABLE>
+
+<P>
+
+Storing a pixmap in a GC might or might not result in a copy
+being made.
+If the pixmap is later used as the destination for a graphics request,
+the change might or might not be reflected in the GC.
+If the pixmap is used simultaneously in a graphics request both as
+a destination and as a tile or stipple,
+the results are undefined.
+
+<P>
+
+For optimum performance,
+you should draw as much as possible with the same GC 
+(without changing its components).
+The costs of changing GC components relative to using different GCs
+depend upon the display hardware and the server implementation.
+It is quite likely that some amount of GC information will be
+cached in display hardware and that such hardware can only cache a small number
+of GCs.
+
+<A NAME="dashes"></A>
+<P>
+
+The dashes value is actually a simplified form of the
+more general patterns that can be set with 
+<B><A HREF="convenience-functions/XSetDashes.html">XSetDashes()</A></B>.  
+Specifying a
+value of N is equivalent to specifying the two-element list [N, N] in 
+<B><A HREF="convenience-functions/XSetDashes.html">XSetDashes()</A></B>. 
+The value must be nonzero,
+or a
+<B>BadValue</B>
+error results.
+
+<A NAME="clip-mask"></A>
+<P>
+
+The clip-mask restricts writes to the destination drawable.  
+If the clip-mask is set to a pixmap,
+it must have depth one and have the same root as the GC,
+or a
+<B>BadMatch</B>
+error results.
+If clip-mask is set to
+<B>None</B>,
+the pixels are always drawn regardless of the clip origin.
+The clip-mask also can be set by calling the
+<B><A HREF="convenience-functions/XSetClipRectangles.html">XSetClipRectangles()</A></B>
+or
+<B><A HREF="../utilities/regions/XSetRegion.html">XSetRegion()</A></B>
+functions.
+Only pixels where the clip-mask has a bit set to 1 are drawn.  
+Pixels are not drawn outside the area covered by the clip-mask 
+or where the clip-mask has a bit set to 0.
+The clip-mask affects all graphics requests.
+The clip-mask does not clip sources.
+The clip-mask origin is interpreted relative to the origin of whatever
+destination drawable is specified in a graphics request.
+
+<A NAME="subwindow-mode"></A>
+<P>
+
+You can set the subwindow-mode to
+<B>ClipByChildren</B>
+or
+<B>IncludeInferiors</B>.
+For 
+<B>ClipByChildren</B>, 
+both source and destination windows are
+additionally clipped by all viewable 
+<B><A HREF="../window/create.html#InputClass">InputOutput</A></B>
+children.  
+For 
+<B>IncludeInferiors</B>,
+neither source nor destination window is clipped by inferiors. 
+This will result in including subwindow contents in the source
+and drawing through subwindow boundaries of the destination.
+The use of 
+<B>IncludeInferiors</B>
+on a window of one depth with mapped
+inferiors of differing depth is not illegal, but the semantics are
+undefined by the core protocol.
+
+<A NAME="fill-rule"></A>
+<P>
+
+The fill-rule defines what pixels are inside (drawn) for
+paths given in 
+<B><A HREF="../graphics/filling-areas/XFillPolygon.html">XFillPolygon()</A></B>
+requests and can be set to 
+<B>EvenOddRule</B>
+or
+<B>WindingRule</B>.
+For
+<B>EvenOddRule</B>,
+a point is inside if
+an infinite ray with the point as origin crosses the path an odd number
+of times.  
+For 
+<B>WindingRule</B>, 
+a point is inside if an infinite ray with the
+point as origin crosses an unequal number of clockwise and
+counterclockwise directed path segments.
+A clockwise directed path segment is one that crosses the ray from left to
+right as observed from the point.
+A counterclockwise segment is one that crosses the ray from right to left
+as observed from the point.
+The case where a directed line segment is coincident with the ray is
+uninteresting because you can simply choose a different ray that is not
+coincident with a segment.
+
+<P>
+
+For both 
+<B>EvenOddRule</B>
+and
+<B>WindingRule</B>,
+a point is infinitely small, 
+and the path is an infinitely thin line.  
+A pixel is inside if the center point of the pixel is inside
+and the center point is not on the boundary.  
+If the center point is on the boundary,
+the pixel is inside if and only if the polygon interior is immediately to
+its right (x increasing direction).  
+Pixels with centers on a horizontal edge are a special case 
+and are inside if and only if the polygon interior is immediately below 
+(y increasing direction).
+
+<A NAME="arc-mode"></A>
+<P>
+
+The arc-mode controls filling in the 
+<B><A HREF="../graphics/filling-areas/XFillArcs.html">XFillArcs()</A></B>
+function and can be set to
+<B>ArcPieSlice</B>
+or
+<B>ArcChord</B>.
+For
+<B>ArcPieSlice</B>,
+the arcs are pie-slice filled.
+For
+<B>ArcChord</B>,
+the arcs are chord filled.
+
+<A NAME="graphics-exposure"></A>
+<P>
+
+The graphics-exposure flag controls 
+<B><A HREF="../events/exposure/graphics-expose-and-no-expose.html">GraphicsExpose</A></B>
+event generation
+for 
+<B><A HREF="../graphics/XCopyArea.html">XCopyArea()</A></B>
+and 
+<B><A HREF="../graphics/XCopyPlane.html">XCopyPlane()</A></B>
+requests (and any similar requests defined by extensions).
+
+<P>
+
+To create a new GC that is usable on a given screen with a 
+depth of drawable, use
+<B><A HREF="XCreateGC.html">XCreateGC()</A></B>.
+
+<P>
+
+To copy components from a source GC to a destination GC, use
+<B><A HREF="XCopyGC.html">XCopyGC()</A></B>.
+
+<P>
+
+To change the components in a given GC, use
+<B><A HREF="XChangeGC.html">XChangeGC()</A></B>.
+
+<P>
+
+To obtain components of a given GC, use
+<B><A HREF="XGetGCValues.html">XGetGCValues()</A></B>.
+
+<P>
+
+To free a given GC, use
+<B><A HREF="XFreeGC.html">XFreeGC()</A></B>.
+
+<P>
+
+To obtain the 
+<B><A HREF="/toto/GContext.html">GContext</A></B>
+resource ID for a given GC, use 
+<B><A HREF="XGContextFromGC.html">XGContextFromGC()</A></B>
+
+<P>
+
+Xlib usually defers sending changes to the components of a GC to the server
+until a graphics function is actually called with that GC.
+This permits batching of component changes into a single server request.
+In some circumstances, however, it may be necessary for the client
+to explicitly force sending the changes to the server.
+An example might be when a protocol extension uses the GC indirectly,
+in such a way that the extension interface cannot know what GC will be used.
+To force sending GC component changes, use
+<B><A HREF="XFlushGC.html">XFlushGC()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="convenience-functions/">Using GC Convenience Routines</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

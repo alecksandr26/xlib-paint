@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: ResizeRequest Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.11.4 ResizeRequest Events</H1>
+
+<!.IN "Events" "ResizeRequest">
+<!.IN "ResizeRequest" "" "@DEF@">
+
+The X server can report
+<B>ResizeRequest</B>
+events to clients wanting information about another client's attempts to change the
+size of a window.
+The X server generates this event whenever some other client attempts to change
+the size of the specified window by calling
+<B><A HREF="../../window/XConfigureWindow.html">XConfigureWindow()</A></B>,
+<B><A HREF="../../window/XResizeWindow.html">XResizeWindow()</A></B>,
+or
+<B><A HREF="../../window/XMoveResizeWindow.html">XMoveResizeWindow()</A></B>.
+
+<P>
+
+To receive
+<B>ResizeRequest</B>
+events, set the
+<B>ResizeRedirect</B>
+bit in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the window. 
+Any attempts to change the size by other clients are then redirected.
+
+<A NAME="XResizeRequestEvent"></A>
+<P>
+
+The structure for this event type contains:
+
+<P>
+
+<!.IN "XResizeRequestEvent" "" "@DEF@">
+
+<CODE><PRE>
+
+typedef struct {
+	int type;	/* ResizeRequest */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Window window;
+	int width, height;
+} XResizeRequestEvent;
+
+</PRE></CODE>
+
+<P>
+
+The <B>window</B> member is set to the window whose size another 
+client attempted to change.
+The <B>width</B> and <B>height</B> members are set to the inside size of the window, 
+excluding the border.
+
+<H5 ALIGN=right><I>Next: <A HREF="../colormap-state.html">Colormap State Change Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

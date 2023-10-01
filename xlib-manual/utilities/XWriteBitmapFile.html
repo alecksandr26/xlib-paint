@@ -1,0 +1,107 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XWriteBitmapFile</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XWriteBitmapFile</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XWriteBitmapFile" "" "@DEF@">
+
+<CODE><PRE>
+int XWriteBitmapFile(<B>display</B>, <B>filename</B>, <B>bitmap</B>, <B>width</B>, <B>height</B>, <B>x_hot</B>, <B>y_hot</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      char *<B>filename</B>;
+      <A HREF="../pixmap-and-cursor/pixmap.html">Pixmap</A> <B>bitmap</B>;
+      unsigned int <B>width</B>, <B>height</B>;
+      int <B>x_hot</B>, <B>y_hot</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>filename</B>
+<TD> Specifies the file name to use.
+The format of the file name is operating-system dependent.
+
+<TR><TD> <B>bitmap</B>
+<TD> Specifies the bitmap.
+
+<TR><TD> <B>width</B><BR>
+	<B>height</B>
+<TD> Specify the width and height.
+
+<TR><TD> <B>x_hot</B><BR>
+	<B>y_hot</B>
+<TD> Specify where to place the hotspot coordinates (or \-1,\-1 if none are present)
+in the file.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XWriteBitmapFile()</B>
+function writes a bitmap out to a file in the X Version 11 format.
+The name used in the output file is derived from the file name
+by deleting the directory prefix.
+The file is written in the encoding of the current locale.
+If the file cannot be opened for writing, 
+it returns 
+<B>BitmapOpenFailed</B>.  
+If insufficient memory is allocated,
+<B>XWriteBitmapFile()</B>
+returns
+<B>BitmapNoMemory</B>;
+otherwise, on no error,
+it returns
+<B>BitmapSuccess</B>.
+If x_hot and y_hot are not -1, -1, 
+<B>XWriteBitmapFile()</B>
+writes them out as the hotspot coordinates for the bitmap.
+
+<P>
+
+<B>XWriteBitmapFile()</B>
+can generate
+<B>BadDrawable</B>
+and
+<B>BadMatch</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+</TABLE>
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+
+<H2>See also</H2>
+
+<B><A HREF="XCreateBitmapFromData.html">XCreateBitmapFromData()</A></B>,
+<B><A HREF="../pixmap-and-cursor/XCreatePixmap.html">XCreatePixmap()</A></B>,
+<B><A HREF="XCreatePixmapFromBitmapData.html">XCreatePixmapFromBitmapData()</A></B>,
+<B><A HREF="../graphics/XPutImage.html">XPutImage()</A></B>,
+<B><A HREF="XReadBitmapFile.html">XReadBitmapFile()</A></B>,
+"<A HREF="manipulating-bitmaps.html">Manipulating Bitmaps</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

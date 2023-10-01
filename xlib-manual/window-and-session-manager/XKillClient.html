@@ -1,0 +1,86 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XKillClient</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XKillClient</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XKillClient" "" "@DEF@">
+
+<CODE><PRE>
+XKillClient(<B>display</B>, <B>resource</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      XID <B>resource</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>resource</B>
+<TD> Specifies any resource associated with the client that you want to destroy or
+<B>AllTemporary</B> .
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XKillClient()</B>
+function
+forces a close-down of the client
+that created the resource
+if a valid resource is specified.
+If the client has already terminated in
+either 
+<B>RetainPermanent</B> 
+or 
+<B>RetainTemporary</B> 
+mode, all of the client's
+resources are destroyed.
+If 
+<B>AllTemporary</B> 
+is specified, the resources of all clients that have terminated in
+<B>RetainTemporary</B> 
+are destroyed (see section 2.5).
+This permits implementation of window manager facilities that aid debugging.
+A client can set its close-down mode to
+<B>RetainTemporary</B> .
+If the client then crashes,
+its windows would not be destroyed. 
+The programmer can then inspect the application's window tree 
+and use the window manager to destroy the zombie windows.
+
+<P>
+
+<B>XKillClient()</B>
+can generate a
+<B>BadValue</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../display/XSetCloseDownMode.html">XSetCloseDownMode()</A></B>,
+"<A HREF="killing-clients.html">Killing Clients</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

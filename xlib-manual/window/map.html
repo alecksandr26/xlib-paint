@@ -1,0 +1,93 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Mapping Windows</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>3.5 Mapping Windows</H1>
+
+A window is considered mapped if an 
+<B><A HREF="XMapWindow.html">XMapWindow()</A></B>
+call has been made on it.
+It may not be visible on the screen for one of the following reasons:
+
+<UL>
+
+<P><LI>
+It is obscured by another opaque window.
+
+<P><LI>
+One of its ancestors is not mapped.
+
+<P><LI>
+It is entirely clipped by an ancestor.
+</UL>
+
+<B><A HREF="../events/exposure/expose.html">Expose</A></B> 
+events are generated for the window when part or all of
+it becomes visible on the screen. 
+A client receives the
+<B><A HREF="../events/exposure/expose.html">Expose</A></B> 
+events only if it has asked for them.
+Windows retain their position in the stacking order when they are unmapped.
+
+<P>
+
+A window manager may want to control the placement of subwindows.
+If 
+<B><A HREF="../events/processing-overview.html#SubstructureRedirectMask">SubstructureRedirectMask</A></B> 
+has been selected by a window manager
+on a parent window (usually a root window),
+a map request initiated by other clients on a child window is not performed,
+and the window manager is sent a 
+<B>MapRequest</B>
+event.
+However, if the override-redirect flag on the child had been set to
+<B>True</B>
+(usually only on pop-up menus),
+the map request is performed.
+
+<P>
+
+A tiling window manager might decide to reposition and resize other clients' 
+windows and then decide to map the window to its final location.
+A window manager that wants to provide decoration might
+reparent the child into a frame first.
+For further information,
+see "<A HREF="attributes/override-redirect.html">Override Redirect Flag</A>" and 
+"<A HREF="../events/window-state-change/">Window State Change Events</A>".
+Only a single client at a time can select for 
+<B><A HREF="../events/processing-overview.html#SubstructureRedirectMask">SubstructureRedirectMask</A></B>.
+
+<P>
+
+Similarly, a single client can select for 
+<B><A HREF="../events/processing-overview.html#ResizeRedirectMask">ResizeRedirectMask</A></B> 
+on a parent window.
+Then, any attempt to resize the window by another client is suppressed, and
+the client receives a 
+<B><A HREF="../events/structure-control/resize.html">ResizeRequest</A></B> 
+event.
+
+<P>
+
+To map a given window, use 
+<B><A HREF="XMapWindow.html">XMapWindow()</A></B>.
+
+<P>
+
+To map and raise a window, use
+<B><A HREF="XMapRaised.html">XMapRaised()</A></B>.
+
+<P>
+
+To map all subwindows for a specified window, use 
+<B><A HREF="XMapSubwindows.html">XMapSubwindows()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="unmap.html">Unmapping Windows</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>
+
+

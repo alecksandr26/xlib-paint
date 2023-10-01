@@ -1,0 +1,316 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Image Format Functions and Macros</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>2.2.2. Image Format Functions and Macros</H1>
+
+Applications are required to present data to the X server
+in a format that the server demands.
+To help simplify applications,
+most of the work required to convert the data is provided by Xlib
+(see "<A HREF="../graphics/images.html">Transferring Images between Client and Server</A>" and 
+"<A HREF="../utilities/manipulating-images.html">Manipulating Images</A>").
+
+<A NAME="XPixmapFormatValues"></A>
+<P>
+
+The
+<U>XPixmapFormatValues</U>
+structure provides an interface to the pixmap format information
+that is returned at the time of a connection setup.
+It contains:
+
+<P>
+
+<PRE><CODE>
+typedef struct {
+	int depth;
+	int bits_per_pixel;
+	int scanline_pad;
+} XPixmapFormatValues;
+</CODE></PRE>
+
+<P>
+
+<A NAME="XListPixmapFormats"></A>
+<H3>XListPixmapFormats</H3>
+
+To obtain the pixmap format information for a given display, use
+<B>XListPixmapFormats()</B> .
+<!.IN "XListPixmapFormats" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="#XPixmapFormatValues">XPixmapFormatValues</A> *XListPixmapFormats(<B>display</B>, <B>count_return</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      int *<B>count_return</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>count_return</B>
+<TD> Returns the number of pixmap formats that are supported by the display.
+
+</TABLE>
+
+<P>
+
+The
+<B>XListPixmapFormats()</B>
+function returns an array of
+<A HREF="#XPixmapFormatValues">XPixmapFormatValues</A>
+structures that describe the types of Z format images supported
+by the specified display.
+If insufficient memory is available,
+<B>XListPixmapFormats</B>
+returns NULL.
+To free the allocated storage for the
+<A HREF="#XPixmapFormatValues">XPixmapFormatValues</A>
+structures, use
+<B><A HREF="XFree.html">XFree()</A></B>.
+
+<P>
+ 
+The following lists the C language macros,
+their corresponding function equivalents that are for other language bindings,
+and what data they both return for the specified server and screen.
+These are often used by toolkits as well as by simple applications.
+
+<P>
+
+<A NAME="ImageByteOrder"></A>
+<H3>ImageByteOrder</H3>
+
+<CODE><PRE>
+ImageByteOrder(<B>display</B>)
+
+int XImageByteOrder(<B>display</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<P>
+
+<!.IN "ImageByteOrder" "" "@DEF@">
+<!.IN "XImageByteOrder" "" "@DEF@">
+Both specify the required byte order for images for each scanline unit in 
+XY format (bitmap) or for each pixel value in 
+Z format.
+The macro or function can return either
+<B>LSBFirst</B> 
+or 
+<B>MSBFirst</B> .
+
+<P>
+
+<A NAME="BitmapUnit"></A>
+<H3>BitmapUnit</H3>
+
+<CODE><PRE>
+BitmapUnit(<B>display</B>)
+
+int XBitmapUnit(<B>display</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<TABLE>
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+</TABLE>
+
+<P>
+
+<!.IN "BitmapUnit" "" "@DEF@">
+<!.IN "XBitmapUnit" "" "@DEF@">
+Both return the size of a bitmap's scanline unit in bits.
+The scanline is calculated in multiples of this value.
+
+
+<P>
+
+<A NAME="BitmapBitOrder"></A>
+<H3>BitmapBitOrder</H3>
+
+<CODE><PRE>
+BitmapBitOrder(<B>display</B>)
+
+int XBitmapBitOrder(<B>display</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<P>
+
+<!.IN "BitmapBitOrder" "" "@DEF@">
+<!.IN "XBitmapBitOrder" "" "@DEF@">
+Within each bitmap unit, the left-most bit in the bitmap as displayed
+on the screen is either the least-significant or most-significant bit in the
+unit.
+This macro or function can return 
+<B>LSBFirst</B>
+or 
+<B>MSBFirst</B>.
+
+<A NAME="BitmapPad"></A>
+<H3>BitmapPad</H3>
+
+<CODE><PRE>
+BitmapPad(<B>display</B>)
+
+int XBitmapPad(<B>display</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<P>
+
+<!.IN "BitmapPad" "" "@DEF@">
+<!.IN "XBitmapPad" "" "@DEF@">
+Each scanline must be padded to a multiple of bits returned
+by this macro or function.
+
+<A NAME="DisplayHeight"></A>
+<H3>DisplayHeight</H3>
+
+<CODE><PRE>
+DisplayHeight(<B>display</B>, <B>screen_number</B>)
+
+int XDisplayHeight(<B>display</B>, <B>screen_number</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen_number</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the appropriate screen number on the host server.
+
+</TABLE>
+
+<!.IN "DisplayHeight" "" "@DEF@">
+<!.IN "XDisplayHeight" "" "@DEF@">
+Both return an integer that describes the height of the screen
+in pixels.
+
+<A NAME="DisplayHeightMM"></A>
+<H3>DisplayHeightMM</H3>
+
+<CODE><PRE>
+DisplayHeightMM(<B>display</B>, <B>screen_number</B>)
+
+int XDisplayHeightMM(<B>display</B>, <B>screen_number</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen_number</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the appropriate screen number on the host server.
+
+</TABLE>
+
+<P>
+
+<!.IN "DisplayHeightMM" "" "@DEF@">
+<!.IN "XDisplayHeightMM" "" "@DEF@">
+Both return the height of the specified screen in millimeters.
+
+<A NAME="DisplayWidth"></A>
+<H3>DisplayWidth</H3>
+
+<CODE><PRE>
+DisplayWidth(<B>display</B>, <B>screen_number</B>)
+
+int XDisplayWidth(<B>display</B>, <B>screen_number</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen_number</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<P>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the appropriate screen number on the host server.
+
+</TABLE>
+
+<P>
+
+<!.IN "DisplayWidth" "" "@DEF@">
+<!.IN "XDisplayWidth" "" "@DEF@">
+Both return the width of the screen in pixels.
+
+<A NAME="DisplayWidthMM"></A>
+<H3>DisplayWidthMM</H3>
+
+<CODE><PRE>
+DisplayWidthMM(<B>display</B>, <B>screen_number</B>)
+
+int XDisplayWidthMM(<B>display</B>, <B>screen_number</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen_number</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the appropriate screen number on the host server.
+
+</TABLE>
+
+<P>
+
+<!.IN "DisplayWidthMM" "" "@DEF@">
+<!.IN "XDisplayWidthMM" "" "@DEF@">
+Both return the width of the specified screen in millimeters.
+
+<H5 ALIGN=right><I>Next: <A HREF="screen-information.html">Screen Information Macros</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

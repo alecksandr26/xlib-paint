@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Window Attributes: Event Mask and Do Not Propagate Mask Attributes</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>3.2.7 Event Mask and Do Not Propagate Mask Attributes</H1>
+
+The event mask defines which events the client is interested in for this 
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+or
+<B><A HREF="../create.html#InputClass">InputOnly</A></B>
+window (or, for some event types, inferiors of this window).
+The event mask is the bitwise inclusive OR of zero or more of the 
+valid event mask bits.
+You can specify that no maskable events are reported by setting 
+<B><A HREF="../../events/mask.html#NoEventMask">NoEventMask</A></B>
+(default).
+
+<P>
+
+The do-not-propagate-mask attribute
+defines which events should not be propagated to 
+ancestor windows when no client has the event type selected in this 
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+or
+<B><A HREF="../create.html#InputClass">InputOnly</A></B>
+window.
+The do-not-propagate-mask is the bitwise inclusive OR of zero or more
+of the following masks:
+<B>KeyPress</B>, 
+<B>KeyRelease</B>,
+<B>ButtonPress</B>, 
+<B>ButtonRelease</B>,
+<B>PointerMotion</B>,
+<B>Button1Motion</B>, 
+<B>Button2Motion</B>, 
+<B>Button3Motion</B>,
+<B>Button4Motion</B>, 
+<B>Button5Motion</B>, 
+and
+<B>ButtonMotion</B>.
+You can specify that all events are propagated by setting 
+<B><A HREF="../../events/mask.html#NoEventMask">NoEventMask</A></B>
+(default).
+
+<H5 ALIGN=right><I>Next: <A HREF="override-redirect.html">Override Redirect Flag</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

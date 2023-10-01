@@ -1,0 +1,239 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XAllowEvents</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XAllowEvents</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XAllowEvents" "" "@DEF@">
+
+<CODE><PRE>
+XAllowEvents(<B>display</B>, <B>event_mode</B>, <B>time</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      int <B>event_mode</B>; 
+      <A HREF="pointer-grabbing.html#Time">Time</A> <B>time</B>; 
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>event_mode</B>
+<TD> Specifies the event mode.
+You can pass 
+<B>AsyncPointer</B>, 
+<B>SyncPointer</B>, 
+<B>AsyncKeyboard</B>, 
+<B>SyncKeyboard</B>,
+<B>ReplayPointer</B>, 
+<B>ReplayKeyboard</B>,
+<B>AsyncBoth</B>,
+or
+<B>SyncBoth</B>.
+
+<TR><TD> <B>time</B>
+<TD> Specifies the time.
+You can pass either a timestamp or
+<B>CurrentTime</B>.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XAllowEvents()</B>
+function releases some queued events if the client has caused a device 
+to freeze.
+It has no effect if the specified time is earlier than the last-grab
+time of the most recent active grab for the client or if the specified time
+is later than the current X server time.
+Depending on the event_mode argument, the following occurs:
+
+<TABLE>
+<TR><TD VALIGN=top><B>AsyncPointer
+<TD>
+If the pointer is frozen by the client,
+pointer event processing continues as usual.
+If the pointer is frozen twice by the client on behalf of two separate grabs,
+<B>AsyncPointer</B> 
+thaws for both.
+<B>AsyncPointer</B>
+has no effect if the pointer is not frozen by the client,
+but the pointer need not be grabbed by the client.
+
+<TR><TD VALIGN=top><B>SyncPointer 
+<TD>
+If the pointer is frozen and actively grabbed by the client,
+pointer event processing continues as usual until the next 
+<B><A HREF="../events/keyboard-pointer/keyboard-pointer.html">ButtonPress</A></B> 
+or 
+<B><A HREF="../events/keyboard-pointer/keyboard-pointer.html">ButtonRelease</A></B> 
+event is reported to the client.
+At this time, 
+the pointer again appears to freeze.
+However, if the reported event causes the pointer grab to be released,
+the pointer does not freeze.
+<B>SyncPointer</B> 
+has no effect if the pointer is not frozen by the client
+or if the pointer is not grabbed by the client.
+
+<TR><TD VALIGN=top><B>ReplayPointer
+<TD>
+If the pointer is actively grabbed by the client and is frozen as the result of
+an event having been sent to the client (either from the activation of a 
+<B><A HREF="XGrabButton.html">XGrabButton()</A></B>
+or from a previous 
+<B>XAllowEvents()</B>
+with mode 
+<B>SyncPointer</B>
+but not from a 
+<B><A HREF="XGrabPointer.html">XGrabPointer()</A></B>),
+the pointer grab is released and that event is completely reprocessed.
+This time, however, the function ignores any passive grabs at or above 
+(towards the root of) the grab_window of the grab just released.
+The request has no effect if the pointer is not grabbed by the client
+or if the pointer is not frozen as the result of an event.
+
+<TR><TD VALIGN=top><B>AsyncKeyboard 
+<TD>
+If the keyboard is frozen by the client,
+keyboard event processing continues as usual.
+If the keyboard is frozen twice by the client on behalf of two separate grabs,
+<B>AsyncKeyboard</B> 
+thaws for both.
+<B>AsyncKeyboard</B> 
+has no effect if the keyboard is not frozen by the client,
+but the keyboard need not be grabbed by the client.
+
+<TR><TD VALIGN=top><B>SyncKeyboard
+<TD>
+If the keyboard is frozen and actively grabbed by the client,
+keyboard event processing continues as usual until the next 
+<B><A HREF="../events/keyboard-pointer/keyboard-pointer.html">KeyPress</A></B> 
+or 
+<B><A HREF="../events/keyboard-pointer/keyboard-pointer.html">KeyRelease</A></B> 
+event is reported to the client.
+At this time,
+the keyboard again appears to freeze.
+However, if the reported event causes the keyboard grab to be released,
+the keyboard does not freeze.
+<B>SyncKeyboard</B> 
+has no effect if the keyboard is not frozen by the client
+or if the keyboard is not grabbed by the client.
+
+<TR><TD VALIGN=top><B>ReplayKeyboard
+<TD>
+If the keyboard is actively grabbed by the client and is frozen 
+as the result of an event having been sent to the client (either from the
+activation of a 
+<B><A HREF="XGrabKey.html">XGrabKey()</A></B>
+or from a previous 
+<B>XAllowEvents()</B>
+with mode 
+<B>SyncKeyboard</B> 
+but not from a 
+<B><A HREF="XGrabKeyboard.html">XGrabKeyboard()</A></B>),
+the keyboard grab is released and that event is completely reprocessed.
+This time, however, the function ignores any passive grabs at or above 
+(towards the root of)
+the grab_window of the grab just released.
+The request has no effect if the keyboard is not grabbed by the client
+or if the keyboard is not frozen as the result of an event.
+
+<TR><TD VALIGN=top><B>SyncBoth
+<TD>
+If both pointer and keyboard are frozen by the client,
+event processing for both devices continues as usual until the next
+<B><A HREF="../events/keyboard-pointer/keyboard-pointer.html">ButtonPress</A></B>, 
+<B><A HREF="../events/keyboard-pointer/keyboard-pointer.html">ButtonRelease</A></B>,
+<B><A HREF="../events/keyboard-pointer/keyboard-pointer.html">KeyPress</A></B>, 
+or 
+<B><A HREF="../events/keyboard-pointer/keyboard-pointer.html">KeyRelease</A></B> 
+event is reported to the client for a grabbed device 
+(button event for the pointer, key event for the keyboard), 
+at which time the devices again appear to freeze.  
+However, if the reported event causes the grab to be released,
+then the devices do not freeze (but if the other device is still
+grabbed, then a subsequent event for it will still cause both devices
+to freeze).  
+<B>SyncBoth</B>
+has no effect unless both pointer and keyboard
+are frozen by the client.
+If the pointer or keyboard is frozen twice
+by the client on behalf of two separate grabs, 
+<B>SyncBoth</B> 
+thaws for both (but a subsequent freeze for 
+<B>SyncBoth</B> 
+will only freeze each device once).
+
+<TR><TD VALIGN=top><B>AsyncBoth
+<TD>
+If the pointer and the keyboard are frozen by the
+client, event processing for both devices continues as usual.
+If a device is frozen twice by the client on behalf of two separate grabs,
+<B>AsyncBoth</B> 
+thaws for both.
+<B>AsyncBoth</B> 
+has no effect unless both
+pointer and keyboard are frozen by the client.
+</TABLE>
+
+<P>
+
+<B>AsyncPointer</B>, 
+<B>SyncPointer</B>, 
+and 
+<B>ReplayPointer</B> 
+have no effect on the
+processing of keyboard events.
+<B>AsyncKeyboard</B>, 
+<B>SyncKeyboard</B>, 
+and 
+<B>ReplayKeyboard</B> 
+have no effect on the
+processing of pointer events.
+It is possible for both a pointer grab and a keyboard grab (by the same 
+or different clients) to be active simultaneously.
+If a device is frozen on behalf of either grab,
+no event processing is performed for the device.
+It is possible for a single device to be frozen because of both grabs.
+In this case,
+the freeze must be released on behalf of both grabs before events can 
+again be processed.
+If a device is frozen twice by a single client,
+then a single
+<B>AllowEvents</B>
+releases both.
+
+<P>
+
+<B>XAllowEvents()</B>
+can generate a
+<B>BadValue</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+"<A HREF="resuming-event-processing.html">Resuming Event Processing</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

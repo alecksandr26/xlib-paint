@@ -1,0 +1,181 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetInputFocus</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetInputFocus</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XSetInputFocus" "" "@DEF@">
+
+<CODE><PRE>
+XSetInputFocus(<B>display</B>, <B>focus</B>, <B>revert_to</B>, <B>time</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>focus</B>;
+      int <B>revert_to</B>; 
+      <A HREF="pointer-grabbing.html#Time">Time</A> <B>time</B>; 
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>focus</B>
+<TD> Specifies the window,
+<B>PointerRoot</B>,
+or
+<B>None</B>.
+
+<TR><TD> <B>revert_to</B>
+<TD> Specifies where the input focus reverts to if the window becomes not
+viewable.
+You can pass 
+<B>RevertToParent</B>, 
+<B>RevertToPointerRoot</B>, 
+or 
+<B>RevertToNone</B>.
+
+<TR><TD> <B>time</B>
+<TD> Specifies the time.
+You can pass either a timestamp or
+<B>CurrentTime</B>.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XSetInputFocus()</B>
+function changes the input focus and the last-focus-change time.
+It has no effect if the specified time is earlier than the current
+last-focus-change time or is later than the current X server time.
+Otherwise, the last-focus-change time is set to the specified time
+(<B>CurrentTime</B> 
+is replaced by the current X server time).
+<B>XSetInputFocus()</B>
+causes the X server to generate
+<B><A HREF="../events/input-focus/">FocusIn</A></B> 
+and 
+<B><A HREF="../events/input-focus/">FocusOut</A></B> 
+events.
+
+<P>
+
+Depending on the focus argument,
+the following occurs: 
+
+<UL>
+
+<P><LI>
+If focus is
+<B>None</B>,
+all keyboard events are discarded until a new focus window is set,
+and the revert_to argument is ignored.
+
+<P><LI>
+If focus is a window, 
+it becomes the keyboard's focus window.
+If a generated keyboard event would normally be reported to this window
+or one of its inferiors, the event is reported as usual. 
+Otherwise, the event is reported relative to the focus window.
+
+<P><LI>
+If focus is
+<B>PointerRoot</B>,
+the focus window is dynamically taken to be the root window of whatever screen 
+the pointer is on at each keyboard event.  
+In this case, the revert_to argument is ignored.
+
+<P>
+
+The specified focus window must be viewable at the time 
+<B>XSetInputFocus()</B>
+is called,
+or a
+<B>BadMatch</B>
+error results.
+If the focus window later becomes not viewable, 
+the X server
+evaluates the revert_to argument to determine the new focus window as follows: 
+
+<P><LI>
+If revert_to is
+<B>RevertToParent</B>,
+the focus reverts to the parent (or the closest viewable ancestor), 
+and the new revert_to value is taken to be
+<B>RevertToNone</B>.  
+
+<P><LI>
+If revert_to is
+<B>RevertToPointerRoot</B> 
+or 
+<B>RevertToNone</B>,
+the focus reverts to
+<B>PointerRoot</B>
+or
+<B>None</B>,
+respectively.
+When the focus reverts,
+the X server generates
+<B><A HREF="../events/input-focus/">FocusIn</A></B>
+and
+<B><A HREF="../events/input-focus/">FocusOut</A></B>
+events, but the last-focus-change time is not affected.
+
+</UL>
+
+<P>
+
+<B>XSetInputFocus()</B>
+can generate
+<B>BadMatch</B>,
+<B>BadValue</B>,
+and
+<B>BadWindow</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XGetInputFocus.html">XGetInputFocus()</A></B>,
+<B><A HREF="XWarpPointer.html">XWarpPointer()</A></B>,
+"<A HREF="controlling-focus.html">Controlling Input Focus</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,99 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetWindowBackground</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetWindowBackground</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XSetWindowBackground" "" "@DEF@">
+
+<CODE><PRE>
+XSetWindowBackground(<B>display</B>, <B>w</B>, <B>background_pixel</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      unsigned long <B>background_pixel</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>background_pixel</B>
+<TD> Specifies the pixel that is to be used for the background.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XSetWindowBackground()</B>
+function sets the background of the window to the specified pixel value.
+Changing the background does not cause the window contents to be changed.
+<B>XSetWindowBackground()</B>
+uses a pixmap of undefined size filled with the pixel value you passed.
+If you try to change the background of an 
+<B><A HREF="create.html#InputClass">InputOnly</A></B>
+window, a
+<B>BadMatch</B>
+error results.
+
+<P>
+
+<B>XSetWindowBackground()</B>
+can generate
+<B>BadMatch</B>
+and
+<B>BadWindow</B>
+errors.
+
+<P ALIGN=center>Note
+<BLOCKQUOTE>
+<B>XSetWindowBackground()</B>
+and
+<B><A HREF="XSetWindowBackgroundPixmap.html">XSetWindowBackgroundPixmap()</A></B>
+do not change the current contents of the window.
+</BLOCKQUOTE>
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>,
+<B><A HREF="XConfigureWindow.html">XConfigureWindow()</A></B>,
+<B><A HREF="XCreateWindow.html">XCreateWindow()</A></B>,
+<B><A HREF="XDestroyWindow.html">XDestroyWindow()</A></B>,
+<B><A HREF="../window-and-session-manager/XInstallColormap.html">XInstallColormap()</A></B>,
+<B><A HREF="XMapWindow.html">XMapWindow()</A></B>,
+<B><A HREF="XRaiseWindow.html">XRaiseWindow()</A></B>,
+<B><A HREF="XSetWindowBackgroundPixmap.html">XSetWindowBackgroundPixmap()</A></B>,
+<B><A HREF="XSetWindowBorder.html">XSetWindowBorder()</A></B>,
+<B><A HREF="XSetWindowBorderPixmap.html">XSetWindowBorderPixmap()</A></B>,
+<B><A HREF="XSetWindowColormap.html">XSetWindowColormap()</A></B>,
+<B><A HREF="XUnmapWindow.html">XUnmapWindow()</A></B>,
+"<A HREF="change-attributes.html">Changing Window Attributes</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetModifierMapping</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetModifierMapping</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetModifierMapping" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="keyboard-encoding.html#XModifierKeymap">XModifierKeymap</A> *XGetModifierMapping(<B>display</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetModifierMapping()</B>
+function returns a pointer to a newly created
+<A HREF="keyboard-encoding.html#XModifierKeymap">XModifierKeymap</A>
+structure that contains the keys being used as modifiers.
+The structure should be freed after use by calling
+<B><A HREF="XFreeModifiermap.html">XFreeModifiermap()</A></B>.
+If only zero values appear in the set for any modifier, 
+that modifier is disabled.
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeKeyboardMapping.html">XChangeKeyboardMapping()</A></B>,
+<B><A HREF="XDeleteModifiermapEntry.html">XDeleteModifiermapEntry()</A></B>,
+<B><A HREF="XDisplayKeycodes.html">XDisplayKeycodes()</A></B>,
+<B><A HREF="../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XFreeModifiermap.html">XFreeModifiermap()</A></B>,
+<B><A HREF="XGetKeyboardMapping.html">XGetKeyboardMapping()</A></B>,
+<B><A HREF="XInsertModifiermapEntry.html">XInsertModifiermapEntry()</A></B>,
+<B><A HREF="XNewModifiermap.html">XNewModifiermap()</A></B>,
+<B><A HREF="XSetModifierMapping.html">XSetModifierMapping()</A></B>,
+<B><A HREF="XSetPointerMapping.html">XSetPointerMapping()</A></B>,
+"<A HREF="keyboard-encoding.html">Keyboard Encoding</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

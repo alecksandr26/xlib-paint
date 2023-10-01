@@ -1,0 +1,98 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetWMColormapWindows</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetWMColormapWindows</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XSetWMColormapWindows" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../../introduction/errors.html#Status">Status</A></B> XSetWMColormapWindows(<B>display</B>, <B>w</B>, <B>colormap_windows</B>, <B>count</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      Window *<B>colormap_windows</B>;
+      int <B>count</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>colormap_windows</B>
+<TD> Specifies the list of windows.
+
+<TR><TD> <B>count</B>
+<TD> Specifies the number of windows in the list.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The 
+<B>XSetWMColormapWindows()</B>
+function replaces the <A HREF="/gui/x/icccm/sec-4.html#WM_COLORMAP_WINDOWS">WM_COLORMAP_WINDOWS</A> property on the specified
+window with the list of windows specified by the colormap_windows argument.
+It the property does not already exist,
+<B>XSetWMColormapWindows()</B>
+sets the <A HREF="/gui/x/icccm/sec-4.html#WM_COLORMAP_WINDOWS">WM_COLORMAP_WINDOWS</A> property on the specified
+window to the list of windows specified by the colormap_windows argument.
+The property is stored with a type of WINDOW and a format of 32.
+If it cannot intern the <A HREF="/gui/x/icccm/sec-4.html#WM_COLORMAP_WINDOWS">WM_COLORMAP_WINDOWS</A> atom,
+<B>XSetWMColormapWindows()</B>
+returns a zero status.
+Otherwise, it returns a nonzero status.
+
+<P>
+
+<B>XSetWMColormapWindows()</B>
+can generate
+<B>BadAlloc</B>
+and
+<B>BadWindow</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocClassHint.html">XAllocClassHint()</A></B>,
+<B><A HREF="XAllocIconSize.html">XAllocIconSize()</A></B>,
+<B><A HREF="XAllocSizeHints.html">XAllocSizeHints()</A></B>,
+<B><A HREF="XAllocWMHints.html">XAllocWMHints()</A></B>,
+<B><A HREF="XGetWMColormapWindows.html">XGetWMColormapWindows()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetCommand.html">XSetCommand()</A></B>,
+<B><A HREF="XSetTextProperty.html">XSetTextProperty()</A></B>,
+<B><A HREF="XSetTransientForHint.html">XSetTransientForHint()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetWMClientMachine.html">XSetWMClientMachine()</A></B>,
+<B><A HREF="XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B>,
+<B><A HREF="XSetWMIconName.html">XSetWMIconName()</A></B>,
+<B><A HREF="XSetWMName.html">XSetWMName()</A></B>,
+<B><A HREF="XSetWMProperties.html">XSetWMProperties()</A></B>,
+<B><A HREF="XSetWMProtocols.html">XSetWMProtocols()</A></B>,
+<B><A HREF="XStringListToTextProperty.html">XStringListToTextProperty()</A></B>,
+"<A HREF="wm-protocols.html">Setting and Reading the WM_TRANSIENT_FOR Property</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

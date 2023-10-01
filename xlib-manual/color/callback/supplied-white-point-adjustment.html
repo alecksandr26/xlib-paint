@@ -1,0 +1,160 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Supplied White Point Adjustment Procedures</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.10.4 Supplied White Point Adjustment Procedures</H1>
+
+White point adjustment procedures provided by Xlib are as follows:
+
+<UL>
+<P><LI>
+XcmsCIELabWhiteShiftColors
+
+<P>
+
+This uses the CIE L*a*b* color space for adjusting the chromatic character
+of colors to compensate for the chromatic differences between the source
+and destination white points.
+This procedure simply converts the color specifications to 
+<B>XcmsCIELab</B>
+using the source white point and then converts to the target specification
+format using the destinations white point.
+No client data is necessary.
+
+<P><LI>
+<B>XcmsCIELuvWhiteShiftColors</B>
+
+<P>
+
+This uses the CIE L*u*v* color space for adjusting the chromatic character
+of colors to compensate for the chromatic differences between the source
+and destination white points.
+This procedure simply converts the color specifications to 
+<B>XcmsCIELuv</B>
+using the source white point and then converts to the target specification
+format using the destinations white point.
+No client data is necessary.
+
+<P><LI>
+<B>XcmsTekHVCWhiteShiftColors</B>
+
+<P>
+
+This uses the TekHVC color space for adjusting the chromatic character
+of colors to compensate for the chromatic differences between the source
+and destination white points.
+This procedure simply converts the color specifications to
+<B>XcmsTekHVC</B>
+using the source white point and then converts to the target specification
+format using the destinations white point.
+An advantage of this procedure over those previously described
+is an attempt to minimize hue shift.
+No client data is necessary.
+
+</UL>
+
+From an implementation point of view,
+these white point adjustment procedures convert the color specifications
+to a device-independent but white-point-dependent color space 
+(for example, CIE L*u*v*, CIE L*a*b*, TekHVC) using one white point
+and then converting those specifications to the target color space 
+using another white point.
+In other words,
+the specification goes in the color space with one white point 
+but comes out with another white point, 
+resulting in a chromatic shift based on the chromatic displacement
+between the initial white point and target white point.
+The CIE color spaces that are assumed to be white-point-independent
+are CIE u'v'Y, CIE XYZ, and CIE xyY.
+When developing a custom white point adjustment procedure that uses a
+device-independent color space not initially accessible for use in the
+color management system, use
+<B><A HREF="../management-extensions/XcmsAddColorSpace.html">XcmsAddColorSpace()</A></B>
+to insure that it is added.
+
+<P>
+
+As an example, 
+if the CCC specifies a white point adjustment procedure
+and if the Client White Point and Screen White Point differ, the
+<B><A HREF="../XcmsAllocColor.html">XcmsAllocColor()</A></B>
+function will use the white point adjustment
+procedure twice: 
+
+<UL>
+
+<P><LI>
+Once to convert to
+<B>XcmsRGB</B>
+
+<P><LI>
+A second time to convert from
+<B>XcmsRGB</B>
+
+</UL>
+
+<P>
+
+For example, assume the specification is in
+<B>XcmsCIEuvY</B>
+and the adjustment procedure is
+<B>XcmsCIELuvWhiteShiftColors</B>.
+During conversion to
+<B>XcmsRGB</B>,
+the call to 
+<B><A HREF="../XcmsAllocColor.html">XcmsAllocColor()</A></B>
+results in the following series of color specification conversions:
+
+<UL>
+
+<P><LI>
+From 
+<B>XcmsCIEuvY</B>
+to
+<B>XcmsCIELuv</B>
+using the Client White Point
+
+<P><LI>
+From 
+<B>XcmsCIELuv</B>
+to
+<B>XcmsCIEuvY</B>
+using the Screen White Point
+
+<P><LI>
+From
+<B>XcmsCIEuvY</B>
+to
+<B>XcmsCIEXYZ</B>
+(CIE u'v'Y and XYZ are white-point-independent color spaces)
+
+<P><LI>
+From 
+<B>XcmsCIEXYZ</B>
+to 
+<B>XcmsRGBi</B>
+
+<P><LI>
+From 
+<B>XcmsRGBi</B>
+to
+<B>XcmsRGB</B>
+
+</UL>
+
+The resulting RGB specification is passed to
+<B><A HREF="../XAllocColor.html">XAllocColor()</A></B>,
+and the RGB
+specification returned by
+<B><A HREF="../XAllocColor.html">XAllocColor()</A></B>
+is converted back to 
+<B>XcmsCIEuvY</B>
+by reversing the color conversion sequence.
+
+<H5 ALIGN=right><I>Next: <A HREF="../gamut-querying/">Gamut Querying Functions</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

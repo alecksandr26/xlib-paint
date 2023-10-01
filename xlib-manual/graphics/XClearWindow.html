@@ -1,0 +1,88 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XClearWindow</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XClearWindow</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Window" "clearing">
+<!.IN "Clearing" "windows">
+<!.IN "XClearWindow" "" "@DEF@">
+
+<CODE><PRE>
+XClearWindow(<B>display</B>, <B>w</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XClearWindow()</B>
+function clears the entire area in the specified window and is
+equivalent to
+<B><A HREF="XClearArea.html">XClearArea</A></B>(display, w, 0, 0, 0, 0, <B>False</B>).
+If the window has a defined background tile, the rectangle is tiled with a
+plane-mask of all ones and 
+<B>GXcopy</B>
+function.
+If the window has
+background 
+<B>None</B>, 
+the contents of the window are not changed.  
+If you specify a window whose class is
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B> ,
+a
+<B>BadMatch</B>
+error results. 
+
+<P>
+
+<B>XClearWindow()</B>
+can generate
+<B>BadMatch</B>
+and
+<B>BadWindow</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+      
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XClearArea.html">XClearArea()</A></B>,
+<B><A HREF="XCopyArea.html">XCopyArea()</A></B>,
+"<A HREF="clearing-areas.html">Clearing Areas</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

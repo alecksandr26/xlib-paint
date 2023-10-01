@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XEqualRegion</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XEqualRegion</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XEqualRegion" "" "@DEF@">
+
+<CODE><PRE>
+Bool XEqualRegion(<B>r1</B>, <B>r2</B>)
+      <A HREF="./">Region</A> <B>r1</B>, <B>r2</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>r1</B><BR>
+	<B>r2</B>
+<TD> Specify the two regions.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XEqualRegion()</B>
+function returns
+<B>True</B>
+if the two regions have the same offset, size, and shape.
+
+<H2>See also</H2>
+
+<B><A HREF="XCreateRegion.html">XCreateRegion()</A></B>,
+<B><A HREF="XEmptyRegion.html">XEmptyRegion()</A></B>,
+<B><A HREF="XEqualRegion.html">XEqualRegion()</A></B>,
+<B><A HREF="XIntersectRegion.html">XIntersectRegion()</A></B>,
+<B><A HREF="XPointInRegion.html">XPointInRegion()</A></B>,
+<B><A HREF="XRectInRegion.html">XRectInRegion()</A></B>,
+"<A HREF="comparing.html">Determining if Regions Are Empty or Equal</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

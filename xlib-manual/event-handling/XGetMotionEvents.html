@@ -1,0 +1,108 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetMotionEvents</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetMotionEvents</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetMotionEvents" "" "@DEF@">
+
+<CODE><PRE>
+XTimeCoord *XGetMotionEvents(<B>display</B>, <B>w</B>, <B>start</B>, <B>stop</B>, <B>nevents_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      Time <B>start</B>, <B>stop</B>;	
+      int *<B>nevents_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>start</B><BR>
+	<B>stop</B>
+<TD> Specify the time interval in which the events are returned from the motion
+history buffer.
+You can pass a timestamp or
+<B>CurrentTime</B>.
+
+<TR><TD> <B>nevents_return</B>
+<TD> Returns the number of events from the motion history buffer.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetMotionEvents()</B>
+function returns all events in the motion history buffer that fall between the
+specified start and stop times, inclusive, and that have coordinates
+that lie within the specified window (including its borders) at its present
+placement.
+If the server does not support motion history, 
+if the start time is later than the stop time,
+or if the start time is in the future, 
+no events are returned;
+<B>XGetMotionEvents()</B>
+returns NULL.
+If the stop time is in the future, it is equivalent to specifying
+<B>CurrentTime</B> .
+The return type for this function is a structure defined as follows:
+
+<A NAME="XTimeCoord"></A>
+<P>
+
+<!.IN "XTimeCoord" "" "@DEF@">
+<PRE><CODE>
+typedef struct {
+	Time time;
+	short x, y;
+} XTimeCoord;
+</PRE></CODE>
+
+<P>
+
+The <B>time</B> member is set to the time, in milliseconds. 
+The <B>x</B> and <B>y</B> members are set to the coordinates of the pointer and
+are reported relative to the origin
+of the specified window.
+To free the data returned from this call, use
+<B><A HREF="../display/XFree.html">XFree()</A></B>.
+
+<P>
+
+<B>XGetMotionEvents()</B>
+can generate a
+<B>BadWindow</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XDisplayMotionBufferSize.html">XDisplayMotionBufferSize()</A></B>,
+<B><A HREF="manipulating-event-queue/XIfEvent.html">XIfEvent()</A></B>,
+<B><A HREF="manipulating-event-queue/XNextEvent.html">XNextEvent()</A></B>,
+<B><A HREF="XPutBackEvent.html">XPutBackEvent()</A></B>,
+<B><A HREF="XSendEvent.html">XSendEvent()</A></B>,
+"<A HREF="getting-pointer-motion-history.html">Getting Pointer Motion History</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

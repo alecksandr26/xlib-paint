@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: CIELab Queries</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.11.2 CIELab Queries</H1>
+
+The following equations are useful in describing the CIELab query functions:
+
+<P>
+
+<!.IN "Psychometric Hue Angle">
+<!.IN "CIE metric lightness">
+<!.IN "Psychometric Chroma">
+<!.IN "Psychometric Chroma" "maximum">
+
+<BLOCKQUOTE><I>
+CIELab Psychometric Chroma = sqrt(a_star<SUP>2</SUP> + b_star <SUP>2</SUP> )
+
+<P>
+
+CIELab Psychometric Hue = tan<SUP>-1</SUP> ( b_star / a_star )
+</I></BLOCKQUOTE>
+
+To obtain the CIE L*a*b* coordinates of maximum Psychometric Chroma
+for a given Psychometric Hue Angle and CIE metric lightness (L*), use
+<B><A HREF="XcmsCIELabQueryMaxC.html">XcmsCIELabQueryMaxC()</A></B>.
+
+<P>
+
+To obtain the CIE L*a*b* coordinates of maximum CIE metric lightness (L*)
+for a given Psychometric Hue Angle and Psychometric Chroma, use
+<B><A HREF="XcmsCIELabQueryMaxL.html">XcmsCIELabQueryMaxL()</A></B>.
+
+<P>
+
+To obtain the CIE L*a*b* coordinates of maximum Psychometric Chroma
+for a given Psychometric Hue Angle, use
+<B><A HREF="XcmsCIELabQueryMaxLC.html">XcmsCIELabQueryMaxLC()</A></B>.
+
+<P>
+
+To obtain the CIE L*a*b* coordinates of minimum CIE metric lightness (L*)
+for a given Psychometric Hue Angle and Psychometric Chroma, use
+<B><A HREF="XcmsCIELabQueryMinL.html">XcmsCIELabQueryMinL()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="cieluv.html">CIELuv Queries</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.lri.fr:8000/">Christophe Tronche</A></ADDRESS>
+</BODY>
+</HTML>

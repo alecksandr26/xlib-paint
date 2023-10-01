@@ -1,0 +1,125 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XCreatePixmapCursor</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XCreatePixmapCursor</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XCreatePixmapCursor" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="cursor.html">Cursor</A> XCreatePixmapCursor(<B>display</B>, <B>source</B>, <B>mask</B>, <B>foreground_color</B>, <B>background_color</B>, <B>x</B>, <B>y</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="pixmap.html">Pixmap</A> <B>source</B>;
+      <A HREF="pixmap.html">Pixmap</A> <B>mask</B>;
+      <A HREF="../color/structures.html">XColor</A> *<B>foreground_color</B>;
+      <A HREF="../color/structures.html">XColor</A> *<B>background_color</B>;
+      unsigned int <B>x</B>, <B>y</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>source</B>
+<TD> Specifies the shape of the source cursor.
+
+<TR><TD> <B>mask</B>
+<TD> Specifies the cursor's source bits to be displayed or
+<B>None</B> .
+
+<TR><TD> <B>foreground_color</B>
+<TD> Specifies the RGB values for the foreground of the source. 
+
+<TR><TD> <B>background_color</B>
+<TD> Specifies the RGB values for the background of the source.
+.ds Xy 
+
+<TR><TD> <B>x</B>
+<TR><TD> <B>y</B>
+<TD> Specify the x and y coordinates, which indicate the hotspot relative to the source's origin.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XCreatePixmapCursor()</B>
+function creates a cursor and returns the cursor ID associated with it.
+The foreground and background RGB values must be specified using
+foreground_color and background_color,
+even if the X server only has a
+<B><A HREF="../window/visual-types.html">StaticGray</A></B>
+or
+<B><A HREF="../window/visual-types.html">GrayScale</A></B>
+screen.
+The foreground color is used for the pixels set to 1 in the
+source, and the background color is used for the pixels set to 0.
+Both source and mask, if specified, must have depth one (or a 
+<B>BadMatch</B>
+error results) but can have any root.
+The mask argument defines the shape of the cursor.
+The pixels set to 1 in the mask define which source pixels are displayed,
+and the pixels set to 0 define which pixels are ignored.
+If no mask is given, 
+all pixels of the source are displayed.
+The mask, if present, must be the same size as the pixmap defined by the 
+source argument, or a
+<B>BadMatch</B>
+error results.
+The hotspot must be a point within the source,
+or a
+<B>BadMatch</B>
+error results.
+
+<P>
+
+The components of the cursor can be transformed arbitrarily to meet
+display limitations.
+The pixmaps can be freed immediately if no further explicit references
+to them are to be made.
+Subsequent drawing in the source or mask pixmap has an undefined effect on the
+cursor.
+The X server might or might not make a copy of the pixmap.
+
+<P>
+
+<B>XCreatePixmapCursor()</B>
+can generate
+<B>BadAlloc</B>
+and
+<B>BadPixmap</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadPixmap</B>
+<TD> A value for a Pixmap argument does not name a
+     defined Pixmap.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XCreateFontCursor.html">XCreateFontCursor()</A></B>,
+<B><A HREF="XCreateGlyphCursor.html">XCreateGlyphCursor()</A></B>,
+<B><A HREF="../window/XDefineCursor.html">XDefineCursor()</A></B>,
+<B><A HREF="../graphics/font-metrics/XLoadFont.html">XLoadFont()</A></B>,
+<B><A HREF="XRecolorCursor.html">XRecolorCursor()</A></B>,
+"<A HREF="cursor.html">Creating, Recoloring, and Freeing Cursors</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

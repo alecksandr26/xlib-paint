@@ -1,0 +1,90 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XEventsQueued</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XEventsQueued</H1>
+
+<!.IN "XEventsQueued" "" "@DEF@">
+
+<H2>Syntax</H2>
+
+<CODE><PRE>
+int XEventsQueued(<B>display</B>, <B>mode</B>)
+     <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+     int <B>mode</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>mode</B>
+<TD> Specifies the mode.
+You can pass
+<B>QueuedAlready</B>,
+<B>QueuedAfterFlush</B>,
+or
+<B>QueuedAfterReading</B>.
+
+</TABLE>
+
+<H2>Description</H2>
+
+If mode is 
+<B>QueuedAlready</B>,
+<B>XEventsQueued()</B>
+returns the number of events
+already in the event queue (and never performs a system call).
+If mode is 
+<B>QueuedAfterFlush</B>, 
+<B>XEventsQueued()</B>
+returns the number of events already in the queue if the number is nonzero.
+If there are no events in the queue, 
+<B>XEventsQueued()</B>
+flushes the output buffer, 
+attempts to read more events out of the application's connection,
+and returns the number read.
+If mode is 
+<B>QueuedAfterReading</B>, 
+<B>XEventsQueued()</B>
+returns the number of events already in the queue if the number is nonzero. 
+If there are no events in the queue, 
+<B>XEventsQueued()</B>
+attempts to read more events out of the application's connection 
+without flushing the output buffer and returns the number read.
+
+<P>
+
+<B>XEventsQueued()</B>
+always returns immediately without I/O if there are events already in the
+queue.
+<B>XEventsQueued()</B>
+with mode 
+<B>QueuedAfterFlush</B>
+is identical in behavior to
+<B><A HREF="XPending.html">XPending()</A></B>.
+<B>XEventsQueued()</B>
+with mode
+<B>QueuedAlready</B>
+is identical to the
+<B><A HREF="../display/display-macros.html#QLength">XQLength()</A></B>
+function.
+
+<H2>See also</H2>
+
+<B><A HREF="XFlush.html">XFlush()</A></B>,
+<B><A HREF="manipulating-event-queue/XIfEvent.html">XIfEvent()</A></B>,
+<B><A HREF="manipulating-event-queue/XNextEvent.html">XNextEvent()</A></B>,
+<B><A HREF="XPending.html">XPending()</A></B>,
+<B><A HREF="XPutBackEvent.html">XPutBackEvent()</A></B>,
+<B><A HREF="XSync.html">XSync()</A></B>,
+"<A HREF="event-queue-management.html">Event Queue Management</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

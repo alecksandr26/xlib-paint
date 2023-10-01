@@ -1,0 +1,90 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XLookupColor</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XLookupColor</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Color" "naming">
+<!.IN "XLookupColor" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../introduction/errors.html#Status">Status</A></B> XLookupColor(<B>display</B>, <B>colormap</B>, <B>color_name</B>, <B>exact_def_return</B>, <B>screen_def_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="./#colormap">Colormap</A> <B>colormap</B>;
+      char *<B>color_name</B>;
+      <A HREF="structures.html">XColor</A> *<B>exact_def_return</B>, *<B>screen_def_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>colormap</B>
+<TD> Specifies the colormap.
+
+<TR><TD> <B>color_name</B>
+<TD> Specifies the color name string (for example, red) whose color 
+definition structure you want returned.
+
+<TR><TD> <B>exact_def_return</B>
+<TD> Returns the exact RGB values.
+
+<TR><TD> <B>screen_def_return</B>
+<TD> Returns the closest RGB values provided by the hardware.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XLookupColor()</B>
+function looks up the string name of a color with respect to the screen
+associated with the specified colormap.
+It returns both the exact color values and
+the closest values provided by the screen 
+with respect to the visual type of the specified colormap.
+If the color name is not in the Host Portable Character Encoding, 
+the result is implementation dependent.
+Use of uppercase or lowercase does not matter.
+<B>XLookupColor()</B>
+returns nonzero if the name is resolved;
+otherwise, it returns zero.
+
+<P>
+
+<B>XLookupColor()</B>
+can generate a
+<B>BadColor</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadColor</B>
+<TD>  A value for a Colormap argument does not name a
+      defined Colormap.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocColor.html">XAllocColor()</A></B>,
+<B><A HREF="XCreateColormap.html">XCreateColormap()</A></B>,
+<B><A HREF="XLookupColor.html">XLookupColor()</A></B>,
+<B><A HREF="XParseColor.html">XParseColor()</A></B>,
+<B><A HREF="XQueryColor.html">XQueryColor()</A></B>,
+<B><A HREF="XQueryColors.html">XQueryColors()</A></B>,
+<B><A HREF="XStoreColors.html">XStoreColors()</A></B>,
+"<A HREF="mapping-names-to-values.html">Mapping Color Names to Values</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

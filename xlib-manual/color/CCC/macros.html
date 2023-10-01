@@ -1,0 +1,145 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Color Conversion Context Macros</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.8.3 Color Conversion Context Macros</H1>
+
+Applications should not directly modify any part of the
+XcmsCCC.
+The following lists the C language macros, their corresponding function
+equivalents for other language bindings, and what data they both
+can return.
+
+<A NAME="DisplayOfCCC"></A>
+<A NAME="XcmsDisplayOfCCC"></A>
+<H2>DisplayOfCCC, XcmsDisplayOfCCC</H2>
+
+<!.IN "DisplayOfCCC" "" "@DEF@">
+<!.IN "XcmsDisplayOfCCC" "" "@DEF@">
+
+<CODE><PRE>
+DisplayOfCCC(<B>ccc</B>)
+     XcmsCCC <B>ccc</B>;
+
+<A HREF="../../display/opening.html#Display">Display</A> *XcmsDisplayOfCCC(<B>ccc</B>)
+     XcmsCCC <B>ccc</B>;
+
+</PRE></CODE>
+
+
+<TABLE>
+
+<TR><TD> <B>ccc</B>
+<TD> Specifies the CCC.
+
+</TABLE>
+
+Both return the display associated with the specified CCC.
+
+<A NAME="VisualOfCCC"></A>
+<A NAME="XcmsVisualOfCCC"></A>
+<H2>VisualOfCCC, XcmsVisualOfCCC</H2>
+
+<!.IN "VisualOfCCC" "" "@DEF@">
+<!.IN "XcmsVisualOfCCC" "" "@DEF@">
+
+<CODE><PRE>
+VisualOfCCC(<B>ccc</B>)
+     XcmsCCC <B>ccc</B>;
+
+<A HREF="../../window/visual-types.html#Visual">Visual</A> *XcmsVisualOfCCC(<B>ccc</B>)
+     XcmsCCC <B>ccc</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>ccc</B>
+<TD> Specifies the CCC.
+
+</TABLE>
+
+Both return the visual associated with the specified <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>.
+
+<A NAME="ScreenNumberOfCCC"></A>
+<A NAME="XcmsScreenNumberOfCCC"></A>
+<H2>ScreenNumberOfCCC, XcmsScreenNumberOfCCC</H2>
+
+<!.IN "ScreenNumberOfCCC" "" "@DEF@">
+<!.IN "XcmsScreenNumberOfCCC" "" "@DEF@">
+
+<CODE><PRE>
+ScreenNumberOfCCC(<B>ccc</B>)
+     XcmsCCC <B>ccc</B>;
+
+int XcmsScreenNumberOfCCC(<B>ccc</B>)
+     XcmsCCC <B>ccc</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>ccc</B>
+<TD> Specifies the CCC.
+
+</TABLE>
+
+Both return the number of the screen associated with the specified CCC.
+
+<A NAME="ScreenWhitePointOfCCC"></A>
+<A NAME="XcmsScreenWhitePointOfCCC"></A>
+<H2>ScreenWhitePointOfCCC, XcmsScreenWhitePointOfCCC</H2>
+
+<!.IN "ScreenWhitePointOfCCC" "" "@DEF@">
+<!.IN "XcmsScreenWhitePointOfCCC" "" "@DEF@">
+
+<CODE><PRE>
+ScreenWhitePointOfCCC(<B>ccc</B>)
+     XcmsCCC <B>ccc</B>;
+
+<A HREF="../structures.html#XcmsColor">XcmsColor</A> *XcmsScreenWhitePointOfCCC(<B>ccc</B>)
+     XcmsCCC <B>ccc</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>ccc</B>
+<TD> Specifies the CCC.
+
+</TABLE>
+
+Both return the white point of the screen associated with the specified <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>.
+
+<A NAME="ClientWhitePointOfCCC"></A>
+<A NAME="XcmsClientWhitePointOfCCC"></A>
+<H2>ClientWhitePointOfCCC, XcmsClientWhitePointOfCCC</H2>
+
+<!.IN "ClientWhitePointOfCCC" "" "@DEF@">
+<!.IN "XcmsClientWhitePointOfCCC" "" "@DEF@">
+
+<CODE><PRE>
+ClientWhitePointOfCCC(<B>ccc</B>)
+     XcmsCCC <B>ccc</B>;
+
+<A HREF="../structures.html#XcmsColor">XcmsColor</A> *XcmsClientWhitePointOfCCC(<B>ccc</B>)
+     XcmsCCC <B>ccc</B>;
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>ccc</B>
+<TD> Specifies the CCC.
+
+</TABLE>
+
+Both return the Client White Point of the specified CCC.
+
+<H5 ALIGN=right><I>Next: <A HREF="modifying-attributes.html">Modifying Attributes of a Color Conversion Context</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,156 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Display: opening (XOpenDisplay)</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>2.1. Opening the Display</H1>
+
+To open a connection to the X server that controls a display, use
+<B>XOpenDisplay()</B>.
+
+<H2>Syntax</H2>
+
+<!.IN "XOpenDisplay" "" "@DEF@">
+
+<PRE><CODE>
+Display *XOpenDisplay(<B>display_name</B>)
+      char *<B>display_name</B>;
+</CODE></PRE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+<TR><TD><B>display_name</B>
+<TD>
+Specifies the hardware display name, which determines the display
+and communications domain to be used.
+On a POSIX-conformant system, if the display_name is NULL, 
+it defaults to the value of the DISPLAY environment variable. 
+<!.IN "Environment" "DISPLAY">
+</TABLE>
+
+<H2>Description</H2>
+
+The encoding and interpretation of the display name is
+implementation dependent.
+Strings in the Host Portable Character Encoding are supported;
+support for other characters is implementation dependent.
+On POSIX-conformant systems,
+the display name or DISPLAY environment variable can be a string in the format:
+
+<P>
+<CODE><PRE><I>
+	hostname:number.screen_number
+</I></PRE></CODE>
+
+<P>
+<TABLE>
+
+<TR><TD> <B>hostname</B>
+<TD> Specifies the name of the host machine on which the display is physically
+attached.
+You follow the hostname with either a single colon (:) or a double colon (::).
+
+<TR><TD> <B>number</B>
+<TD> Specifies the number of the display server on that host machine.
+You may optionally follow this display number with a period (.).
+A single CPU can have more than one display.
+Multiple displays are usually numbered starting with zero.
+<!.IN "Screen">
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the screen to be used on that server.
+Multiple screens can be controlled by a single X server.
+The screen_number sets an internal variable that can be accessed by
+using the 
+<B><A HREF="display-macros.html#DefaultScreen">DefaultScreen()</A></B>
+macro or the 
+<B><A HREF="display-macros.html#DefaultScreen">XDefaultScreen()</A></B>
+function if you are using languages other than C (see "<A HREF="information.html#display">Display Macros</A>").
+</TABLE>
+
+<P>
+
+For example, the following would specify screen 1 of display 0 on the 
+machine named ``dual-headed'':
+
+<P>
+<BLOCKQUOTE>
+dual-headed:0.1
+</BLOCKQUOTE>
+
+<P>
+
+The
+<B>XOpenDisplay()</B>
+function returns a 
+<A HREF="#Display">Display</A> 
+structure that serves as the
+connection to the X server and that contains all the information
+about that X server.
+<B>XOpenDisplay()</B>
+connects your application to the X server through TCP 
+or DECnet communications protocols,
+or through some local inter-process communication protocol.
+<!.IN "Protocol" "TCP">
+<!.IN "Protocol" "DECnet">
+If the hostname is a host machine name and a single colon (:)
+separates the hostname and display number,
+<B>XOpenDisplay()</B>
+connects using TCP streams.
+If the hostname is not specified,
+Xlib uses whatever it believes is the fastest transport.
+If the hostname is a host machine name and a double colon (::)
+separates the hostname and display number,
+<B>XOpenDisplay()</B>
+connects using DECnet.
+A single X server can support any or all of these transport mechanisms
+simultaneously.
+A particular Xlib implementation can support many more of these transport
+mechanisms.
+
+<P>
+
+<!.IN "Display">
+<A NAME="Display"></A>
+If successful, 
+<B>XOpenDisplay()</B> 
+returns a pointer to a 
+<B>Display</B> 
+structure,
+which is defined in 
+<B>X11/Xlib.h</B>.
+If 
+<B>XOpenDisplay()</B> 
+does not succeed, it returns NULL.
+After a successful call to
+<B>XOpenDisplay()</B> 
+all of the screens in the display can be used by the client.
+The screen number specified in the display_name argument is returned 
+by the 
+<B><A HREF="display-macros.html#DefaultScreen">DefaultScreen()</A></B>
+macro (or the
+<B><A HREF="display-macros.html#DefaultScreen">XDefaultScreen()</A></B>
+function).
+You can access elements of the
+<B>Display</B>
+and
+<A HREF="display-macros.html">Screen</A>
+structures only by using the information macros or functions.
+For information about using macros and functions to obtain information from 
+the
+<B>Display</B> 
+structure,
+see <A HREF="information.html#display">Display Macros</A>.
+
+<P>
+
+X servers may implement various types of access control mechanisms
+(see "<A HREF="../window-and-session-manager/controlling-host-access/">Controlling Host Access</A>").
+
+<H5 ALIGN=right><I>Next: <A HREF="information.html">Obtaining Information about the Display, Image Formats, or Screens</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,118 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XStoreNamedColor</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XStoreNamedColor</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Color" "storing">
+<!.IN "Color" "naming">
+<!.IN "XStoreNamedColor" "" "@DEF@">
+
+<CODE><PRE>
+XStoreNamedColor(<B>display</B>, <B>colormap</B>, <B>color</B>, <B>pixel</B>, <B>flags</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="./#colormap">Colormap</A> <B>colormap</B>;
+      char *<B>color</B>;
+      unsigned long <B>pixel</B>;
+      int <B>flags</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>colormap</B>
+<TD> Specifies the colormap.
+
+<TR><TD> <B>color</B>
+<TD> Specifies the color name string (for example, red). 
+
+<TR><TD> <B>pixel</B>
+<TD> Specifies the entry in the colormap. 
+
+<TR><TD> <B>flags</B>
+<TD> Specifies which red, green, and blue components are set.
+
+</TABLE>
+
+<H2>Description</H2>
+ 
+The
+<B>XStoreNamedColor()</B>
+function looks up the named color with respect to the screen associated with
+the colormap and stores the result in the specified colormap.
+The pixel argument determines the entry in the colormap.
+The flags argument determines which of the red, green, and blue components 
+are set. 
+You can set this member to the
+bitwise inclusive OR of the bits 
+<B>DoRed</B>, 
+<B>DoGreen</B>, 
+and 
+<B>DoBlue</B>.
+If the color name is not in the Host Portable Character Encoding, 
+the result is implementation dependent.
+Use of uppercase or lowercase does not matter.
+If the specified pixel is not a valid index into the colormap, a
+<B>BadValue</B>
+error results.
+If the specified pixel either is unallocated or is allocated read-only, a
+<B>BadAccess</B>
+error results.
+
+<P>
+
+<B>XStoreNamedColor()</B>
+can generate
+<B>BadAccess</B>,
+<B>BadColor</B>,
+<B>BadName</B>,
+and 
+<B>BadValue</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAccess</B>
+<TD> A client attempted to free a color map entry that
+it did not already allocate.
+<TR><TD><B>BadAccess</B>
+<TD> A client attempted to store into a read-only color
+     map entry.
+
+<TR><TD><B>BadColor</B>
+<TD>  A value for a Colormap argument does not name a
+      defined Colormap.
+
+<TR><TD><B>BadName</B>
+<TD> A font or color of the specified name does not exist.
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocColor.html">XAllocColor()</A></B>,
+<B><A HREF="XCreateColormap.html">XCreateColormap()</A></B>,
+<B><A HREF="XQueryColor.html">XQueryColor()</A></B>,
+<B><A HREF="XStoreColor.html">XStoreColor()</A></B>,
+<B><A HREF="XStoreColors.html">XStoreColors()</A></B>,
+"<A HREF="modifying-and-querying-cells.html">Modifying and Querying Colormap Cells</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

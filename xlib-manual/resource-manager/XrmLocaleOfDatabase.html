@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmLocaleOfDatabase</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmLocaleOfDatabase</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XrmLocaleOfDatabase" "" "@DEF@">
+
+<CODE><PRE>
+char *XrmLocaleOfDatabase(<B>database</B>)
+      <B><A HREF="creating-and-storing-databases.html">XrmDatabase</A></B> <B>database</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>database</B>
+<TD> Specifies the resource database.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XrmLocaleOfDatabase()</B>
+function returns the name of the locale bound to the specified
+database, as a null-terminated string.
+The returned locale name string is owned by Xlib and should not be
+modified or freed by the client.
+Xlib is not permitted to free the string until the database is destroyed.
+Until the string is freed,
+it will not be modified by Xlib.
+
+<H2>See also</H2>
+
+<B><A HREF="XrmDestroyDatabase.html">XrmDestroyDatabase()</A></B>,
+<B><A HREF="XrmGetDatabase.html">XrmGetDatabase()</A></B>,
+<B><A HREF="XrmGetFileDatabase.html">XrmGetFileDatabase()</A></B>,
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>,
+<B><A HREF="XrmGetStringDatabase.html">XrmGetStringDatabase()</A></B>,
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmPutFileDatabase.html">XrmPutFileDatabase()</A></B>,
+<B><A HREF="XrmPutResource.html">XrmPutResource()</A></B>,
+<B><A HREF="XrmSetDataBase.html">XrmSetDataBase()</A></B>,
+"<A HREF="creating-and-storing-databases.html">Creating and Storing Databases</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

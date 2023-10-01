@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Keyboard Grabbing</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>12.2 Keyboard Grabbing</H1>
+
+Xlib provides functions that you can use to grab or ungrab the keyboard
+as well as allow events.
+
+<P>
+
+For many functions in this section,
+you pass keymask bits.
+The valid keymask bits are:
+<B>ShiftMask</B>,
+<B>LockMask</B>,
+<B>ControlMask</B>,
+<B>Mod1Mask</B>,
+<B>Mod2Mask</B>,
+<B>Mod3Mask</B>,
+<B>Mod4Mask</B>,
+and
+<B>Mod5Mask</B>.
+
+<P>
+
+To grab the keyboard, use
+<B><A HREF="XGrabKeyboard.html">XGrabKeyboard()</A></B>.
+
+<P>
+
+To ungrab the keyboard, use
+<B><A HREF="XUngrabKeyboard.html">XUngrabKeyboard()</A></B>.
+
+<P>
+
+To passively grab a single key of the keyboard, use
+<B><A HREF="XGrabKey.html">XGrabKey()</A></B>.
+
+<P>
+
+To ungrab a key, use
+<B><A HREF="XUngrabKey.html">XUngrabKey()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="resuming-event-processing.html">Resuming Event Processing</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

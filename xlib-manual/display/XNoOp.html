@@ -1,0 +1,44 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XNoOp</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>2.3. Generating a NoOperation Protocol Request</H1>
+
+To execute a 
+<B><A HREF="../appendix/a.html#NoOperation">NoOperation</A></B>
+protocol request, use
+<B>XNoOp()</B>.
+<!.IN "XNoOp" "" "@DEF@">
+
+<H2>Syntax</H2>
+
+<CODE><PRE>
+XNoOp(<B>display</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XNoOp()</B>
+function sends a 
+<B><A HREF="../appendix/a.html#NoOperation">NoOperation</A></B>
+protocol request to the X server,
+thereby exercising the connection.
+
+<H5 ALIGN=right><I>Next: <A HREF="XFree.html">Freeing Client-Created Data</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

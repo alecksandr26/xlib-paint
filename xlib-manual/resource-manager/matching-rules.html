@@ -1,0 +1,95 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Resource Manager Matching Rules</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>15.2 Resource Manager Matching Rules</H1>
+
+The algorithm for determining which resource database entry
+matches a given query is the heart of the resource manager.
+All queries must fully specify the name and class of the desired resource
+(use of the characters ``*'' and ``?'' are not permitted).
+The library supports up to 100 components in a full name or class.
+Resources are stored in the database with only partially specified
+names and classes, using pattern matching constructs.
+An asterisk (*) is a loose binding and is used to represent any number
+of intervening components, including none.
+A period (.) is a tight binding and is used to separate immediately
+adjacent components.
+A question mark (?) is used to match any single component name or class.
+A database entry cannot end in a loose binding;
+the final component (which cannot be the character ``?'') must be specified.
+The lookup algorithm searches the database for the entry that most
+closely matches (is most specific for) the full name and class being queried.
+When more than one database entry matches the full name and class,
+precedence rules are used to select just one.
+
+<P>
+
+The full name and class are scanned from left to right (from highest
+level in the hierarchy to lowest), one component at a time.
+At each level, the corresponding component and/or binding of each
+matching entry is determined, and these matching components and
+bindings are compared according to precedence rules.
+Each of the rules is applied at each level before moving to the next level,
+until a rule selects a single entry over all others.
+The rules, in order of precedence, are:
+
+<OL>
+
+<P><LI> An entry that contains a matching component (whether name, class,
+or the character ``?'')
+takes precedence over entries that elide the level (that is, entries
+that match the level in a loose binding).
+
+<P><LI>An entry with a matching name takes precedence over both
+entries with a matching class and entries that match using the character ``?''.
+An entry with a matching class takes precedence over
+entries that match using the character ``?''.
+
+<P><LI>An entry preceded by a tight binding takes precedence over entries
+preceded by a loose binding.
+</OL>
+
+<P>
+
+To illustrate these rules,
+consider the following resource database entries:
+
+<BLOCKQUOTE>
+<PRE><CODE>
+xmh*Paned*activeForeground:		red	<I>(entry A)</I>
+*incorporate.Foreground:		blue	<I>(entry B)</I>
+xmh.toc*Command*activeForeground:	green	<I>(entry C)</I>
+xmh.toc*?.Foreground:			white	<I>(entry D)</I>
+xmh.toc*Command.activeForeground:	black	<I>(entry E)</I>
+</PRE></CODE>
+</BLOCKQUOTE>
+
+<P>
+
+Consider a query for the resource:
+
+<P>
+
+<BLOCKQUOTE>
+<PRE><CODE>
+xmh.toc.messagefunctions.incorporate.activeForeground	<I>(name)</I>
+Xmh.Paned.Box.Command.Foreground			<I>(class)</I>
+</PRE></CODE>
+</BLOCKQUOTE>
+
+<P>
+
+At the first level (xmh, Xmh), rule 1 eliminates entry B.
+At the second level (toc, Paned), rule 2 eliminates entry A.
+At the third level (messagefunctions, Box), no entries are eliminated.
+At the fourth level (incorporate, Command), rule 2 eliminates entry D.
+At the fifth level (activeForeground, Foreground), rule 3 eliminates entry C.
+
+<H5 ALIGN=right><I>Next: <A HREF="quarks.html">Quarks</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

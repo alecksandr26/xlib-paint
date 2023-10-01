@@ -1,0 +1,83 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Extensions: XESetErrorString</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XESetErrorString</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XESetErrorString" "" "@DEF@">
+
+<CODE><PRE>
+char  *(*XESetErrorString(<B>display</B>, <B>extension</B>, <B>proc</B>))()
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      int <B>extension</B>;
+      char *(*<B>proc</B>)();
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>extension</B>
+<TD> Specifies the extension number.
+
+<TR><TD> <B>proc</B>
+<TD> Specifies the procedure to call to obtain an error string.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The 
+<B><A HREF="../../event-handling/protocol-errors/XGetErrorText.html">XGetErrorText()</A></B>
+function returns a string to the user for an error.
+<B>XESetErrorString()</B>
+allows you to define a procedure to be called that
+should return a pointer to the error message.
+The following is an example.
+
+<P>
+
+<PRE><CODE>
+(*<B>proc</B>)(<B>display</B>, <B>code</B>, <B>codes</B>, <B>buffer</B>, <B>nbytes</B>)
+	<A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+	int <B>code</B>;
+	<A HREF="hooking-into-xlib.html#XExtCodes">XExtCodes</A> *<B>codes</B>;
+	char *<B>buffer</B>;
+	int <B>nbytes</B>;
+</PRE></CODE>
+
+<P>
+
+Your procedure is called with the error code for every error detected.
+You should copy nbytes of a null-terminated string containing the
+error message into buffer.
+
+<H2>See also</H2>
+
+<B><A HREF="XESetBeforeFlush.html">XESetBeforeFlush()</A></B>,
+<B><A HREF="XESetCloseDisplay.html">XESetCloseDisplay()</A></B>,
+<B><A HREF="XESetCopyGC.html">XESetCopyGC()</A></B>,
+<B><A HREF="XESetCreateFont.html">XESetCreateFont()</A></B>,
+<B><A HREF="XESetCreateGC.html">XESetCreateGC()</A></B>,
+<B><A HREF="XESetError.html">XESetError()</A></B>,
+<B><A HREF="XESetEventToWire.html">XESetEventToWire()</A></B>,
+<B><A HREF="XESetFlushGC.html">XESetFlushGC()</A></B>,
+<B><A HREF="XESetFreeFont.html">XESetFreeFont()</A></B>,
+<B><A HREF="XESetFreeGC.html">XESetFreeGC()</A></B>,
+<B><A HREF="XESetPrintErrorValues.html">XESetPrintErrorValues()</A></B>,
+<B><A HREF="XESetWireToError.html">XESetWireToError()</A></B>,
+<B><A HREF="XESetWireToEvent.html">XESetWireToEvent()</A></B>,
+<B><A HREF="_XSetLastRequestRead.html">_XSetLastRequestRead()</A></B>,
+"<A HREF="hooks-into-the-library.html">Hooks into the Library</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

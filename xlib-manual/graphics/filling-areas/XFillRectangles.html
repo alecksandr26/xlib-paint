@@ -1,0 +1,140 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XFillRectangles</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XFillRectangles</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XFillRectangles" "" "@DEF@">
+
+<CODE><PRE>
+XFillRectangles(<B>display</B>, <B>d</B>, <B>gc</B>, <B>rectangles</B>, <B>nrectangles</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Drawable <B>d</B>;
+      <A HREF="../../GC/manipulating.html">GC</A> <B>gc</B>;
+      <A HREF="../drawing/#XRectangle">XRectangle</A> *<B>rectangles</B>;
+      int <B>nrectangles</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>d</B>
+<TD> Specifies the drawable. 
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>rectangles</B>
+<TD> Specifies an array of rectangles.
+
+<TR><TD> <B>nrectangles</B>
+<TD> Specifies the number of rectangles in the array.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XFillRectangles()</B>
+function fills rectangles
+as if a four-point 
+<B>FillPolygon</B>
+protocol request were specified for each rectangle:
+
+<P>
+
+<BLOCKQUOTE>
+<I>[x,y] [x+width,y] [x+width,y+height] [x,y+height]</I>
+</BLOCKQUOTE>
+
+<P>
+
+The function uses the x and y coordinates,
+width and height dimensions, and GC you specify.
+
+<P>
+
+<B>XFillRectangles()</B>
+fills the rectangles in the order listed in the array.  
+For any given rectangle,
+<B>XFillRectangles()</B>
+does not draw a pixel more than once.  
+If rectangles intersect, the intersecting pixels are
+drawn multiple times.
+
+<P>
+
+The function uses these GC components: 
+<A HREF="../../GC/manipulating.html#function">function</A>,
+<A HREF="../../GC/manipulating.html#plane-mask">plane-mask</A>,
+<A HREF="../../GC/manipulating.html#fill-style">fill-style</A>,
+<A HREF="../../GC/manipulating.html#subwindow-mode">subwindow-mode</A>,
+<A HREF="../../GC/manipulating.html#clip-mask">clip-x-origin</A>,
+<A HREF="../../GC/manipulating.html#clip-mask">clip-y-origin</A>,
+and
+<A HREF="../../GC/manipulating.html#clip-mask">clip-mask</A>.
+
+They also use these GC mode-dependent components: 
+<A HREF="../../GC/manipulating.html#foreground">foreground</A>,
+<A HREF="../../GC/manipulating.html#background">background</A>,
+<A HREF="../../GC/manipulating.html#tile">tile</A>,
+<A HREF="../../GC/manipulating.html#stipple">stipple</A>,
+<A HREF="../../GC/manipulating.html#tile">tile-stipple-x-origin</A>,
+and
+<A HREF="../../GC/manipulating.html#tile">tile-stipple-y-origin</A>.
+
+<P>
+
+<B>XFillRectangles()</B>
+can generate
+<B>BadDrawable</B> ,
+<B>BadGC</B> ,
+and
+<B>BadMatch</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../GContext.html">GContext</A></B> 
+	argument does not name a defined 
+	<B><A HREF="../GContext.html">GContext</A></B>.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../drawing/XDrawArc.html">XDrawArc()</A></B>,
+<B><A HREF="../drawing/XDrawPoint.html">XDrawPoint()</A></B>,
+<B><A HREF="../drawing/XDrawRectangles.html">XDrawRectangles()</A></B>,
+<B><A HREF="XFillArc.html">XFillArc()</A></B>,
+<B><A HREF="XFillArcs.html">XFillArcs()</A></B>,
+<B><A HREF="XFillPolygon.html">XFillPolygon()</A></B>,
+<B><A HREF="XFillRectangles.html">XFillRectangles()</A></B>,
+"<A HREF="rectangles.html">Filling Single and Multiple Rectangles</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

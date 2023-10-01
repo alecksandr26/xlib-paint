@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetFontProperty</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetFontProperty</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetFontProperty" "" "@DEF@">
+
+<CODE><PRE>
+Bool XGetFontProperty(<B>font_struct</B>, <B>atom</B>, <B>value_return</B>)
+      <A HREF="./#XFontStruct">XFontStruct</A> *<B>font_struct</B>;
+      <A HREF="../../window-information/properties-and-atoms.html">Atom</A> <B>atom</B>;
+      unsigned long *<B>value_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>font_struct</B>
+<TD> Specifies the storage associated with the font.
+
+<TR><TD> <B>atom</B>
+<TD> Specifies the atom for the property name you want returned.
+
+<TR><TD> <B>value_return</B>
+<TD> Returns the value of the font property.
+
+</TABLE>
+
+<H2>Description</H2>
+
+Given the atom for that property,
+the
+<B>XGetFontProperty()</B>
+function returns the value of the specified font property. 
+<B>XGetFontProperty()</B>
+also returns 
+<B>False</B>
+if the property was not defined or 
+<B>True</B>
+if it was defined.
+A set of predefined atoms exists for font properties,
+which can be found in
+<B><TT>X11/Xatom.h .</TT></B>
+This set contains the standard properties associated with
+a font.
+Although it is not guaranteed,
+it is likely that the predefined font properties will be present.
+
+<H2>See also</H2>
+
+<B><A HREF="../../GC/XCreateGC.html">XCreateGC()</A></B>,
+<B><A HREF="XFreeFont.html">XFreeFont()</A></B>,
+<B><A HREF="XListFonts.html">XListFonts()</A></B>,
+<B><A HREF="XLoadFont.html">XLoadFont()</A></B>,
+<B><A HREF="XLoadQueryFont.html">XLoadQueryFont()</A></B>,
+<B><A HREF="XQueryFont.html">XQueryFont()</A></B>,
+<B><A HREF="../../window-and-session-manager/XSetFontPath.html">XSetFontPath()</A></B>,
+<B><A HREF="XUnloadFont.html">XUnloadFont()</A></B>,
+"<A HREF="fonts.html">Loading and Freeing Fonts</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

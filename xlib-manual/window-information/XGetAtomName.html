@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetAtomName</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetAtomName</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Atom" "getting name">
+<!.IN "XGetAtomName" "" "@DEF@">
+
+<CODE><PRE>
+char *XGetAtomName(<B>display</B>, <B>atom</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Atom <B>atom</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>atom</B>
+<TD> Specifies the atom for the property name you want returned.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetAtomName()</B>
+function returns the name associated with the specified atom.
+If the data returned by the server is in the Latin Portable Character Encoding,
+then the returned string is in the Host Portable Character Encoding.
+Otherwise, the result is implementation dependent.
+To free the resulting string,
+call
+<B><A HREF="../display/XFree.html">XFree()</A></B>.
+
+<P>
+
+<B>XGetAtomName()</B>
+can generate a
+<B>BadAtom</B>
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadAtom</B>
+<TD> A value for an Atom argument does not name a
+     defined Atom.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XGetAtomNames.html">XGetAtomNames()</A></B>,
+<B><A HREF="XGetWindowProperty.html">XGetWindowProperty()</A></B>,
+<B><A HREF="XInternAtom.html">XInternAtom()</A></B>,
+<B><A HREF="XInternAtoms.html">XInternAtoms()</A></B>,
+"<A HREF="properties-and-atoms.html">Properties and Atoms</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

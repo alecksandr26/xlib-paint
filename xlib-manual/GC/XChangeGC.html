@@ -1,0 +1,132 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XChangeGC</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XChangeGC</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XChangeGC" "" "@DEF@">
+
+<CODE><PRE>
+XChangeGC(<B>display</B>, <B>gc</B>, <B>valuemask</B>, <B>values</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="manipulating.html">GC</A> <B>gc</B>;
+      unsigned long <B>valuemask</B>;
+      <A HREF="manipulating.html#XGCValues">XGCValues</A> *<B>values</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>valuemask</B>
+<TD> Specifies which components in the GC are to be changed using information in the specified values structure. 
+This argument is the bitwise inclusive OR of zero or more of the valid
+GC component mask bits.
+
+<TR><TD> <B>values</B>
+<TD> Specifies any values as specified by the valuemask.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XChangeGC()</B>
+function changes the components specified by valuemask for
+the specified GC.
+The values argument contains the values to be set.
+The values and restrictions are the same as for 
+<B><A HREF="XCreateGC.html">XCreateGC()</A></B>.
+Changing the clip-mask overrides any previous 
+<B><A HREF="convenience-functions/XSetClipRectangles.html">XSetClipRectangles()</A></B>
+request on the context. 
+Changing the dash-offset or dash-list
+overrides any previous 
+<B><A HREF="convenience-functions/XSetDashes.html">XSetDashes()</A></B>
+request on the context.
+The order in which components are verified and altered is server-dependent.
+If an error is generated, a subset of the components may have been altered.
+
+<P>
+
+<B>XChangeGC()</B>
+can generate
+<B>BadAlloc</B> ,
+<B>BadFont</B> ,
+<B>BadGC</B> ,
+<B>BadMatch</B> ,
+<B>BadPixmap</B> ,
+and
+<B>BadValue</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadFont</B>
+<TD>A value for a font argument does not name a defined font (or, in some cases, 
+	<B><A HREF="../my-own/gcontext.html">GContext</A></B>).
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../my-own/gcontext.html">GContext</A></B>
+	argument does not name a defined 
+	<B><A HREF="../my-own/gcontext.html">GContext</A></B>.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+      
+<TR><TD><B>BadPixmap</B>
+<TD> A value for a Pixmap argument does not name a
+     defined Pixmap.
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../display/display-macros.html#AllPlanes">AllPlanes()</A></B>,
+<B><A HREF="../graphics/XCopyArea.html">XCopyArea()</A></B>,
+<B><A HREF="XCopyGC.html">XCopyGC()</A></B>, 
+<B><A HREF="XCreateGC.html">XCreateGC()</A></B>,
+<B><A HREF="../utilities/regions/XCreateRegion.html">XCreateRegion()</A></B>,
+<B><A HREF="../graphics/drawing/XDrawArc.html">XDrawArc()</A></B>,
+<B><A HREF="../graphics/drawing/XDrawLine.html">XDrawLine()</A></B>,
+<B><A HREF="../graphics/drawing/XDrawRectangle.html">XDrawRectangle()</A></B>,
+<B><A HREF="../graphics/drawing-text/XDrawText.html">XDrawText()</A></B>,
+<B><A HREF="../graphics/filling-areas/XFillRectangle.html">XFillRectangle()</A></B>,
+<B><A HREF="XFreeGC.html">XFreeGC()</A></B>, 
+<B><A HREF="XGContextFromGC.html">XGContextFromGC()</A></B>,
+<B><A HREF="XGetGCValues.html">XGetGCValues()</A></B>, 
+<B><A HREF="convenience-functions/XQueryBestSize.html">XQueryBestSize()</A></B>,
+<B><A HREF="convenience-functions/XSetArcMode.html">XSetArcMode()</A></B>,
+<B><A HREF="convenience-functions/XSetClipOrigin.html">XSetClipOrigin()</A></B>,
+"<A HREF="manipulating.html">Manipulating Graphics Context/State</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

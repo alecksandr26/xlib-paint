@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Changing Window Attributes</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>3.9 Changing Window Attributes</H1>
+
+Xlib provides functions that you can use to set window attributes.
+<B><A HREF="XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>
+is the more general function that allows you to set one or more window
+attributes provided by the
+<A HREF="attributes/#XSetWindowAttributes">XSetWindowAttributes</A>
+structure.
+The other functions described in this section allow you to set one specific
+window attribute, such as a window's background.
+
+<P>
+
+To change one or more attributes for a given window, use
+<B><A HREF="XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>.
+
+<P>
+
+To set the background of a window to a given pixel, use 
+<B><A HREF="XSetWindowBackground.html">XSetWindowBackground()</A></B>.
+
+<P>
+
+To set the background of a window to a given pixmap, use 
+<B><A HREF="XSetWindowBackgroundPixmap.html">XSetWindowBackgroundPixmap()</A></B>.
+
+<P>
+
+To change and repaint a window's border to a given pixel, use 
+<B><A HREF="XSetWindowBorder.html">XSetWindowBorder()</A></B>.
+
+<P>
+
+To change and repaint the border tile of a given window, use 
+<B><A HREF="XSetWindowBorderPixmap.html">XSetWindowBorderPixmap()</A></B>.
+
+<P>
+
+To set the colormap of a given window, use
+<B><A HREF="XSetWindowColormap.html">XSetWindowColormap()</A></B>.
+
+<P>
+
+To define which cursor will be used in a window, use
+<B><A HREF="XDefineCursor.html">XDefineCursor()</A></B>.
+
+<P>
+
+To undefine the cursor in a given window, use
+<B><A HREF="XUndefineCursor.html">XUndefineCursor()</A></B>.
+
+<H5 ALIGN=right><I>Next Chapter: <A HREF="../window-information/">Window Information Functions</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

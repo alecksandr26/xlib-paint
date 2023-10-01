@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Keyboard Utility Functions</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>16.1 Keyboard Utility Functions</H1>
+
+This section discusses mapping between <A HREF="../../input/keyboard-encoding.html">KeyCodes</A> and
+<A HREF="../../input/keyboard-encoding.html#KeySym">KeySyms</A>,
+classifying <A HREF="../../input/keyboard-encoding.html#KeySym">KeySyms</A>, and mapping between 
+<A HREF="../../input/keyboard-encoding.html#KeySym">KeySyms</A> and string names.
+The first three functions in this section operate on a cached copy of the
+server keyboard mapping.
+The first four <A HREF="../../input/keyboard-encoding.html#KeySym">KeySyms</A> for each <A HREF="../../input/keyboard-encoding.html">KeyCode</A>
+are modified according to the rules given in "<A HREF="../../input/keyboard-encoding.html">Keyboard Encoding</A>".
+To obtain the untransformed KeySyms defined for a key,
+use the functions described in section "<A HREF="../../input/keyboard-encoding.html">Keyboard Encoding</A>".
+
+<P>
+
+To obtain a <A HREF="../../input/keyboard-encoding.html#KeySym">KeySym</A> for the <A HREF="../../input/keyboard-encoding.html">KeyCode</A> of an event, use
+<B><A HREF="XLookupKeysym.html">XLookupKeysym()</A></B>.
+
+<P>
+
+To obtain a <A HREF="../../input/keyboard-encoding.html#KeySym">KeySym</A>
+for a specific 
+<A HREF="../../input/keyboard-encoding.html">KeyCode</A>,
+use
+<B><A HREF="XKeycodeToKeysym.html">XKeycodeToKeysym()</A></B>.
+
+<P>
+
+To obtain a 
+<A HREF="../../input/keyboard-encoding.html">KeyCode</A>
+for a key having a specific 
+<A HREF="../../input/keyboard-encoding.html#KeySym">KeySym</A>,
+use
+<B><A HREF="XKeysymToKeycode.html">XKeysymToKeycode()</A></B>.
+
+<P>
+
+The mapping between KeyCodes and KeySyms is cached internal to Xlib.
+When this information is changed at the server, an Xlib function must
+be called to refresh the cache.
+To refresh the stored modifier and keymap information, use
+<B><A HREF="XRefreshKeyboardMapping.html">XRefreshKeyboardMapping()</A></B>.
+
+<P>
+
+To obtain the uppercase and lowercase forms of a KeySym, us
+<B><A HREF="XConvertCase.html">XConvertCase()</A></B>.
+
+<P>
+
+<A HREF="../../input/keyboard-encoding.html#KeySym">KeySyms</A> have string names as well as numeric codes.
+To convert the name of the 
+<A HREF="../../input/keyboard-encoding.html#KeySym">KeySym</A> to the KeySym code, use
+<B><A HREF="XStringToKeysym.html">XStringToKeysym()</A></B>.
+
+<P>
+
+To convert a KeySym code to the name of the <A HREF="../../input/keyboard-encoding.html#KeySym">KeySym</A>, use
+<B><A HREF="XKeysymToString.html">XKeysymToString()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="keysym-classification.html">KeySym Classification Macros</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

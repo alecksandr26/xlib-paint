@@ -1,32 +1,30 @@
 /*
   This XOpenDisplay allocates a few chunks that are not freeded on XCloseDisplay
- */
+*/
 
 #include <X11/Xlib.h>
-#include <err.h>
+#include <unittest.h>
 
 #include "../include/colors.h"
 #include "../include/window.h"
 
-Window win;
-
-int main(void)
-{
-	dp = XOpenDisplay(NULL); /* Open the defualt dispaly */
-	if (dp == NULL) errx(1, "The display should be open can't be null");
+TESTCASE(TestCreateWindow) {
+	/* Initialize the window */
+	Window win = 0;
 	
+	/* Open the defualt dispaly */
+	dp = XOpenDisplay(NULL);
+
 	src = DefaultScreen(dp);
 	root = RootWindow(dp, src);
 	vis = DefaultVisual(dp, src);
 	
-	win = create_window(0, 0, 500, 500, "window");
-	
-	destroy_window(win);
+	TEST(CreateWindow) {
+		win = create_window(0, 0, 500, 500, "window");
+		ASSERT(win != 0, "Failed creating the window");
+		destroy_window(win);
+	}
 	
 	XCloseDisplay(dp);
-	return 0;
-}
-
-
-
+} ENDTESTCASE
 

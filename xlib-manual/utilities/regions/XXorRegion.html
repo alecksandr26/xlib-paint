@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XXorRegion</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XXorRegion</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XXorRegion" "" "@DEF@">
+
+<CODE><PRE>
+XXorRegion(<B>sra</B>, <B>srb</B>, <B>dr_return</B>)
+      <A HREF="./">Region</A> <B>sra</B>, <B>srb</B>, <B>dr_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>sra</B><BR>
+	<B>srb</B>
+<TD> Specify the two regions with which you want to perform the computation.
+
+<TR><TD> <B>dr_return</B>
+<TD> Returns the result of the computation.
+
+</TABLE>
+
+<H2>Description</H2>
+
+Calculate the difference between the union and intersection 
+of two regions.
+
+<H2>See also</H2>
+
+<B><A HREF="XCreateRegion.html">XCreateRegion()</A></B>,
+<B><A HREF="../../graphics/drawing/XDrawRectangle.html">XDrawRectangle()</A></B>,
+<B><A HREF="XEmptyRegion.html">XEmptyRegion()</A></B>,
+<B><A HREF="XIntersectRegion.html">XIntersectRegion()</A></B>,
+<B><A HREF="XOffsetRegion.html">XOffsetRegion()</A></B>,
+<B><A HREF="XShrinkRegion.html">XShrinkRegion()</A></B>,
+<B><A HREF="XSubtractRegion.html">XSubtractRegion()</A></B>,
+<B><A HREF="XUnionRectWithRegion.html">XUnionRectWithRegion()</A></B>,
+<B><A HREF="XUnionRegion.html">XUnionRegion()</A></B>,
+"<A HREF="computing.html">Computing with Regions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

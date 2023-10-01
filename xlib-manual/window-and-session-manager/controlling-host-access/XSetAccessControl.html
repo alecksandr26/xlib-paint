@@ -1,0 +1,84 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetAccessControl</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetAccessControl</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XSetAccessControl" "" "@DEF@">
+
+<CODE><PRE>
+XSetAccessControl(<B>display</B>, <B>mode</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      int <B>mode</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>mode</B>
+<TD> Specifies the mode.
+You can pass
+<B>EnableAccess</B>
+or
+<B>DisableAccess</B> .
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XSetAccessControl()</B>
+function either enables or disables the use of the access control list 
+at each connection setup.
+
+<P>
+
+<B>XSetAccessControl()</B>
+can generate
+<B>BadAccess</B>
+and
+<B>BadValue</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAccess</B>
+<TD> A client attempted to free a color map entry that
+it did not already allocate.
+<TR><TD><B>BadAccess</B>
+<TD> A client attempted to store into a read-only color
+     map entry.
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAddHost.html">XAddHost()</A></B>,
+<B><A HREF="XAddHosts.html">XAddHosts()</A></B>,
+<B><A HREF="XDisableAccessControl.html">XDisableAccessControl()</A></B>,
+<B><A HREF="XEnableAccessControl.html">XEnableAccessControl()</A></B>,
+<B><A HREF="../../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XListHosts.html">XListHosts()</A></B>,
+<B><A HREF="XRemoveHost.html">XRemoveHost()</A></B>,
+<B><A HREF="XRemoveHosts.html">XRemoveHosts()</A></B>,
+"<A HREF="access.html">Changing, Enabling, or Disabling Access Control</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

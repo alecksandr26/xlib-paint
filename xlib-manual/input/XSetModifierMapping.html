@@ -1,0 +1,132 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetModifierMapping</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetModifierMapping</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XSetModifierMapping" "" "@DEF@">
+
+<CODE><PRE>
+int XSetModifierMapping(<B>display</B>, <B>modmap</B>)
+        <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+        <A HREF="keyboard-encoding.html#XModifierKeymap">XModifierKeymap</A> *<B>modmap</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>modmap</B>
+<TD> Specifies the 
+<A HREF="keyboard-encoding.html#XModifierKeymap">XModifierKeymap</A>
+structure.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XSetModifierMapping()</B>
+function specifies the KeyCodes of the keys (if any) that are to be used 
+as modifiers.
+If it succeeds,
+the X server generates a
+<B><A HREF="../events/window-state-change/mapping.html">MappingNotify</A></B>
+event, and
+<B>XSetModifierMapping()</B>
+returns
+<B>MappingSuccess</B>.
+X permits at most eight modifier keys.
+If more than eight are specified in the
+<A HREF="keyboard-encoding.html#XModifierKeymap">XModifierKeymap</A>
+structure, a
+<B>BadLength</B>
+error results.
+
+<P>
+
+The modifiermap member of the 
+<A HREF="keyboard-encoding.html#XModifierKeymap">XModifierKeymap</A>
+structure contains eight sets of max_keypermod KeyCodes, 
+one for each modifier in the order 
+<B>Shift</B>, 
+<B>Lock</B>, 
+<B>Control</B>, 
+<B>Mod1</B>, 
+<B>Mod2</B>, 
+<B>Mod3</B>, 
+<B>Mod4</B>, 
+and 
+<B>Mod5</B>.
+Only nonzero KeyCodes have meaning in each set, 
+and zero KeyCodes are ignored.
+In addition, all of the nonzero KeyCodes must be in the range specified by 
+min_keycode and max_keycode in the 
+<A HREF="../display/opening.html#Display">Display</A> 
+structure,
+or a 
+<B>BadValue</B>
+error results.
+
+<P>
+
+An X server can impose restrictions on how modifiers can be changed, 
+for example,
+if certain keys do not generate up transitions in hardware,
+if auto-repeat cannot be disabled on certain keys,
+or if multiple modifier keys are not supported.  
+If some such restriction is violated, 
+the status reply is
+<B>MappingFailed</B>,
+and none of the modifiers are changed.
+If the new KeyCodes specified for a modifier differ from those
+currently defined and any (current or new) keys for that modifier are
+in the logically down state, 
+<B>XSetModifierMapping()</B>
+returns
+<B>MappingBusy</B>, 
+and none of the modifiers is changed.
+
+<P>
+
+<B>XSetModifierMapping()</B>
+can generate
+<B>BadAlloc</B>
+and 
+<B>BadValue</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeKeyboardMapping.html">XChangeKeyboardMapping()</A></B>,
+<B><A HREF="XDeleteModifiermapEntry.html">XDeleteModifiermapEntry()</A></B>,
+<B><A HREF="XDisplayKeycodes.html">XDisplayKeycodes()</A></B>,
+<B><A HREF="../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XFreeModifiermap.html">XFreeModifiermap()</A></B>,
+<B><A HREF="XGetKeyboardMapping.html">XGetKeyboardMapping()</A></B>,
+<B><A HREF="XGetModifierMapping.html">XGetModifierMapping()</A></B>,
+<B><A HREF="XInsertModifiermapEntry.html">XInsertModifiermapEntry()</A></B>,
+<B><A HREF="XNewModifiermap.html">XNewModifiermap()</A></B>,
+<B><A HREF="XSetPointerMapping.html">XSetPointerMapping()</A></B>,
+"<A HREF="keyboard-encoding.html">Keyboard Encoding</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

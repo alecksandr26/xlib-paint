@@ -1,0 +1,48 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Selecting Events Using a Window or Event Mask</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>11.4.3 Selecting Events Using a Window or Event Mask</H1>
+
+The functions discussed in this section let you select events by window 
+or event types, allowing you to process events out of order.
+
+<P>
+
+To remove the next event that matches both a window and an event mask, use
+<B><A HREF="XWindowEvent.html">XWindowEvent()</A></B>.
+
+<P>
+
+To remove the next event that matches both a window and an event mask (if any),
+use
+<B><A HREF="XCheckWindowEvent.html">XCheckWindowEvent()</A></B>.
+
+<P>
+
+To remove the next event that matches an event mask, use
+<B><A HREF="XMaskEvent.html">XMaskEvent()</A></B>.
+
+<P>
+
+To return and remove the next event that matches an event mask (if any), use
+<B><A HREF="XCheckMaskEvent.html">XCheckMaskEvent()</A></B>.
+
+<P>
+
+To return and remove the next event in the queue that matches an event type, use
+<B><A HREF="XCheckTypedEvent.html">XCheckTypedEvent()</A></B>.
+
+<P>
+
+To return and remove the next event in the queue that matches an event type 
+and a window, use
+<B><A HREF="XCheckTypedWindowEvent.html">XCheckTypedWindowEvent()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="../putting-back.html">Putting an Event Back into the Queue</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

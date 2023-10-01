@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XInsertModifiermapEntry</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XInsertModifiermapEntry</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XInsertModifiermapEntry" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="keyboard-encoding.html#XModifierKeymap">XModifierKeymap</A> *XInsertModifiermapEntry(<B>modmap</B>, <B>keycode_entry</B>, <B>modifier</B>)
+     <A HREF="keyboard-encoding.html#XModifierKeymap">XModifierKeymap</A> *<B>modmap</B>;
+     KeyCode <B>keycode_entry</B>;
+     int <B>modifier</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>modmap</B>
+<TD> Specifies the 
+<A HREF="keyboard-encoding.html#XModifierKeymap">XModifierKeymap</A>
+structure.
+
+<TR><TD> <B>keycode_entry</B>
+<TD> Specifies the KeyCode. 
+
+<TR><TD> <B>modifier</B>
+<TD> Specifies the modifier.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XInsertModifiermapEntry()</B>
+function adds the specified KeyCode to the set that controls the specified
+modifier and returns the resulting
+<A HREF="keyboard-encoding.html#XModifierKeymap">XModifierKeymap</A>
+structure (expanded as needed).
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeKeyboardMapping.html">XChangeKeyboardMapping()</A></B>,
+<B><A HREF="XDeleteModifiermapEntry.html">XDeleteModifiermapEntry()</A></B>,
+<B><A HREF="XDisplayKeycodes.html">XDisplayKeycodes()</A></B>,
+<B><A HREF="../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XFreeModifiermap.html">XFreeModifiermap()</A></B>,
+<B><A HREF="XGetKeyboardMapping.html">XGetKeyboardMapping()</A></B>,
+<B><A HREF="XGetModifierMapping.html">XGetModifierMapping()</A></B>,
+<B><A HREF="XNewModifiermap.html">XNewModifiermap()</A></B>,
+<B><A HREF="XSetModifierMapping.html">XSetModifierMapping()</A></B>,
+<B><A HREF="XSetPointerMapping.html">XSetPointerMapping()</A></B>,
+"<A HREF="keyboard-encoding.html">Keyboard Encoding</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

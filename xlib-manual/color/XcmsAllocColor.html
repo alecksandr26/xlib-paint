@@ -1,0 +1,100 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XcmsAllocColor</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XcmsAllocColor</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Allocation" "read-only colormap cells">
+<!.IN "Read-only colormap cells" "allocating">
+<!.IN "Color" "allocation">
+<!.IN "XcmsAllocColor" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="conversion-contexts-and-gamut-mapping.html#cmsStatus">Status</A></B> XcmsAllocColor(<B>display</B>, <B>colormap</B>, <B>color_in_out</B>, <B>result_format</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="./#colormap">Colormap</A> <B>colormap</B>;
+      <A HREF="structures.html#XcmsColor">XcmsColor</A> *<B>color_in_out</B>;
+      <A HREF="structures.html#XcmsColor">XcmsColorFormat</A> <B>result_format</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>colormap</B>
+<TD> Specifies the colormap.
+
+<TR><TD> <B>color_in_out</B>
+<TD> Specifies the color to allocate and returns the pixel and color 
+that is actually used in the colormap.
+
+<TR><TD> <B>result_format</B>
+<TD> Specifies the color format for the returned color specification.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XcmsAllocColor()</B>
+function is similar to
+<B><A HREF="XAllocColor.html">XAllocColor()</A></B>
+except the color can be specified in any format.
+The
+<B>XcmsAllocColor()</B>
+function ultimately calls 
+<B><A HREF="XAllocColor.html">XAllocColor()</A></B>
+to allocate a read-only color cell (colormap entry) with the specified color.
+<B>XcmsAllocColor()</B>
+first converts the color specified
+to an RGB value and then passes this to
+<B><A HREF="XAllocColor.html">XAllocColor()</A></B>.
+<B>XcmsAllocColor()</B>
+returns the pixel value of the color cell and the color specification
+actually allocated.
+This returned color specification is the result of converting the RGB value
+returned by 
+<B><A HREF="XAllocColor.html">XAllocColor()</A></B>
+into the format specified with the result_format argument.
+If there is no interest in a returned color specification, 
+unnecessary computation can be bypassed if result_format is set to
+<B><A HREF="structures.html#XcmsRGBFormat">XcmsRGBFormat</A></B>.
+The corresponding colormap cell is read-only.
+If this routine returns 
+<B><A HREF="conversion-contexts-and-gamut-mapping.html#cmsStatus">XcmsFailure</A></B>, 
+the color_in_out color specification is left unchanged.
+
+<P>
+
+<B>XcmsAllocColor()</B>
+can generate a
+<B>BadColor</B>
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadColor</B>
+<TD>  A value for a Colormap argument does not name a
+      defined Colormap.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XcmsAllocNamedColor.html">XcmsAllocNamedColor()</A></B>,
+<B><A HREF="XcmsQueryColor.html">XcmsQueryColor()</A></B>,
+<B><A HREF="XcmsStoreColor.html">XcmsStoreColor()</A></B>,
+"<A HREF="cell.html">Allocating and Freeing Color Cells</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetErrorHandler</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetErrorHandler</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XSetErrorHandler" "" "@DEF@">
+
+<CODE><PRE>
+int (*XSetErrorHandler(<B>handler</B>))()
+      int (*<B>handler</B>)(<A HREF="../../display/opening.html#Display">Display</A> *, <A HREF="default-handlers.html#XErrorEvent">XErrorEvent</A> *)
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>handler</B>
+<TD> Specifies the program's supplied error handler.
+
+</TABLE>
+
+<H2>Description</H2>
+ 
+Xlib generally calls the program's
+supplied error handler whenever an error is received.
+It is not called on
+<B>BadName</B>
+errors from
+<B><A HREF="../../appendix/a.html#OpenFont">OpenFont</A></B>,
+<B><A HREF="../../appendix/a.html#LookupColor">LookupColor</A></B>,
+or
+<B><A HREF="../../appendix/a.html#AllocNamedColor">AllocNamedColor</A></B>
+protocol requests or on
+<B>BadFont</B>
+errors from a
+<B><A HREF="../../appendix/a.html#QueryFont">QueryFont</A></B>
+protocol request.
+These errors generally are reflected back to the program through the
+procedural interface.
+Because this condition is not assumed to be fatal, 
+it is acceptable for your error handler to return;
+the returned value is ignored.
+However, the error handler should not
+call any functions (directly or indirectly) on the display
+that will generate protocol requests or that will look for input events.
+The previous error handler is returned.
+
+<H2>See also</H2>
+
+<B><A HREF="XDisplayName.html">XDisplayName()</A></B>,
+<B><A HREF="XGetErrorDatabaseText.html">XGetErrorDatabaseText()</A></B>,
+<B><A HREF="XGetErrorText.html">XGetErrorText()</A></B>,
+<B><A HREF="../../display/opening.html">XOpenDisplay()</A></B>,
+<B><A HREF="XSetIOErrorHandler.html">XSetIOErrorHandler()</A></B>,
+<B><A HREF="XSynchronize.html">XSynchronize()</A></B>,
+"<A HREF="default-handlers.html">Using the Default Error Handlers</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

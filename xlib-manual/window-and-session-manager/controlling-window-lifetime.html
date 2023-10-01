@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Controlling the Lifetime of a Window</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>9.2 Controlling the Lifetime of a Window</H1>
+
+The save-set of a client is a list of other clients' windows that,
+if they are inferiors of one of the client's windows at connection close,
+should not be destroyed and should be remapped if they are unmapped.
+For further information about close-connection processing,
+see "<A HREF="../display/close-operation.html">X Server Connection Close Operations</A>".
+To allow an application's window to survive when a window manager that
+has reparented a window fails,
+Xlib provides the save-set functions that you can 
+use to control the longevity of subwindows
+that are normally destroyed when the parent is destroyed.
+For example, a window manager that wants to add decoration
+to a window by adding a frame might reparent an application's
+window. 
+When the frame is destroyed,
+the application's window should not be destroyed 
+but be returned to its previous place in the window hierarchy.
+
+<P>
+
+The X server automatically removes windows from the save-set
+when they are destroyed.
+
+<P>
+
+To add or remove a window from the client's save-set, use
+<B><A HREF="XChangeSaveSet.html">XChangeSaveSet()</A></B>.
+
+<P>
+
+To add a window to the client's save-set, use
+<B><A HREF="XAddToSaveSet.html">XAddToSaveSet()</A></B>.
+
+<P>
+
+To remove a window from the client's save-set, use
+<B><A HREF="XRemoveFromSaveSet.html">XRemoveFromSaveSet()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="managing-installed-colormap.html">Managing Installed Colormaps</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

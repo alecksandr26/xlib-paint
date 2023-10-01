@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XDisplayName</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XDisplayName</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XDisplayName" "" "@DEF@">
+
+<CODE><PRE>
+char *XDisplayName(<B>string</B>)
+      char *<B>string</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>string</B>
+<TD> Specifies the character string.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XDisplayName()</B>
+function returns the name of the display that 
+<B><A HREF="../../display/opening.html">XOpenDisplay()</A></B>
+would attempt to use.
+If a NULL string is specified,
+<B>XDisplayName()</B>
+looks in the environment for the display and returns the display name that
+<B><A HREF="../../display/opening.html">XOpenDisplay()</A></B>
+would attempt to use.
+This makes it easier to report to the user precisely which display the
+program attempted to open when the initial connection attempt failed.
+
+<H2>See also</H2>
+
+<B><A HREF="XGetErrorDatabaseText.html">XGetErrorDatabaseText()</A></B>,
+<B><A HREF="XGetErrorText.html">XGetErrorText()</A></B>,
+<B><A HREF="../../display/opening.html">XOpenDisplay()</A></B>,
+<B><A HREF="XSetErrorHandler.html">XSetErrorHandler()</A></B>,
+<B><A HREF="XSetIOErrorHandler.html">XSetIOErrorHandler()</A></B>,
+<B><A HREF="XSynchronize.html">XSynchronize()</A></B>,
+"<A HREF="default-handlers.html">Using the Default Error Handlers</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

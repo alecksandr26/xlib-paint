@@ -1,0 +1,36 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Manipulating Top-Level Windows</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>14.1.1 Manipulating Top-Level Windows</H1>
+
+Xlib provides functions that you can use to change the visibility or size
+of top-level windows (that is, those that were created as children 
+of the root window).
+Note that the subwindows that you create are ignored by window managers.
+Therefore,
+you should use the basic window functions described in "<A HREF="../../window/">Window Functions</A>"
+to manipulate your application's subwindows.
+
+<P>
+
+To request that a top-level window be iconified, use
+<B><A HREF="XIconifyWindow.html">XIconifyWindow()</A></B>.
+
+<P>
+
+To request that a top-level window be withdrawn, use
+<B><A HREF="XWithdrawWindow.html">XWithdrawWindow()</A></B>.
+
+<P>
+
+To request that a top-level window be reconfigured, use
+<B><A HREF="XReconfigureWMWindow.html">XReconfigureWMWindow()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="converting-string-lists.html">Converting String Lists</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

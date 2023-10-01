@@ -1,0 +1,34 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Computing Character String Sizes</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>8.5.3 Computing Character String Sizes</H1>
+
+Xlib provides functions that you can use to compute the width,
+the logical extents, 
+and the server information about 8-bit and 2-byte text strings.
+<!.IN "XTextWidth">
+<!.IN "XTextWidth16">
+The width is computed by adding the character widths of all the characters.
+It does not matter if the font is an 8-bit or 2-byte font.
+These functions return the sum of the character metrics, in pixels.
+
+<P>
+
+To determine the width of an 8-bit character string, use
+<B><A HREF="XTextWidth.html">XTextWidth()</A></B>.
+
+<P>
+
+To determine the width of a 2-byte character string, use
+<B><A HREF="XTextWidth16.html">XTextWidth16()</A></B>.
+
+<P>
+
+<H5 ALIGN=right><I>Next: <A HREF="computing-logical-extent.html">Computing Logical Extents</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

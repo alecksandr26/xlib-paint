@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Window Functions</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>Chapter 3: Window Functions</H1>
+
+In the X Window System, 
+a <B>window</B> is a rectangular area on the screen that lets you
+view graphic output.
+Client applications
+can display overlapping and nested windows on one or more
+screens that are driven by X servers on one or more machines.
+Clients who want to create windows must first 
+connect their program to the X server
+by calling 
+<B><A HREF="../display/opening.html">XOpenDisplay()</A></B>.
+This chapter begins with a discussion of 
+visual types and window attributes.
+The chapter continues with a discussion of the Xlib functions you can use to:
+
+<UL>
+<LI> <A HREF="create.html">Create windows</A>
+<LI> <A HREF="destroy.html">Destroy windows</A>
+<LI> <A HREF="map.html">Map windows</A>
+<LI> <A HREF="unmap.html">Unmap windows</A>
+<LI> <A HREF="configure.html">Configure windows</A>
+<LI> <A HREF="stacking-order.html">Change the stacking order</A>
+<LI> <A HREF="change-attributes.html">Change window attributes</A>
+</UL>
+
+<P>
+
+This chapter also identifies the window actions that may generate events.
+
+<P>
+
+Note that it is vital that your application conform to the
+established conventions for communicating with window managers
+for it to work well with the various window managers in use (see section "<A HREF="../ICC/client-to-window-manager/">Client to Window Manager Communication</A>").
+Toolkits generally adhere to these conventions for you,
+relieving you of the burden.
+Toolkits also often supersede many functions in this chapter
+with versions of their own.
+Refer to the documentation for the toolkit you are using
+for more information.
+
+<H5 ALIGN=right><I>Next: <A HREF="visual-types.html">Visual Types</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

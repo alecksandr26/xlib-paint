@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmQPutResource</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmQPutResource</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XrmQPutResource" "" "@DEF@">
+
+<CODE><PRE>
+void XrmQPutResource(<B>database</B>, <B>bindings</B>, <B>quarks</B>, <B>type</B>, <B>value</B>)
+     <B><A HREF="creating-and-storing-databases.html">XrmDatabase</A></B> *<B>database</B>;
+     <A HREF="quarks.html#XrmBindingList">XrmBindingList</A> <B>bindings</B>;
+     <B><A HREF="quarks.html#XrmQuark">XrmQuarkList</A></B> <B>quarks</B>;
+     <B><A HREF="quarks.html#XrmQuark">XrmRepresentation</A></B> <B>type</B>;
+     <B><A HREF="creating-and-storing-databases.html">XrmValue</A></B> *<B>value</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>database</B>
+<TD> Specifies the resource database.
+
+<TR><TD> <B>bindings</B>
+<TD> Specifies a list of bindings.
+
+<TR><TD> <B>quarks</B>
+<TD> Specifies the complete or partial name or the class list of the resource.
+
+<TR><TD> <B>type</B>
+<TD> Specifies the type of the resource.
+
+<TR><TD> <B>value</B>
+<TD> Specifies the value of the resource, which is specified as a string.
+
+</TABLE>
+
+<H2>Description</H2>
+
+If database contains NULL,
+<B>XrmQPutResource()</B>
+creates a new database and returns a pointer to it.
+If a resource entry with the identical bindings and quarks already
+exists in the database, the previous type and value are replaced by the new
+specified type and value.
+The value is stored in the database without modification.
+
+<H2>See also</H2>
+
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>,
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmMergeDatabases.html">XrmMergeDatabases()</A></B>,
+<B><A HREF="XrmPutLineResource.html">XrmPutLineResource()</A></B>,
+<B><A HREF="XrmPutStringResource.html">XrmPutStringResource()</A></B>,
+<B><A HREF="XrmQPutResource.html">XrmQPutResource()</A></B>,
+<B><A HREF="XrmQPutStringResource.html">XrmQPutStringResource()</A></B>,
+<B><A HREF="XrmUniqueQuark.html">XrmUniqueQuark()</A></B>,
+"<A HREF="storing.html">Storing Into a Resource Database</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

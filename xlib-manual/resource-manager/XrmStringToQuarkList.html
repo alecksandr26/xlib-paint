@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmStringToQuarkList</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmStringToQuarkList</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XrmStringToQuarkList" "" "@DEF@">
+
+<CODE><PRE>
+#define XrmStringToNameList(str, name)  XrmStringToQuarkList((str), (name))
+#define XrmStringToClassList(str,class) XrmStringToQuarkList((str), (class))
+
+void XrmStringToQuarkList(<B>string</B>, <B>quarks_return</B>)
+     char *<B>string</B>;
+     XrmQuarkList <B>quarks_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>string</B>
+<TD> Specifies the string for which a quark list is to be allocated.
+
+<TR><TD> <B>quarks_return</B>
+<TD> Returns the list of quarks.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XrmStringToQuarkList()</B>
+function converts the null-terminated string (generally a fully qualified name)
+to a list of quarks.
+Note that the string must be in the valid ResourceName format 
+(see "<A HREF="file-syntax.html">Resource File Syntax</A>").
+If the string is not in the Host Portable Character Encoding,
+the conversion is implementation dependent.
+
+<H2>See also</H2>
+
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>,
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmMergeDatabases.html">XrmMergeDatabases()</A></B>,
+<B><A HREF="XrmPermStringToQuark.html">XrmPermStringToQuark()</A></B>,
+<B><A HREF="XrmPutResource.html">XrmPutResource()</A></B>,
+<B><A HREF="XrmQuarkToString.html">XrmQuarkToString()</A></B>,
+<B><A HREF="XrmStringToBindingQuarkList.html">XrmStringToBindingQuarkList()</A></B>,
+<B><A HREF="XrmStringToQuark.html">XrmStringToQuark()</A></B>,
+<B><A HREF="XrmUniqueQuark.html">XrmUniqueQuark()</A></B>,
+"<A HREF="quarks.html">Quarks</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

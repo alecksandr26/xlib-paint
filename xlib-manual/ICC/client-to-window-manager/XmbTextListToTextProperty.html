@@ -1,0 +1,136 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XmbTextListToTextProperty</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XmbTextListToTextProperty</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XmbTextListToTextProperty" "" "@DEF@">
+<!.IN "XwcTextListToTextProperty" "" "@DEF@">
+
+<CODE><PRE>
+int XmbTextListToTextProperty(<B>display</B>, <B>list</B>, <B>count</B>, <B>style</B>, <B>text_prop_return</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      char **<B>list</B>;
+      int <B>count</B>;
+      <A HREF="converting-string-lists.html#XICCEncodingStyle">XICCEncodingStyle</A> <B>style</B>;
+      <A HREF="converting-string-lists.html">XTextProperty</A> *<B>text_prop_return</B>;
+
+int XwcTextListToTextProperty(<B>display</B>, <B>list</B>, <B>count</B>, <B>style</B>, <B>text_prop_return</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      wchar_t **<B>list</B>;
+      int <B>count</B>;
+      <A HREF="converting-string-lists.html#XICCEncodingStyle">XICCEncodingStyle</A> <B>style</B>;
+      <A HREF="converting-string-lists.html">XTextProperty</A> *<B>text_prop_return</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>list</B>
+<TD> Specifies a list of null-terminated character strings.
+
+<TR><TD> <B>count</B>
+<TD> Specifies the number of strings specified.
+
+<TR><TD> <B>style</B>
+<TD> Specifies the manner in which the property is encoded.
+
+<TR><TD> <B>text_prop_return</B>
+<TD> Returns the
+<B><A HREF="converting-string-lists.html">XTextProperty</A></B>
+structure.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XmbTextListToTextProperty()</B>
+and
+<B>XwcTextListToTextProperty()</B>
+functions set the specified 
+<B><A HREF="converting-string-lists.html">XTextProperty</A></B>
+value to a set of null-separated elements representing the concatenation
+of the specified list of null-terminated text strings.
+A final terminating null is stored at the end of the value field 
+of text_prop_return but is not included in the nitems member.
+
+<P>
+
+The functions set the encoding field of text_prop_return to an
+<A HREF="../../window-information/properties-and-atoms.html">Atom</A> 
+for the specified display 
+naming the encoding determined by the specified style
+and convert the specified text list to this encoding for storage in
+the text_prop_return value field.
+If the style 
+<B>XStringStyle</B>
+or 
+<B>XCompoundTextStyle</B>
+is specified,
+this encoding is ``STRING'' or ``COMPOUND_TEXT'', respectively.
+If the style 
+<B>XTextStyle</B>
+is specified,
+this encoding is the encoding of the current locale.
+If the style 
+<B>XStdICCTextStyle</B>
+is specified,
+this encoding is ``STRING'' if the text is fully convertible to STRING,
+else ``COMPOUND_TEXT''.
+
+<P>
+
+If insufficient memory is available for the new value string,
+the functions return 
+<B>XNoMemory</B>.
+If the current locale is not supported,
+the functions return 
+<B>XLocaleNotSupported</B>.
+In both of these error cases,
+the functions do not set text_prop_return.
+
+<P>
+
+To determine if the functions are guaranteed not to return
+<B>XLocaleNotSupported</B>,
+use
+<B>XSupportsLocale</B>.
+
+<P>
+
+If the supplied text is not fully convertible to the specified encoding,
+the functions return the number of unconvertible characters.
+Each unconvertible character is converted to an implementation-defined and
+encoding-specific default string.
+Otherwise, the functions return 
+<B>Success</B>.
+Note that full convertibility to all styles except 
+<B>XStringStyle</B>
+is guaranteed.
+
+<P>
+
+To free the storage for the value field, use
+<B><A HREF="../../display/XFree.html">XFree()</A></B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XmbTextPropertyToTextList.html">XmbTextPropertyToTextList()</A></B>,
+<B><A HREF="XmbTextPropertyToTextList.html">XwcTextPropertyToTextList()</A></B>,
+<B><A HREF="XwcFreeStringList.html">XwcFreeStringList()</A></B>,
+<B><A HREF="XDefaultString.html">XDefaultString()</A></B>,
+<B><A HREF="XSetTextProperty.html">XSetTextProperty()</A></B>,
+<B><A HREF="XStringListToTextProperty.html">XStringListToTextProperty()</A></B>,
+"<A HREF="converting-string-lists.html">Converting String Lists</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

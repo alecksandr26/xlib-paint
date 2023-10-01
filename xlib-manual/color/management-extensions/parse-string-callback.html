@@ -1,0 +1,32 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Parse String Callback</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.12.5 Parse String Callback</H1>
+
+The callback in the
+<B><A HREF="creating-additional-spaces.html#XcmsColorSpace">XcmsColorSpace</A></B>
+structure for parsing a color string for the particular color space must
+adhere to the following software interface specification:
+<!.IN  "XcmsParseStringProc" "" "@DEF@">
+<CODE><PRE>
+typedef int (*XcmsParseStringProc)(<B>color_string</B>, <B>color_return</B>)
+      char *<B>color_string</B>;
+      <A HREF="../structures.html#XcmsColor">XcmsColor</A> *<B>color_return</B>;
+</PRE></CODE>
+
+<TABLE>
+<TR><TD><B>color_string</B>
+	<TD>Specifies the color string to parse.
+<TR><TD><B>color_return</B>
+	<TD>Returns the color specification in the color space's format.
+</TABLE>
+<P>
+
+<H5 ALIGN=right><I>Next: <A HREF="specification-conversion-callback.html">Color Specification Conversion Callback</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XPutPixel</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XPutPixel</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XPutPixel" "" "@DEF@">
+
+<CODE><PRE>
+XPutPixel(<B>ximage</B>, <B>x</B>, <B>y</B>, <B>pixel</B>)
+      <A HREF="../graphics/images.html#XImage">XImage</A> *<B>ximage</B>;
+      int <B>x</B>;
+      int <B>y</B>;
+      unsigned long <B>pixel</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>ximage</B>
+<TD> Specifies the image.
+
+<TR><TD> <B>x</B><BR>
+	<B>y</B>
+<TD> Specify the x and y coordinates.
+
+<TR><TD> <B>pixel</B>
+<TD> Specifies the new pixel value.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XPutPixel()</B>
+function overwrites the pixel in the named image with the specified pixel value.
+The input pixel value must be in normalized format
+(that is, the least-significant byte of the long is the least-significant
+byte of the pixel).
+The image must contain the x and y coordinates.
+
+<H2>See also</H2>
+
+<B><A HREF="XAddPixel.html">XAddPixel()</A></B>,
+<B><A HREF="XCreateImage.html">XCreateImage()</A></B>,
+<B><A HREF="XDestroyImage.html">XDestroyImage()</A></B>,
+<B><A HREF="XGetPixel.html">XGetPixel()</A></B>,
+<B><A HREF="XSubImage.html">XSubImage()</A></B>,
+"<A HREF="manipulating-images.html">Manipulating Images</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

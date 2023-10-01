@@ -1,0 +1,153 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XChangeKeyboardMapping</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XChangeKeyboardMapping</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XChangeKeyboardMapping" "" "@DEF@">
+
+<CODE><PRE>
+XChangeKeyboardMapping(<B>display</B>, <B>first_keycode</B>, <B>keysyms_per_keycode</B>, <B>keysyms</B>, <B>num_codes</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      int <B>first_keycode</B>;
+      int <B>keysyms_per_keycode</B>;
+      KeySym *<B>keysyms</B>;
+      int <B>num_codes</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>first_keycode</B>
+<TD> Specifies the first KeyCode that is to be changed.
+
+<TR><TD> <B>keysyms_per_keycode</B>
+<TD> Specifies the number of KeySyms per KeyCode.
+
+<TR><TD> <B>keysyms</B>
+<TD> Specifies an array of KeySyms.
+
+<TR><TD> <B>num_codes</B>
+<TD> Specifies the number of KeyCodes that are to be changed.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XChangeKeyboardMapping()</B>
+function defines the symbols for the specified number of KeyCodes
+starting with first_keycode.
+The symbols for KeyCodes outside this range remain unchanged.  
+The number of elements in keysyms must be:
+
+<P>
+
+<BLOCKQUOTE><I>
+num_codes * keysyms_per_keycode
+</I></BLOCKQUOTE>
+
+<P>
+
+The specified first_keycode must be greater than or equal to min_keycode 
+returned by
+<B><A HREF="XDisplayKeycodes.html">XDisplayKeycodes()</A></B>,
+or a 
+<B>BadValue</B>
+error results.
+In addition, the following expression must be less than or equal to 
+max_keycode as returned by
+<B><A HREF="XDisplayKeycodes.html">XDisplayKeycodes()</A></B>,
+or a
+<B>BadValue</B>
+error results:
+
+<P>
+
+<BLOCKQUOTE><I>
+first_keycode + num_codes - 1
+</I></BLOCKQUOTE>
+
+<P>
+
+KeySym number N, counting from zero, for KeyCode K has the following index
+in keysyms, counting from zero: 
+
+<P>
+
+<BLOCKQUOTE><I>
+(K - first_keycode) * keysyms_per_keycode + N
+</I></BLOCKQUOTE>
+
+<P>
+
+The specified keysyms_per_keycode can be chosen arbitrarily by the client
+to be large enough to hold all desired symbols. 
+A special KeySym value of 
+<B>NoSymbol</B> 
+should be used to fill in unused elements 
+for individual KeyCodes.  
+It is legal for 
+<B>NoSymbol</B> 
+to appear in nontrailing positions
+of the effective list for a KeyCode.
+<B>XChangeKeyboardMapping()</B>
+generates a 
+<B><A HREF="../events/window-state-change/mapping.html">MappingNotify</A></B> 
+event.
+
+<P>
+
+There is no requirement that the X server interpret this mapping. 
+It is merely stored for reading and writing by clients.
+
+<P>
+
+<B>XChangeKeyboardMapping()</B>
+can generate
+<B>BadAlloc</B> 
+and
+<B>BadValue</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XDeleteModifiermapEntry.html">XDeleteModifiermapEntry()</A></B>,
+<B><A HREF="XDisplayKeycodes.html">XDisplayKeycodes()</A></B>,
+<B><A HREF="../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XFreeModifiermap.html">XFreeModifiermap()</A></B>,
+<B><A HREF="XGetKeyboardMapping.html">XGetKeyboardMapping()</A></B>,
+<B><A HREF="XGetModifierMapping.html">XGetModifierMapping()</A></B>,
+<B><A HREF="XInsertModifiermapEntry.html">XInsertModifiermapEntry()</A></B>,
+<B><A HREF="XNewModifiermap.html">XNewModifiermap()</A></B>,
+<B><A HREF="XSetModifierMapping.html">XSetModifierMapping()</A></B>,
+<B><A HREF="XSetPointerMapping.html">XSetPointerMapping()</A></B>,
+"<A HREF="keyboard-encoding.html">Keyboard Encoding</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

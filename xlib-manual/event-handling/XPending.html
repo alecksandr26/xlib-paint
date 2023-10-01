@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XPending</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XPending</H1>
+
+<!.IN "XPending" "" "@DEF@">
+
+<H2>Syntax</H2>
+
+<CODE><PRE>
+int XPending(<B>display</B>)
+      Display *<B>display</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XPending()</B>
+function returns the number of events that have been received from the
+X server but have not been removed from the event queue.
+<B>XPending()</B>
+is identical to
+<B><A HREF="XEventsQueued.html">XEventsQueued()</A></B>
+with the mode
+<B>QueuedAfterFlush</B>
+specified.
+
+<H2>See also</H2>
+
+<B><A HREF="XEventsQueued.html">XEventsQueued()</A></B>,
+<B><A HREF="XFlush.html">XFlush()</A></B>,
+<B><A HREF="manipulating-event-queue/XIfEvent.html">XIfEvent()</A></B>,
+<B><A HREF="XNextEvent.html">XNextEvent()</A></B>,
+<B><A HREF="XPutBackEvent.html">XPutBackEvent()</A></B>,
+<B><A HREF="XSync.html">XSync()</A></B>,
+"<A HREF="event-queue-management.html">Event Queue Management</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

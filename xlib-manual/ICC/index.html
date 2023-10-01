@@ -1,0 +1,92 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Inter-Client Communication Functions</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>Chapter 14: Inter-Client Communication Functions</H1>
+
+The <B><A HREF="/gui/x/icccm/">Inter-Client Communication Conventions Manual</A></B>,
+hereafter referred to as the ICCCM, details the
+X Consortium approved conventions that govern inter-client communications.
+These conventions ensure peer-to-peer client cooperation in the use 
+of selections, cut buffers, and shared resources as well as client cooperation
+with window and session managers.
+For further information,
+see the <B><A HREF="/gui/x/icccm/">Inter-Client Communication Conventions Manual</A></B>.
+
+<P>
+
+Xlib provides a number of standard properties and programming interfaces
+that are <A HREF="/gui/x/icccm/">ICCCM</A> compliant.
+The predefined atoms for some of these properties are defined in the
+<B><TT>X11/Xatom.h</TT></B>
+header file, where
+to avoid name conflicts with user symbols their
+<B<#define</B>
+name has an XA_ prefix.
+For further information about atoms and properties,
+see section "<A HREF="../window-information/properties-and-atoms.html">Properties and Atoms</A>".
+
+<P>
+
+Xlib's selection and cut buffer mechanisms provide the primary programming 
+interfaces by which peer client applications communicate with each other 
+(see sections "<A HREF="../window-information/selection.html">Selections</A>" and "<A HREF="../utilities/using-cut-buffers.html">Using Cut Buffers</A>").
+The functions discussed in this chapter provide 
+the primary programming interfaces by which client applications communicate 
+with their window and session managers as well as share standard colormaps.
+
+<P>
+
+The standard properties that are of special interest for communicating 
+with window and session managers are:
+<!.IN "Atom" "predefined">
+<TABLE>
+<TR><TD COLSPAN=4><HR>
+<TR><TD><B>Name</B>	<TD><B>Type</B>		<TH>Format	<TD><B>Description</B>
+<TR><TD COLSPAN=4><HR>
+<TR><TD><TT>WM_CLASS</TT>		<TD><TT>STRING		<TD ALIGN=center>8	<TD>Set by application programs to allow window and session
+												managers to obtain the application's resources from the resource database.
+<TR><TD><TT>WM_CLIENT_MACHINE</TT>	<TD><TT>TEXT		<TD>			<TD>The string name of the machine on which the client application is running.
+<TR><TD><TT>WM_COLORMAP_WINDOWS</TT>	<TD><TT>WINDOW		<TD ALIGN=center>32	<TD>The list of window IDs that may need a different colormap
+												than that of their top-level window.
+<TR><TD><TT>WM_COMMAND</TT>		<TD><TT>TEXT		<TD>			<TD>The command and arguments, null-separated, used to invoke the
+												application.
+<TR><TD><TT>WM_HINTS</TT>		<TD><TT>WM_HINTS	<TD ALIGN=center>32	<TD>Additional hints set by the client for use by the window manager.
+												The C type of this property is <B><B><A HREF="client-to-window-manager/wm-hints.html#XWMHints">XWMHints</A></B></B>.
+<TR><TD><TT>WM_ICON_NAME</TT>		<TD><TT>TEXT		<TD>			<TD>The name to be used in an icon.
+<TR><TD><TT>WM_ICON_SIZE</TT>		<TD><TT>WM_ICON_SIZE	<TD ALIGN=center>32	<TD>The window manager may set this property on the root window to
+												specify the icon sizes it supports.
+												The C type of this property is <B><B><A HREF="client-to-window-manager/wm-icon-size.html#XIconSize">XIconSize</A></B></B>.
+<TR><TD><TT>WM_NAME</TT>		<TD><TT>TEXT		<TD>			<TD>The name of the application.
+<TR><TD><TT>WM_NORMAL_HINTS</TT>	<TD><TT>WM_SIZE_HINTS	<TD ALIGN=center>32	<TD>Size hints for a window in its normal state.
+												The C type of this property is <B><A HREF="client-to-window-manager/wm-normal-hints.html#XSizeHints">XSizeHints</A></B>.
+<TR><TD><TT>WM_PROTOCOLS</TT>		<TD><TT>ATOM		<TD ALIGN=center>32	<TD>List of atoms that identify the communications protocols between the
+												client and window manager in which the client is willing to participate.
+<TR><TD><TT>WM_STATE</TT>		<TD><TT>WM_STATE	<TD ALIGN=center>32	<TD>Intended for communication between window and session managers only.
+<TR><TD><TT>WM_TRANSIENT_FOR</TT>	<TD><TT>WINDOW		<TD ALIGN=center>32	<TD>Set by application programs to indicate to the window manager that a transient
+												top-level window, such as a dialog box.
+<TR><TD COLSPAN=4><HR>
+</TABLE>
+
+<P>
+
+The remainder of this chapter discusses:
+
+<UL>
+<P><LI>
+<A HREF="client-to-window-manager/">Client-to-window-manager communication</A>
+
+<P><LI>
+<A HREF="client-to-session-manager/">Client-to-session-manager communication</A>
+
+<P><LI>
+<A HREF="standard-colormaps/">Standard colormaps</A>
+</UL>
+
+<H5 ALIGN=right><I>Next: <A HREF="client-to-window-manager/">Client to Window Manager Communication</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

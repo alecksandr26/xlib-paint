@@ -1,0 +1,197 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Overview of the X Window System</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>1.1. Overview of the X Window System</H1>
+
+<P>
+
+Some of the terms used in this book are unique to X,
+and other terms that are common to other window systems 
+have different meanings in X.
+You may find it helpful to refer to the <A HREF="../glossary/">glossary</A>, 
+which is located at the end of the book.
+
+<P>
+
+The X Window System supports one or more screens containing
+overlapping windows or subwindows.
+A <B>screen</B> is a physical monitor and hardware,
+which can be either color, grayscale, or monochrome.
+There can be multiple screens for each display or workstation.
+A single X server can provide display services for any number of screens.
+A set of screens for a single user with one keyboard and one pointer
+(usually a mouse) is called a display.
+
+<P>
+
+<!.IN "Screen">
+All the windows in an X server are arranged in strict hierarchies.
+At the top of each hierarchy is a root window,
+which covers each of the display screens.
+Each root window is partially or completely covered by child windows.
+All windows, except for root windows, have parents.
+There is usually at least one window for each application program.
+<!.IN "Child window">
+<!.IN "Parent Window">
+Child windows may in turn have their own children.
+In this way, 
+an application program can create an arbitrarily deep tree 
+on each screen.
+X provides graphics, text, and raster operations for windows.
+
+<P>
+
+A child window can be larger than its parent. 
+That is, part or all of
+the child window can extend beyond the boundaries of the parent,
+but all output to a window is clipped by its parent.
+<!.IN "Stacking order">
+If several children of a window have overlapping locations, 
+one of the children is considered to be on top of or raised over the
+others thus obscuring them.
+Output to areas covered by other windows is suppressed by the window
+system unless the window has backing store.
+If a window is obscured by a second window, 
+the second window obscures only those ancestors of the second window,
+which are also ancestors of the first window.
+
+<P>
+
+<!.IN "Window" "" "@DEF@">
+A window has a border zero or more pixels in width, which can
+be any pattern (pixmap) or solid color you like.
+A window usually but not always has a background pattern,
+which will be repainted by the window system when uncovered.
+Child windows obscure their parents,
+and graphic operations in the parent window usually
+are clipped by the children.
+
+<P>
+
+Each window and pixmap has its own coordinate system.
+The coordinate system has the X axis horizontal and the Y axis vertical
+with the origin [0, 0] at the upper-left corner.
+Coordinates are integral,
+in terms of pixels,
+and coincide with pixel centers.
+For a window, 
+the origin is inside the border at the inside, upper-left corner.
+
+<P>
+
+X does not guarantee to preserve the contents of windows. 
+When part or all of a window is hidden and then brought back onto the screen,
+its contents may be lost. 
+The server then sends the client program an
+<B><A HREF="../events/exposure/expose.html">Expose</A></B>
+event to notify it that part or all of the window needs to be repainted.
+Programs must be prepared to regenerate the contents of windows on demand.
+
+<P>
+
+<!.IN "Pixmap">
+<!.IN "Drawable">
+<!.IN "Tile">
+<!.IN "Bitmap">
+X also provides off-screen storage of graphics objects,
+called pixmaps.
+Single plane (depth 1) pixmaps are sometimes referred to as bitmaps.
+Pixmaps can be used in most graphics functions interchangeably with
+windows and are used in various graphics operations to define patterns or tiles.
+Windows and pixmaps together are referred to as drawables.
+
+<P>
+
+Most of the functions in Xlib just add requests to an output buffer.
+These requests later execute asynchronously on the X server.
+Functions that return values of information stored in
+the server do not return (that is, they block)
+until an explicit reply is received or an error occurs.
+You can provide an error handler,
+which will be called when the error is reported.
+
+<P>
+
+<!.IN "XSync">
+If a client does not want a request to execute asynchronously, 
+it can follow the request with a call to 
+<B><A HREF="../event-handling/XSync.html">XSync()</A></B> , 
+which blocks until all previously buffered
+asynchronous events have been sent and acted on.
+As an important side effect, 
+the output buffer in Xlib is always flushed by a call to any function
+that returns a value from the server or waits for input.
+
+<A NAME="XID"></A>
+<P>
+
+<!.IN "Resource IDs">
+<!.IN "Resource IDs" "Window">
+<!.IN "Resource IDs" "Font">
+<!.IN "Resource IDs" "Pixmap">
+<!.IN "Resource IDs" "Cursor">
+<!.IN "Resource IDs" "GContext">
+Many Xlib functions will return an integer resource ID,
+which allows you to refer to objects stored on the X server.
+These can be of type 
+<B>Window</B>, 
+<B>Font</B>, 
+<B>Pixmap</B>, 
+<B>Colormap</B>,
+<B>Cursor</B>, 
+and 
+<B>GContext</B>,
+as defined in the file
+<TT>&lt;X11/X.h&gt;</TT>.
+These resources are created by requests and are destroyed
+(or freed) by requests or when connections are closed.
+Most of these resources are potentially sharable between
+applications, and in fact, windows are manipulated explicitly by
+window manager programs.
+Fonts and cursors are shared automatically across multiple screens.
+Fonts are loaded and unloaded as needed and are shared by multiple clients.
+Fonts are often cached in the server.
+Xlib provides no support for sharing graphics contexts between applications.
+
+<P>
+
+<!.IN "Event">
+Client programs are informed of events.
+Events may either be side effects of a request (for example, restacking windows
+generates 
+<B><A HREF="../events/exposure/expose.html">Expose</A></B> 
+events) or completely asynchronous (for example, from the keyboard).
+A client program asks to be informed of events.
+Because other applications can send events to your application,
+programs must be prepared to handle (or ignore) events of all types.
+
+<P>
+
+Input events (for example, a key pressed or the pointer moved) 
+arrive asynchronously from the server and are queued until they are 
+requested by an explicit call (for example,
+<B><A HREF="../event-handling/manipulating-event-queue/XNextEvent.html">XNextEvent()</A></B>
+or
+<B><A HREF="../event-handling/manipulating-event-queue/XWindowEvent.html">XWindowEvent()</A></B>).
+In addition, some library
+functions (for example,
+<B><A HREF="../window/XRaiseWindow.html">XRaiseWindow()</A></B>)
+generate 
+<B><A HREF="../events/exposure/expose.html">Expose</A></B>
+and
+<B><A HREF="../events/structure-control/configure.html">ConfigureRequest</A></B>
+events.
+These events also arrive asynchronously, but the client may
+<!.IN "XSync">
+wish to explicitly wait for them by calling
+<B><A HREF="../event-handling/XSync.html">XSync()</A></B>
+after calling a function that can cause the server to generate events.
+
+<H5 ALIGN=right><I>Next: <A HREF="errors.html">Errors</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

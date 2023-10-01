@@ -1,0 +1,142 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XFillArc</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XFillArc</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XFillArc" "" "@DEF@">
+
+<CODE><PRE>
+XFillArc(<B>display</B>, <B>d</B>, <B>gc</B>,  <B>x</B>, <B>y</B>, <B>width</B>, <B>height</B>, <B>angle1</B>, <B>angle2</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Drawable <B>d</B>;
+      <A HREF="../../GC/manipulating.html">GC</A> <B>gc</B>;
+      int <B>x</B>, <B>y</B>;
+      unsigned int <B>width</B>, <B>height</B>;
+      int <B>angle1</B>, <B>angle2</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>d</B>
+<TD> Specifies the drawable. 
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>x</B>
+	<B>y</B>
+<TD> Specify the x and y coordinates, which are relative to the origin of the drawable and specify the upper-left corner of the bounding rectangle.
+
+<TR><TD> <B>width</B>
+	<B>height</B>
+<TD> Specify the width and height, which are the major and minor axes of the arc.
+
+<TR><TD> <B>angle1</B>
+<TD> Specifies the start of the arc relative to the three-o'clock position
+from the center, in units of degrees * 64.
+
+<TR><TD> <B>angle2</B>
+<TD> Specifies the path and extent of the arc relative to the start of the
+arc, in units of degrees * 64.
+
+</TABLE>
+
+<H2>Description</H2>
+
+For each arc, 
+<B>XFillArc()</B>
+fills the region closed by the infinitely thin path
+described by the specified arc and, depending on the 
+arc-mode specified in the GC, one or two line segments. 
+For 
+<B>ArcChord</B> , 
+the single line segment joining the endpoints of the arc is used.  
+For 
+<B>ArcPieSlice</B> ,
+the two line segments joining the endpoints of the arc with the center
+point are used.  
+For any given arc,  
+.PN XFillArc
+does not draw a pixel more than once.  
+If regions intersect, 
+the intersecting pixels are drawn multiple times.
+
+<P>
+
+Both functions use these GC components: 
+<A HREF="../../GC/manipulating.html#function">function</A>,
+<A HREF="../../GC/manipulating.html#plane-mask">plane-mask</A>,
+<A HREF="../../GC/manipulating.html#fill-style">fill-style</A>,
+<A HREF="../../GC/manipulating.html#arc-mode">arc-mode</A>,
+<A HREF="../../GC/manipulating.html#subwindow-mode">subwindow-mode</A>,
+<A HREF="../../GC/manipulating.html#clip-mask">clip-x-origin</A>, 
+<A HREF="../../GC/manipulating.html#clip-mask">clip-y-origin</A>,
+and
+<A HREF="../../GC/manipulating.html#clip-mask">clip-mask</A>.
+
+They also use these GC mode-dependent components: 
+<A HREF="../../GC/manipulating.html#foreground">foreground</A>,
+<A HREF="../../GC/manipulating.html#background">background</A>,
+<A HREF="../../GC/manipulating.html#tile">tile</A>,
+<A HREF="../../GC/manipulating.html#stipple">stipple</A>,
+<A HREF="../../GC/manipulating.html#tile">tile-stipple-x-origin</A>, 
+and
+<A HREF="../../GC/manipulating.html#tile">tile-stipple-y-origin</A>.
+
+<P>
+
+<B>XFillArc()</B>
+can generate
+<B>BadDrawable</B> ,
+<B>BadGC</B> ,
+and
+<B>BadMatch</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../GContext.html">GContext</A></B> 
+	argument does not name a defined 
+	<B><A HREF="../GContext.html">GContext</A></B>.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../drawing/XDrawArc.html">XDrawArc()</A></B>,
+<B><A HREF="../drawing/XDrawPoint.html">XDrawPoint()</A></B>,
+<B><A HREF="../drawing/XDrawRectangle.html">XDrawRectangle()</A></B>
+<B><A HREF="XFillArcs.html">XFillArcs()</A></B>,
+<B><A HREF="XFillPolygon.html">XFillPolygon()</A></B>,
+<B><A HREF="XFillRectangle.html">XFillRectangle()</A></B>,
+<B><A HREF="XFillRectangles.html">XFillRectangles()</A></B>,
+"<A HREF="arcs.html">Filling Single and Multiple Arcs</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

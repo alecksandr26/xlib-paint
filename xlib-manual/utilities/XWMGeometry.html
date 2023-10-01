@@ -1,0 +1,109 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XWMGeometry</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XWMGeometry</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XWMGeometry" "" "@DEF@">
+
+<CODE><PRE>
+int XWMGeometry(<B>display</B>, <B>screen</B>, <B>user_geom</B>, <B>def_geom</B>, <B>bwidth</B>, <B>hints</B>, <B>x_return</B>, <B>y_return</B>,
+                <B>width_return</B>, <B>height_return</B>, <B>gravity_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen</B>;
+      char *<B>user_geom</B>;
+      char *<B>def_geom</B>;
+      unsigned int <B>bwidth</B>;
+      <A HREF="../ICC/client-to-window-manager/wm-normal-hints.html#XSizeHints">XSizeHints</A> *<B>hints</B>;
+      int *<B>x_return</B>, *<B>y_return</B>; 
+      int *<B>width_return</B>;
+      int *<B>height_return</B>;
+      int *<B>gravity_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the screen.
+
+<TR><TD> <B>user_geom</B>
+<TD> Specifies the user-specified geometry or NULL.
+
+<TR><TD> <B>def_geom</B>
+<TD> Specifies the application's default geometry or NULL.
+
+<TR><TD> <B>bwidth</B>
+<TD> Specifies the border width.
+
+<TR><TD> <B>hints</B>
+<TD> Specifies the size hints for the window in its normal state.
+
+<TR><TD> <B>x_return</B><BR>
+	<B>y_return</B>
+<TD> Return the x and y offsets.
+
+<TR><TD> <B>width_return</B><BR>
+	<B>height_return</B>
+<TD> Return the width and height determined.
+
+<TR><TD> <B>gravity_return</B>
+<TD> Returns the window gravity.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The 
+<B>XWMGeometry()</B>
+function combines any geometry information (given in the format used by 
+<B><A HREF="XParseGeometry.html">XParseGeometry()</A></B>)
+specified by the user and by the calling program with size hints 
+(usually the ones to be stored in <A HREF="/gui/x/icccm/sec-4.html#WM_NORMAL_HINTS">WM_NORMAL_HINTS</A>) and returns the position, 
+size, and gravity
+(<B>NorthWestGravity</B>, 
+<B>NorthEastGravity</B>, 
+<B>SouthEastGravity</B>,
+or
+<B>SouthWestGravity</B>) 
+that describe the window.
+If the base size is not set in the 
+<A HREF="../ICC/client-to-window-manager/wm-normal-hints.html#XSizeHints">XSizeHints</A>
+structure, 
+the minimum size is used if set.
+Otherwise, a base size of zero is assumed.
+If no minimum size is set in the hints structure, 
+the base size is used.
+A mask (in the form returned by 
+<B><A HREF="XParseGeometry.html">XParseGeometry()</A></B>) 
+that describes which values came from the user specification 
+and whether or not the position coordinates are relative
+to the right and bottom edges is returned.
+Note that these coordinates will have already been accounted for 
+in the x_return and y_return values.
+
+<P>
+
+Note that invalid geometry specifications can cause a width or height 
+of zero to be returned.
+The caller may pass the address of the hints win_gravity field 
+as gravity_return to update the hints directly.
+
+<H2>See also</H2>
+
+<B><A HREF="XParseGeometry.html">XParseGeometry()</A></B>,
+<B><A HREF="../ICC/client-to-window-manager/XSetWMProperties.html">XSetWMProperties()</A></B>,
+"<A HREF="parsing-window-geometry.html">Parsing the Window Geometry</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

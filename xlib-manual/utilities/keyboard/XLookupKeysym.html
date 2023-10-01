@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XLookupKeysym</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XLookupKeysym</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XLookupKeysym" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="../../input/keyboard-encoding.html#KeySym">KeySym</A> XLookupKeysym(<B>key_event</B>, <B>index</B>)
+      <A HREF="../../events/keyboard-pointer/keyboard-pointer.html#XKeyEvent">XKeyEvent</A> *<B>key_event</B>;
+      int <B>index</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>key_event</B>
+<TD> Specifies the 
+<B><A HREF="../../events/keyboard-pointer/keyboard-pointer.html">KeyPress</A></B>
+or
+<B><A HREF="../../events/keyboard-pointer/keyboard-pointer.html">KeyRelease</A></B>
+event.
+
+<TR><TD> <B>index</B>
+<TD> Specifies the index into the KeySyms list for the event's KeyCode.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XLookupKeysym()</B>
+function uses a given keyboard event and the index you specified to return
+the KeySym from the list that corresponds to the KeyCode member in the
+<A HREF="../../events/keyboard-pointer/keyboard-pointer.html#XKeyEvent">XKeyPressedEvent</A>
+or
+<A HREF="../../events/keyboard-pointer/keyboard-pointer.html#XKeyEvent">XKeyReleasedEvent</A>
+structure.
+If no KeySym is defined for the KeyCode of the event,
+<B>XLookupKeysym()</B>
+returns
+<B>NoSymbol</B>.
+
+<H2>See also</H2>
+
+<B><A HREF="../XLookupString.html">XLookupString()</A></B>,
+<B><A HREF="XRebindKeySym.html">XRebindKeySym()</A></B>,
+<B><A HREF="XStringToKeysym.html">XStringToKeysym()</A></B>,
+<B><A HREF="XRefreshKeyboardMapping.html">XRefreshKeyboardMapping()</A></B>,
+<A HREF="../../events/keyboard-pointer/keyboard-pointer.html#XButtonEvent">XButtonEvent</A>,
+<A HREF="../../events/window-state-change/map.html#XMapEvent">XMapEvent</A>,
+<A HREF="./">Keyboard Utility Functions</A>.
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

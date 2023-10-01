@@ -1,0 +1,97 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XMoveWindow</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XMoveWindow</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XMoveWindow" "" "@DEF@">
+
+<CODE><PRE>
+XMoveWindow(<B>display</B>, <B>w</B>, <B>x</B>, <B>y</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      int <B>x</B>, <B>y</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window to be moved
+
+<TR><TD> <B>x</B><BR><B>y</B>
+<TD> Specify the x and y coordinates, which define the new location of the top-left pixel
+of the window's border or the window itself if it has no border.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XMoveWindow()</B>
+function moves the specified window to the specified x and y coordinates,
+but it does not change the window's size, raise the window, or
+change the mapping state of the window.
+Moving a mapped window may or may not lose the window's contents 
+depending on if the window is obscured by nonchildren 
+and if no backing store exists.
+If the contents of the window are lost, 
+the X server generates
+<B><A HREF="../events/exposure/expose.html">Expose</A></B>
+events.
+Moving a mapped window generates
+<B><A HREF="../events/exposure/expose.html">Expose</A></B>
+events on any formerly obscured windows. 
+
+<P>
+
+If the <A HREF="attributes/override-redirect.html">override-redirect</A> flag of the window is 
+<B>False</B>
+and some
+other client has selected 
+<B><A HREF="../events/processing-overview.html#SubstructureRedirectMask">SubstructureRedirectMask</A></B> 
+on the parent, the X server generates a
+<B><A HREF="../events/structure-control/configure.html">ConfigureRequest</A></B> 
+event, and no further processing is
+performed.  
+Otherwise, the window is moved.
+
+<P>
+
+<B>XMoveWindow()</B>
+can generate a
+<B>BadWindow</B>
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>,
+<B><A HREF="XConfigureWindow.html">XConfigureWindow()</A></B>,
+<B><A HREF="XCreateWindow.html">XCreateWindow()</A></B>,
+<B><A HREF="XDestroyWindow.html">XDestroyWindow()</A></B>,
+<B><A HREF="XMapWindow.html">XMapWindow()</A></B>,
+<B><A HREF="XMoveResizeWindow.html">XMoveResizeWindow()</A></B>,
+<B><A HREF="XRaiseWindow.html">XRaiseWindow()</A></B>,
+<B><A HREF="XResizeWindow.html">XResizeWindow()</A></B>,
+<B><A HREF="XSetWindowBorderWidth.html">XSetWindowBorderWidth()</A></B>,
+<B><A HREF="XUnmapWindow.html">XUnmapWindow()</A></B>,
+"<A HREF="configure.html">Configuring Windows</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

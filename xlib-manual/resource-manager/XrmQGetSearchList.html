@@ -1,0 +1,95 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmQGetSearchList</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmQGetSearchList</H1>
+
+<A NAME="XrmSearchList"></A>
+<H2>Syntax</H2>
+
+<!.IN "XrmQGetSearchList" "" "@DEF@">
+
+<CODE><PRE>
+typedef XrmHashTable *XrmSearchList;
+
+Bool XrmQGetSearchList(<B>database</B>, <B>names</B>, <B>classes</B>, <B>list_return</B>, <B>list_length</B>)
+     <B><A HREF="creating-and-storing-databases.html">XrmDatabase</A></B> <B>database</B>;
+     <B><A HREF="quarks.html#XrmNameList">XrmNameList</A></B> <B>names</B>;
+     <B><A HREF="quarks.html#XrmClassList">XrmClassList</A></B> <B>classes</B>;
+     <B>XrmSearchList</B> <B>list_return</B>;
+     int <B>list_length</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>database</B>
+<TD> Specifies the database that is to be used.
+
+<TR><TD> <B>names</B>
+<TD> Specifies a list of resource names.
+
+<TR><TD> <B>classes</B>
+<TD> Specifies a list of resource classes.
+
+<TR><TD> <B>list_return</B>
+<TD> Returns a search list for further use.
+The caller must allocate sufficient space for the list before calling 
+<B>XrmQGetSearchList()</B>.
+
+<TR><TD> <B>list_length</B>
+<TD> Specifies the number of entries (not the byte size) allocated for list_return.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XrmQGetSearchList()</B>
+function takes a list of names and classes
+and returns a list of database levels where a match might occur.
+The returned list is in best-to-worst order and
+uses the same algorithm as 
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>
+for determining precedence.
+If list_return was large enough for the search list,
+<B>XrmQGetSearchList()</B>
+returns 
+<B>True</B>;
+otherwise, it returns
+<B>False</B>.
+
+<P>
+
+The size of the search list that the caller must allocate is
+dependent upon the number of levels and wildcards in the resource specifiers 
+that are stored in the database.
+The worst case length is %3 sup n%,
+where \fIn\fP is the number of name or class components in names or classes.
+
+<P>
+
+When using 
+<B>XrmQGetSearchList()</B>
+followed by multiple probes for resources with a common name and class prefix,
+only the common prefix should be specified in the name and class list to 
+<B>XrmQGetSearchList()</B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>,
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmMergeDatabases.html">XrmMergeDatabases()</A></B>,
+<B><A HREF="XrmPutResource.html">XrmPutResource()</A></B>,
+<B><A HREF="XrmQGetResource.html">XrmQGetResource()</A></B>,
+<B><A HREF="XrmQGetSearchResource.html">XrmQGetSearchResource()</A></B>,
+<B><A HREF="XrmUniqueQuark.html">XrmUniqueQuark()</A></B>,
+"<A HREF="looking-up.html">Looking Up Resources</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,368 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Font Metrics</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>8.5 Font Metrics</H1>
+
+<!.IN "Font">
+A font is a graphical description of a set of characters that are used to 
+increase efficiency whenever a set of small, similar sized patterns are 
+repeatedly used.
+
+<P>
+
+This section discusses how to:
+
+<UL>
+
+<P><LI>
+<A HREF="fonts.html">Load and free fonts</A>
+
+<P><LI>
+<A HREF="names.html">Obtain and free font names</A>
+
+<P><LI>
+<A HREF="computing-string-size.html">Compute character string sizes</A>
+
+<P><LI>
+<A HREF="computing-logical-extent.html">Return logical extents</A>
+
+<P><LI>
+<A HREF="querying-string-size.html">Query character string sizes</A>
+
+</UL>
+
+<P>
+
+The X server loads fonts whenever a program requests a new font.
+The server can cache fonts for quick lookup.
+Fonts are global across all screens in a server.
+Several levels are possible when dealing with fonts.
+Most applications simply use 
+<B><A HREF="XLoadQueryFont.html">XLoadQueryFont()</A></B>
+to load a font and query the font metrics.
+
+<P>
+
+Characters in fonts are regarded as masks.
+Except for image text requests,
+the only pixels modified are those in which bits are set to 1 in the character.
+This means that it makes sense to draw text using stipples or tiles
+(for example, many menus gray-out unusable entries).
+
+<P>
+
+The
+<B>XFontStruct</B>
+structure contains all of the information for the font
+and consists of the font-specific information as well as
+a pointer to an array of
+<B>XCharStruct</B>
+structures for the
+characters contained in the font.
+The
+<B>XFontStruct</B>,
+<B>XFontProp</B>,
+and
+<B>XCharStruct</B>
+structures contain:
+
+<A NAME="XCharStruct"></A>
+<P>
+
+<!.IN "XCharStruct" "" "@DEF@">
+<PRE><CODE>
+typedef struct {
+	short lbearing;			/* origin to left edge of raster */
+	short rbearing;			/* origin to right edge of raster */
+	short width;			/* advance to next char's origin */
+	short ascent;			/* baseline to top edge of raster */
+	short descent;			/* baseline to bottom edge of raster */
+	unsigned short attributes;	/* per char flags (not predefined) */
+} XCharStruct;
+</PRE></CODE>
+
+<A NAME="XFontProp"></A>
+<P>
+
+<!.IN "XFontProp" "" "@DEF@">
+<PRE><CODE>
+typedef struct {
+	Atom	name;
+	unsigned long card32;
+} XFontProp;
+</PRE></CODE>
+
+<A NAME="XChar2b"></A>
+<P>
+
+<!.IN "XChar2b" "" "@DEF@">
+<PRE><CODE>
+typedef struct {	/* normal 16 bit characters are two bytes */
+    unsigned char byte1;
+    unsigned char byte2;
+} XChar2b;
+</PRE></CODE>
+
+<A NAME="XFontStruct"></A>
+<P>
+
+<!.IN "XFontStruct" "" "@DEF@">
+<PRE><CODE>
+typedef struct {
+	XExtData *ext_data;		/* hook for extension to hang data */
+	Font fid;			/* Font id for this font */
+	unsigned direction;		/* hint about the direction font is painted */
+	unsigned min_char_or_byte2;	/* first character */
+	unsigned max_char_or_byte2;	/* last character */
+	unsigned min_byte1;		/* first row that exists */
+	unsigned max_byte1;		/* last row that exists */
+	Bool all_chars_exist;		/* flag if all characters have nonzero size */
+	unsigned default_char;		/* char to print for undefined character */
+	int n_properties;		/* how many properties there are */
+	XFontProp *properties;		/* pointer to array of additional properties */
+	XCharStruct min_bounds;		/* minimum bounds over all existing char */
+	XCharStruct max_bounds;		/* maximum bounds over all existing char */
+	XCharStruct *per_char;		/* first_char to last_char information */
+	int ascent;			/* logical extent above baseline for spacing */
+	int descent;			/* logical decent below baseline for spacing */
+} XFontStruct;
+</PRE></CODE>
+
+<P>
+
+X supports single byte/character, two bytes/character matrix,
+and 16-bit character text operations.
+Note that any of these forms can be used with a font, but a
+single byte/character text request can only specify a single byte
+(that is, the first row of a 2-byte font).
+You should view 2-byte fonts as a two-dimensional matrix of defined
+characters: byte1 specifies the range of defined rows and
+byte2 defines the range of defined columns of the font.
+Single byte/character fonts have one row defined, and the byte2 range
+specified in the structure defines a range of characters.
+
+<P>
+
+The bounding box of a character is defined by the 
+<B>XCharStruct</B>
+of that character.
+When characters are absent from a font,
+the default_char is used.
+When fonts have all characters of the same size,
+only the information in the
+<B>XFontStruct</B>
+min and max bounds are used.
+
+<P>
+
+The members of the 
+<B>XFontStruct</B>
+have the following semantics:
+
+<UL>
+
+<P><LI>
+The direction member can be either 
+<B>FontLeftToRight</B>
+or 
+<B>FontRightToLeft</B>. 
+It is just a hint as to whether most 
+<B>XCharStruct</B>
+elements 
+have a positive 
+(<B>FontLeftToRight</B>) 
+or a negative 
+(<B>FontRightToLeft</B>)
+character width 
+metric.
+The core protocol defines no support for vertical text.
+
+<P><LI>
+If the min_byte1 and max_byte1 members are both zero, min_char_or_byte2
+specifies the linear character index corresponding to the first element
+of the per_char array, and max_char_or_byte2 specifies the linear character
+index of the last element.
+
+<P>
+
+If either min_byte1 or max_byte1 are nonzero, both
+min_char_or_byte2 and max_char_or_byte2 are less than 256, 
+and the 2-byte character index values corresponding to the
+per_char array element N (counting from 0) are:
+<BLOCKQUOTE>
+	byte1 = N/D + min_byte1<BR>
+	byte2 = N\D + min_char_or_byte2
+</BLOCKQUOTE>
+where:
+<BLOCKQUOTE>
+        D = max_char_or_byte2 - min_char_or_byte2 + 1<BR>
+        / = integer division<BR>
+        \ = integer modulus
+</BLOCKQUOTE>
+
+<P><LI>
+If the per_char pointer is NULL, 
+all glyphs between the first and last character indexes
+inclusive have the same information,
+as given by both min_bounds and max_bounds.
+
+<P><LI>
+If all_chars_exist is 
+<B>True</B>,
+all characters in the per_char array have nonzero bounding boxes.
+
+<P><LI>
+The default_char member specifies the character that will be used when an
+undefined or nonexistent character is printed.  
+The default_char is a 16-bit character (not a 2-byte character).
+For a font using 2-byte matrix format, 
+the default_char has byte1 in the most-significant byte
+and byte2 in the least-significant byte.
+If the default_char itself specifies an undefined or nonexistent character, 
+no printing is performed for an undefined or nonexistent character.
+
+<P><LI>
+The min_bounds and max_bounds members contain the most extreme values of
+each individual 
+<B>XCharStruct</B>
+component over all elements of this array
+(and ignore nonexistent characters).
+The bounding box of the font (the smallest
+rectangle enclosing the shape obtained by superimposing all of the
+characters at the same origin [x,y]) has its upper-left coordinate at:
+
+<BLOCKQUOTE>
+	<I>[x + min_bounds.lbearing, y - max_bounds.ascent]</I>
+</BLOCKQUOTE>
+
+Its width is:
+<BLOCKQUOTE>
+	<I>max_bounds.rbearing - min_bounds.lbearing</I>
+</BLOCKQUOTE>
+
+Its height is:
+
+<BLOCKQUOTE>
+	<I>max_bounds.ascent + max_bounds.descent</I>
+</BLOCKQUOTE>
+
+<P><LI>
+The ascent member is the logical extent of the font above the baseline that is
+used for determining line spacing.
+Specific characters may extend beyond
+this.
+
+<P><LI>
+The descent member is the logical extent of the font at or below the
+baseline that is used for determining line spacing.
+Specific characters may extend beyond this.
+
+<P><LI>
+If the baseline is at Y-coordinate y,
+the logical extent of the font is inclusive between the Y-coordinate 
+values (y - font.ascent) and (y + font.descent - 1).
+Typically,
+the minimum interline spacing between rows of text is given
+by ascent + descent.
+
+</UL>
+
+<P>
+
+For a character origin at [x,y],
+the bounding box of a character (that is, 
+the smallest rectangle that encloses the character's shape)
+described in terms of 
+<B>XCharStruct</B>
+components is a rectangle with its upper-left corner at:
+
+<P>
+
+<BLOCKQUOTE>
+<I>[x + lbearing, y - ascent]</I>
+</BLOCKQUOTE>
+
+<P>
+
+Its width is:
+
+<P>
+
+<BLOCKQUOTE>
+	<I>rbearing - lbearing</U>
+</BLOCKQUOTE>
+
+<P>
+
+Its height is:
+
+<P>
+
+<BLOCKQUOTE>
+<I>ascent + descent</I>
+</BLOCKQUOTE>
+
+<P>
+
+The origin for the next character is defined to be:
+
+<P>
+
+<BLOCKQUOTE>
+<I>[x + width, y]</I>
+</BLOCKQUOTE>
+
+<P>
+
+The lbearing member defines the extent of the left edge of the character ink
+from the origin.
+The rbearing member defines the extent of the right edge of the character ink
+from the origin.
+The ascent member defines the extent of the top edge of the character ink
+from the origin.
+The descent member defines the extent of the bottom edge of the character ink
+from the origin.
+The width member defines the logical width of the character.
+
+<P>
+
+Note that the baseline (the y position of the character origin) 
+is logically viewed as being the scanline just below nondescending characters. 
+When descent is zero,
+only pixels with Y-coordinates less than y are drawn,
+and the origin is logically viewed as being coincident with the left edge of
+a nonkerned character. 
+When lbearing is zero,
+no pixels with X-coordinate less than x are drawn.
+Any of the
+<B>XCharStruct</B>
+metric members could be negative.
+If the width is negative,
+the next character will be placed to the left of the current origin.
+
+<P>
+
+The X protocol does not define the interpretation of the attributes member 
+in the
+<B>XCharStruct</B>
+structure.
+A nonexistent character is represented with all members of its
+<B>XCharStruct</B>
+set to zero.
+
+<P>
+
+A font is not guaranteed to have any properties.
+The interpretation of the property value (for example, long or unsigned long)
+must be derived from <B>a priori</B> knowledge of the property. 
+A basic set of font properties is specified in the X Consortium standard
+<B>X Logical Font Description Conventions</B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="fonts.html">Loading and Freeing Fonts</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

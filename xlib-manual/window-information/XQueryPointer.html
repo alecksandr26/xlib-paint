@@ -1,0 +1,117 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: sXQueryPointer</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XQueryPointer</H1>
+
+<!.IN "XQueryPointer" "" "@DEF@">
+
+<H2>Syntax</H2>
+
+<CODE><PRE>
+Bool XQueryPointer(<B>display</B>, <B>w</B>, <B>root_return</B>, <B>child_return</B>, <B>root_x_return</B>, <B>root_y_return</B>, 
+                     <B>win_x_return</B>, <B>win_y_return</B>, <B>mask_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="../window/">Window</A> <B>w</B>;
+      <A HREF="../window/">Window</A> *<B>root_return</B>, *<B>child_return</B>;
+      int *<B>root_x_return</B>, *<B>root_y_return</B>;
+      int *<B>win_x_return</B>, *<B>win_y_return</B>;
+      unsigned int *<B>mask_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>root_return</B>
+<TD> Returns the root window that the pointer is in.
+
+<TR><TD> <B>child_return</B>
+<TD> Returns the child window that the pointer is located in, if any.
+
+<TR><TD> <B>root_x_return</B><BR><B>root_y_return</B>
+<TD> Return the pointer coordinates relative to the root window's origin.
+
+<TR><TD> <B>win_x_return</B><BR><B>win_y_return</B>
+<TD> Return the pointer coordinates relative to the specified window.
+
+<TR><TD> <B>mask_return</B>
+<TD> Returns the current state of the modifier keys and pointer buttons.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XQueryPointer()</B>
+function returns the root window the pointer is logically on and the pointer
+coordinates relative to the root window's origin.
+If
+<B>XQueryPointer()</B>
+returns 
+<B>False</B>, 
+the pointer is not on the same screen as the specified window, and
+<B>XQueryPointer()</B>
+returns 
+<B>None</B>
+to child_return and zero to win_x_return and win_y_return.
+If 
+<B>XQueryPointer()</B>
+returns 
+<B>True</B>, 
+the pointer coordinates returned to win_x_return and win_y_return
+are relative to the origin of the specified window.
+In this case, 
+<B>XQueryPointer()</B>
+returns the child that contains the pointer, if any,
+or else
+<B>None</B>
+to child_return.
+
+<P>
+
+<B>XQueryPointer()</B>
+returns the current logical state of the keyboard buttons 
+and the modifier keys in mask_return.
+It sets mask_return to the bitwise inclusive OR of one or more
+of the button or modifier key bitmasks to match 
+the current state of the mouse buttons and the modifier keys.
+
+<P>
+
+Note that the logical state of a device (as seen through Xlib)
+may lag the physical state if device event processing is frozen
+(see "<A HREF="../input/pointer-grabbing.html">Pointer Grabbing</A>").
+
+<P>
+
+<B>XQueryPointer()</B>
+can generate a
+<B>BadWindow</B>
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XGetWindowAttributes.html">XGetWindowAttributes()</A></B>,
+<B><A HREF="XQueryTree.html">XQueryTree()</A></B>,
+"<A HREF="translate.html">Translating Screen Coordinates</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

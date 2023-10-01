@@ -1,0 +1,108 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XTextExtents</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XTextExtents</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XTextExtents" "" "@DEF@">
+
+<CODE><PRE>
+XTextExtents(<B>font_struct</B>, <B>string</B>, <B>nchars</B>, <B>direction_return</B>, <B>font_ascent_return</B>,
+              <B>font_descent_return</B>, <B>overall_return</B>)
+      <A HREF="./#XFontStruct">XFontStruct</A> *<B>font_struct</B>;
+      char *<B>string</B>;
+      int <B>nchars</B>;
+      int *<B>direction_return</B>;
+      int *<B>font_ascent_return</B>, *<B>font_descent_return</B>;
+      <A HREF="./#XCharStruct">XCharStruct</A> *<B>overall_return</B>;
+
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>font_struct</B>
+<TD> Specifies the 
+<A HREF="./#XFontStruct">XFontStruct</A> 
+structure.
+
+<TR><TD> <B>string</B>
+<TD> Specifies the character string.
+
+<TR><TD> <B>nchars</B>
+<TD> Specifies the number of characters in the character string.
+
+<TR><TD> <B>direction_return</B>
+<TD> Returns the value of the direction hint
+(<B>FontLeftToRight</B>
+or
+<B>FontRightToLeft</B>).
+
+<TR><TD> <B>font_ascent_return</B>
+<TD> Returns the font ascent.
+
+<TR><TD> <B>font_descent_return</B>
+<TD> Returns the font descent.
+
+<TR><TD> <B>overall_return</B>
+<TD> Returns the overall size in the specified
+<A HREF="./#XCharStruct">XCharStruct</A> 
+structure.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XTextExtents()</B>
+function
+performs the size computation locally and, thereby,
+avoid the round-trip overhead of
+<B><A HREF="XQueryTextExtents.html">XQueryTextExtents()</A></B>
+and
+<B><A HREF="XQueryTextExtents16.html">XQueryTextExtents16()</A></B>.
+The function returns an
+<A HREF="./#XCharStruct">XCharStruct</A>
+structure, whose members are set to the values as follows.
+
+<P>
+
+The ascent member is set to the maximum of the ascent metrics of all
+characters in the string.
+The descent member is set to the maximum of the descent metrics.
+The width member is set to the sum of the character-width metrics of all
+characters in the string.
+For each character in the string,
+let W be the sum of the character-width metrics of all characters preceding 
+it in the string.
+Let L be the left-side-bearing metric of the character plus W.
+Let R be the right-side-bearing metric of the character plus W.
+The lbearing member is set to the minimum L of all characters in the string.
+The rbearing member is set to the maximum R.
+
+<P>
+
+For fonts defined with linear indexing rather than 2-byte matrix indexing,
+each 
+<A HREF="./#XChar2b">XChar2b</A> 
+structure is interpreted as a 16-bit number with byte1 as the 
+most-significant byte.
+If the font has no defined default character,
+undefined characters in the string are taken to have all zero metrics.
+
+<H2>See also</H2>
+
+<B><A HREF="XQueryTextExtents.html">XQueryTextExtents()</A></B>,
+<B><A HREF="XQueryTextExtents16.html">XQueryTextExtents16()</A></B>,
+<B><A HREF="XTextExtents16.html">XTextExtents16()</A></B>,
+"<A HREF="computing-logical-extent.html">Computing Logical Extents</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XRotateBuffers</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XRotateBuffers</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XRotateBuffers" "" "@DEF@">
+
+<CODE><PRE>
+XRotateBuffers(<B>display</B>, <B>rotate</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      int <B>rotate</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>rotate</B>
+<TD> Specifies how much to rotate the cut buffers.
+
+</TABLE>
+
+<H2>Description</H2>
+ 
+The
+<B>XRotateBuffers()</B>
+function rotates the cut
+buffers, such that buffer 0 becomes buffer n, 
+buffer 1 becomes n + 1 mod 8, and so on.
+This cut buffer numbering is global to the display.
+Note that
+<B>XRotateBuffers()</B>
+generates
+<B>BadMatch</B>
+errors if any of the eight buffers have not been created.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XFetchBuffer.html">XFetchBuffer()</A></B>,
+<B><A HREF="XFetchBytes.html">XFetchBytes()</A></B>,
+<B><A HREF="XStoreBuffer.html">XStoreBuffer()</A></B>,
+<B><A HREF="XStoreBytes.html">XStoreBytes()</A></B>,
+"<A HREF="using-cut-buffers.html">Using Cut Buffers</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

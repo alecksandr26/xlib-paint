@@ -1,0 +1,47 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XFreeFontNames</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XFreeFontNames</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XFreeFontNames" "" "@DEF@">
+
+<CODE><PRE>
+XFreeFontNames(<B>list</B>)
+      char *<B>list</B>[];
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>list</B>
+<TD> Specifies the array of strings you want to free.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XFreeFontNames()</B>
+function frees the array and strings returned by
+<B><A HREF="XListFonts.html">XListFonts()</A></B>
+or
+<B><A HREF="XListFontsWithInfo.html">XListFontsWithInfo()</A></B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XListFonts.html">XListFonts()</A></B>,
+<B><A HREF="XListFontsWithInfo.html">XListFontsWithInfo()</A></B>,
+<B><A HREF="XLoadFont.html">XLoadFont()</A></B>,
+<B><A HREF="../../window-and-session-manager/XSetFontPath.html">XSetFontPath()</A></B>,
+"<A HREF="names.html">Obtaining and Freeing Font Names and Information</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

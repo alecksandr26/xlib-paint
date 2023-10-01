@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetVisualInfo</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetVisualInfo</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetVisualInfo" "" "@DEF@">
+
+<CODE><PRE>
+XVisualInfo *XGetVisualInfo(<B>display</B>, <B>vinfo_mask</B>, <B>vinfo_template</B>, <B>nitems_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      long <B>vinfo_mask</B>;
+      <A HREF="visual.html#XVisualInfo">XVisualInfo</A> *<B>vinfo_template</B>;
+      int *<B>nitems_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>vinfo_mask</B>
+<TD> Specifies the visual mask value.
+
+<TR><TD> <B>vinfo_template</B>
+<TD> Specifies the visual attributes that are to be used in matching the visual
+structures.
+
+<TR><TD> <B>nitems_return</B>
+<TD> Returns the number of matching visual structures.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B><A HREF="XGetVisualInfo.html">XGetVisualInfo()</A></B>
+function returns a list of visual structures that have attributes 
+equal to the attributes specified by vinfo_template.
+If no visual structures match the template using the specified vinfo_mask,
+<B><A HREF="XGetVisualInfo.html">XGetVisualInfo()</A></B>
+returns a NULL.
+To free the data returned by this function, use
+<B><A HREF="../display/XFree.html">XFree()</A></B>.
+
+<H2>See also</H2>
+
+<B><A HREF="../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XMatchVisualInfo.html">XMatchVisualInfo()</A></B>,
+<B><A HREF="../window/XVisualIDFromVisual.html">XVisualIDFromVisual()</A></B>,
+"<A HREF="visual.html">Determining the Appropriate Visual Type</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

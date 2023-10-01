@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Graphics Functions</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>Chapter 8: Graphics Functions</H1>
+
+Once you have established a connection to a display,
+you can use the Xlib graphics functions to:
+
+<UL>
+<P><LI>
+<A HREF="clearing-areas.html">Clear and copy areas</A>
+
+<P><LI>
+<A HREF="drawing/">Draw points, lines, rectangles, and arcs</A>
+
+<P><LI>
+<A HREF="filling-areas/">Fill areas</A>
+
+<P><LI>
+<A HREF="font-metrics/">Manipulate fonts</A>
+
+<P><LI>
+<A HREF="drawing-text/">Draw text</A>
+
+<P><LI>
+<A HREF="images.html">Transfer images between clients and the server</A>
+
+</UL>
+
+<P>
+
+If the same drawable and GC is used for each call,
+Xlib batches back-to-back calls to
+<B><A HREF="drawing/XDrawPoint.html">XDrawPoint()</A></B>,
+<B><A HREF="drawing/XDrawLine.html">XDrawLine()</A></B>,
+<B><A HREF="drawing/XDrawRectangle.html">XDrawRectangle()</A></B>,
+<B><A HREF="filling-areas/XFillArc.html">XFillArc()</A></B>,
+and
+<B><A HREF="filling-areas/XFillRectangle.html">XFillRectangle()</A></B>.
+Note that this reduces the total number of requests sent to the server.
+
+<H5 ALIGN=right><I>Next: <A HREF="clearing-areas.html">Clearing Areas</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,136 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XAllocColorCells</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XAllocColorCells</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Read/write colormap cells" "allocating">
+<!.IN "Allocation" "read/write colormap cells">
+<!.IN "Color" "allocation">
+<!.IN "XAllocColorCells" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../introduction/errors.html#Status">Status</A></B> XAllocColorCells(<B>display</B>, <B>colormap</B>, <B>contig</B>, <B>plane_masks_return</B>, <B>nplanes</B>, 
+                          <B>pixels_return</B>, <B>npixels</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="./#colormap">Colormap</A> <B>colormap</B>;
+      Bool <B>contig</B>;
+      unsigned long <B>plane_masks_return</B>[];
+      unsigned int <B>nplanes</B>;
+      unsigned long <B>pixels_return</B>[];
+      unsigned int <B>npixels</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>colormap</B>
+<TD> Specifies the colormap.
+
+<TR><TD> <B>contig</B>
+<TD> Specifies a Boolean value that indicates whether the planes must be contiguous.
+
+<TR><TD> <B>plane_mask_return</B>
+<TD> Returns an array of plane masks.
+
+<TR><TD> <B>nplanes</B>
+<TD> Specifies the number of plane masks that are to be returned in the plane masks 
+array. 
+
+<TR><TD> <B>pixels_return</B>
+<TD> Returns an array of pixel values. 
+
+<TR><TD> <B>npixels</B>
+<TD> Specifies the number of pixel values that are to be returned in the 
+pixels_return array. 
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XAllocColorCells()</B>
+function allocates read/write color cells.
+The number of colors must be positive and the number of planes nonnegative,
+or a
+<B>BadValue</B>
+error results.
+If ncolors and nplanes are requested, 
+then ncolors pixels
+and nplane plane masks are returned.
+No mask will have any bits set to 1 in common with
+any other mask or with any of the pixels.
+By ORing together each pixel with zero or more masks,
+<I>ncolors * 2<SUP>nplanes</SUP></I> distinct pixels can be produced.
+All of these are
+allocated writable by the request.
+For 
+<B><A HREF="../window/visual-types.html">GrayScale</A></B> 
+or 
+<B><A HREF="../window/visual-types.html">PseudoColor</A></B> , 
+each mask has exactly one bit set to 1. 
+For 
+<B><A HREF="../window/visual-types.html">DirectColor</A></B> , 
+each has exactly three bits set to 1.
+If contig is 
+<B>True</B>
+and if all masks are ORed
+together, a single contiguous set of bits set to 1 will be formed for 
+<B><A HREF="../window/visual-types.html">GrayScale</A></B>
+or 
+<B><A HREF="../window/visual-types.html">PseudoColor</A></B> 
+and three contiguous sets of bits set to 1 (one within each
+pixel subfield) for 
+<B><A HREF="../window/visual-types.html">DirectColor</A></B> .
+The RGB values of the allocated
+entries are undefined.
+<B>XAllocColorCells()</B>
+returns nonzero if it succeeded or zero if it failed.
+
+<P>
+
+<B>XAllocColorCells()</B>
+can generate
+<B>BadColor</B>
+and
+<B>BadValue</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadColor</B>
+<TD>  A value for a Colormap argument does not name a
+      defined Colormap.
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocColor.html">XAllocColor()</A></B>,
+<B><A HREF="XAllocColorPlanes.html">XAllocColorPlanes()</A></B>,
+<B><A HREF="XAllocNamedColor.html">XAllocNamedColor()</A></B>,
+<B><A HREF="XCreateColormap.html">XCreateColormap()</A></B>,
+<B><A HREF="XFreeColors.html">XFreeColors()</A></B>,
+<B><A HREF="XQueryColor.html">XQueryColor()</A></B>,
+<B><A HREF="XStoreColors.html">XStoreColors()</A></B>,
+"<A HREF="cell.html">Allocating and Freeing Color Cells</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,151 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XDrawText16</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XDrawText16</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XDrawText16" "" "@DEF@">
+
+<CODE><PRE>
+XDrawText16(<B>display</B>, <B>d</B>, <B>gc</B>, <B>x</B>, <B>y</B>, <B>items</B>, <B>nitems</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Drawable <B>d</B>;
+      <A HREF="../../GC/manipulating.html">GC</A> <B>gc</B>;
+      int <B>x</B>, <B>y</B>;
+      <A HREF="./#XTextItem16">XTextItem16</A> *<B>items</B>;
+      int <B>nitems</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>d</B>
+<TD> Specifies the drawable. 
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>x</B><BR>
+	<B>y</B>
+<TD> Specify the x and y coordinates, which are relative to the origin of the specified drawable and define the origin of the first character.
+
+<TR><TD> <B>items</B>
+<TD> Specifies an array of text items.
+
+<TR><TD> <B>nitems</B>
+<TD> Specifies the number of text items in the array.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XDrawText16()</B>
+function is similar to
+<B><A HREF="XDrawText.html">XDrawText()</A></B>
+except that it uses 2-byte or 16-bit characters.
+Both functions allow complex spacing and font shifts between counted strings.
+
+<P>
+
+Each text item is processed in turn.
+A font member other than 
+<B>None</B>
+in an item causes the font to be stored in the GC
+and used for subsequent text.  
+A text element delta specifies an additional change
+in the position along the x axis before the string is drawn. 
+The delta is always added to the character origin
+and is not dependent on any characteristics of the font.
+Each character image, as defined by the font in the GC, is treated as an
+additional mask for a fill operation on the drawable.
+The drawable is modified only where the font character has a bit set to 1.
+If a text item generates a
+<B>BadFont</B>
+error, the previous text items may have been drawn.
+
+<P>
+
+For fonts defined with linear indexing rather than 2-byte matrix indexing,
+each 
+<A HREF="../font-metrics/#XChar2b">XChar2b</A>
+structure is interpreted as a 16-bit number with byte1 as the 
+most-significant byte.
+
+<P>
+
+The function uses these GC components:
+<A HREF="../../GC/manipulating.html#function">function</A>,
+<A HREF="../../GC/manipulating.html#plane-mask">plane-mask</A>,
+<A HREF="../../GC/manipulating.html#fill-style">fill-style</A>,
+<A HREF="../../GC/manipulating.html">font</A>,
+<A HREF="../../GC/manipulating.html#subwindow-mode">subwindow-mode</A>, 
+<A HREF="../../GC/manipulating.html#clip-mask">clip-x-origin</A>,
+<A HREF="../../GC/manipulating.html#clip-mask">clip-y-origin</A>, and 
+<A HREF="../../GC/manipulating.html#clip-mask">clip-mask</A>.
+It also uses these GC mode-dependent components: 
+<A HREF="../../GC/manipulating.html#foreground">foreground</A>,
+<A HREF="../../GC/manipulating.html#background">background</A>, 
+<A HREF="../../GC/manipulating.html#tile">tile</A>,
+<A HREF="../../GC/manipulating.html#stipple">stipple</A>, 
+<A HREF="../../GC/manipulating.html#tile">tile-stipple-x-origin</A>, 
+and 
+<A HREF="../../GC/manipulating.html#tile">tile-stipple-y-origin</A>.
+
+<P>
+
+<B>XDrawText16()</B>
+can generate
+<B>BadDrawable</B> ,
+<B>BadFont</B> ,
+<B>BadGC</B> ,
+and
+<B>BadMatch</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+<TR><TD><B>BadFont</B>
+<TD>A value for a font argument does not name a defined font (or, in some cases, 
+    <B><A HREF="../GContext.html">GContext</A></B>).
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../GContext.html">GContext</A></B> 
+	argument does not name a defined 
+	<B><A HREF="../GContext.html">GContext</A></B>.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XDrawText.html">XDrawText()</A></B>,
+<B><A HREF="XDrawImageString.html">XDrawImageString()</A></B>,
+<B><A HREF="../font-metrics/XLoadFont.html">XLoadFont()</A></B>,
+<B><A HREF="XDrawString.html">XDrawString()</A></B>,
+"<A HREF="complex.html">Drawing Complex Text</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

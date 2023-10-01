@@ -1,0 +1,89 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XParseColor</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XParseColor</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Color" "naming">
+<!.IN "XParseColor" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../introduction/errors.html#Status">Status</A></B> XParseColor(<B>display</B>, <B>colormap</B>, <B>spec</B>, <B>exact_def_return</B>)
+        <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+        <A HREF="./#colormap">Colormap</A> <B>colormap</B>;
+        char *<B>spec</B>;
+        <A HREF="structures.html">XColor</A> *<B>exact_def_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>colormap</B>
+<TD> Specifies the colormap.
+
+<TR><TD> <B>spec</B>
+<TD> Specifies the color name string;
+case is ignored.
+
+<TR><TD> <B>exact_def_return</B>
+<TD> Returns the exact color value for later use and sets the
+<B>DoRed</B> ,
+<B>DoGreen</B> ,
+and
+<B>DoBlue</B>
+flags.
+
+</TABLE>
+
+<H2>Description</H2>
+ 
+The
+<B>XParseColor()</B>
+function looks up the string name of a color with respect to the screen
+associated with the specified colormap.
+It returns the exact color value.
+If the color name is not in the Host Portable Character Encoding, 
+the result is implementation dependent.
+Use of uppercase or lowercase does not matter.
+<B>XParseColor()</B>
+returns nonzero if the name is resolved;
+otherwise, it returns zero.
+
+<P>
+
+<B>XParseColor()</B>
+can generate a
+<B>BadColor</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadColor</B>
+<TD>  A value for a Colormap argument does not name a
+      defined Colormap.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocColor.html">XAllocColor()</A></B>,
+<B><A HREF="XCreateColormap.html">XCreateColormap()</A></B>,
+<B><A HREF="XLookupColor.html">XLookupColor()</A></B>,
+<B><A HREF="XQueryColor.html">XQueryColor()</A></B>,
+<B><A HREF="XQueryColors.html">XQueryColors()</A></B>,
+<B><A HREF="XStoreColors.html">XStoreColors()</A></B>,
+"<A HREF="mapping-names-to-values.html">Mapping Color Names to Values</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

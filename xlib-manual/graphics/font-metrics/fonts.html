@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Loading and Freeing Fonts</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>8.5.1 Loading and Freeing Fonts</H1>
+
+Xlib provides functions that you can use to load fonts, get font information,
+unload fonts, and free font information.
+<!.IN "Fonts" "getting information">
+<!.IN "Fonts" "unloading">
+<!.IN "Fonts" "freeing font information">
+A few font functions use a 
+<B><A HREF="../../my-own/gcontext.html">GContext</A></B> 
+resource ID or a font ID interchangeably.
+
+<P>
+
+To load a given font, use
+<B><A HREF="XLoadFont.html">XLoadFont()</A></B>.
+
+<P>
+
+To return information about an available font, use
+<B><A HREF="XQueryFont.html">XQueryFont()</A></B>.
+
+<P>
+
+To perform a
+<B><A HREF="XLoadFont.html">XLoadFont()</A></B>
+and
+<B><A HREF="XQueryFont.html">XQueryFont()</A></B>
+in a single operation, use
+<B><A HREF="XLoadQueryFont.html">XLoadQueryFont()</A></B>.
+
+<P>
+
+To unload the font and free the storage used by the font structure
+that was allocated by
+<B><A HREF="XQueryFont.html">XQueryFont()</A></B>
+or
+<B><A HREF="XLoadQueryFont.html">XLoadQueryFont()</A></B>,
+use
+<B><A HREF="XFreeFont.html">XFreeFont()</A></B>.
+
+<P>
+
+To return a given font property, use
+<B><A HREF="XGetFontProperty.html">XGetFontProperty()</A></B>.
+
+<P>
+
+To unload a font that was loaded by
+<B><A HREF="XLoadFont.html">XLoadFont()</A></B>, 
+use
+<B><A HREF="XUnloadFont.html">XUnloadFont()</A></B>.
+
+<P>
+
+<H5 ALIGN=right><I>Next: <A HREF="names.html">Obtaining and Freeing Font Names and Information</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,88 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Creating and Storing Databases</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>15.4 Creating and Storing Databases</H1>
+
+<!.IN "XrmDatabase" "" "@DEF@">
+A resource database is an opaque type,
+<B>XrmDatabase</B>.
+Each database value is stored in an
+<B>XrmValue</B>
+structure.
+This structure consists of a size, an address, and a representation type.
+The size is specified in bytes.
+The representation type is a way for you to store data tagged by some 
+application-defined type (for example, the strings ``font'' or ``color'').
+It has nothing to do with the C data type or with its class. 
+The
+<B>XrmValue</B> 
+structure is defined as:
+
+<P>
+
+<!.IN "XrmValue" "" "@DEF@">
+<PRE><CODE>
+typedef struct {
+	unsigned int size;
+	XPointer addr;
+} XrmValue, *XrmValuePtr;
+</PRE></CODE>
+
+<P>
+
+To initialize the resource manager, use
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>.
+
+<P>
+
+To retrieve a database from disk, use
+<B><A HREF="XrmGetFileDatabase.html">XrmGetFileDatabase()</A></B>.
+
+<P>
+
+To store a copy of a database to disk, use
+<B><A HREF="XrmPutFileDatabase.html">XrmPutFileDatabase()</A></B>.
+
+<P>
+
+To obtain a pointer to the screen independent resources of a display, use
+<B><A HREF="XResourceManagerString.html">XResourceManagerString()</A></B>.
+
+<P>
+
+To obtain a pointer to the screen-specific resources of a screen, use
+<B><A HREF="XScreenResourceString.html">XScreenResourceString()</A></B>.
+
+<P>
+
+To create a database from a string, use
+<B><A HREF="XrmGetStringDatabase.html">XrmGetStringDatabase()</A></B>.
+
+<P>
+
+To obtain locale name of a database, use
+<B><A HREF="XrmLocaleOfDatabase.html">XrmLocaleOfDatabase()</A></B>.
+
+<P>
+
+To destroy a resource database and free its allocated memory, use
+<B><A HREF="XrmDestroyDatabase.html">XrmDestroyDatabase()</A></B>.
+
+<P>
+
+To associate a resource database with a display, use
+<B><A HREF="XrmSetDatabase.html">XrmSetDatabase()</A></B>.
+
+<P>
+
+To get the resource database associated with a display, use
+<B><A HREF="XrmGetDatabase.html">XrmGetDatabase()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="merging-databases.html">Merging Resource Databases</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

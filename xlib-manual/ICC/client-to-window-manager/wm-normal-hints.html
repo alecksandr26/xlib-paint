@@ -1,0 +1,137 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Setting and Reading the WM_NORMAL_HINTS Property</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>14.1.7 Setting and Reading the WM_NORMAL_HINTS Property</H1>
+
+Xlib provides functions that you can use to set or read 
+the <A HREF="/gui/x/icccm/sec-4.html#WM_NORMAL_HINTS">WM_NORMAL_HINTS</A> property for a given window.
+The functions use the flags and the
+<B>XSizeHints</B>
+structure, as defined in the
+<B><TT>X11/Xutil.h</TT></B>
+header file.
+
+<P>
+
+The size of the
+<B>XSizeHints</B>
+structure may grow in future releases, as new components are
+added to support new <A HREF="/gui/x/icccm/">ICCCM</A> features.
+Passing statically allocated instances of this structure into
+Xlib may result in memory corruption when running against a
+future release of the library.
+As such, it is recommended that only dynamically allocated
+instances of the structure be used.
+
+<P>
+
+To allocate an
+<B>XSizeHints</B>
+structure, use
+<B><A HREF="XAllocSizeHints.html">XAllocSizeHints()</A></B>.
+
+<A NAME="XSizeHints"></A>
+<P>
+
+The
+<B>XSizeHints</B>
+structure contains:
+
+<P>
+
+<PRE><CODE>
+/* Size hints mask bits */
+
+#define <B>USPosition</B>	(1L << 0)	/* user specified x, y */
+#define <B>USSize</B>		(1L << 1)	/* user specified width, height */
+#define <B>PPosition</B>	(1L << 2)	/* program specified position */
+#define <B>PSize</B>		(1L << 3)	/* program specified size */
+#define <B>PMinSize</B>	(1L << 4)	/* program specified minimum size */
+#define <B>PMaxSize</B>	(1L << 5)	/* program specified maximum size */
+#define <B>PResizeInc</B>	(1L << 6)	/* program specified resize increments */
+#define <B>PAspect</B>		(1L << 7)	/* program specified min and max aspect ratios */
+#define <B>PBaseSize</B>	(1L << 8)
+#define <B>PWinGravity</B>	(1L << 9)
+#define <B>PAllHints</B>	(PPosition|PSize|PMinSize|PMaxSize|PResizeInc|PAspect)
+</PRE></CODE>
+
+<!.IN "XSizeHints" "" "@DEF@">
+<PRE><CODE>
+/* Values */
+
+typedef struct {
+	long flags;		/* marks which fields in this structure are defined */
+	int x, y;		/* Obsolete */
+	int width, height;	/* Obsolete */
+	int min_width, min_height;
+	int max_width, max_height;
+	int width_inc, height_inc;
+	struct {
+	       int x;		/* numerator */
+	       int y;		/* denominator */
+	} min_aspect, max_aspect;
+	int base_width, base_height;
+	int win_gravity;
+	/* this structure may be extended in the future */
+} XSizeHints;
+</PRE></CODE>
+
+<P>
+
+The <B>x</B>, <B>y</B>, <B>width</B>, and <B>height</B> members are now obsolete
+and are left solely for compatibility reasons.
+The <B>min_width</B> and <B>min_height</B> members specify the
+minimum window size that still allows the application to be useful.
+The <B>max_width</B> and <B>max_height</B> members specify the maximum window size.
+The <B>width_inc</B> and <B>height_inc</B> members define an arithmetic progression of
+sizes (minimum to maximum) into which the window prefers to be resized.
+The <B>min_aspect</B> and <B>max_aspect</B> members are expressed
+as ratios of <B>x</B> and <B>y</B>, 
+and they allow an application to specify the range of aspect
+ratios it prefers.
+The <B>base_width</B> and <B>base_height</B> members define the desired size of the window.
+The window manager will interpret the position of the window 
+and its border width to position the point of the outer rectangle 
+of the overall window specified by the <B>win_gravity</B> member.
+The outer rectangle of the window includes any borders or decorations
+supplied by the window manager.
+In other words,
+if the window manager decides to place the window where the client asked,
+the position on the parent window's border named by the win_gravity 
+will be placed where the client window would have been placed 
+in the absence of a window manager.
+
+<P>
+
+Note that use of the
+<B>PAllHints</B>
+macro is highly discouraged.
+
+<P>
+
+To set a window's <A HREF="/gui/x/icccm/sec-4.html#WM_NORMAL_HINTS">WM_NORMAL_HINTS</A> property, use
+<B><A HREF="XSetWMNormalHints.html">XSetWMNormalHints()</A></B>.
+
+<P>
+
+To read a window's <A HREF="/gui/x/icccm/sec-4.html#WM_NORMAL_HINTS">WM_NORMAL_HINTS</A> property, use
+<B><A HREF="XGetWMNormalHints.html">XGetWMNormalHints()</A></B>.
+
+<P>
+
+To set a window's <A HREF="/gui/x/icccm/sec-4.html#WM_NORMAL_HINTS">WM_SIZE_HINTS</A> property, use
+<B><A HREF="XSetWMSizeHints.html">XSetWMSizeHints()</A></B>.
+
+<P>
+
+To read a window's <A HREF="/gui/x/icccm/sec-4.html#WM_NORMAL_HINTS">WM_SIZE_HINTS</A> property, use
+<B><A HREF="XGetWMSizeHints.html">XGetWMSizeHints()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="wm-class.html">Setting and Reading the WM_CLASS Property</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

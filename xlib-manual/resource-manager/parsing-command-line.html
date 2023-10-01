@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Parsing Command Line Options</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>15.9 Parsing Command Line Options</H1>
+
+The
+<B><A HREF="XrmParseCommand.html">XrmParseCommand()</A></B>
+function can be used to parse the command line arguments to a program
+and modify a resource database with selected entries from the command line.
+
+<A NAME="XrmOptionKind"></A>
+<P>
+
+<!.IN "XrmOptionKind" "" "@DEF@">
+<PRE><CODE>
+typedef enum {
+	XrmoptionNoArg,		/* Value is specified in XrmOptionDescRec.value		*/
+	XrmoptionIsArg,		/* Value is the option string itself			*/
+	XrmoptionStickyArg,	/* Value is characters immediately following option	*/
+	XrmoptionSepArg,	/* Value is next argument in argv			*/
+	XrmoptionResArg,	/* Resource and value in next argument in argv 		*/
+	XrmoptionSkipArg,	/* Ignore this option and the next argument in argv	*/
+	XrmoptionSkipLine,	/* Ignore this option and the rest of argv		*/
+	XrmoptionSkipNArgs	/* Ignore this option and the next
+				     XrmOptionDescRec.value arguments in argv 		*/
+} XrmOptionKind;
+</PRE></CODE>
+
+<P>
+
+Note that
+<B>XrmoptionSkipArg</B>
+is equivalent to 
+<B>XrmoptionSkipNArgs</B>
+with the
+<B>XrmOptionDescRec.value</B>
+field containing the value one.
+Note also that the value zero for
+<B>XrmoptionSkipNArgs</B>
+indicates that only the option itself is to be skipped.
+
+<A NAME="XrmOptionDescRec"></A>
+<P>
+
+<!.IN "XrmOptionDescRec" "" "@DEF@">
+<PRE><CODE>
+typedef struct {
+	char *option;		/* Option specification string in argv		    	*/
+	char *specifier;	/* Binding and resource name (sans application name)    */
+	XrmOptionKind argKind;	/* Which style of option it is	    			*/
+	XPointer value;		/* Value to provide if XrmoptionNoArg or 
+				     XrmoptionSkipNArgs   				*/
+} XrmOptionDescRec, *XrmOptionDescList;
+</PRE></CODE>
+
+<P>
+
+To load a resource database from a C command line, use
+<B><A HREF="XrmParseCommand.html">XrmParseCommand()</A></B>.
+
+<H5 ALIGN=right><I>Next Chapter: <A HREF="../utilities/">Application Utility Functions</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

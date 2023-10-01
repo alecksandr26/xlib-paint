@@ -1,0 +1,80 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XStringListToTextProperty</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XStringListToTextProperty</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XStringListToTextProperty" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../../introduction/errors.html#Status">Status</A></B> XStringListToTextProperty(<B>list</B>, <B>count</B>, <B>text_prop_return</B>)
+      char **<B>list</B>;
+      int <B>count</B>;
+      <A HREF="converting-string-lists.html">XTextProperty</A> *<B>text_prop_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>list</B>
+<TD> Specifies a list of null-terminated character strings.
+
+<TR><TD> <B>count</B>
+<TD> Specifies the number of strings.
+
+<TR><TD> <B>text_prop_return</B>
+<TD> Returns the
+<A HREF="converting-string-lists.html">XTextProperty</A>
+structure.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The 
+<B>XStringListToTextProperty()</B>
+function sets the specified 
+<A HREF="converting-string-lists.html">XTextProperty</A>
+to be of type STRING (format 8) with a value representing the
+concatenation of the specified list of null-separated character strings.
+An extra null byte (which is not included in the nitems member) 
+is stored at the end of the value field of text_prop_return.
+The strings are assumed (without verification) to be in the STRING encoding.
+If insufficient memory is available for the new value string, 
+<B>XStringListToTextProperty()</B>
+does not set any fields in the
+<A HREF="converting-string-lists.html">XTextProperty</A>
+structure and returns a zero status.
+Otherwise, it returns a nonzero status.
+To free the storage for the value field, use 
+<B><A HREF="../../display/XFree.html">XFree()</A></B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocClassHint.html">XAllocClassHint()</A></B>,
+<B><A HREF="XAllocIconSize.html">XAllocIconSize()</A></B>,
+<B><A HREF="XAllocSizeHints.html">XAllocSizeHints()</A></B>,
+<B><A HREF="XAllocWMHints.html">XAllocWMHints()</A></B>,
+<B><A HREF="../../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XFreeStringList.html">XFreeStringList()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetCommand.html">XSetCommand()</A></B>,
+<B><A HREF="XSetTransientForHint.html">XSetTransientForHint()</A></B>,
+<B><A HREF="XSetTextProperty.html">XSetTextProperty()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetWMClientMachine.html">XSetWMClientMachine()</A></B>,
+<B><A HREF="XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B>,
+<B><A HREF="XSetWMIconName.html">XSetWMIconName()</A></B>,
+<B><A HREF="XSetWMName.html">XSetWMName()</A></B>,
+<B><A HREF="XSetWMProperties.html">XSetWMProperties()</A></B>,
+<B><A HREF="XSetWMProtocols.html">XSetWMProtocols()</A></B>,
+<B><A HREF="XTextPropertyToStringList.html">XTextPropertyToStringList()</A></B>,
+"<A HREF="converting-string-lists.html">Converting String Lists</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

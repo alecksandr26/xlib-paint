@@ -1,0 +1,89 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XQueryTree</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XQueryTree</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Child Window">
+<!.IN "Parent Window">
+<!.IN "XQueryTree" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="../introduction/errors.html#Status">Status</A> XQueryTree(<B>display</B>, <B>w</B>, <B>root_return</B>, <B>parent_return</B>, <B>children_return</B>, <B>nchildren_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      Window *<B>root_return</B>;
+      Window *<B>parent_return</B>;
+      Window **<B>children_return</B>;
+      unsigned int *<B>nchildren_return</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window whose list of children, root, parent, and number of children you want to obtain.
+
+<TR><TD> <B>root_return</B>
+<TD> Returns the root window.
+
+<TR><TD> <B>parent_return</B>
+<TD> Returns the parent window.
+
+<TR><TD> <B>children_return</B>
+<TD> Returns the list of children.
+
+<TR><TD> <B>nchildren_return</B>
+<TD> Returns the number of children.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XQueryTree()</B>
+function returns the root ID, the parent window ID, 
+a pointer to the list of children windows
+(NULL when there are no children), 
+and the number of children in the list for the specified window.
+The children are listed in current stacking order, from bottommost 
+(first) to topmost (last).
+<B>XQueryTree()</B>
+returns zero if it fails and nonzero if it succeeds.
+To free a non-NULL children list when it is no longer needed, use 
+<B><A HREF="../display/XFree.html">XFree()</A></B>.
+
+<P>
+
+<B>XQueryTree()</B>
+can generate a
+<B>BadWindow</B>
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XGetWindowAttributes.html">XGetWindowAttributes()</A></B>,
+<B><A HREF="XQueryPointer.html">XQueryPointer()</A></B>,
+"<A HREF="obtain.html">Obtaining Window Information</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

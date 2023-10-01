@@ -3,13 +3,15 @@
  */
 
 #include <X11/Xlib.h>
-#include <err.h>
+#include <unittest.h>
 
-int main(void)
-{
-	Display *dp = XOpenDisplay(NULL); /* Open the defualt dispaly */
-	if (dp == NULL) errx(1, "The display should be open can't be null");
+TESTCASE(TestOpenDisplay) {
+	/* Open the defualt dispaly */
+	Display *dp = XOpenDisplay(NULL);
+
+	TEST(OpenDisplay) {
+		ASSERT(dp != NULL, "The display weren't able to open");
+	}
 
 	XCloseDisplay(dp);
-	return 0;
-}
+} ENDTESTCASE

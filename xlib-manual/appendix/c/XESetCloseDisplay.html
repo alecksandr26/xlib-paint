@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Extensions: XESetCloseDisplay</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XESetCloseDisplay</H1>
+
+<H2>Syntax</H2>
+
+
+<!.IN "XESetCloseDisplay" "" "@DEF@">
+
+<CODE><PRE>
+int (*XESetCloseDisplay(<B>display</B>, <B>extension</B>, <B>proc</B>))()
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      int <B>extension</B>;
+      int (*<B>proc</B>)();
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>extension</B>
+<TD> Specifies the extension number.
+
+<TR><TD> <B>proc</B>
+<TD> Specifies the procedure to call when the display is closed.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XESetCloseDisplay()</B>
+function defines a procedure to be called whenever
+<B><A HREF="../../display/XCloseDisplay.html">XCloseDisplay()</A></B>
+is called.  
+It returns any previously defined procedure, usually NULL.
+
+<P>
+
+When 
+<B><A HREF="../../display/XCloseDisplay.html">XCloseDisplay()</A></B>
+is called, 
+your procedure is called 
+with these arguments:
+
+<P>
+
+<PRE><CODE>
+(*<B>proc</B>)(<B>display</B>, <B>codes</B>)
+	Display *<B>display</B>;
+	XExtCodes *<B>codes</B>;
+</PRE></CODE>
+
+<H2>See also</H2>
+
+<B><A HREF="XESetBeforeFlush.html">XESetBeforeFlush()</A></B>,
+<B><A HREF="XESetCopyGC.html">XESetCopyGC()</A></B>,
+<B><A HREF="XESetCreateFont.html">XESetCreateFont()</A></B>,
+<B><A HREF="XESetCreateGC.html">XESetCreateGC()</A></B>,
+<B><A HREF="XESetError.html">XESetError()</A></B>,
+<B><A HREF="XESetErrorString.html">XESetErrorString()</A></B>,
+<B><A HREF="XESetEventToWire.html">XESetEventToWire()</A></B>,
+<B><A HREF="XESetFlushGC.html">XESetFlushGC()</A></B>,
+<B><A HREF="XESetFreeFont.html">XESetFreeFont()</A></B>,
+<B><A HREF="XESetFreeGC.html">XESetFreeGC()</A></B>,
+<B><A HREF="XESetPrintErrorValues.html">XESetPrintErrorValues()</A></B>,
+<B><A HREF="XESetWireToError.html">XESetWireToError()</A></B>,
+<B><A HREF="XESetWireToEvent.html">XESetWireToEvent()</A></B>,
+<B><A HREF="_XSetLastRequestRead.html">_XSetLastRequestRead()</A></B>,
+"<A HREF="hooks-into-the-library.html">Hooks into the Library</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

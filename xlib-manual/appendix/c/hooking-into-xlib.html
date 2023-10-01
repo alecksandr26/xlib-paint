@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Extensions: Hooking into Xlib </TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>Hooking into Xlib </H1>
+
+These functions allow you to hook into the library.  
+They are not normally used by application programmers but are used 
+by people who need to extend the core X protocol and
+the X library interface.
+The functions, which generate protocol requests for X, are typically
+called stubs.
+
+<P>
+
+In extensions, stubs first should check to see if they have initialized 
+themselves on a connection.
+If they have not, they then should call 
+<B><A HREF="XInitExtension.html">XInitExtension()</A></B>
+to attempt to initialize themselves on the connection.
+
+<P>
+
+If the extension needs to be informed of GC/font allocation or
+deallocation or if the extension defines new event types, 
+the functions described here allow the extension to be 
+called when these events occur.
+
+<A NAME="XExtCodes"></A>
+<P>
+
+The
+<B>XExtCodes</B>
+structure returns the information from 
+<B><A HREF="XInitExtension.html">XInitExtension()</A></B>
+and is defined in
+<B><TT>X11/Xlib.h : </TT></B>
+
+<P>
+
+<!.IN "XExtCodes" "" "@DEF@">
+<PRE><CODE>
+typedef struct _XExtCodes {	/* public to extension, cannot be changed */
+	int extension;	/* extension number */
+	int major_opcode;	/* major op-code assigned by server */
+	int first_event;	/* first event number for the extension */
+	int first_error;	/* first error number for the extension */
+} XExtCodes;
+</PRE></CODE>
+
+<P>
+
+To allocate an 
+<B>XExtCodes</B>, use
+<B><A HREF="XAddExtension.html">XAddExtension()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="hooks-into-the-library.html">Hooks into the Library</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

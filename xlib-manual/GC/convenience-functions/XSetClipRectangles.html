@@ -1,0 +1,162 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetClipRectangles</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetClipRectangles</H1>
+
+<!.IN "XSetClipRectangles" "" "@DEF@">
+
+<CODE><PRE>
+XSetClipRectangles(<B>display</B>, <B>gc</B>, <B>clip_x_origin</B>, <B>clip_y_origin</B>, <B>rectangles</B>, <B>n</B>, <B>ordering</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="../manipulating.html">GC</A> <B>gc</B>;
+      int <B>clip_x_origin</B>, <B>clip_y_origin</B>;
+      <A HREF="../../graphics/drawing/#XRectangle">XRectangle</A> <B>rectangles</B>[];
+      int <B>n</B>;
+      int <B>ordering</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>clip_x_origin</B>
+	<B>clip_y_origin</B>
+<TD> Specify the x and y coordinates of the clip-mask origin.
+
+<TR><TD> <B>rectangles</B>
+<TD> Specifies an array of rectangles that define the clip-mask.
+
+<TR><TD> <B>n</B>
+<TD> Specifies the number of rectangles. 
+
+<TR><TD> <B>ordering</B>
+<TD> Specifies the ordering relations on the rectangles.
+You can pass
+<B>Unsorted</B>,
+<B>YSorted</B>,
+<B>YXSorted</B>,
+or
+<B>YXBanded</B>.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XSetClipRectangles()</B>
+function changes the clip-mask in the specified GC 
+to the specified list of rectangles and sets the clip origin.
+The output is clipped to remain contained within the
+rectangles.
+The clip-origin is interpreted relative to the origin of
+whatever destination drawable is specified in a graphics request.  
+The rectangle coordinates are interpreted relative to the clip-origin.  
+The rectangles should be nonintersecting, or the graphics results will be
+undefined.
+Note that the list of rectangles can be empty, 
+which effectively disables output.
+This is the opposite of passing
+<B>None</B>
+as the clip-mask in
+<B><A HREF="../XCreateGC.html">XCreateGC()</A></B>,
+<B><A HREF="../XChangeGC.html">XChangeGC()</A></B>,
+and
+<B><A HREF="XSetClipMask.html">XSetClipMask()</A></B>.
+
+<P>
+
+If known by the client, ordering relations on the rectangles can be
+specified with the ordering argument. 
+This may provide faster operation
+by the server. 
+If an incorrect ordering is specified, the X server may generate a
+<B>BadMatch</B>
+error, but it is not required to do so.
+If no error is generated, the graphics
+results are undefined.
+<B>Unsorted</B>
+means the rectangles are in arbitrary order.
+<B>YSorted</B>
+means that the rectangles are nondecreasing in their Y origin.
+<B>YXSorted</B>
+additionally constrains 
+<B>YSorted</B>
+order in that all
+rectangles with an equal Y origin are nondecreasing in their X
+origin.  
+<B>YXBanded</B>
+additionally constrains 
+<B>YXSorted</B>
+by requiring that,
+for every possible Y scanline, all rectangles that include that
+scanline have an identical Y origins and Y extents.
+
+<P>
+
+<B>XSetClipRectangles()</B>
+can generate
+<B>BadAlloc</B>, 
+<B>BadGC</B>,
+<B>BadMatch</B>,
+and
+<B>BadValue</B> 
+errors.
+
+<H2>Syntax</H2>
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../GContext.html">GContext</A></B> 
+	argument does not name a defined 
+	<B><A HREF="../GContext.html">GContext</A></B>.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+      
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../XCreateGC.html">XCreateGC()</A></B>,
+<B><A HREF="../../graphics/drawing/XDrawRectangle.html">XDrawRectangle()</A></B>,
+<B><A HREF="XQueryBestSize.html">XQueryBestSize()</A></B>,
+<B><A HREF="XSetArcMode.html">XSetArcMode()</A></B>,
+<B><A HREF="XSetClipMask.html">XSetClipMask()</A></B>,
+<B><A HREF="XSetClipOrigin.html">XSetClipOrigin()</A></B>,
+<B><A HREF="XSetFillStyle.html">XSetFillStyle()</A></B>,
+<B><A HREF="XSetFont.html">XSetFont()</A></B>,
+<B><A HREF="XSetLineAttributes.html">XSetLineAttributes()</A></B>,
+<B><A HREF="XSetState.html">XSetState()</A></B>,
+<B><A HREF="XSetTile.html">XSetTile()</A></B>,
+"<A HREF="clip-region.html">Setting the Clip Region</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

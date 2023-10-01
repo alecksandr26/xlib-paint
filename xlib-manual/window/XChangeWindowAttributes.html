@@ -1,0 +1,187 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XChangeWindowAttributes</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XChangeWindowAttributes</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XChangeWindowAttributes" "" "@DEF@">
+
+<CODE><PRE>
+XChangeWindowAttributes(<B>display</B>, <B>w</B>, <B>valuemask</B>, <B>attributes</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="">Window</A> <B>w</B>;
+      unsigned long <B>valuemask</B>;
+      <A HREF="attributes/#XSetWindowAttributes.html">XSetWindowAttributes</A> *<B>attributes</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>valuemask</B>
+<TD> Specifies which window attributes are defined in the attributes
+argument.
+This mask is the bitwise inclusive OR of the valid attribute mask bits.
+If valuemask is zero,
+the attributes are ignored and are not referenced.
+The values and restrictions are
+the same as for
+<B><A HREF="XCreateWindow.html">XCreateWindow()</A></B>.
+
+<TR><TD> <B>attributes</B>
+<TD> Specifies the structure from which the values (as specified by the value mask)
+are to be taken.
+The value mask should have the appropriate bits
+set to indicate which attributes have been set in the structure 
+(see "<A HREF="attributes/">Window Attributes</A>").
+
+</TABLE>
+
+<H2>Description</H2>
+
+Depending on the valuemask,
+the
+<B>XChangeWindowAttributes()</B>
+function uses the window attributes in the
+<A HREF="attributes/#XSetWindowAttributes.html">XSetWindowAttributes</A>
+structure to change the specified window attributes.
+Changing the background does not cause the window contents to be
+changed.
+To repaint the window and its background, use 
+<B><A HREF="../graphics/XClearWindow.html">XClearWindow()</A></B>.
+Setting the border or changing the background such that the
+border tile origin changes causes the border to be repainted.
+Changing the background of a root window to 
+<B>None</B>
+or 
+<B>ParentRelative</B>
+restores the default background pixmap.
+Changing the border of a root window to
+<B>CopyFromParent</B>
+restores the default border pixmap.
+Changing the <A HREF="attributes/gravity.html">win-gravity</A> does not affect the current position of the
+window.
+Changing the <A HREF="attributes/backing-store.html">backing-store</A> of an obscured window to 
+<B>WhenMapped</B>
+or
+<B>Always</B>, 
+or changing the <A HREF="attributes/backing.html">backing-planes</A>, <A HREF="attributes/backing.html">backing-pixel</A>, or
+<A HREF="attributes/save-under.html">save-under</A> of a mapped window may have no immediate effect.
+Changing the colormap of a window (that is, defining a new map, not
+changing the contents of the existing map) generates a 
+<B><A HREF="../events/colormap-state.html">ColormapNotify</A></B>
+event.
+Changing the colormap of a visible window may have no
+immediate effect on the screen because the map may not be installed
+(see
+<B><A HREF="../window-and-session-manager/XInstallColormap.html">XInstallColormap()</A></B>).
+Changing the cursor of a root window to 
+<B>None</B>
+restores the default
+cursor.
+Whenever possible, you are encouraged to share colormaps.
+
+<P>
+
+Multiple clients can select input on the same window. 
+Their event masks are maintained separately.
+When an event is generated, 
+it is reported to all interested clients. 
+However, only one client at a time can select for 
+<B><A HREF="../events/processing-overview.html#SubstructureRedirectMask">SubstructureRedirectMask</A></B>
+<B><A HREF="../events/processing-overview.html#ResizeRedirectMask">ResizeRedirectMask</A></B>
+and
+<B><A HREF="../events/processing-overview.html#ButtonPressMask">ButtonPressMask</A></B>
+If a client attempts to select any of these event masks 
+and some other client has already selected one, 
+a
+<B>BadAccess</B>
+error results.
+There is only one do-not-propagate-mask for a window, 
+not one per client.
+
+<P>
+
+<B>XChangeWindowAttributes()</B>
+can generate
+<B>BadAccess</B>,
+<B>BadColor</B>,
+<B>BadCursor</B>,
+<B>BadMatch</B>,
+<B>BadPixmap</B>,
+<B>BadValue</B>,
+and
+<B>BadWindow</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadAccess</B>
+<TD> A client attempted to free a color map entry that
+it did not already allocate.
+
+<TR><TD><B>BadAccess</B>
+<TD> A client attempted to store into a read-only color
+map entry.
+
+<TR><TD><B>BadColor</B>
+<TD>  A value for a Colormap argument does not name a
+      defined Colormap.
+
+<TR><TD><B>BadCursor</B> 
+<TD>A value for a Cursor argument does not name a
+    defined Cursor.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+to match in some other way required by the request.
+
+<TR><TD><B>BadPixmap</B>
+<TD> A value for a Pixmap argument does not name a
+     defined Pixmap.
+
+<TR><TD><B>BadValue</B>
+<TD>Some numeric value falls outside the range of values accepted by the request.
+Unless a specific range is specified for an argument, the full range defined
+by the argument's type is accepted.  Any argument defined as a set of
+alternatives can generate this error.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XConfigureWindow.html">XConfigureWindow()</A></B>,
+<B><A HREF="XCreateWindow.html">XCreateWindow()</A></B>,
+<B><A HREF="XDestroyWindow.html">XDestroyWindow()</A></B>,
+<B><A HREF="../window-and-session-manager/XInstallColormap.html">XInstallColormap()</A></B>,
+<B><A HREF="XMapWindow.html">XMapWindow()</A></B>,
+<B><A HREF="XRaiseWindow.html">XRaiseWindow()</A></B>,
+<B><A HREF="XSetWindowBackground.html">XSetWindowBackground()</A></B>,
+<B><A HREF="XSetWindowBackgroundPixmap.html">XSetWindowBackgroundPixmap()</A></B>,
+<B><A HREF="XSetWindowBorder.html">XSetWindowBorder()</A></B>,
+<B><A HREF="XSetWindowBorderPixmap.html">XSetWindowBorderPixmap()</A></B>,
+<B><A HREF="XSetWindowColormap.html">XSetWindowColormap()</A></B>,
+<B><A HREF="XUnmapWindow.html">XUnmapWindow()</A></B>,
+"<A HREF="change-attributes.html">Changing Window Attributes</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

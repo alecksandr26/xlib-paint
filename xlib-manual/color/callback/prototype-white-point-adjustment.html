@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Prototype White Point Adjustment Procedure</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.10.3 Prototype White Point Adjustment Procedure</H1>
+
+The white point adjustment procedure interface must adhere to the following:
+<!.IN "XcmsWhiteAdjustProc" "" "@DEF@">
+
+<CODE><PRE>
+typedef <B><A HREF="../conversion-contexts-and-gamut-mapping.html#cmsStatus">Status</A></B> (*XcmsWhiteAdjustProc)(<B>ccc</B>, <B>initial_white_point</B>, <B>target_white_point</B>, <B>target_format</B>,
+                <B>colors_in_out</B>, <B>ncolors</B>, <B>compression_flags_return</B>)
+       <A HREF="../CCC/macros.html">XcmsCCC</A> <B>ccc</B>;
+       <A HREF="../structures.html#XcmsColor">XcmsColor</A> *<B>initial_white_point</B>;
+       <A HREF="../structures.html#XcmsColor">XcmsColor</A> *<B>target_white_point</B>;
+       <A HREF="../structures.html#XcmsColor">XcmsColorFormat</A> <B>target_format</B>;
+       <A HREF="../structures.html#XcmsColor">XcmsColor</A> <B>colors_in_out[]</B>;
+       unsigned int <B>ncolors</B>;
+       Bool <B>compression_flags_return[]</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>ccc</B>
+<TD> Specifies the <A HREF="../conversion-contexts-and-gamut-mapping.html">CCC</A>.
+
+<TR><TD> <B>initial_white_point</B>
+<TD> Specifies the initial white point.
+
+<TR><TD> <B>target_white_point</B>
+<TD> Specifies the target white point.
+
+<TR><TD> <B>target_format</B>
+<TD> Specifies the target color specification format.
+
+<TR><TD> <B>colors_in_out</B>
+<TD> Specifies an array of color specifications.
+Pixel members should be ignored and must remain unchanged upon return.
+
+<TR><TD> <B>ncolors</B>
+<TD> Specifies the number of 
+<A HREF="../structures.html#XcmsColor">XcmsColor</A>
+structures in the color specification array.
+
+<TR><TD> <B>compression_flags_return</B>
+<TD> Returns an array of Boolean values for indicating compression status.
+If a non-NULL pointer is supplied
+and a color at a given index is compressed, then
+<B>True</B>
+should be stored at the corresponding index in this array;
+otherwise, the array should not be modified.
+
+</TABLE>
+
+<H5 ALIGN=right><I>Next: <A HREF="supplied-white-point-adjustment.html">Supplied White Point Adjustment Procedures</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

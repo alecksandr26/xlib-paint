@@ -1,0 +1,39 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Window Attributes: Cursor</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>3.2.10 Cursor Attribute</H1>
+
+The cursor attribute specifies which cursor is to be used when the pointer is
+in the 
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+or
+<B><A HREF="../create.html#InputClass">InputOnly</A></B>
+window.
+You can set the cursor to a cursor or
+<B>None</B>
+(default).
+
+<P>
+
+If you set the cursor to
+<B>None</B>,
+the parent's cursor is used when the 
+pointer is in the 
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+or
+<B><A HREF="../create.html#InputClass">InputOnly</A></B>
+window, and any change in the parent's cursor will cause an
+immediate change in the displayed cursor.
+By calling
+<B><A HREF="../../pixmap-and-cursor/XFreeCursor.html">XFreeCursor()</A></B>,
+the cursor can be freed immediately as long as no further explicit reference 
+to it is made.
+
+<H5 ALIGN=right><I>Next: <A HREF="../create.html">Creating Windows</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

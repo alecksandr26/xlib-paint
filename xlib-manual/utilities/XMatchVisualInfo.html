@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XMatchVisualInfo</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XMatchVisualInfo</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XMatchVisualInfo" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../introduction/errors.html#Status">Status</A></B> XMatchVisualInfo(<B>display</B>, <B>screen</B>, <B>depth</B>, <B>class</B>, <B>vinfo_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      int <B>screen</B>;
+      int <B>depth</B>;
+      int <B>class</B>;
+      <A HREF="visual.html#XVisualInfo">XVisualInfo</A> *<B>vinfo_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the screen.
+
+<TR><TD> <B>depth</B>
+<TD> Specifies the depth of the screen.
+
+<TR><TD> <B>class</B>
+<TD> Specifies the class of the screen.
+
+<TR><TD> <B>vinfo_return</B>
+<TD> Returns the matched visual information.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B><A HREF="XMatchVisualInfo.html">XMatchVisualInfo()</A></B>
+function returns the visual information for a visual that matches the specified
+depth and class for a screen.
+Because multiple visuals that match the specified depth and class can exist,
+the exact visual chosen is undefined.
+If a visual is found,
+<B><A HREF="XMatchVisualInfo.html">XMatchVisualInfo()</A></B>
+returns nonzero and the information on the visual to vinfo_return.
+Otherwise, when a visual is not found,
+<B><A HREF="XMatchVisualInfo.html">XMatchVisualInfo()</A></B>
+returns zero.
+
+<H2>See also</H2>
+
+<B><A HREF="../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XGetVisualInfo.html">XGetVisualInfo()</A></B>,
+<B><A HREF="../window/XVisualIDFromVisual.html">XVisualIDFromVisual()</A></B>,
+"<A HREF="visual.html">Determining the Appropriate Visual Type</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

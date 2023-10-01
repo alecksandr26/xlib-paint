@@ -1,0 +1,139 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XReparentWindow</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XReparentWindow</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XReparentWindow" "" "@DEF@">
+
+<CODE><PRE>
+XReparentWindow(<B>display</B>, <B>w</B>, <B>parent</B>, <B>x</B>, <B>y</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      Window <B>parent</B>;
+      int <B>x</B>, <B>y</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>parent</B>
+<TD> Specifies the parent window.
+
+<TR><TD> <B>x</B><BR>
+	<B>y</B>
+<TD> Specify the x and y coordinates of the position in the new parent window.
+
+</TABLE>
+
+<H2>Description</H2>
+
+If the specified window is mapped,
+<B>XReparentWindow()</B>
+automatically performs an
+<B>UnmapWindow</B>
+request on it, removes it from its current position in the hierarchy,
+and inserts it as the child of the specified parent.
+The window is placed in the stacking order on top with respect to
+sibling windows.
+
+<P>
+
+After reparenting the specified window,
+<B>XReparentWindow()</B>
+causes the X server to generate a
+<B><A HREF="../events/window-state-change/reparent.html">ReparentNotify</A></B>
+event.
+The override_redirect member returned in this event is
+set to the window's corresponding attribute.
+Window manager clients usually should ignore this window if this member
+is set to
+<B>True</B> .
+Finally, if the specified window was originally mapped,
+the X server automatically performs a
+<B>MapWindow</B>
+request on it.
+
+<P>
+
+The X server performs normal exposure processing on formerly obscured
+windows.
+The X server might not generate 
+<B><A HREF="../events/exposure/expose.html">Expose</A></B> 
+events for regions from the initial
+<B>UnmapWindow</B>
+request that are immediately obscured by the final
+<B>MapWindow</B>
+request.
+A
+<B>BadMatch</B>
+error results if:
+
+<UL>
+
+<P><LI>
+The new parent window is not on the same screen as
+the old parent window.
+
+<P><LI>
+The new parent window is the specified window or an inferior of the
+specified window.
+
+<P><LI>
+The new parent is
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B> ,
+and the window is not.
+
+<P><LI>
+The specified window has a
+<B>ParentRelative</B>
+background, and the new parent window is not the same depth as the
+specified window.
+
+</UL>
+
+<P>
+
+<B>XReparentWindow()</B>
+can generate
+<B>BadMatch</B>
+and
+<B>BadWindow</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeSaveSet.html">XChangeSaveSet()</A></B>,
+"<A HREF="changing-window-parent.html">Changing the Parent of a Window</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

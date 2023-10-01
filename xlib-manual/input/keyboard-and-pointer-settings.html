@@ -1,0 +1,205 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Keyboard and Pointer Settings</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>12.6 Keyboard and Pointer Settings</H1>
+
+Xlib provides functions that you can use to
+change the keyboard control, obtain a list of the auto-repeat keys,
+turn keyboard auto-repeat on or off, ring the bell, 
+set or obtain the pointer button or keyboard mapping, 
+and obtain a bit vector for the keyboard.
+
+<P>
+
+<!.IN "Keyboard" "bell volume">
+<!.IN "Keyboard" "keyclick volume">
+<!.IN "Keyboard" "bit vector">
+<!.IN "Mouse" "programming">
+This section discusses 
+the user-preference options of bell, key click,
+pointer behavior, and so on.
+The default values for many of these options are server dependent.
+Not all implementations will actually be able to control all of these
+parameters.
+
+<P>
+
+The
+<B><A HREF="XChangeKeyboardControl.html">XChangeKeyboardControl()</A></B>
+function changes control of a keyboard and operates on a
+<B>XKeyboardControl</B>
+structure:
+
+<A NAME="XKeyboardControl"></A>
+<P>
+
+<PRE><CODE>
+/* Mask bits for ChangeKeyboardControl */
+
+#define <B>KBKeyClickPercent</B>	(1L<<0)
+#define <B>KBBellPercent</B>		(1L<<1)
+#define <B>KBBellPitch</B>		(1L<<2)
+#define <B>KBBellDuration</B>		(1L<<3)
+#define <B>KBLed</B>			(1L<<4)
+#define <B>KBLedMode</B>		(1L<<5)
+#define <B>KBKey</B>			(1L<<6)
+#define <B>KBAutoRepeatMode</B>		(1L<<7)
+</PRE></CODE>
+
+<!.IN "XKeyboardControl" "" "@DEF@">
+<PRE><CODE>
+/* Values */
+
+typedef struct {
+	int key_click_percent;
+	int bell_percent;
+	int bell_pitch;
+	int bell_duration;
+	int led;
+	int led_mode;		/* LedModeOn, LedModeOff */
+	int key;
+	int auto_repeat_mode;	/* AutoRepeatModeOff, AutoRepeatModeOn, 
+                            	AutoRepeatModeDefault */
+} XKeyboardControl;
+</PRE></CODE>
+
+<P>
+
+The <B>key_click_percent</B> member sets the volume for key clicks between 0 (off) 
+and 100 (loud) inclusive, if possible.  
+A setting of -1 restores the default.
+Other negative values generate a
+<B>BadValue</B>
+error.
+
+<P>
+
+The <B>bell_percent</B> sets the base volume for the bell between 0 (off) and 100
+(loud) inclusive, if possible.  
+A setting of -1 restores the default.
+Other negative values generate a
+<B>BadValue</B>
+error.
+The <B>bell_pitch</B> member sets the pitch (specified in Hz) of the bell, if possible.
+A setting of -1 restores the default.
+Other negative values generate a
+<B>BadValue</B>
+error.
+The <B>bell_duration</B> member sets the duration of the
+bell specified in milliseconds, if possible.  
+A setting of -1 restores the default.
+Other negative values generate a
+<B>BadValue</B>
+error.
+
+<P>
+
+If both the <B>led_mode</B> and <B>led</B> members are specified,
+the state of that LED is changed, if possible.  
+The <B>led_mode</B> member can be set to
+<B>LedModeOn</B>
+or
+<B>LedModeOff</B>.
+If only led_mode is specified, the state of
+all LEDs are changed, if possible.  
+At most 32 LEDs numbered from one are supported. 
+No standard interpretation of LEDs is defined.
+If <B>led</B> is specified without <B>led_mode</B>, a
+<B>BadMatch</B>
+error results. 
+
+<P>
+
+If both the auto_repeat_mode and key members are specified, 
+the auto_repeat_mode of that key is changed (according to
+<B>AutoRepeatModeOn</B>,
+<B>AutoRepeatModeOff</B>,
+or
+<B>AutoRepeatModeDefault</B>),
+if possible.
+If only auto_repeat_mode is
+specified, the global auto_repeat_mode for the entire keyboard is
+changed, if possible, and does not affect the per key settings.
+If a key is specified without an auto_repeat_mode, a
+<B>BadMatch</B>
+error results.
+Each key has an individual mode of whether or not it should auto-repeat
+and a default setting for the mode.
+In addition,
+there is a global mode of whether auto-repeat should be enabled or not
+and a default setting for that mode.
+When global mode is
+<B>AutoRepeatModeOn</B>,
+keys should obey their individual auto-repeat modes.
+When global mode is
+<B>AutoRepeatModeOff</B>,
+no keys should auto-repeat.
+An auto-repeating key generates alternating
+<B><A HREF="../events/keyboard-pointer/keyboard-pointer.html">KeyPress</A></B>
+and
+<B><A HREF="../events/keyboard-pointer/keyboard-pointer.html">KeyRelease</A></B>
+events.
+When a key is used as a modifier,
+it is desirable for the key not to auto-repeat,
+regardless of its auto-repeat setting.
+
+<P>
+
+A bell generator connected with the console but not directly on a
+keyboard is treated as if it were part of the keyboard.
+The order in which controls are verified and altered is server-dependent.
+If an error is generated, a subset of the controls may have been altered.
+
+<P>
+
+To obtain the current control values for the keyboard, use
+<B><A HREF="XGetKeyboardControl.html">XGetKeyboardControl()</A></B>.
+
+<P>
+
+To turn on keyboard auto-repeat, use
+<B><A HREF="XAutoRepeatOn.html">XAutoRepeatOn()</A></B>.
+
+<P>
+
+To turn off keyboard auto-repeat, use
+<B><A HREF="XAutoRepeatOff.html">XAutoRepeatOff()</A></B>.
+
+<P>
+
+To ring the bell, use
+<B><A HREF="XBell.html">XBell()</A></B>.
+
+<P>
+
+To obtain a bit vector that describes the state of the keyboard, use
+<B><A HREF="XQueryKeymap.html">XQueryKeymap()</A></B>.
+
+<P>
+
+To set the mapping of the pointer buttons, use
+<B><A HREF="XSetPointerMapping.html">XSetPointerMapping()</A></B>.
+
+<P>
+
+To get the pointer mapping, use
+<B><A HREF="XGetPointerMapping.html">XGetPointerMapping()</A></B>.
+
+<P>
+
+To control the pointer's interactive feel, use
+<B><A HREF="XChangePointerControl.html">XChangePointerControl()</A></B>.
+
+<P>
+
+To get the current pointer parameters, use
+<B><A HREF="XGetPointerControl.html">XGetPointerControl()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="keyboard-encoding.html">Keyboard Encoding</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

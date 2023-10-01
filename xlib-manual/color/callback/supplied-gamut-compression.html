@@ -1,0 +1,165 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Supplied Gamut Compression Procedures</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.10.2 Supplied Gamut Compression Procedures</H1>
+
+The following equations are useful in describing gamut compression
+functions:
+
+<P>
+
+<I>
+CIELab Psychometric Chroma  =  sqrt(a_star<SUP>2</SUP>  +  b_star<SUP>2</SUP>)
+
+<P>
+
+<TABLE CELLPADDING=0 CELLSPACING=0>
+<TR><TD ROWSPAN=3><I>CIELab Psychometric Hue  =  tan<SUP>-1</SUP>&nbsp;<TD ALIGN=center><I>b_star
+<TR><TD><HR>
+<TR><TD ALIGN=center><I>a_star
+</TABLE>
+
+<P>
+
+CIELuv Psychometric Chroma  =  sqrt(u_star sup 2  +  v_star sup 2 )
+</I>
+
+<P>
+
+<TABLE>
+<TR><TD ROWSPAN=3><I>CIELuv Psychometric Hue  =  tan<SUP>-1</SUP>	<TD ALIGN=center><I> v_star
+<TR><TD><HR>
+<TR><TD><I>u_star
+</TABLE>
+
+<P>
+
+The gamut compression callback procedures provided by Xlib are as follows:
+
+<UL>
+
+<P><LI>
+<B>XcmsCIELabClipL</B>
+
+<P>
+
+This brings the encountered out-of-gamut color specification into the 
+screen's color gamut by reducing or increasing CIE metric lightness (L*) 
+in the CIE L*a*b* color space until the color is within the gamut.
+If the Psychometric Chroma of the color specification 
+is beyond maximum for the Psychometric Hue Angle,
+then while maintaining the same Psychometric Hue Angle,
+the color will be clipped to the CIE L*a*b* coordinates of maximum
+Psychometric Chroma.
+See
+<B><A HREF="../gamut-querying/XcmsCIELabQueryMaxC.html">XcmsCIELabQueryMaxC()</A></B>.
+No client data is necessary.
+
+<P><LI>
+<B>XcmsCIELabClipab</B>
+
+<P>
+
+This brings the encountered out-of-gamut color specification into the 
+screen's color gamut by reducing Psychometric Chroma,
+while maintaining Psychometric Hue Angle,
+until the color is within the gamut.
+No client data is necessary.
+
+<P><LI>
+<B>XcmsCIELabClipLab</B>
+
+<P>
+
+This brings the encountered out-of-gamut color specification into the
+screen's color gamut by replacing it with CIE L*a*b* coordinates
+that fall within the color gamut while maintaining the original
+Psychometric Hue
+Angle and whose vector to the original coordinates is the shortest attainable.
+No client data is necessary.
+
+<P><LI>
+<B>XcmsCIELuvClipL</B>
+
+<P>
+
+This brings the encountered out-of-gamut color specification into the 
+screen's color gamut by reducing or increasing CIE metric lightness (L*)
+in the CIE L*u*v* color space until the color is within the gamut.
+If the Psychometric Chroma of the color specification
+is beyond maximum for the Psychometric Hue Angle,
+then, while maintaining the same Psychometric Hue Angle,
+the color will be clipped to the CIE L*u*v* coordinates of maximum
+Psychometric Chroma.
+See
+<B><A HREF="../gamut-querying/XcmsCIELuvQueryMaxC.html">XcmsCIELuvQueryMaxC()</A></B>.
+No client data is necessary.
+
+<P><LI>
+<B>XcmsCIELuvClipuv</B>
+
+<P>
+
+This brings the encountered out-of-gamut color specification into the
+screen's color gamut by reducing
+Psychometric Chroma, while maintaining Psychometric Hue Angle,
+until the color is within the gamut.
+No client data is necessary.
+
+<P><LI>
+<B>XcmsCIELuvClipLuv</B>
+
+<P>
+
+This brings the encountered out-of-gamut color specification into the
+screen's color gamut by replacing it with CIE L*u*v* coordinates
+that fall within the color gamut while maintaining the original
+Psychometric Hue
+Angle and whose vector to the original coordinates is the shortest attainable.
+No client data is necessary.
+
+<P><LI>
+<B>XcmsTekHVCClipV</B>
+
+<P>
+
+This brings the encountered out-of-gamut color specification into the
+screen's color gamut by reducing or increasing the Value dimension
+in the TekHVC color space until the color is within the gamut.
+If Chroma of the color specification is beyond maximum for the particular Hue,
+then, while maintaining the same Hue,
+the color will be clipped to the Value and Chroma coordinates
+that represent maximum Chroma for that particular Hue.
+No client data is necessary.
+
+<P><LI>
+<B>XcmsTekHVCClipC</B>
+
+<P>
+
+This brings the encountered out-of-gamut color specification into the
+screen's color gamut by reducing the Chroma dimension
+in the TekHVC color space until the color is within the gamut.
+No client data is necessary.
+
+<P><LI>
+<B>XcmsTekHVCClipVC</B>
+
+<P>
+
+This brings the encountered out-of-gamut color specification into the
+screen's color gamut by replacing it with TekHVC coordinates
+that fall within the color gamut while maintaining the original Hue
+and whose vector to the original coordinates is the shortest attainable.
+No client data is necessary.
+
+</UL>
+
+<H5 ALIGN=right><I>Next: <A HREF="prototype-white-point-adjustment.html">Prototype White Point Adjustment Procedure</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

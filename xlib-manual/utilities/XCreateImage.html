@@ -1,0 +1,121 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XCreateImage</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XCreateImage</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XCreateImage" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="../graphics/images.html#XImage">XImage</A> *XCreateImage(<B>display</B>, <B>visual</B>, <B>depth</B>, <B>format</B>, <B>offset</B>, <B>data</B>, <B>width</B>, <B>height</B>, <B>bitmap_pad</B>, 
+                        <B>bytes_per_line</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="../window/visual-types.html#Visual">Visual</A> *<B>visual</B>;
+      unsigned int <B>depth</B>;
+      int <B>format</B>;
+      int <B>offset</B>;
+      char *<B>data</B>;
+      unsigned int <B>width</B>;
+      unsigned int <B>height</B>;
+      int <B>bitmap_pad</B>;
+      int <B>bytes_per_line</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>visual</B>
+<TD> Specifies the
+<A HREF="../window/visual-types.html#Visual">Visual</A>
+structure.
+
+<TR><TD> <B>depth</B>
+<TD> Specifies the depth of the image.
+
+<TR><TD> <B>format</B>
+<TD> Specifies the format for the image.
+You can pass
+<B>XYBitmap</B>,
+<B>XYPixmap</B>,
+or 
+<B>ZPixmap</B>.
+
+<TR><TD> <B>offset</B>
+<TD> Specifies the number of pixels to ignore at the beginning of the scanline.
+
+<TR><TD> <B>data</B>
+<TD> Specifies the image data.
+
+<TR><TD> <B>width</B>
+<TD> Specifies the width of the image, in pixels.
+
+<TR><TD> <B>height</B>
+<TD> Specifies the height of the image, in pixels.
+
+<TR><TD> <B>bitmap_pad</B>
+<TD> Specifies the quantum of a scanline (8, 16, or 32).
+In other words, the start of one scanline is separated in client memory from 
+the start of the next scanline by an integer multiple of this many bits.  
+
+<TR><TD> <B>bytes_per_line</B>
+<TD> Specifies the number of bytes in the client image between
+the start of one scanline and the start of the next.  
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XCreateImage()</B>
+function allocates the memory needed for an
+<A HREF="../graphics/images.html#XImage">XImage</A>
+structure for the
+specified display but does not allocate space for the image itself.
+Rather, it initializes the structure byte-order, bit-order, and bitmap-unit
+values from the display and returns a pointer to the 
+<A HREF="../graphics/images.html#XImage">XImage</A> 
+structure.
+The red, green, and blue mask values are defined for Z format images only
+and are derived from the 
+<A HREF="../window/visual-types.html#Visual">Visual</A> 
+structure passed in.
+Other values also are passed in.
+The offset permits the rapid displaying of the image without requiring each 
+scanline to be shifted into position.
+If you pass a zero value in bytes_per_line,
+Xlib assumes that the scanlines are contiguous
+in memory and calculates the value of bytes_per_line itself.
+
+<P>
+
+Note that when the image is created using
+<B>XCreateImage()</B>,
+<B><A HREF="../graphics/XGetImage.html">XGetImage()</A></B>,
+or
+<B><A HREF="XSubImage.html">XSubImage()</A></B>,
+the destroy procedure that the 
+<B><A HREF="../graphics/XDestroyImage.html">XDestroyImage()</A></B>
+function calls frees both the image structure 
+and the data pointed to by the image structure.
+
+<H2>See also</H2>
+
+<B><A HREF="XAddPixel.html">XAddPixel()</A></B>,
+<B><A HREF="XDestroyImage.html">XDestroyImage()</A></B>,
+<B><A HREF="XGetPixel.html">XGetPixel()</A></B>,
+<B><A HREF="XPutPixel.html">XPutPixel()</A></B>,
+<B><A HREF="XSubImage.html">XSubImage()</A></B>,
+"<A HREF="manipulating-images.html">Manipulating Images</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

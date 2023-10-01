@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetZoomHints</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetZoomHints</H1>
+
+This function is no longer supported by the
+<I><A HREF="/gui/x/icccm/">Inter-Client Communication Conventions Manual</A></I>.
+<!.IN "XSetZoomHints" "" "@DEF@">
+
+<H2>Syntax</H2>
+
+<CODE><PRE>
+XSetZoomHints(<I>display</I>, <I>w</I>, <I>zhints</I>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<I>display</I>;
+      Window <I>w</I>;
+      <A HREF="../../ICC/client-to-window-manager/wm-normal-hints.html#XSizeHints">XSizeHints</A> *<I>zhints</I>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <I>display</I>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <I>w</I>
+<TD> Specifies the window.
+
+<TR><TD> <I>zhints</I>
+<TD> Specifies a pointer to the zoom hints.
+
+</TABLE>
+
+<H2>Description</H2>
+
+Many window managers think of windows in one of three states:
+iconic, normal, or zoomed.
+The
+<B>XSetZoomHints()</B>
+function provides the window manager with information for the window in the
+zoomed state.
+
+<B>XSetZoomHints()</B>
+can generate
+<B>BadAlloc</B>
+and
+<B>BadWindow</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+"<A HREF="d.html">Compatibility Functions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

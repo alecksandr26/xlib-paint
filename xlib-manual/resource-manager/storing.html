@@ -1,0 +1,37 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Storing Into a Resource Database</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>15.7 Storing Into a Resource Database</H1>
+
+To store resources into the database, use
+<B><A HREF="XrmPutResource.html">XrmPutResource()</A></B>
+or
+<B><A HREF="XrmQPutResource.html">XrmQPutResource()</A></B>.
+Both functions take a partial resource specification, a
+representation type, and a value.
+This value is copied into the specified database.
+
+<P>
+
+To add a resource that is specified as a string, use
+<B><A HREF="XrmPutStringResource.html">XrmPutStringResource()</A></B>.
+
+<P>
+
+To add a string resource using quarks as a specification, use
+<B><A HREF="XrmQPutStringResource.html">XrmQPutStringResource()</A></B>.
+
+<P>
+
+To add a single resource entry that is specified as a string that contains
+both a name and a value, use
+<B><A HREF="XrmPutLineResource.html">XrmPutLineResource()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="enumerating-entries.html">Enumerating Database Entries</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

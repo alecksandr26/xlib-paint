@@ -1,0 +1,132 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XDrawSegments</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XDrawSegments</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XDrawSegments" "" "@DEF@">
+
+<CODE><PRE>
+XDrawSegments(<B>display</B>, <B>d</B>, <B>gc</B>, <B>segments</B>, <B>nsegments</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Drawable <B>d</B>;
+      <A HREF="../../GC/manipulating.html">GC</A> <B>gc</B>;
+      <A HREF="./#XSegment">XSegment</A> *<B>segments</B>;
+      int <B>nsegments</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>d</B>
+<TD> Specifies the drawable. 
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>segments</B>
+<TD> Specifies an array of segments.
+
+<TR><TD> <B>nsegments</B>
+<TD> Specifies the number of segments in the array.
+
+</TABLE>
+
+<H2>Description</H2>
+
+<P>
+
+The
+<B>XDrawSegments()</B>
+function draws multiple, unconnected lines. 
+For each segment, 
+<B>XDrawSegments()</B>
+draws a
+line between (x1, y1) and (x2, y2).
+It draws the lines in the order listed in the array of
+<A HREF="./#XSegment">XSegment</A>
+structures and does not perform joining at coincident endpoints.
+For any given line, 
+<B>XDrawSegments()</B>
+does not draw a pixel more than once.  
+If lines intersect, the intersecting pixels are drawn multiple times.  
+
+<P>
+
+<B>XDrawSegments()</B>
+use these <A HREF="../../GC/manipulating.html">GC</A> components:
+<A HREF="../../GC/manipulating.html#function">function</A>, <A HREF="../../GC/manipulating.html#plane-mask">plane-mask</A>, 
+<A HREF="../../GC/manipulating.html#line-width">line-width</A>,
+<A HREF="../../GC/manipulating.html#line-style">line-style</A>,
+<A HREF="../../GC/manipulating.html#cap-style">cap-style</A>,
+<A HREF="../../GC/manipulating.html#fill-style">fill-style</A>,
+<A HREF="../../GC/manipulating.html#subwindow-mode">subwindow-mode</A>,
+<A HREF="../../GC/manipulating.html#clip-mask">clip-x-origin</A>,
+<A HREF="../../GC/manipulating.html#clip-mask">clip-y-origin</A>,
+and <A HREF="../../GC/manipulating.html#clip-mask">clip-mask</A>.
+
+<B>XDrawSegments()</B> also uses these <A HREF="../../GC/manipulating.html">GC</A> mode-dependent components:
+<A HREF="../../GC/manipulating.html#foreground">foreground</A>,
+<A HREF="../../GC/manipulating.html#background">background</A>,
+<A HREF="../../GC/manipulating.html#tile">tile</A>,
+<A HREF="../../GC/manipulating.html#stipple">stipple</A>,
+<A HREF="../../GC/manipulating.html#tile">tile-stipple-x-origin</A>, 
+<A HREF="../../GC/manipulating.html#tile">tile-stipple-y-origin</A>,
+<A HREF="../../GC/manipulating.html#dashes">dash-offset</A>,
+and
+<A HREF="../../GC/manipulating.html#dashes">dash-list</A>.
+
+<P>
+
+<B>XDrawSegments()</B>,
+can generate
+<B>BadDrawable</B> ,
+<B>BadGC</B> ,
+and
+<B>BadMatch</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../GContext.html">GContext</A></B> 
+	argument does not name a defined 
+	<B><A HREF="../GContext.html">GContext</A></B>.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+      
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XDrawArc.html">XDrawArc()</A></B>,
+<B><A HREF="XDrawLine.html">XDrawLine()</A></B>,
+<B><A HREF="XDrawLines.html">XDrawLines()</A></B>,
+<B><A HREF="XDrawPoint.html">XDrawPoint()</A></B>,
+<B><A HREF="XDrawRectangle.html">XDrawRectangle()</A></B>,
+"<A HREF="lines.html">Drawing Single and Multiple Lines</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,27 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Event Queue Management</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>11.3 Event Queue Management</H1>
+
+Xlib maintains an event queue.
+However, the operating system also may be buffering data 
+in its network connection that is not yet read into the event queue.
+
+<P>
+
+To check the number of events in the event queue, use
+<B><A HREF="XEventsQueued.html">XEventsQueued()</A></B>.
+
+<P>
+
+To return the number of events that are pending, use 
+<B><A HREF="XPending.html">XPending()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="manipulating-event-queue/">Manipulating the Event Queue</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

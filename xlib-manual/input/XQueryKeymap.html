@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XQueryKeymap</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XQueryKeymap</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XQueryKeymap" "" "@DEF@">
+
+<CODE><PRE>
+XQueryKeymap(<B>display</B>, <B>keys_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      char <B>keys_return</B>[32];
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>keys_return</B>
+<TD> Returns an array of bytes that identifies which keys are pressed down.
+Each bit represents one key of the keyboard.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XQueryKeymap()</B>
+function returns a bit vector for the logical state of the keyboard, 
+where each bit set to 1 indicates that the corresponding key is currently 
+pressed down.
+The vector is represented as 32 bytes.
+Byte N (from 0) contains the bits for keys 8N to 8N + 7 
+with the least-significant bit in the byte representing key 8N.
+
+<P>
+
+Note that the logical state of a device (as seen by client applications)
+may lag the physical state if device event processing is frozen.
+
+<H2>See also</H2>
+
+<B><A HREF="XAutoRepeatOff.html">XAutoRepeatOff()</A></B>,
+<B><A HREF="XAutoRepeatOn.html">XAutoRepeatOn()</A></B>,
+<B><A HREF="XBell.html">XBell()</A></B>,
+<B><A HREF="XChangeKeyboardControl.html">XChangeKeyboardControl()</A></B>,
+<B><A HREF="XChangeKeyboardMapping.html">XChangeKeyboardMapping()</A></B>,
+<B><A HREF="XGetKeyboardControl.html">XGetKeyboardControl()</A></B>,
+<B><A HREF="XSetPointerMapping.html">XSetPointerMapping()</A></B>,
+"<A HREF="keyboard-and-pointer-settings.html">Keyboard and Pointer Settings</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,30 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Creating and Freeing Pixmaps</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>5.1 Creating and Freeing Pixmaps</H1>
+
+Pixmaps can only be used on the screen on which they were created.
+Pixmaps are off-screen resources that are used for various operations,
+for example, defining cursors as tiling patterns 
+or as the source for certain raster operations.
+Most graphics requests can operate either on a window or on a pixmap.
+A bitmap is a single bit-plane pixmap.
+
+<P>
+
+To create a pixmap of a given size, use
+<B><A HREF="XCreatePixmap.html">XCreatePixmap()</A></B>.
+
+<P>
+
+To free all storage associated with a specified pixmap, use
+<B><A HREF="XFreePixmap.html">XFreePixmap()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="cursor.html">Creating, Recoloring, and Freeing Cursors</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

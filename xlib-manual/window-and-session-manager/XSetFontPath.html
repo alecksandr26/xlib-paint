@@ -1,0 +1,85 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetFontPath</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetFontPath</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XSetFontPath" "" "@DEF@">
+
+<CODE><PRE>
+XSetFontPath(<B>display</B>, <B>directories</B>, <B>ndirs</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      char **<B>directories</B>;
+      int <B>ndirs</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>directories</B>
+<TD> Specifies the directory path used to look for a font.
+Setting the path to the empty list restores the default path defined
+for the X server.
+
+<TR><TD> <B>ndirs</B>
+<TD> Specifies the number of directories in the path.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XSetFontPath()</B>
+function defines the directory search path for font lookup.
+There is only one search path per X server, not one per client.
+The encoding and interpretation of the
+strings is implementation dependent, but typically they specify
+directories or font servers to be searched in the order listed.
+An X server is permitted to cache font information internally;
+for example, it might cache an entire font from a file and not
+check on subsequent opens of that font to see if the underlying
+font file has changed.
+However,
+when the font path is changed,
+the X server is guaranteed to flush all cached information about fonts 
+for which there currently are no explicit resource IDs allocated.
+The meaning of an error from this request is implementation dependent.
+
+<P>
+
+<B>XSetFontPath()</B>
+can generate a
+<B>BadValue</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XGetFontPath.html">XGetFontPath()</A></B>,
+<B><A HREF="XFreeFontPath.html">XFreeFontPath()</A></B>,
+<B><A HREF="../graphics/font-metrics/XListFonts.html">XListFonts()</A></B>,
+<B><A HREF="../graphics/font-metrics/XLoadFont.html">XLoadFont()</A></B>,
+"<A HREF="font-search-path.html">Setting and Retrieving the Font Search Path</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

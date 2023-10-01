@@ -1,0 +1,104 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetRGBColormaps</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetRGBColormaps</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetRGBColormaps" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../../introduction/errors.html#Status">Status</A></B> XGetRGBColormaps(<B>display</B>, <B>w</B>, <B>std_colormap_return</B>, <B>count_return</B>, <B>property</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      <B><A HREF="./#XStandardColormap">XStandardColormap</A></B> **<B>std_colormap_return</B>;
+      int *<B>count_return</B>;
+      Atom <B>property</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>std_colormap_return</B>
+<TD> Returns the
+<B><A HREF="./#XStandardColormap">XStandardColormap</A></B>
+structure.
+
+<TR><TD> <B>count_return</B>
+<TD> Returns the number of colormaps.
+
+<TR><TD> <B>property</B>
+<TD> Specifies the property name.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The 
+<B>XGetRGBColormaps()</B>
+function returns the RGB colormap definitions stored 
+in the specified property on the named window.
+If the property exists, is of type RGB_COLOR_MAP, is of format 32, 
+and is long enough to contain a colormap definition,
+<B>XGetRGBColormaps()</B>
+allocates and fills in space for the returned colormaps
+and returns a nonzero status.
+If the visualid is not present, 
+<B>XGetRGBColormaps()</B>
+assumes the default visual for the screen on which the window is located; 
+if the killid is not present, 
+<B>None</B>
+is assumed, which indicates that the resources cannot be released.
+Otherwise, 
+none of the fields are set, and 
+<B>XGetRGBColormaps()</B>
+returns a zero status.
+Note that it is the caller's responsibility to honor the <A HREF="/gui/x/icccm/">ICCCM</A>
+restriction that only RGB_DEFAULT_MAP contain more than one definition.
+
+<P>
+
+<B>XGetRGBColormaps()</B>
+can generate
+<B>BadAtom</B>
+and
+<B>BadWindow</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAtom</B>
+<TD> A value for an Atom argument does not name a
+     defined Atom.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocStandardColormap.html">XAllocStandardColormap()</A></B>,
+<B><A HREF="XSetRGBColormaps.html">XSetRGBColormaps()</A></B>,
+<B><A HREF="./#XStandardColormap">XStandardColormap</A></B>,
+<B><A HREF="../../color/XAllocColor.html">XAllocColor()</A></B>,
+<B><A HREF="../../color/XCreateColormap.html">XCreateColormap()</A></B>,
+<B><A HREF="../../display/XFree.html">XFree()</A></B>,
+<B><A HREF="../../display/XSetCloseDownMode.html">XSetCloseDownMode()</A></B>,
+"<A HREF="setting-and-obtaining.html">Setting and Obtaining Standard Colormaps</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

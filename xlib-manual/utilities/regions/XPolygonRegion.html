@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XPolygonRegion</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XPolygonRegion</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XPolygonRegion" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="./">Region</A> XPolygonRegion(<B>points</B>, <B>n</B>, <B>fill_rule</B>)
+      <A HREF="../../graphics/drawing/#XPoint">XPoint</A> <B>points[]</B>;
+      int <B>n</B>;
+      int <B>fill_rule</B>;	
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>points</B>
+<TD> Specifies an array of points.
+
+<TR><TD> <B>n</B>
+<TD> Specifies the number of points in the polygon. 
+
+<TR><TD> <B>fill_rule</B>
+<TD> Specifies the fill-rule you want to set for the specified GC.
+You can pass 
+<B>EvenOddRule</B>
+or
+<B>WindingRule</B> .
+
+</TABLE>
+
+<H2>Description</H2>
+ 
+The
+<B>XPolygonRegion()</B>
+function returns a region for the polygon defined by the points array.
+For an explanation of <A HREF="../../GC/manipulating.html#fill-rule">fill_rule</A>,
+see
+<B><A HREF="../../GC/XCreateGC.html">XCreateGC()</A></B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XCreateRegion.html">XCreateRegion()</A></B>,
+<B><A HREF="XDestroyRegion.html">XDestroyRegion()</A></B>,
+<B><A HREF="XEmptyRegion.html">XEmptyRegion()</A></B>,
+<B><A HREF="XIntersectRegion.html">XIntersectRegion()</A></B>,
+<B><A HREF="XSetRegion.html">XSetRegion()</A></B>,
+"<A HREF="creating-copying-destroying.html">Creating, Copying, or Destroying Regions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

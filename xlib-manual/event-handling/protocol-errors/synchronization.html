@@ -1,0 +1,39 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Enabling or Disabling Synchronization</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>11.8.1 Enabling or Disabling Synchronization</H1>
+
+When debugging X applications, 
+it often is very convenient to require Xlib to behave synchronously
+so that errors are reported as they occur.
+The following function lets you disable or enable synchronous behavior.
+Note that graphics may occur 30 or more times more slowly when 
+synchronization is enabled.
+<!.IN "_Xdebug">
+On POSIX-conformant systems,
+there is also a global variable 
+<B>_Xdebug</B>
+that, if set to nonzero before starting a program under a debugger, will force
+synchronous library behavior.
+
+<P>
+
+After completing their work,
+all Xlib functions that generate protocol requests call what is known as
+an after function.
+<B><A HREF="XSetAfterFunction.html">XSetAfterFunction()</A></B>
+sets which function is to be called.
+
+<P>
+
+To enable or disable synchronization, use 
+<B><A HREF="XSynchronize.html">XSynchronize()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="default-handlers.html">Using the Default Error Handlers</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

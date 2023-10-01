@@ -1,0 +1,136 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Event Structures</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.2 Event Structures</H1>
+
+For each event type,
+a corresponding structure is declared in
+<B><TT>X11/Xlib.h</TT></B>.
+All the event structures have the following common members:
+
+<P>
+
+<!.IN "XAnyEvent" "" "@DEF@">
+<CODE><PRE>
+typedef struct {
+	int type;
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Window window;
+} XAnyEvent;
+</PRE></CODE>
+
+<P>
+
+The <B>type</B> member is set to the event type constant name that uniquely identifies
+it.
+For example, when the X server reports a
+<B><A HREF="exposure/graphics-expose-and-no-expose.html">GraphicsExpose</A></B>
+event to a client application, it sends an
+<A HREF="exposure/graphics-expose-and-no-expose.html#XGraphicsExposeEvent">XGraphicsExposeEvent</A>
+structure with the <B>type</B> member set to
+<B><A HREF="exposure/graphics-expose-and-no-expose.html">GraphicsExpose</A></B>.
+The <B>display</B> member is set to a pointer to the display the event was read on.
+The <B>send_event</B> member is set to
+<B>True</B>
+if the event came from a
+<B><A HREF="../appendix/a.html#SendEvent">SendEvent</A></B>
+protocol request.
+The <B>serial</B> member is set from the serial number reported in the protocol
+but expanded from the 16-bit least-significant bits to a full 32-bit value.
+The <B>window</B> member is set to the window that is most useful to toolkit
+dispatchers.
+
+<P>
+
+The X server can send events at any time in the input stream. 
+Xlib stores any events received while waiting for a reply in an event queue 
+for later use.
+Xlib also provides functions that allow you to check events 
+in the event queue (see section "<A HREF="../event-handling/event-queue-management.html">Event Queue Management</A>").
+
+<P>
+
+In addition to the individual structures declared for each event type, the
+<B>XEvent</B>
+structure is a union of the individual structures declared for each event type.
+Depending on the type,
+you should access members of each event by using the 
+<B>XEvent</B>
+union.
+
+<A NAME="XEvent"></A>
+<P>
+
+<!.IN "XEvent" "" "@DEF@">
+<CODE><PRE>
+typedef union _XEvent {
+	int type;	/* must not be changed */
+	XAnyEvent xany;
+	<A HREF="keyboard-pointer/keyboard-pointer.html#XKeyEvent">XKeyEvent</A> xkey;
+	<A HREF="keyboard-pointer/keyboard-pointer.html#XButtonEvent">XButtonEvent</A> xbutton;
+	<A HREF="keyboard-pointer/keyboard-pointer.html#XMotionEvent">XMotionEvent</A> xmotion;
+	<A HREF="window-entry-exit/#XCrossingEvent">XCrossingEvent</A> xcrossing;
+	<A HREF="input-focus/#XFocusChangeEvent">XFocusChangeEvent</A> xfocus;
+	<A HREF="exposure/expose.html#XExposeEvent">XExposeEvent</A> xexpose;
+	<A HREF="exposure/graphics-expose-and-no-expose.html#XGraphicsExposeEvent">XGraphicsExposeEvent</A> xgraphicsexpose;
+	<A HREF="exposure/graphics-expose-and-no-expose.html#XNoExposeEvent">XNoExposeEvent</A> xnoexpose;
+	<A HREF="window-state-change/visibility.html#XVisibilityEvent">XVisibilityEvent</A> xvisibility;
+	<A HREF="window-state-change/create.html#XCreateWindowEvent">XCreateWindowEvent</A> xcreatewindow;
+	<A HREF="window-state-change/destroy.html#XDestroyWindowEvent">XDestroyWindowEvent</A> xdestroywindow;
+	<A HREF="window-state-change/unmap.html#XUnmapEvent">XUnmapEvent</A> xunmap;
+	<A HREF="window-state-change/map.html#XMapEvent">XMapEvent</A> xmap;
+	<A HREF="structure-control/map.html#XMapRequestEvent">XMapRequestEvent</A> xmaprequest;
+	<A HREF="window-state-change/reparent.html#XReparentEvent">XReparentEvent</A> xreparent;
+	<A HREF="window-state-change/configure.html#XConfigureEvent">XConfigureEvent</A> xconfigure;
+	<A HREF="window-state-change/gravity.html#XGravityEvent">XGravityEvent</A> xgravity;
+	<A HREF="structure-control/resize.html#XResizeRequestEvent">XResizeRequestEvent</A> xresizerequest;
+	<A HREF="structure-control/configure.html#XConfigureRequestEvent">XConfigureRequestEvent</A> xconfigurerequest;
+	<A HREF="window-state-change/circulate.html#XCirculateEvent">XCirculateEvent</A> xcirculate;
+	<A HREF="structure-control/circulate.html#XCirculateRequestEvent">XCirculateRequestEvent</A> xcirculaterequest;
+	<A HREF="client-communication/property.html#XPropertyEvent">XPropertyEvent</A> xproperty;
+	<A HREF="client-communication/selection-clear.html#XSelectionClearEvent">XSelectionClearEvent</A> xselectionclear;
+	<A HREF="client-communication/selection-request.html#XSelectionRequestEvent">XSelectionRequestEvent</A> xselectionrequest;
+	<A HREF="client-communication/selection.html#XSelectionEvent">XSelectionEvent</A> xselection;
+	<A HREF="colormap-state.html#XColormapEvent">XColormapEvent</A> xcolormap;
+	<A HREF="client-communication/client-message.html#XClientMessageEvent">XClientMessageEvent</A> xclient;
+	<A HREF="window-state-change/mapping.html#XMappingEvent">XMappingEvent</A> xmapping;
+	XErrorEvent xerror;
+	<A HREF="key-map.html#XKeymapEvent">XKeymapEvent</A> xkeymap;
+	long pad[24];
+} XEvent;
+</PRE></CODE>
+
+<P>
+
+An
+<B>XEvent</B>
+structure's first entry always is the type member,
+which is set to the event type.
+The second member always is the serial number of the protocol request
+that generated the event.
+The third member always is send_event,
+which is a
+<B>Bool</B>
+that indicates if the event was sent by a different client.
+The fourth member always is a display,
+which is the display that the event was read from.
+Except for keymap events,
+the fifth member always is a window,
+which has been carefully selected to be useful to toolkit dispatchers.
+To avoid breaking toolkits,
+the order of these first five entries is not to change.
+Most events also contain a time member,
+which is the time at which an event occurred.
+In addition, a pointer to the generic event must be cast before it
+is used to access any other information in the structure.
+
+<H5 ALIGN=right><I>Next: <A HREF="mask.html">Event Masks</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

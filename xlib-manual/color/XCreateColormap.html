@@ -1,0 +1,169 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XCreateColormap</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XCreateColormap</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XCreateColormap" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="./#colormap">Colormap</A> XCreateColormap(<B>display</B>, <B>w</B>, <B>visual</B>, <B>alloc</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      <A HREF="../window/visual-types.html#Visual">Visual</A> *<B>visual</B>;
+      int <B>alloc</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window on whose screen you want to create a colormap.
+
+<TR><TD> <B>visual</B>
+<TD> Specifies a visual type supported on the screen.
+If the visual type is not one supported by the screen, 
+a
+<B>BadMatch</B>
+error results.
+
+<TR><TD> <B>alloc</B>
+<TD> Specifies the colormap entries to be allocated.
+You can pass 
+<B>AllocNone</B>
+or 
+<B>AllocAll</B>.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XCreateColormap()</B>
+function creates a colormap of the specified visual type for the screen 
+on which the specified window resides and returns the colormap ID 
+associated with it.
+Note that the specified window is only used to determine the screen.
+
+<P>
+
+The initial values of the colormap entries are undefined for the 
+visual classes
+<B><A HREF="../window/visual-types.html">GrayScale</A></B>,
+<B><A HREF="../window/visual-types.html">PseudoColor</A></B>,
+and
+<B><A HREF="../window/visual-types.html">DirectColor</A></B> .
+For
+<B><A HREF="../window/visual-types.html">StaticGray</A></B>,
+<B><A HREF="../window/visual-types.html">StaticColor</A></B>,
+and
+<B><A HREF="../window/visual-types.html">TrueColor</A></B>,
+the entries have defined values,
+but those values are specific to the visual and are not defined by X.
+For
+<B><A HREF="../window/visual-types.html">StaticGray</A></B>,
+<B><A HREF="../window/visual-types.html">StaticColor</A></B>,
+and
+<B><A HREF="../window/visual-types.html">TrueColor</A></B>,
+alloc must be
+<B>AllocNone</B>,
+or a
+<B>BadMatch</B>
+error results.
+For the other visual classes,
+if alloc is
+<B>AllocNone</B>,
+the colormap initially has no allocated entries,
+and clients can allocate them.
+For information about the visual types,
+see "<A HREF="../window/visual-types.html">Visual Types</A>".
+
+<P>
+
+If alloc is
+<B>AllocAll</B>,
+the entire colormap is allocated writable.
+The initial values of all allocated entries are undefined.
+For
+<B><A HREF="../window/visual-types.html">GrayScale</A></B>
+and
+<B><A HREF="../window/visual-types.html">PseudoColor</A></B>,
+the effect is as if an
+<B><A HREF="XAllocColorCells.html">XAllocColorCells()</A></B>
+call returned all pixel values from zero to N - 1,
+where N is the colormap entries value in the specified visual.
+For
+<B><A HREF="../window/visual-types.html">DirectColor</A></B>,
+the effect is as if an
+<B><A HREF="XAllocColorPlanes.html">XAllocColorPlanes()</A></B>
+call returned a pixel value of zero and red_mask, green_mask, 
+and blue_mask values containing the same bits as the corresponding
+masks in the specified visual.
+However, in all cases,
+none of these entries can be freed by using
+<B><A HREF="XFreeColors.html">XFreeColors()</A></B>.
+
+<P>
+
+<B>XCreateColormap()</B>
+can generate
+<B>BadAlloc</B>,
+<B>BadMatch</B>,
+<B>BadValue</B>,
+and
+<B>BadWindow</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+      
+<TR><TD><B>BadPixmap</B>
+<TD> A value for a Pixmap argument does not name a
+     defined Pixmap.
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocColor.html">XAllocColor()</A></B>,
+<B><A HREF="../window/XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>,
+<B><A HREF="XCopyColormapAndFree.html">XCopyColormapAndFree()</A></B>,
+<B><A HREF="../window/XCreateWindow.html">XCreateWindow()</A></B>,
+<B><A HREF="XFreeColormap.html">XFreeColormap()</A></B>,
+<B><A HREF="XQueryColor.html">XQueryColor()</A></B>,
+<B><A HREF="XStoreColors.html">XStoreColors()</A></B>,
+"<A HREF="colormap.html">Creating, Copying, and Destroying Colormaps</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

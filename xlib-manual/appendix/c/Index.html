@@ -1,0 +1,46 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Appendix C: Extensions</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>Appendix C: Extensions</H1>
+
+Because X can evolve by extensions to the core protocol, 
+it is important that extensions not be perceived as second class citizens.
+At some point, 
+your favorite extensions may be adopted as additional parts of the 
+X Standard.
+
+<P>
+
+Therefore, there should be little to distinguish the use of an extension from 
+that of the core protocol.
+To avoid having to initialize extensions explicitly in application programs, 
+it is also important that extensions perform lazy evaluations,
+automatically initializing themselves when called for the first time.  
+
+<P>
+
+This appendix describes techniques for writing extensions to Xlib that will
+run at essentially the same performance as the core protocol requests.
+
+<P ALIGN=center><B>Note</B>
+<BLOCKQUOTE>
+It is expected that a given extension to X consists of multiple
+requests.
+Defining ten new features as ten separate extensions is a bad practice.
+Rather, they should be packaged into a single extension
+and should use minor opcodes to distinguish the requests.
+</BLOCKQUOTE>
+
+<P>
+
+The symbols and macros used for writing stubs to Xlib are listed in
+<B><TT>X11/Xlibint.h.</TT></B>
+
+<H5 ALIGN=right><I>Next: <A HREF="basic-protocol-support.html">Basic Protocol Support Routines</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

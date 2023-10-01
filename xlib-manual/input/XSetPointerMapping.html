@@ -1,0 +1,94 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetPointerMapping</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSetPointerMapping</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XSetPointerMapping" "" "@DEF@">
+
+<CODE><PRE>
+int XSetPointerMapping(<B>display</B>, <B>map</B>, <B>nmap</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      unsigned char <B>map</B>[];
+      int <B>nmap</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>map</B>
+<TD> Specifies the mapping list.
+
+<TR><TD> <B>nmap</B>
+<TD> Specifies the number of items in the mapping list.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XSetPointerMapping()</B>
+function sets the mapping of the pointer.
+If it succeeds, the X server generates a
+<B><A HREF="../events/window-state-change/mapping.html">MappingNotify</A></B>
+event, and
+<B>XSetPointerMapping()</B>
+returns
+<B>MappingSuccess</B>.
+Element map[i] defines the logical button number for the physical button
+i+1.
+The length of the list must be the same as
+<B>XGetPointerMapping</B>
+would return,
+or a
+<B>BadValue</B>
+error results.
+A zero element disables a button, and elements are not restricted in
+value by the number of physical buttons.
+However, no two elements can have the same nonzero value,
+or a
+<B>BadValue</B>
+error results.
+If any of the buttons to be altered are logically in the down state,
+<B>XSetPointerMapping()</B>
+returns
+<B>MappingBusy</B>,
+and the mapping is not changed.
+
+<P>
+
+<B>XSetPointerMapping()</B>
+can generate a
+<B>BadValue</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeKeyboardControl.html">XChangeKeyboardControl()</A></B>,
+<B><A HREF="XChangeKeyboardMapping.html">XChangeKeyboardMapping()</A></B>,
+<B><A HREF="XGetPointerMapping.html">XGetPointerMapping()</A></B>,
+"<A HREF="keyboard-and-pointer-settings.html">Keyboard and Pointer Settings</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

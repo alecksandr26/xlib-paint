@@ -1,0 +1,266 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XCreateWindow, XCreateSimpleWindow</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XCreateWindow, XCreateSimpleWindow</H1>
+
+<H2>SYNTAX</H2>
+<PRE><CODE>
+<A HREF="./">Window</A> XCreateWindow(<B>display</B>, <B>parent</B>, <B>x</B>, <B>y</B>, <B>width</B>, <B>height</B>, <B>border_width</B>, <B>depth</B>, 
+                       <B>class</B>, <B>visual</B>, <B>valuemask</B>, <B>attributes</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="./">Window</A> <B>parent</B>;
+      int <B>x</B>, <B>y</B>; 
+      unsigned int <B>width</B>, <B>height</B>;
+      unsigned int <B>border_width</B>;
+      int <B>depth</B>;
+      unsigned int <B>class</B>;
+      <A HREF="visual-types.html#Visual">Visual</A> *<B>visual</B>
+      unsigned long <B>valuemask</B>;
+      <A HREF="attributes/#XSetWindowAttributes">XSetWindowAttributes</A> *<B>attributes</B>;
+
+
+Window XCreateSimpleWindow(<B>display</B>, <B>parent</B>, <B>x</B>, <B>y</B>, <B>width</B>, <B>height</B>, <B>border_width</B>, 
+                             <B>border</B>, <B>background</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="./">Window</A> <B>parent</B>;
+      int <B>x</B>, <B>y</B>;
+      unsigned int <B>width</B>, <B>height</B>;
+      unsigned int <B>border_width</B>;
+      unsigned long <B>border</B>;
+      unsigned long <B>background</B>;
+</CODE></PRE>
+
+<H2>ARGUMENTS</H2>
+
+<TABLE>
+<TR><TD> <B>attributes</B>
+<TD> Specifies the structure from which the values (as specified by the value mask)
+are to be taken.
+The value mask should have the appropriate bits
+set to indicate which attributes have been set in the structure.
+<TR><TD> <B>background</B>
+<TD> Specifies the background pixel value of the window.
+
+<TR><TD> <B>border</B>
+<TD> Specifies the border pixel value of the window.
+<TR><TD> <B>border_width</B>
+<TD> Specifies the width of the created window's border in pixels.
+<TR><TD> <B>class</B>
+<TD> Specifies the created window's class.
+You can pass
+<B><A HREF="create.html#InputClass">InputOutput</A></B>, 
+<B><A HREF="create.html#InputClass">InputOnly</A></B>, 
+or 
+<B>CopyFromParent</B>.
+A class of 
+<B>CopyFromParent</B>
+means the class
+is taken from the parent.
+<TR><TD> <B>depth</B>
+<TD> Specifies the window's depth.
+A depth of 
+<B>CopyFromParent</B>
+means the depth is taken from the parent.
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+<TR><TD> <B>parent</B>
+<TD> Specifies the parent window.
+<TR><TD> <B>valuemask</B>
+<TD> Specifies which window attributes are defined in the attributes
+argument.
+This mask is the bitwise inclusive OR of the valid attribute mask bits.
+If valuemask is zero,
+the attributes are ignored and are not referenced.
+<TR><TD> <B>visual</B>
+<TD> Specifies the visual type.
+A visual of 
+<B>CopyFromParent</B>
+means the visual type is taken from the 
+parent.
+
+<TR><TD><B>width</B><BR>
+	<B>height</B>
+<TD> Specify the width and height, which are the created window's inside dimensions
+and do not include the created window's borders
+
+<TR><TD> <B>x</B>
+	<BR><B>y</B>
+<TD> Specify the x and y coordinates, which are the top-left outside corner of the window's
+borders and are relative to the inside of the parent window's borders.
+
+</TABLE>
+
+<H2>DESCRIPTION</H2>
+
+The
+<B>XCreateWindow</B>
+function creates an unmapped subwindow for a specified parent window, 
+returns the window ID of the created window, 
+and causes the X server to generate a
+<B><A HREF="../events/window-state-change/create.html">CreateNotify</A></B>
+event.
+The created window is placed on top in the stacking order 
+with respect to siblings.
+
+<P>
+
+The coordinate system has the X axis horizontal and the Y axis vertical
+with the origin [0, 0] at the upper-left corner.
+Coordinates are integral,
+in terms of pixels,
+and coincide with pixel centers.
+Each window and pixmap has its own coordinate system.
+For a window, 
+the origin is inside the border at the inside, upper-left corner.
+
+<P>
+
+The border_width for an
+<B><A HREF="create.html#InputClass">InputOnly</A></B>
+window must be zero, or a
+<B>BadMatch</B>
+error results.
+For class
+<B><A HREF="create.html#InputClass">InputOutput</A></B>,
+the visual type and depth must be a combination supported for the screen,
+or a
+<B>BadMatch</B>
+error results.
+The depth need not be the same as the parent,
+but the parent must not be a window of class 
+<B><A HREF="create.html#InputClass">InputOnly</A></B>,
+or a
+<B>BadMatch</B>
+error results.
+For an
+<B><A HREF="create.html#InputClass">InputOnly</A></B>
+window,
+the depth must be zero, and the visual must be one supported by the screen.
+If either condition is not met,
+a
+<B>BadMatch</B>
+error results.
+The parent window, however, may have any depth and class.
+If you specify any invalid window attribute for a window, a
+<B>BadMatch</B>
+error results.
+
+<P>
+
+The created window is not yet displayed (mapped) on the user's display.
+To display the window, call
+<B><A HREF="XMapWindow.html">XMapWindow()</A></B>.
+The new window initially uses the same cursor as
+its parent. 
+A new cursor can be defined for the new window by calling
+<B><A HREF="XDefineCursor.html">XDefineCursor()</A></B>.
+
+The window will not be visible on the screen unless it and all of its
+ancestors are mapped and it is not obscured by any of its ancestors.
+
+<P>
+
+<B>XCreateWindow</B>
+can generate
+<B>BadAlloc</B>
+<B>BadColor</B>,
+<B>BadCursor</B>,
+<B>BadMatch</B>,
+<B>BadPixmap</B>,
+<B>BadValue</B>,
+and
+<B>BadWindow</B>
+errors.
+
+<P>
+
+The
+<B>XCreateSimpleWindow</B>
+function creates an unmapped
+<B><A HREF="create.html#InputClass">InputOutput</A></B>
+subwindow for a specified parent window, returns the
+window ID of the created window, and causes the X server to generate a
+<B><A HREF="../events/window-state-change/create.html">CreateNotify</A></B>
+event.
+The created window is placed on top in the stacking order with respect to 
+siblings.
+Any part of the window that extends outside its parent window is clipped.
+The border_width for an
+<B><A HREF="create.html#InputClass">InputOnly</A></B>
+window must be zero, or a
+<B>BadMatch</B>
+error results.
+<B>XCreateSimpleWindow</B>
+inherits its depth, class, and visual from its parent.
+All other window attributes, except background and border, 
+have their default values.
+
+<P>
+
+<B>XCreateSimpleWindow</B>
+can generate
+<B>BadAlloc</B>,
+<B>BadMatch</B>,
+<B>BadValue</B>,
+and
+<B>BadWindow</B>
+errors.
+
+<H2>DIAGNOSTICS</H2>
+
+<TABLE>
+
+<TR><TD> <B>BadAlloc</B>
+<TD>The server failed to allocate the requested resource or server memory.
+
+
+<TR><TD> <B>BadColor</B>
+<TD>A value for a Colormap argument does not name a defined Colormap.
+
+
+<TR><TD> <B>BadCursor</B>
+<TD>A value for a Cursor argument does not name a defined Cursor.
+
+
+<TR><TD> <B>BadMatch</B>
+<TD>The values do not exist for an
+<B><A HREF="create.html#InputClass">InputOnly</A></B>
+window.
+
+
+<TR><TD> <B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+to match in some other way required by the request.
+
+
+<TR><TD> <B>BadPixmap</B>
+<TD>A value for a Pixmap argument does not name a defined Pixmap.
+
+
+<TR><TD> <B>BadValue</B>
+<TD>Some numeric value falls outside the range of values accepted by the request.
+Unless a specific range is specified for an argument, the full range defined
+by the argument's type is accepted.  Any argument defined as a set of
+alternatives can generate this error.
+
+
+<TR><TD> <B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>SEE ALSO</H2>
+
+<B><A HREF="XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>,
+<B><A HREF="XConfigureWindow.html">XConfigureWindow()</A></B>, 
+<B><A HREF="XDefineCursor.html">XDefineCursor()</A></B>,
+<B><A HREF="XDestroyWindow.html">XDestroyWindow()</A></B>, 
+<B><A HREF="XMapWindow.html">XMapWindow()</A></B>, 
+<B><A HREF="XRaiseWindow.html">XRaiseWindow()</A></B>,
+<B><A HREF="XUnmapWindow.html">XUnmapWindow()</A></B>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,81 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: CirculateNotify Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.10.1 CirculateNotify Events</H1>
+
+<!.IN "Events" "CirculateNotify">
+<!.IN "CirculateNotify" "" "@DEF@">
+The X server can report
+<B>CirculateNotify</B>
+events to clients wanting information about when a window changes 
+its position in the stack.
+The X server generates this event type whenever a window is actually restacked 
+as a result of a client application calling
+<B><A HREF="../../window/XCirculateSubwindows.html">XCirculateSubwindows()</A></B>,
+<B><A HREF="../../window/XCirculateSubwindowsUp.html">XCirculateSubwindowsUp()</A></B>,
+or
+<B><A HREF="../../window/XCirculateSubwindowsDown.html">XCirculateSubwindowsDown()</A></B>.
+
+<P>
+
+To receive 
+<B>CirculateNotify</B>
+events, set the
+<B>StructureNotifyMask</B>
+bit in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the window
+or the
+<B>SubstructureNotifyMask</B>
+bit in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the parent window
+(in which case, circulating any child generates an event).
+
+<A NAME="XCirculateEvent"></A>
+<P>
+
+The structure for this event type contains:
+
+<P>
+
+<!.IN "XCirculateEvent" "" "@DEF@">
+
+<CODE><PRE>
+typedef struct {
+	int type;		/* CirculateNotify */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Window event;
+	Window window;
+	int place;		/* PlaceOnTop, PlaceOnBottom */
+} XCirculateEvent;
+
+</PRE></CODE>
+
+<P>
+
+The <B>event</B> member is set either to the restacked window or to its parent,
+depending on whether
+<B>StructureNotify</B>
+or
+<B>SubstructureNotify</B>
+was selected.
+The <B>window</B> member is set to the window that was restacked.
+The <B>place</B> member is set to the window's position after the restack occurs and
+is either
+<B>PlaceOnTop</B>
+or
+<B>PlaceOnBottom</B>.
+If it is
+<B>PlaceOnTop</B>,
+the window is now on top of all siblings.
+If it is
+<B>PlaceOnBottom</B>,
+the window is now below all siblings.
+
+<H5 ALIGN=right><I>Next: <A HREF="configure.html">ConfigureNotify Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

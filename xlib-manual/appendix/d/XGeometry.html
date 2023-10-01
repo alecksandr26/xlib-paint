@@ -1,0 +1,105 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGeometry</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGeometry</H1>
+
+This function has been superseded by
+<B><A HREF="../../utilities/XWMGeometry.html">XWMGeometry()</A></B>.
+
+<H2>Syntax</H2>
+
+<!.IN "Window" "determining location">
+<!.IN "XGeometry" "" "@DEF@">
+
+<CODE><PRE>
+int XGeometry(<I>display</I>, <I>screen</I>, <I>position</I>, <I>default_position</I>, <I>bwidth</I>, <I>fwidth</I>, <I>fheight</I>, <I>xadder</I>, 
+                  <I>yadder</I>, <I>x_return</I>, <I>y_return</I>, <I>width_return</I>, <I>height_return</I>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<I>display</I>;
+      int <I>screen</I>;
+      char *<I>position</I>, *<I>default_position</I>;	
+      unsigned int <I>bwidth</I>;
+      unsigned int <I>fwidth</I>, <I>fheight</I>;	
+      int <I>xadder</I>, <I>yadder</I>;	
+      int *<I>x_return</I>, *<I>y_return</I>;
+      int *<I>width_return</I>, *<I>height_return</I>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <I>display</I>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <I>screen</I>
+<TD> Specifies the screen.
+
+<TR><TD> <I>position</I><BR>
+ 	 <I>default_position</I>
+<TD> Specify the geometry specifications.
+
+<TR><TD> <I>bwidth</I>
+<TD> Specifies the border width.
+
+<TR><TD> <I>fheight</I><BR>
+         <I>fwidth</I>
+<TD> Specify the font height and width in pixels (increment size).
+
+<TR><TD> <I>xadder</I><BR>
+         <I>yadder</I>
+<TD> Specify additional interior padding needed in the window.
+
+<TR><TD> <I>x_return</I><BR>
+         <I>y_return</I>
+<TD> Return the x and y offsets.
+
+<TR><TD> <I>width_return</I><BR>
+         <I>height_return</I>
+<TD> Return the width and height determined.
+
+</TABLE>
+
+<H2>Description</H2>
+
+You pass in the border width (<B>bwidth</B>),
+size of the increments <B>fwidth</B> and <B>fheight</B>
+(typically font width and height),
+and any additional interior space (<B>xadder</B> and <B>yadder</B>)
+to make it easy to compute the resulting size.
+The
+<B>XGeometry()</B>
+function returns the position the window should be placed given a position and
+a default position.
+<B>XGeometry()</B>
+determines the placement of
+a window using a geometry specification as specified by
+<B><A HREF="../../utilities/XParseGeometry.html">XParseGeometry()</A></B>
+and the additional information about the window.
+Given a fully qualified default geometry specification and
+an incomplete geometry specification, 
+<B><A HREF="../../utilities/XParseGeometry.html">XParseGeometry()</A></B>
+returns a bitmask value as defined above in the 
+<B><A HREF="../../utilities/XParseGeometry.html">XParseGeometry()</A></B>
+call,
+by using the position argument.
+
+<P>
+
+The returned width and height will be the width and height specified
+by default_position as overridden by any user-specified position.
+They are not affected by fwidth, fheight, xadder, or yadder.
+The x and y coordinates are computed by using the border width,
+the screen width and height, padding as specified by xadder and yadder,
+and the fheight and fwidth times the width and height from the
+geometry specifications.
+
+<H2>See also</H2>
+"<A HREF="d.html">Compatibility Functions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

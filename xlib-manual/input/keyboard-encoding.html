@@ -1,0 +1,271 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Keyboard Encoding</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>12.7 Keyboard Encoding</H1>
+
+A <B>KeyCode</B> represents a physical (or logical) key.  
+KeyCodes lie in the inclusive range [8,255].  
+A KeyCode value carries no intrinsic information,
+although server implementors may attempt to encode geometry 
+(for example, matrix) information in some fashion so that it can
+be interpreted in a server-dependent fashion.
+The mapping between keys and KeyCodes cannot be changed.
+
+<A NAME="KeySym"></A>
+<P>
+
+A <B>KeySym</B> is an encoding of a symbol on the cap of a key.  
+The set of defined KeySyms includes the ISO Latin character sets (1-4), 
+Katakana, Arabic, Cyrillic, Greek, Technical,
+Special, Publishing, APL, Hebrew, Thai, Korean
+and a miscellany of keys found
+on keyboards (Return, Help, Tab, and so on).  
+To the extent possible, these sets are derived from international
+standards. 
+In areas where no standards exist,
+some of these sets are derived from Digital Equipment Corporation standards.
+The list of defined symbols can be found in
+<B><TT>X11/keysymdef.h</TT></B>.
+Unfortunately, some C preprocessors have
+limits on the number of defined symbols.
+If you must use KeySyms not
+in the Latin 1-4, Greek, and miscellaneous classes,
+you may have to define a symbol for those sets.
+Most applications usually only include 
+<B><TT>X11/keysym.h</TT></B>,
+which defines symbols for ISO Latin 1-4, Greek, and miscellaneous.
+
+<P>
+
+A list of KeySyms is associated with each KeyCode.
+The list is intended to convey the set of symbols on the corresponding key.
+If the list (ignoring trailing
+<B>NoSymbol</B>
+entries) is 
+a single KeySym ``<I>K</I>'',
+then the list is treated as if it were the list 
+``<I>K</I> NoSymbol <I>K</I> NoSymbol''.
+If the list (ignoring trailing
+<B>NoSymbol</B>
+entries) is a pair of KeySyms ``<I>K1 K2</I>'',
+then the list is treated as if it were the list ``<I>K1 K2 K1 K2</I>''.
+If the list (ignoring trailing
+<B>NoSymbol</B>
+entries) is a triple of KeySyms ``<I>K1 K2 K3</I>'',
+then the list is treated as if it were the list ``<I>K1 K2 K3</I> NoSymbol''.
+When an explicit ``void'' element is desired in the list,
+the value
+<B>VoidSymbol</B>
+can be used.
+
+<P>
+
+The first four elements of the list are split into two groups of KeySyms.
+Group 1 contains the first and second KeySyms;
+Group 2 contains the third and fourth KeySyms.
+Within each group,
+if the second element of the group is
+<B>NoSymbol</B> ,
+then the group should be treated as if the second element were 
+the same as the first element,
+except when the first element is an alphabetic KeySym ``<I>K</I>'' 
+for which both lowercase and uppercase forms are defined.
+In that case,
+the group should be treated as if the first element were 
+the lowercase form of ``<I>K</I>'' and the second element were 
+the uppercase form of ``<I>K</I>.''
+
+<P>
+
+The standard rules for obtaining a KeySym from a
+<B><A HREF="../events/keyboard-pointer/keyboard-pointer.html">KeyPress</A></B>
+event make use of only the Group 1 and Group 2 KeySyms;
+no interpretation of other KeySyms in the list is given.
+Which group to use is determined by the modifier state.
+Switching between groups is controlled by the KeySym named MODE SWITCH,
+by attaching that KeySym to some KeyCode and attaching 
+that KeyCode to any one of the modifiers
+<B>Mod1</B>
+through
+<B>Mod5</B>.
+This modifier is called the <I>group modifier</I>.
+For any KeyCode,
+Group 1 is used when the group modifier is off,
+and Group 2 is used when the group modifier is on.
+
+<P>
+
+The
+<B>Lock</B>
+modifier is interpreted as CapsLock when the KeySym named XK_Caps_Lock
+is attached to some KeyCode and that KeyCode is attached to the
+<B>Lock</B>
+modifier.  The
+<B>Lock</B>
+modifier is interpreted as ShiftLock when the KeySym named XK_Shift_Lock
+is attached to some KeyCode and that KeyCode is attached to the
+<B>Lock</B> 
+modifier.  If the
+<B>Lock</B> 
+modifier could be interpreted as both
+CapsLock and ShiftLock, the CapsLock interpretation is used.
+
+<P>
+
+The operation of keypad keys is controlled by the KeySym named XK_Num_Lock,
+by attaching that KeySym to some KeyCode and attaching that KeyCode to any
+one of the modifiers
+<B>Mod1</B> 
+through
+<B>Mod5</B> . 
+This modifier is called the
+<I>numlock modifier</I>.  The standard KeySyms with the prefix ``XK_KP_''
+in their
+name are called keypad KeySyms; these are KeySyms with numeric value in
+the hexadecimal range 0xFF80 to 0xFFBD inclusive.  In addition,
+vendor-specific KeySyms in the hexadecimal range 0x11000000 to 0x1100FFFF
+are also keypad KeySyms.
+
+<P>
+
+Within a group, the choice of KeySym is determined by applying the first
+rule that is satisfied from the following list:
+
+<UL>
+
+
+<P><LI>
+The numlock modifier is on and the second KeySym is a keypad KeySym.  In
+this case, if the
+<B>Shift</B>
+modifier is on, or if the
+<B>Lock</B> 
+modifier is on and
+is interpreted as ShiftLock, then the first KeySym is used, otherwise the
+second KeySym is used.
+
+<P><LI>
+The
+<B>Shift</B> 
+and
+<B>Lock</B> 
+modifiers are both off.  In this case, the first
+KeySym is used.
+
+<P><LI>
+The
+<B>Shift</B> 
+modifier is off, and the
+<B>Lock</B> 
+modifier is on and is
+interpreted as CapsLock.  In this case, the first KeySym is used, but if
+that KeySym is lowercase alphabetic, then the corresponding uppercase
+KeySym is used instead.
+
+<P><LI>
+The
+<B>Shift</B> 
+modifier is on, and the
+<B>Lock</B> 
+modifier is on and is interpreted
+as CapsLock.  In this case, the second KeySym is used, but if that KeySym
+is lowercase alphabetic, then the corresponding uppercase KeySym is used
+instead.
+
+<P><LI>
+The
+<B>Shift</B> 
+modifier is on, or the
+<B>Lock</B> 
+modifier is on and is interpreted
+as ShiftLock, or both.  In this case, the second KeySym is used.
+
+</UL>
+
+<P>
+
+No spatial geometry of the symbols on the key is defined by
+their order in the KeySym list, 
+although a geometry might be defined on a
+server-specific basis.
+The X server does not use the mapping between KeyCodes and KeySyms.
+Rather, it merely stores it for reading and writing by clients.
+
+<P>
+
+To obtain the legal KeyCodes for a display, use
+<B><A HREF="XDisplayKeycodes.html">XDisplayKeycodes()</A></B>.
+
+<P>
+
+To obtain the symbols for the specified KeyCodes, use
+<B><A HREF="XGetKeyboardMapping.html">XGetKeyboardMapping()</A></B>.
+
+<P>
+
+To change the keyboard mapping, use
+<B><A HREF="XChangeKeyboardMapping.html">XChangeKeyboardMapping()</A></B>.
+
+<A NAME="XModifierKeymap"></A>
+<P>
+
+The next six functions make use of the 
+<B>XModifierKeymap</B>
+data structure, which contains:
+
+<P>
+
+<!.IN "XModifierKeymap" "" "@DEF@">
+<PRE><CODE>
+typedef struct {
+	int max_keypermod;	/* This server's max number of keys per modifier */
+	KeyCode *modifiermap;	/* An 8 by max_keypermod array of the modifiers */
+} XModifierKeymap;
+</PRE></CODE>
+
+<P>
+
+To create an
+<B>XModifierKeymap()</B>
+structure, use
+<B><A HREF="XNewModifiermap.html">XNewModifiermap()</A></B>.
+
+<P>
+
+To add a new entry to an 
+<B>XModifierKeymap()</B>
+structure, use
+<B><A HREF="XInsertModifiermapEntry.html">XInsertModifiermapEntry()</A></B>.
+
+<P>
+
+To delete an entry from an 
+<B>XModifierKeymap()</B>
+structure, use
+<B><A HREF="XDeleteModifiermapEntry.html">XDeleteModifiermapEntry()</A></B>.
+
+<P>
+
+To destroy an
+<B>XModifierKeymap</B>
+structure, use
+<B><A HREF="XFreeModifiermap.html">XFreeModifiermap()</A></B>.
+
+<P>
+
+To set the KeyCodes to be used as modifiers, use
+<B><A HREF="XSetModifierMapping.html">XSetModifierMapping()</A></B>.
+
+<P>
+
+To obtain the KeyCodes used as modifiers, use
+<B><A HREF="XGetModifierMapping.html">XGetModifierMapping()</A></B>.
+
+<H5 ALIGN=right><I>Next Chapter: <A HREF="../localization/">Locales and Internationalized Text Functions</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

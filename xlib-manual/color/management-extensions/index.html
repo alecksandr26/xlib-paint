@@ -1,0 +1,41 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Color Management Extensions</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.12 Color Management Extensions</H1>
+
+The Xlib color management facilities can be extended in two ways:
+<UL>
+
+<P><LI>
+Device-Independent Color Spaces
+
+<P>
+
+Device-independent color spaces that are derivable to CIE XYZ
+space can be added using the
+<B><A HREF="XcmsAddColorSpace.html">XcmsAddColorSpace()</A></B>
+function.
+
+<P><LI>
+Color Characterization Function Set
+
+<P>
+
+A Color Characterization Function Set consists of
+device-dependent color spaces and their functions that
+convert between these color spaces and the CIE XYZ
+color space, bundled together for a specific class of output devices.
+A function set can be added using the
+<B><A HREF="XcmsAddFunctionSet.html">XcmsAddFunctionSet()</A></B>
+function.
+
+</UL>
+
+<H5 ALIGN=right><I>Next: <A HREF="spaces.html">Color Spaces</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

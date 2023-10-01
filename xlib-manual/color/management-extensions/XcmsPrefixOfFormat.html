@@ -1,0 +1,43 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XcmsPrefixOfFormat</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XcmsPrefixOfFormat</H1>
+
+<H2>Syntax</H2>
+
+<!.IN  "XcmsPrefixOfFormat" "" "@DEF@">
+
+<CODE><PRE>
+char *XcmsPrefixOfFormat(<B>format</B>)
+      <A HREF="../structures.html#XcmsColor">XcmsColorFormat</A> <B>format</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>format</B>
+<TD> Specifies the color specification format.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XcmsPrefixOfFormat()</B>
+function returns the string prefix associated with the color specification
+encoding specified by the format argument.
+Otherwise, if no encoding is found, it returns NULL.
+The returned string must be treated as read-only.
+
+<H2>See also</H2>
+
+"<A HREF="querying-space-format-and-prefix.html">Querying Color Space Format and Prefix</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

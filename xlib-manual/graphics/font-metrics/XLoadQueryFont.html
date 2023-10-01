@@ -1,0 +1,79 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XLoadQueryFont</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XLoadQueryFont</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XLoadQueryFont" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="./#XFontStruct">XFontStruct</A> *XLoadQueryFont(<B>display</B>, <B>name</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      char *<B>name</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>name</B>
+<TD> Specifies the name of the font,
+which is a null-terminated string.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XLoadQueryFont()</B>
+function provides the most common way for accessing a font.
+<B>XLoadQueryFont()</B>
+both opens (loads) the specified font and returns a pointer to the
+appropriate
+<A HREF="./#XFontStruct">XFontStruct</A>
+structure.
+If the font name is not in the Host Portable Character Encoding,
+the result is implementation dependent.
+If the font does not exist,
+<B>XLoadQueryFont()</B>
+returns NULL.
+
+<P>
+
+<B>XLoadQueryFont()</B>
+can generate a
+<B>BadAlloc</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../../GC/XCreateGC.html">XCreateGC()</A></B>,
+<B><A HREF="XFreeFont.html">XFreeFont()</A></B>,
+<B><A HREF="XGetFontProperty.html">XGetFontProperty()</A></B>,
+<B><A HREF="XListFonts.html">XListFonts()</A></B>,
+<B><A HREF="XLoadFont.html">XLoadFont()</A></B>,
+<B><A HREF="XQueryFont.html">XQueryFont()</A></B>,
+<B><A HREF="../../window-and-session-manager/XSetFontPath.html">XSetFontPath()</A></B>,
+<B><A HREF="XUnloadFont.html">XUnloadFont()</A></B>,
+"<A HREF="fonts.html">Loading and Freeing Fonts</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

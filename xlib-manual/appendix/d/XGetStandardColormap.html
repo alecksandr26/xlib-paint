@@ -1,0 +1,90 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetStandardColormap</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetStandardColormap</H1>
+
+This function has been superseded by
+<B><A HREF="../../ICC/standard-colormaps/XGetRGBColormaps.html">XGetRGBColormaps()</A></B>.
+
+<H2>Syntax</H2>
+
+<!.IN "XGetStandardColormap" "" "@DEF@">
+
+<CODE><PRE>
+Status XGetStandardColormap(<I>display</I>, <I>w</I>, <I>colormap_return</I>, <I>property</I>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<I>display</I>;
+      Window <I>w</I>;
+      <B><A HREF="../../ICC/standard-colormaps/#XStandardColormap">XStandardColormap</A></B> *<I>colormap_return</I>;
+      Atom <I>property</I>;	/* RGB_BEST_MAP, etc. */
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <I>display</I>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <I>w</I>
+<TD> Specifies the window.
+
+<TR><TD> <I>colormap_return</I>
+<TD> Returns the colormap associated with the specified atom.
+
+<TR><TD> <I>property</I>
+<TD> Specifies the property name.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetStandardColormap()</B>
+function returns the colormap definition associated with the atom supplied
+as the property argument.
+<B>XGetStandardColormap()</B>
+returns a nonzero status if successful and zero otherwise.
+For example,
+to fetch the standard
+<B><A HREF="../../window/visual-types.html">GrayScale</A></B>
+colormap for a display,
+you use
+<B>XGetStandardColormap()</B>
+with the following syntax:
+
+<CODE><PRE>
+XGetStandardColormap(dpy, DefaultRootWindow(dpy), &cmap, XA_RGB_GRAY_MAP);
+</PRE></CODE>
+
+See section "<A HREF="../../ICC/standard-colormaps/">Standard Colormaps</A>" for the semantics of standard colormaps.
+
+<P>
+
+<B>XGetStandardColormap()</B>
+can generate
+<B>BadAtom</B>
+and
+<B>BadWindow</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAtom</B>
+<TD> A value for an Atom argument does not name a
+     defined Atom.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+"<A HREF="d.html">Compatibility Functions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,30 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Xpermalloc</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>Xpermalloc</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Xpermalloc" "" "@DEF@">
+
+<CODE><PRE>
+char *Xpermalloc(<B>size</B>)
+     unsigned int <B>size</B>;
+
+</PRE></CODE>
+
+<H2>Description</H2>
+
+The
+<B>Xpermalloc()</B>
+function allocates storage that can never be freed for the life of the
+program.  The memory is allocated with alignment for the C type double.
+This function may provide some performance and space savings over
+the standard operating system memory allocator.
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

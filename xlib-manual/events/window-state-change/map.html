@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Events: MapNotify</TITLE>
+<HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.10.6 MapNotify</H1>
+
+The X server can report
+<B>MapNotify</B>
+events to clients wanting information about which windows are mapped.
+The X server generates this event type whenever a client application changes the
+window's state from unmapped to mapped by calling
+<B><A HREF="../../window/XMapWindow.html">XMapWindow()</A></B>,
+<B><A HREF="../../window/XMapRaised.html">XMapRaised()</A></B>,
+<B><A HREF="../../window/XMapSubwindows.html">XMapSubwindows()</A></B>,
+<B><A HREF="../../window-and-session-manager/XReparentWindow.html">XReparentWindow()</A></B>,
+or as a result of save-set processing.
+
+<H2>Select With</H2>
+
+To receive 
+<B>MapNotify</B>
+events, set the
+<B>StructureNotifyMask</B>
+bit in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the window or the
+<B>SubstructureNotifyMask</B>
+bit in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the parent window
+(in which case, mapping any child generates an event).
+
+<A NAME="XMapEvent"></A>
+<P>
+
+The structure for this event type contains:
+
+<P>
+
+<PRE><CODE>
+typedef struct {
+	int <B>type</B>;		/* MapNotify */
+	unsigned long <B>serial</B>;	/* # of last request processed by server */
+	Bool <B>send_event</B>;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *<B>display</B>;	/* Display the event was read from */
+	Window <B>event</B>;
+	Window <B>window</B>;
+	Bool <B>override_redirect</B>;	/* boolean, is override set... */
+} XMapEvent;
+</PRE></CODE>
+
+<P>
+
+The <B>event</B> member is set either to the window that was mapped or to its parent,
+depending on whether
+<B>StructureNotify</B>
+or
+<B>SubstructureNotify</B>
+was selected.<BR>
+The <B>window</B> member is set to the window that was mapped.<BR>
+The <B>override_redirect</B> member is set to the override-redirect attribute
+of the window.
+Window manager clients normally should ignore this window 
+if the <A HREF="../../window/attributes/override-redirect.html">override-redirect</A> attribute is
+<B>True</B>,
+because these events usually are generated from pop-ups,
+which override structure control.
+
+<H5 ALIGN=right><I>Next: <A HREF="mapping.html">MappingNotify Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+
+</BODY>
+</HTML>

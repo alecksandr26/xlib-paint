@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmStringToQuark</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmStringToQuark</H1>
+
+<H2>Syntax</H2>
+
+
+<CODE><PRE>
+#define XrmStringToName(string) XrmStringToQuark(string)
+#define XrmStringToClass(string) XrmStringToQuark(string)
+#define XrmStringToRepresentation(string) XrmStringToQuark(string)
+
+<B><A HREF="quarks.html">XrmQuark</A></B> XrmStringToQuark(<B>string</B>)
+     char *<B>string</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>string</B>
+<TD> Specifies the string for which a quark is to be allocated.
+
+</TABLE>
+
+<H2>Description</H2>
+
+This function can be used to convert from string to quark representation.
+If the string is not in the Host Portable Character Encoding,
+the conversion is implementation dependent.
+The string argument to
+<B>XrmStringToQuark()</B>
+need not be permanently allocated storage.
+<B><A HREF="XrmPermStringToQuark.html">XrmPermStringToQuark()</A></B>
+is just like
+<B>XrmStringToQuark()</B>,
+except that Xlib is permitted to assume the string argument is permanently
+allocated,
+and, hence, that it can be used as the value to be returned by
+<B><A HREF="XrmQuarkToString.html">XrmQuarkToString()</A></B>.
+
+<P>
+
+For any given quark, if
+<B>XrmStringToQuark()</B>
+returns a non-NULL value,
+all future calls will return the same value (identical address).
+
+<H2>See also</H2>
+
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>,
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmMergeDatabases.html">XrmMergeDatabases()</A></B>,
+<B><A HREF="XrmPermStringToQuark.html">XrmPermStringToQuark()</A></B>,
+<B><A HREF="XrmPutResource.html">XrmPutResource()</A></B>,
+<B><A HREF="XrmQuarkToString.html">XrmQuarkToString()</A></B>,
+<B><A HREF="XrmStringToBindingQuarkList.html">XrmStringToBindingQuarkList()</A></B>,
+<B><A HREF="XrmStringToQuarkList.html">XrmStringToQuarkList()</A></B>,
+<B><A HREF="XrmUniqueQuark.html">XrmUniqueQuark()</A></B>,
+"<A HREF="quarks.html">Quarks</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

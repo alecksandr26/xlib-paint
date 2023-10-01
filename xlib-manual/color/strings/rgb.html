@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: RGB Device String Specification</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.2.1 RGB Device String Specification</H1>
+
+An RGB Device specification is identified by
+the prefix ``rgb:'' and conforms to the following syntax:
+
+<P>
+
+<CODE><PRE>
+rgb:<B>&lt;red&gt;/&lt;green&gt;/&lt;blue&gt;</B>
+
+    <B>&lt;red&gt;</B>, <B>&lt;green&gt;</B>, <B>&lt;blue&gt;</B> := <B>h</B> | <B>hh</B> | <B>hhh</B> | <B>hhhh</B>
+    <B>h</B> := single hexadecimal digits (case insignificant)
+</PRE></CODE>
+
+<P>
+
+Note that <B>h</B> indicates the value scaled in 4 bits, 
+<B>hh</B> the value scaled in 8 bits,
+<B>hhh</B> the value scaled in 12 bits,
+and <B>hhhh</B> the value scaled in 16 bits, respectively.
+
+<P>
+
+Typical examples are the strings ``rgb:ea/75/52'' and ``rgb:ccc/320/320'',
+but mixed numbers of hexadecimal digit strings 
+(``rgb:ff/a5/0'' and ``rgb:ccc/32/0'')
+are also allowed.
+
+<P>
+
+For backward compatibility, an older syntax for RGB Device is
+supported, but its continued use is not encouraged.
+The syntax is an initial sharp sign character followed by
+a numeric specification, in one of the following formats:
+
+<P>
+
+<CODE><PRE>
+#RGB	(4 bits each)
+#RRGGBB	(8 bits each)
+#RRRGGGBBB	(12 bits each)
+#RRRRGGGGBBBB	(16 bits each)
+</PRE></CODE>
+
+<P>
+
+The R, G, and B represent single hexadecimal digits.
+When fewer than 16 bits each are specified, 
+they represent the most-significant bits of the value
+(unlike the ``rgb:'' syntax, in which values are scaled).
+For example, the string ``#3a7'' is the same as ``#3000a0007000''.
+
+<H5 ALIGN=right><I>Next: <A HREF="intensity.html">RGB Intensity String Specification</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

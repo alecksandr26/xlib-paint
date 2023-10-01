@@ -1,0 +1,101 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetErrorDatabaseText</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetErrorDatabaseText</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XGetErrorDatabaseText" "" "@DEF@">
+
+<CODE><PRE>
+XGetErrorDatabaseText(<B>display</B>, <B>name</B>, <B>message</B>, <B>default_string</B>, <B>buffer_return</B>, <B>length</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      char *<B>name</B>, *<B>message</B>;
+      char *<B>default_string</B>;
+      char *<B>buffer_return</B>;
+      int <B>length</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>name</B>
+<TD> Specifies the name of the application.
+
+<TR><TD> <B>message</B>
+<TD> Specifies the type of the error message.
+
+<TR><TD> <B>default_string</B>
+<TD> Specifies the default error message if none is found in the database.
+
+<TR><TD> <B>buffer_return</B>
+<TD> Returns the error description.
+
+<TR><TD> <B>length</B>
+<TD> Specifies the size of the buffer.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetErrorDatabaseText()</B>
+function returns a null-terminated message
+(or the default message) from the error message
+database.
+Xlib uses this function internally to look up its error messages.
+The text in the default_string argument is assumed
+to be in the encoding of the current locale,
+and the text stored in the buffer_return argument
+is in the encoding of the current locale.
+
+<P>
+
+The <B>name</B> argument should generally be the name of your application.
+The <B>message</B> argument should indicate which type of error message you want.
+If the name and message are not in the Host Portable Character Encoding,
+the result is implementation dependent.
+Xlib uses three predefined ``application names'' to report errors.
+In these names,
+uppercase and lowercase matter.
+
+<TABLE>
+<TR><TD VALIGN=top>XProtoError
+<TD>The protocol error number is used as a string for the message argument.
+
+<TR><TD VALIGN=top>XlibMessage
+<TD>These are the message strings that are used internally by the library.
+
+<TR><TD VALIGN=top>XRequest<TD>
+For a core protocol request,
+the major request protocol number is used for the message argument.
+For an extension request,
+the extension name (as given by
+<B><A HREF="InitExtension.html">InitExtension()</A></B>)
+followed by a period (.) and the minor request protocol number 
+is used for the message argument.
+If no string is found in the error database,
+the default_string is returned to the buffer argument.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XDisplayName.html">XDisplayName()</A></B>,
+<B><A HREF="XGetErrorText.html">XGetErrorText()</A></B>,
+<B><A HREF="../../display/opening.html">XOpenDisplay()</A></B>,
+<B><A HREF="XSetErrorHandler.html">XSetErrorHandler()</A></B>,
+<B><A HREF="XSetIOErrorHandler.html">XSetIOErrorHandler()</A></B>,
+<B><A HREF="XSynchronize.html">XSynchronize()</A></B>,
+"<A HREF="default-handlers.html">Using the Default Error Handlers</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

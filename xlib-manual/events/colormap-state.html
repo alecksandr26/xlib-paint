@@ -1,0 +1,103 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Colormap State Change Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.12 Colormap State Change Events</H1>
+
+<!.IN "Events" "ColormapNotify">
+<!.IN "ColormapNotify" "" "@DEF@">
+
+The X server can report
+<B>ColormapNotify</B>
+events to clients wanting information about when the colormap changes 
+and when a colormap is installed or uninstalled. 
+The X server generates this event type whenever a client application:
+
+<UL>
+
+
+<P><LI>
+Changes the colormap member of the
+<A HREF="../window/attributes/#XSetWindowAttributes">XSetWindowAttributes</A>
+structure by 
+calling
+<B><A HREF="../window/XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>,
+<B><A HREF="../color/XFreeColormap.html">XFreeColormap()</A></B>,
+or
+<B><A HREF="../window/XSetWindowColormap.html">XSetWindowColormap()</A></B>
+
+<P><LI>
+Installs or uninstalls the colormap by calling
+<B><A HREF="../window-and-session-manager/XInstallColormap.html">XInstallColormap()</A></B>
+or
+<B><A HREF="../window-and-session-manager/XUninstallColormap.html">XUninstallColormap()</A></B>
+
+</UL>
+
+<P>
+
+To receive 
+<B>ColormapNotify</B>
+events, set the
+<B>ColormapChangeMask</B>
+bit in the <A HREF="../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the window. 
+
+<A NAME="XColormapEvent"></A>
+<P>
+
+The structure for this event type contains:
+
+<P>
+
+<!.IN "XColormapEvent" "" "@DEF@">
+
+<PRE><CODE>
+
+typedef struct {
+	int type;	/* ColormapNotify */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Window window;
+	Colormap colormap;	/* colormap or None */
+	Bool new;
+	int state;	/* ColormapInstalled, ColormapUninstalled */
+} XColormapEvent;
+
+</PRE></CODE>
+
+<P>
+
+The <B>window</B> member is set to the window whose associated 
+colormap is changed, installed, or uninstalled.
+For a colormap that is changed, installed, or uninstalled,
+the <B>colormap</B> member is set to the colormap associated with the window. 
+For a colormap that is changed by a call to
+<B><A HREF="../color/XFreeColormap.html">XFreeColormap()</A></B>,
+the <B>colormap</B> member is set to
+<B>None</B>.
+The new member is set to indicate whether the colormap 
+for the specified window was changed or installed or uninstalled
+and can be 
+<B>True</B>
+or
+<B>False</B>.
+If it is
+<B>True</B>,
+the colormap was changed.
+If it is
+<B>False</B>,
+the colormap was installed or uninstalled.
+The <B>state</B> member is always set to indicate whether the colormap is installed or
+uninstalled and can be 
+<B>ColormapInstalled</B>
+or
+<B>ColormapUninstalled</B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="client-communication/">Client Communication Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

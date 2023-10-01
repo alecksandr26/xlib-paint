@@ -1,0 +1,104 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Extensions: XESetWireToError</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XESetWireToError</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XESetWireToError" "" "@DEF@">
+
+<CODE><PRE>
+Bool (*XESetWireToError(<B>display</B>, <B>error_number</B>, <B>proc</B>)()
+      Display *<B>display</B>;
+      int <B>error_number</B>;
+      Bool (*<B>proc</B>)();
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>error_number</B>
+<TD> Specifies the error code.
+
+<TR><TD> <B>proc</B>
+<TD> Specifies the procedure to call when an error is received.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XESetWireToError()</B>
+function defines a procedure to be called when an extension
+error needs to be converted from wire format to host format.
+The error number defines which protocol error code to install
+the conversion procedure for.
+<B>XESetWireToError()</B>
+returns any previously defined procedure.
+
+<P>
+
+Use this function for extension errors that contain additional error values
+beyond those in a core X error, when multiple wire errors must be combined
+into a single Xlib error, or when it is necessary to intercept an
+X error before it is otherwise examined.
+
+<P>
+
+When Xlib needs to convert an error from wire format to host format,
+the procedure is called with these arguments:
+
+<P>
+
+<PRE><CODE>
+Bool (*<B>proc</B>)(<B>display</B>, <B>he</B>, <B>we</B>)
+	<A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+	<A HREF="../../event-handling/protocol-errors/default-handlers.html#XErrorEvent">XErrorEvent</A> *<B>he</B>;
+	xError *<B>we</B>;
+</PRE></CODE>
+
+<P>
+
+The <B>he</B> argument is a pointer to where the host format error should be stored.
+The structure pointed at by he is guaranteed to be as large as an
+<A HREF="../../events/structures.html#XEvent">XEvent</A>
+structure and so can be cast to a type larger than an
+<A HREF="../../event-handling/protocol-errors/default-handlers.html#XErrorEvent">XErrorEvent</A>
+to store additional values.
+If the error is to be completely ignored by Xlib
+(for example, several protocol error structures will be combined into
+one Xlib error),
+then the function should return
+<B>False</B>;
+otherwise, it should return
+<B>True</B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XESetBeforeFlush.html">XESetBeforeFlush()</A></B>,
+<B><A HREF="XESetCloseDisplay.html">XESetCloseDisplay()</A></B>,
+<B><A HREF="XESetCopyGC.html">XESetCopyGC()</A></B>,
+<B><A HREF="XESetCreateFont.html">XESetCreateFont()</A></B>,
+<B><A HREF="XESetCreateGC.html">XESetCreateGC()</A></B>,
+<B><A HREF="XESetError.html">XESetError()</A></B>,
+<B><A HREF="XESetErrorString.html">XESetErrorString()</A></B>,
+<B><A HREF="XESetEventToWire.html">XESetEventToWire()</A></B>,
+<B><A HREF="XESetFlushGC.html">XESetFlushGC()</A></B>,
+<B><A HREF="XESetFreeFont.html">XESetFreeFont()</A></B>,
+<B><A HREF="XESetFreeGC.html">XESetFreeGC()</A></B>,
+<B><A HREF="XESetPrintErrorValues.html">XESetPrintErrorValues()</A></B>,
+<B><A HREF="XESetWireToEvent.html">XESetWireToEvent()</A></B>,
+<B><A HREF="_XSetLastRequestRead.html">_XSetLastRequestRead()</A></B>,
+"<A HREF="hooks-into-the-library.html">Hooks into the Library</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

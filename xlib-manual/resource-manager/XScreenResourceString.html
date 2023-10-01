@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XScreenResourceString</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XScreenResourceString</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XScreenResourceString" "" "@DEF@">
+
+<CODE><PRE>
+char *XScreenResourceString(<B>screen</B>)
+      <A HREF="../display/display-macros.html">Screen</A> *<B>screen</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the screen.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XScreenResourceString()</B>
+function returns the SCREEN_RESOURCES property from the root window of the
+specified screen.
+The property is converted from type STRING to the current locale.
+The conversion is identical to that produced by 
+<B><A HREF="../ICC/client-to-window-manager/XmbTextPropertyToTextList.html">XmbTextPropertyToTextList()</A></B>
+for a single element STRING property.
+The property value must be in a format that is acceptable to
+<B><A HREF="XrmGetStringDatabase.html">XrmGetStringDatabase()</A></B>.
+If no property exists, NULL is returned.
+The caller is responsible for freeing the returned string by using
+<B><A HREF="../display/XFree.html">XFree()</A></B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XResourceManagerString.html">XResourceManagerString()</A></B>
+"<A HREF="creating-and-storing-databases.html">Creating and Storing Databases</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

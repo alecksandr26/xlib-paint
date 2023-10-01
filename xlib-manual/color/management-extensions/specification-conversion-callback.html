@@ -1,0 +1,154 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Color Specification Conversion Callback</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.12.6 Color Specification Conversion Callback</H1>
+
+Callback functions in the
+<B><A HREF="creating-additional-spaces.html#XcmsColorSpace">XcmsColorSpace</A></B>
+structure for converting a color specification between device-independent
+spaces must adhere to the
+following software interface specification:
+
+<CODE><PRE>
+<B><A HREF="../conversion-contexts-and-gamut-mapping.html#cmsStatus">Status</A></B> ConversionProc(<B>ccc</B>, <B>white_point</B>, <B>colors_in_out</B>, <B>ncolors</B>)
+      <A HREF="../CCC/macros.html">XcmsCCC</A> <B>ccc</B>;
+      <A HREF="../structures.html#XcmsColor">XcmsColor</A> *<B>white_point</B>;
+      <A HREF="../structures.html#XcmsColor">XcmsColor</A> *<B>colors_in_out</B>;
+      unsigned int <B>ncolors</B>;
+</PRE></CODE>
+
+<TABLE>
+<TR><TD> <B>ccc</B>
+<TD>Specifies the CCC.
+
+<TR><TD> <B>white_point</B>
+<TD>Specifies the white point associated with color specifications.
+The pixel member should be ignored,
+and the entire structure remain unchanged upon return.
+
+<TR><TD> <B>colors_in_out</B>
+<TD>Specifies an array of color specifications.
+Pixel members should be ignored and must remain unchanged upon return.
+
+<TR><TD> <B>ncolors</B>
+<TD>Specifies the number of 
+<A HREF="../structures.html#XcmsColor">XcmsColor</A>
+structures in the color specification array.
+</TABLE>
+
+<P>
+
+Callback functions in the
+<B><A HREF="creating-additional-spaces.html#XcmsColorSpace">XcmsColorSpace</A></B>
+structure for converting a color specification to or from a device-dependent
+space must adhere to the
+following software interface specification:
+
+<CODE><PRE>
+<B><A HREF="../conversion-contexts-and-gamut-mapping.html#cmsStatus">Status</A></B> ConversionProc(<B>ccc</B>, <B>colors_in_out</B>, <B>ncolors</B>, <B>compression_flags_return</B>)
+      <A HREF="../CCC/macros.html">XcmsCCC</A> <B>ccc</B>;
+      <A HREF="../structures.html#XcmsColor">XcmsColor</A> *<B>colors_in_out</B>;
+      unsigned int <B>ncolors</B>;
+      Bool <B>compression_flags_return</B>[];
+
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>ccc</B>
+<TD> Specifies the CCC.
+
+<TR><TD> <B>colors_in_out</B>
+<TD> Specifies an array of color specifications.
+Pixel members should be ignored and must remain unchanged upon return.
+
+<TR><TD> <B>ncolors</B>
+<TD> Specifies the number of 
+<A HREF="../structures.html#XcmsColor">XcmsColor</A>
+structures in the color specification array.
+
+<TR><TD> <B>compression_flags_return</B>
+<TD> Returns an array of Boolean values for indicating compression status.
+If a non-NULL pointer is supplied
+and a color at a given index is compressed, then
+<B>True</B>
+should be stored at the corresponding index in this array;
+otherwise, the array should not be modified.
+
+</TABLE>
+
+Conversion functions are available globally for use by other color
+spaces.
+The conversion functions provided by Xlib are:
+<TABLE>
+<TR><TD COLSPAN=3><HR>
+<TR><TD><B>Function</B>	<TD><B>Converts from</B>	<TD><B>Converts to</B>
+<TR><TD COLSPAN=3><HR>
+
+<TR><TD> <B>XcmsCIELabToCIEXYZ()</B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIELabFormat</A></B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIEXYZFormat</A></B>
+
+<TR><TD> <B>XcmsCIELuvToCIEuvY()</B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIELuvFormat</A></B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIEuvYFormat</A></B>
+
+<TR><TD> <B>XcmsCIEXYZToCIELab()</B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIEXYZFormat</A></B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIELabFormat</A></B>
+
+<TR><TD> <B>XcmsCIEXYZToCIEuvY()</B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIEXYZFormat</A></B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIEuvYFormat</A></B>
+
+<TR><TD> <B>XcmsCIEXYZToCIExyY()</B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIEXYZFormat</A></B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIExyYFormat</A></B>
+
+<TR><TD> <B>XcmsCIEXYZToRGBi()</B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIEXYZFormat</A></B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsRGBiFormat</A></B>
+
+<TR><TD> <B>XcmsCIEuvYToCIELuv()</B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIEuvYFormat</A></B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIELabFormat</A></B>
+
+<TR><TD> <B>XcmsCIEuvYToCIEXYZ()</B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIEuvYFormat</A></B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIEXYZFormat</A></B>
+
+<TR><TD> <B>XcmsCIEuvYToTekHVC()</B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIEuvYFormat</A></B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsTekHVCFormat</A></B>
+
+<TR><TD> <B>XcmsCIExyYToCIEXYZ()</B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIExyYFormat</A></B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIEXYZFormat</A></B>
+
+<TR><TD> <B>XcmsRGBToRGBi()</B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsRGBFormat</A></B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsRGBiFormat</A></B>
+
+<TR><TD> <B>XcmsRGBiToCIEXYZ()</B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsRGBiFormat</A></B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIEXYZFormat</A></B>
+
+<TR><TD> <B>XcmsRGBiToRGB()</B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsRGBiFormat</A></B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsRGBFormat</A></B>
+
+<TR><TD> <B>XcmsTekHVCToCIEuvY()</B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsTekHVCFormat</A></B>
+	<TD><B><A HREF="../structures.html#XcmsRGBFormat">XcmsCIEuvYFormat</A></B>
+
+<TR><TD COLSPAN=3><HR>
+</TABLE>
+
+<H5 ALIGN=right><I>Next: <A HREF="function-sets.html">Function Sets</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

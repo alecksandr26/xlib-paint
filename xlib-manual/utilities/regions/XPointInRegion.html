@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XPointInRegion</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XPointInRegion</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XPointInRegion" "" "@DEF@">
+
+<CODE><PRE>
+Bool XPointInRegion(<B>r</B>, <B>x</B>, <B>y</B>)
+      <A HREF="./">Region</A> <B>r</B>;
+      int <B>x</B>, <B>y</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>r</B>
+<TD> Specifies the region.
+
+<TR><TD> <B>x</B><BR>
+	<B>y</B>
+<TD> Specify the x and y coordinates, which define the point.
+</TABLE>
+
+<P>
+
+The
+<B>XPointInRegion()</B>
+function returns 
+<B>True</B>
+if the point (x, y) is contained in the region r.
+
+<H2>See also</H2>
+
+<B><A HREF="XCreateRegion.html">XCreateRegion()</A></B>,
+<B><A HREF="XEqualRegion.html">XEqualRegion()</A></B>,
+<B><A HREF="XEmptyRegion.html">XEmptyRegion()</A></B>,
+<B><A HREF="XIntersectRegion.html">XIntersectRegion()</A></B>,
+<B><A HREF="XRectInRegion.html">XRectInRegion()</A></B>,
+"<A HREF="locating.html">Locating a Point or a Rectangle in a Region</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

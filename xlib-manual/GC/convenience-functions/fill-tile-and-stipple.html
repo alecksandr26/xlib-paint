@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Setting the Fill Tile and Stipple</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>7.2.4 Setting the Fill Tile and Stipple </H1>
+
+Some displays have hardware support for tiling or
+stippling with patterns of specific sizes.
+Tiling and stippling operations that restrict themselves to those specific
+sizes run much faster than such operations with arbitrary size patterns.
+Xlib provides functions that you can use to determine the best size, 
+tile, or stipple for the display
+as well as to set the tile or stipple shape and the tile or stipple origin.
+
+<P>
+
+To obtain the best size of a tile, stipple, or cursor, use
+<B><A HREF="XQueryBestSize.html">XQueryBestSize()</A></B>.
+
+<P>
+
+To obtain the best fill tile shape, use
+<B><A HREF="XQueryBestTile.html">XQueryBestTile()</A></B>.
+
+<P>
+
+To obtain the best stipple shape, use
+<B><A HREF="XQueryBestStipple.html">XQueryBestStipple()</A></B>.
+
+<P>
+
+To set the fill tile of a given GC, use
+<B><A HREF="XSetTile.html">XSetTile()</A></B>.
+
+<P>
+
+To set the stipple of a given GC, use
+<B><A HREF="XSetStipple.html">XSetStipple()</A></B>.
+
+<P>
+
+To set the tile or stipple origin of a given GC, use
+<B><A HREF="XSetTSOrigin.html">XSetTSOrigin()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="font.html">Setting the Current Font</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

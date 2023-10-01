@@ -1,0 +1,81 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Character Sets and Encodings</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>1.7. Character Sets and Encodings</H1>
+
+Some of the Xlib functions make reference to specific character sets
+and character encodings.
+The following are the most common:
+
+<UL>
+<P><LI>
+X Portable Character Set
+.IP
+A basic set of 97 characters, 
+which are assumed to exist in all locales supported by Xlib.
+This set contains the following characters:
+<P>
+a..z A..Z 0..9
+!"#$%&amp;'()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~
+&lt;space&gt;, &lt;tab&gt;, and &lt;newline&gt;
+<P>
+This set is the left/lower half
+of the graphic character set of ISO8859-1 plus space, tab, and newline.
+It is also the set of graphic characters in 7-bit ASCII plus the same
+three control characters.
+The actual encoding of these characters on the host is system dependent.
+
+<P><LI>
+Host Portable Character Encoding
+
+<P>
+The encoding of the X Portable Character Set on the host.
+The encoding itself is not defined by this standard,
+but the encoding must be the same in all locales supported by Xlib on the host.
+If a string is said to be in the Host Portable Character Encoding,
+then it only contains characters from the X Portable Character Set,
+in the host encoding.
+
+<P><LI>
+Latin-1
+
+<P>
+The coded character set defined by the ISO8859-1 standard.
+
+<P><LI>
+Latin Portable Character Encoding
+
+<P>
+The encoding of the X Portable Character Set using the Latin-1 codepoints
+plus ASCII control characters.
+If a string is said to be in the Latin Portable Character Encoding,
+then it only contains characters from the X Portable Character Set,
+not all of Latin-1.
+
+<P><LI>
+STRING Encoding
+
+<P>
+Latin-1, plus tab and newline.
+
+<P><LI>
+POSIX Portable Filename Character Set
+
+<P>
+The set of 65 characters, 
+which can be used in naming files on a POSIX-compliant host,
+that are correctly processed in all locales.
+The set is:
+
+<P>
+a..z A..Z 0..9 ._-
+</UL>
+
+<H5 ALIGN=right><I>Next: <A HREF="formatting.html">Formatting Conventions</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

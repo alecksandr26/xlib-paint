@@ -1,0 +1,541 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Screen Information Macros</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>2.2.3. Screen Information Macros</H1>
+
+The following lists the C language macros,
+their corresponding function equivalents that are for other language bindings,
+and what data they both can return.
+These macros or functions all take a pointer to the appropriate screen
+structure.
+
+<A NAME="BlackPixelOfScreen"></A>
+<H3>BlackPixelOfScreen</H3>
+
+<CODE><PRE>
+BlackPixelOfScreen(<B>screen</B>)
+
+unsigned long XBlackPixelOfScreen(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+<!.IN "BlackPixelOfScreen" "" "@DEF@">
+<!.IN "XBlackPixelOfScreen" "" "@DEF@">
+Both return the black pixel value of the specified screen.
+
+<A NAME="WhitePixelOfScreen"></A>
+<H3>WhitePixelOfScreen</H3>
+     
+
+<P>
+
+<CODE><PRE>
+WhitePixelOfScreen(<B>screen</B>)
+
+unsigned long XWhitePixelOfScreen(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+<!.IN "WhitePixelOfScreen" "" "@DEF@">
+<!.IN "XWhitePixelOfScreen" "" "@DEF@">
+Both return the white pixel value of the specified screen.
+
+<A NAME="CellsOfScreen"></A>
+<H3>CellsOfScreen</H3>
+
+<CODE><PRE>
+CellsOfScreen(<B>screen</B>)
+
+int XCellsOfScreen(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+<!.IN "CellsOfScreen" "" "@DEF@">
+<!.IN "XCellsOfScreen" "" "@DEF@">
+Both return the number of colormap cells in the default colormap 
+of the specified screen.
+
+<A NAME="DefaultColormapOfScreen"></A>
+<H3>DefaultColormapOfScreen</H3>
+
+<CODE><PRE>
+DefaultColormapOfScreen(<B>screen</B>)
+
+Colormap XDefaultColormapOfScreen(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+<!.IN "DefaultColormapOfScreen" "" "@DEF@">
+<!.IN "XDefaultColormapOfScreen" "" "@DEF@">
+Both return the default colormap of the specified screen.
+
+<A NAME="DefaultDepthOfScreen"></A>
+<H3>DefaultDepthOfScreen</H3>
+
+<CODE><PRE>
+DefaultDepthOfScreen(<B>screen</B>)
+
+int XDefaultDepthOfScreen(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+<!.IN "DefaultDepthOfScreen" "" "@DEF@">
+<!.IN "XDefaultDepthOfScreen" "" "@DEF@">
+Both return the depth of the root window.
+
+<A NAME="DefaultGCOfScreen"></A>
+<H3>DefaultGCOfScreen</H3>
+
+<CODE><PRE>
+DefaultGCOfScreen(<B>screen</B>)
+
+GC XDefaultGCOfScreen(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+<!.IN "DefaultGCOfScreen" "" "@DEF@">
+<!.IN "XDefaultGCOfScreen" "" "@DEF@">
+Both return a default graphics context (GC) of the specified screen,
+which has the same depth as the root window of the screen.
+The GC must never be freed.
+
+<A NAME="DefaultVisualOfScreen"></A>
+<H3>DefaultVisualOfScreen</H3>
+
+<CODE><PRE>
+DefaultVisualOfScreen(<B>screen</B>)
+
+Visual *XDefaultVisualOfScreen(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+<!.IN "DefaultVisualOfScreen" "" "@DEF@">
+<!.IN "XDefaultVisualOfScreen" "" "@DEF@">
+Both return the default visual of the specified screen.
+For information on visual types,
+see "<A HREF="../window/visual-types.html">Visual Types</A>".
+
+<A NAME="DoesBackingStore"></A>
+<H3>DoesBackingStore</H3>
+
+<CODE><PRE>
+DoesBackingStore(<B>screen</B>)
+
+int XDoesBackingStore(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+<!.IN "DoesBackingStore" "" "@DEF@">
+<!.IN "XDoesBackingStore" "" "@DEF@">
+Both return a value indicating whether the screen supports backing
+stores.
+The value returned can be one of 
+<B>WhenMapped</B>,
+<B>NotUseful</B>,
+or
+<B>Always</B>
+(see "<A HREF="../window/attributes/backing-store.html">Backing Store Attribute</A>").
+
+<A NAME="DoesSaveUnders"></A>
+<H3>DoesSaveUnders</H3>
+
+<CODE><PRE>
+DoesSaveUnders(<B>screen</B>)
+
+Bool XDoesSaveUnders(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+<!.IN "DoesSaveUnders" "" "@DEF@">
+<!.IN "XDoesSaveUnders" "" "@DEF@">
+Both return a Boolean value indicating whether the
+screen supports save unders.
+If
+<B>True</B>,
+the screen supports save unders.
+If
+<B>False</B>,
+the screen does not support save unders (see "<A HREF="../window/attributes/save-under.html">Save Under Flag</A>").
+
+<A NAME="DisplayOfScreen"></A>
+<H3>DisplayOfScreen</H3>
+
+<CODE><PRE>
+DisplayOfScreen(<B>screen</B>)
+
+Display *XDisplayOfScreen(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+<!.IN "DisplayOfScreen" "" "@DEF@">
+<!.IN "XDisplayOfScreen" "" "@DEF@">
+Both return the display of the specified screen.
+
+<A NAME="ScreenNumberOfScreen"></A>
+<H3>ScreenNumberOfScreen</H3>
+
+<!.IN "XScreenNumberOfScreen" "" "@DEF@">
+.FD 0
+int XScreenNumberOfScreen(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+.FN
+.IP <B>screen</B> 1i
+Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+The
+<B>XScreenNumberOfScreen()</B>
+function returns the screen index number of the specified screen.
+
+<A NAME="EventMaskOfScreen"></A>
+<H3>EventMaskOfScreen</H3>
+
+<CODE><PRE>
+EventMaskOfScreen(<B>screen</B>)
+
+long XEventMaskOfScreen(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+<!.IN "EventMaskOfScreen" "" "@DEF@">
+<!.IN "XEventMaskOfScreen" "" "@DEF@">
+Both return the event mask of the root window for the specified screen
+at connection setup time.
+
+<A NAME="WidthOfScreen"></A>
+<H3>WidthOfScreen</H3>
+
+<CODE><PRE>
+WidthOfScreen(<B>screen</B>)
+
+int XWidthOfScreen(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+<!.IN "WidthOfScreen" "" "@DEF@">
+<!.IN "XWidthOfScreen" "" "@DEF@">
+Both return the width of the specified screen in pixels.
+
+<A NAME="HeightOfScreen"></A>
+<H3>HeightOfScreen</H3>
+
+<CODE><PRE>
+HeightOfScreen(<B>screen</B>)
+
+int XHeightOfScreen(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+<!.IN "HeightOfScreen" "" "@DEF@">
+<!.IN "XHeightOfScreen" "" "@DEF@">
+Both return the height of the specified screen in pixels.
+
+<A NAME="WidthMMOfScreen"></A>
+<H3>WidthMMOfScreen</H3>
+
+<CODE><PRE>
+WidthMMOfScreen(<B>screen</B>)
+
+int XWidthMMOfScreen(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+<!.IN "WidthMMOfScreen" "" "@DEF@">
+<!.IN "XWidthMMOfScreen" "" "@DEF@">
+Both return the width of the specified screen in millimeters.
+
+<A NAME="HeightMMOfScreen"></A>
+<H3>HeightMMOfScreen</H3>
+
+<CODE><PRE>
+HeightMMOfScreen(<B>screen</B>)
+
+int XHeightMMOfScreen(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+<!.IN "HeightMMOfScreen" "" "@DEF@">
+<!.IN "XHeightMMOfScreen" "" "@DEF@">
+Both return the height of the specified screen in millimeters.
+
+<A NAME="MaxCmapsOfScreen"></A>
+<H3>MaxCmapsOfScreen</H3>
+
+<CODE><PRE>
+MaxCmapsOfScreen(<B>screen</B>)
+
+int XMaxCmapsOfScreen(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+<!.IN "MaxCmapsOfScreen" "" "@DEF@">
+<!.IN "XMaxCmapsOfScreen" "" "@DEF@">
+Both return the maximum number of installed colormaps supported 
+by the specified screen
+(see "<A HREF="../window-and-session-manager/managing-installed-colormap.html">Managing Installed Colormaps</A>").
+
+<A NAME="MinCmapsOfScreen"></A>
+<H3>MinCmapsOfScreen</H3>
+
+<CODE><PRE>
+MinCmapsOfScreen(<B>screen</B>)
+
+int XMinCmapsOfScreen(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+<!.IN "MinCmapsOfScreen" "" "@DEF@">
+<!.IN "XMinCmapsOfScreen" "" "@DEF@">
+Both return the minimum number of installed colormaps supported 
+by the specified screen (see "<A HREF="../window-and-session-manager/managing-installed-colormap.html">Managing Installed Colormaps</A>").
+
+<A NAME="PlanesOfScreen"></A>
+<H3>PlanesOfScreen</H3>
+
+<CODE><PRE>
+PlanesOfScreen(<B>screen</B>)
+
+int XPlanesOfScreen(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+<!.IN "PlanesOfScreen" "" "@DEF@">
+<!.IN "XPlanesOfScreen" "" "@DEF@">
+Both return the depth of the root window.
+
+<A NAME="RootWindowOfScreen"></A>
+<H3>RootWindowOfScreen</H3>
+
+<CODE><PRE>
+RootWindowOfScreen(<B>screen</B>)
+
+Window XRootWindowOfScreen(<B>screen</B>)
+      <A HREF="opening.html#Screen">Screen</A> *<B>screen</B>;
+</PRE></CODE>
+
+<TABLE>
+
+<TR><TD> <B>screen</B>
+<TD> Specifies the appropriate 
+<A HREF="opening.html#Screen">Screen</A>
+structure.
+
+</TABLE>
+
+<P>
+
+<!.IN "RootWindowOfScreen" "" "@DEF@">
+<!.IN "XRootWindowOfScreen" "" "@DEF@">
+Both return the root window of the specified screen.
+
+<H5 ALIGN=right><I>Next: <A HREF="XNoOp.html">Generating a NoOperation Protocol Request</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

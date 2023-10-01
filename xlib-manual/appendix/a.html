@@ -1,0 +1,553 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Xlib Functions and Protocol Requests</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>Appendix A: Xlib Functions and Protocol Requests</H1>
+
+This appendix provides two tables that relate to Xlib functions 
+and the X protocol.
+The following table lists each Xlib function (in alphabetical order)
+and the corresponding protocol request that it generates.
+
+<TABLE>
+<TR><TD COLSPAN=2><HR>
+<TR><TD><B>Xlib Function	<TD><B>Protocol Request
+<TR><TD COLSPAN=2><HR>
+
+<TR><TD><B><A HREF="../window-and-session-manager/XActivateScreenSaver.html">XActivateScreenSaver()</A></B>	<TD><B><A HREF="#ForceScreenSaver">ForceScreenSaver</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/controlling-host-access/XAddHost.html">XAddHost()</A></B>	<TD><B><A HREF="#ChangeHosts">ChangeHosts</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/controlling-host-access/XAddHosts.html">XAddHosts()</A></B>	<TD><B><A HREF="#ChangeHosts">ChangeHosts</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/XAddToSaveSet.html">XAddToSaveSet()</A></B>	<TD><B><A HREF="#ChangeSaveSet">ChangeSaveSet</A></B>
+<TR><TD><B><A HREF="../color/XAllocColor.html">XAllocColor()</A></B>	<TD><B><A HREF="#AllocColor">AllocColor</A></B>
+<TR><TD><B><A HREF="../color/XAllocColorCells.html">XAllocColorCells()</A></B>	<TD><B><A HREF="#AllocColorCells">AllocColorCells</A></B>
+<TR><TD><B><A HREF="../color/XAllocColorPlanes.html">XAllocColorPlanes()</A></B>	<TD><B><A HREF="#AllocColorPlanes">AllocColorPlanes</A></B>
+<TR><TD><B><A HREF="../color/XAllocNamedColor.html">XAllocNamedColor()</A></B>	<TD><B><A HREF="#AllocNamedColor">AllocNamedColor</A></B>
+<TR><TD><B><A HREF="../input/XAllowEvents.html">XAllowEvents()</A></B>	<TD><B><A HREF="#AllowEvents">AllowEvents</A></B>
+<TR><TD><B><A HREF="../input/XAutoRepeatOff.html">XAutoRepeatOff()</A></B>	<TD><B><A HREF="#ChangeKeyboardControl">ChangeKeyboardControl</A></B>
+<TR><TD><B><A HREF="../input/XAutoRepeatOn.html">XAutoRepeatOn()</A></B>	<TD><B><A HREF="#ChangeKeyboardControl">ChangeKeyboardControl</A></B>
+<TR><TD><B><A HREF="../input/XBell.html">XBell()</A></B>	<TD><B><A HREF="#Bell">Bell</A></B>
+<TR><TD><B><A HREF="../input/XChangeActivePointerGrab.html">XChangeActivePointerGrab()</A></B>	<TD><B><A HREF="#ChangeActivePointerGrab">ChangeActivePointerGrab</A></B>
+<TR><TD><B><A HREF="../GC/XChangeGC.html">XChangeGC()</A></B>	<TD><B><A HREF="#ChangeGC">ChangeGC</A></B>
+<TR><TD><B><A HREF="../input/XChangeKeyboardControl.html">XChangeKeyboardControl()</A></B>	<TD><B><A HREF="#ChangeKeyboardControl">ChangeKeyboardControl</A></B>
+<TR><TD><B><A HREF="../input/XChangeKeyboardMapping.html">XChangeKeyboardMapping()</A></B>	<TD><B><A HREF="#ChangeKeyboardMapping">ChangeKeyboardMapping</A></B>
+<TR><TD><B><A HREF="../input/XChangePointerControl.html">XChangePointerControl()</A></B>	<TD><B><A HREF="#ChangePointerControl">ChangePointerControl</A></B>
+<TR><TD><B><A HREF="../window-information/XChangeProperty.html">XChangeProperty()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/XChangeSaveSet.html">XChangeSaveSet()</A></B>	<TD><B><A HREF="#ChangeSaveSet">ChangeSaveSet</A></B>
+<TR><TD><B><A HREF="../window/XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>	<TD><B><A HREF="#ChangeWindowAttributes">ChangeWindowAttributes</A></B>
+<TR><TD><B><A HREF="../window/XCirculateSubwindows.html">XCirculateSubwindows()</A></B>	<TD><B><A HREF="#CirculateWindow">CirculateWindow</A></B>
+<TR><TD><B><A HREF="../window/XCirculateSubwindowsDown.html">XCirculateSubwindowsDown()</A></B>	<TD><B><A HREF="#CirculateWindow">CirculateWindow</A></B>
+<TR><TD><B><A HREF="../window/XCirculateSubwindowsUp.html">XCirculateSubwindowsUp()</A></B>	<TD><B><A HREF="#CirculateWindow">CirculateWindow</A></B>
+<TR><TD><B><A HREF="../graphics/XClearArea.html">XClearArea()</A></B>	<TD><B><A HREF="#ClearArea">ClearArea</A></B>
+<TR><TD><B><A HREF="../graphics/XClearWindow.html">XClearWindow()</A></B>	<TD><B><A HREF="#ClearArea">ClearArea</A></B>
+<TR><TD><B><A HREF="../window/XConfigureWindow.html">XConfigureWindow()</A></B>	<TD><B><A HREF="#ConfigureWindow">ConfigureWindow</A></B>
+<TR><TD><B><A HREF="../window-information/XConvertSelection.html">XConvertSelection()</A></B>	<TD><B><A HREF="#ConvertSelection">ConvertSelection</A></B>
+<TR><TD><B><A HREF="../graphics/XCopyArea.html">XCopyArea()</A></B>	<TD><B><A HREF="#CopyArea">CopyArea</A></B>
+<TR><TD><B><A HREF="../color/XCopyColormapAndFree.html">XCopyColormapAndFree()</A></B>	<TD><B><A HREF="#CopyColormapAndFree">CopyColormapAndFree</A></B>
+<TR><TD><B><A HREF="../GC/XCopyGC.html">XCopyGC()</A></B>	<TD><B><A HREF="#CopyGC">CopyGC</A></B>
+<TR><TD><B><A HREF="../graphics/XCopyPlane.html">XCopyPlane()</A></B>	<TD><B><A HREF="#CopyPlane">CopyPlane</A></B>
+<TR><TD VALIGN=top><B><A HREF="../utilities/XCreateBitmapFromData.html">XCreateBitmapFromData()</A></B>	<TD><B><A HREF="#CreateGC">CreateGC</A></B><BR>
+	<B><A HREF="#CreatePixmap">CreatePixmap</A></B><BR>
+	<B><A HREF="#FreeGC">FreeGC</A></B><BR>
+	<B><A HREF="#PutImage">PutImage</A></B>
+<TR><TD><B><A HREF="../color/XCreateColormap.html">XCreateColormap()</A></B>	<TD><B><A HREF="#CreateColormap">CreateColormap</A></B>
+<TR><TD><B><A HREF="../pixmap-and-cursor/XCreateFontCursor.html">XCreateFontCursor()</A></B>	<TD><B><A HREF="#CreateGlyphCursor">CreateGlyphCursor</A></B>
+<TR><TD><B><A HREF="../GC/XCreateGC.html">XCreateGC()</A></B>	<TD><B><A HREF="#CreateGC">CreateGC</A></B>
+<TR><TD><B><A HREF="../pixmap-and-cursor/XCreateGlyphCursor.html">XCreateGlyphCursor()</A></B>	<TD><B><A HREF="#CreateGlyphCursor">CreateGlyphCursor</A></B>
+<TR><TD><B><A HREF="../pixmap-and-cursor/XCreatePixmap.html">XCreatePixmap()</A></B>	<TD><B><A HREF="#CreatePixmap">CreatePixmap</A></B>
+<TR><TD><B><A HREF="../pixmap-and-cursor/XCreatePixmapCursor.html">XCreatePixmapCursor()</A></B>	<TD><B><A HREF="#CreateCursor">CreateCursor</A></B>
+<TR><TD VALIGN=top><B>XCreatePixmapFromData()</B>	<TD><B><A HREF="#CreateGC">CreateGC</A><BR>
+	<B><A HREF="#CreatePixmap">CreatePixmap</A><BR>
+	<B><A HREF="#FreeGC">FreeGC</A><BR>
+	<B><A HREF="#PutImage">PutImage</A><BR>
+<TR><TD><B><A HREF="../window/XCreateWindow.html">XCreateSimpleWindow()</A></B>	<TD><B><A HREF="#CreateWindow">CreateWindow</A></B>
+<TR><TD><B><A HREF="../window/XCreateWindow.html">XCreateWindow()</A></B>	<TD><B><A HREF="#CreateWindow">CreateWindow</A></B>
+<TR><TD><B><A HREF="../window/XDefineCursor.html">XDefineCursor()</A></B>	<TD><B><A HREF="#ChangeWindowAttributes">ChangeWindowAttributes</A></B>
+<TR><TD><B><A HREF="../window-information/XDeleteProperty.html">XDeleteProperty()</A></B>	<TD><B><A HREF="#DeleteProperty">DeleteProperty</A></B>
+<TR><TD><B><A HREF="../window/XDestroySubWindows.html">XDestroySubwindows()</A></B>	<TD><B><A HREF="#DestroySubwindows">DestroySubwindows</A></B>
+<TR><TD><B><A HREF="../window/XDestroyWindow.html">XDestroyWindow()</A></B>	<TD><B><A HREF="#DestroyWindow">DestroyWindow</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/controlling-host-access/XDisableAccessControl.html">XDisableAccessControl()</A></B>	<TD><B><A HREF="#SetAccessControl">SetAccessControl</A></B>
+<TR><TD><B><A HREF="../graphics/drawing/XDrawArc.html">XDrawArc()</A></B>	<TD><B><A HREF="#PolyArc">PolyArc</A></B>
+<TR><TD><B><A HREF="../graphics/drawing/XDrawArcs.html">XDrawArcs()</A></B>	<TD><B><A HREF="#PolyArc">PolyArc</A></B>
+<TR><TD><B><A HREF="../graphics/drawing-text/XDrawImageString.html">XDrawImageString()</A></B>	<TD><B><A HREF="#ImageText8">ImageText8</A></B>
+<TR><TD><B><A HREF="../graphics/drawing-text/XDrawImageString16.html">XDrawImageString16()</A></B>	<TD><B><A HREF="#ImageText16">ImageText16</A></B>
+<TR><TD><B><A HREF="../graphics/drawing/XDrawLine.html">XDrawLine()</A></B>	<TD><B><A HREF="#PolySegment">PolySegment</A></B>
+<TR><TD><B><A HREF="../graphics/drawing/XDrawLines.html">XDrawLines()</A></B>	<TD><B><A HREF="#PolyLine">PolyLine</A></B>
+<TR><TD><B><A HREF="../graphics/drawing/XDrawPoint.html">XDrawPoint()</A></B>	<TD><B><A HREF="#PolyPoint ">PolyPoint </A></B>
+<TR><TD><B><A HREF="../graphics/drawing/XDrawPoints.html">XDrawPoints()</A></B>	<TD><B><A HREF="#PolyPoint">PolyPoint</A></B>
+<TR><TD><B><A HREF="../graphics/drawing/XDrawRectangle.html">XDrawRectangle()</A></B>	<TD><B><A HREF="#PolyRectangle">PolyRectangle</A></B>
+<TR><TD><B><A HREF="../graphics/drawing/XDrawRectangles.html">XDrawRectangles()</A></B>	<TD><B><A HREF="#PolyRectangle">PolyRectangle</A></B>
+<TR><TD><B><A HREF="../graphics/drawing/XDrawSegments.html">XDrawSegments()</A></B>	<TD><B><A HREF="#PolySegment">PolySegment</A></B>
+<TR><TD><B><A HREF="../graphics/drawing-text/XDrawString.html">XDrawString()</A></B>	<TD><B><A HREF="#PolyText8">PolyText8</A></B>
+<TR><TD><B><A HREF="../graphics/drawing-text/XDrawString16.html">XDrawString16()</A></B>	<TD><B><A HREF="#PolyText16">PolyText16</A></B>
+<TR><TD><B><A HREF="../graphics/drawing-text/XDrawText.html">XDrawText()</A></B>	<TD><B><A HREF="#PolyText8">PolyText8</A></B>
+<TR><TD><B><A HREF="../graphics/drawing-text/XDrawText16.html">XDrawText16()</A></B>	<TD><B><A HREF="#PolyText16">PolyText16</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/controlling-host-access/XEnableAccessControl.html">XEnableAccessControl()</A></B>	<TD><B><A HREF="#SetAccessControl">SetAccessControl</A></B>
+<TR><TD><B><A HREF="../utilities/XFetchBytes.html">XFetchBytes()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XFetchName.html">XFetchName()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B>
+<TR><TD><B><A HREF="../graphics/filling-areas/XFillArc.html">XFillArc()</A></B>	<TD><B><A HREF="#PolyFillArc">PolyFillArc</A></B>
+<TR><TD><B><A HREF="../graphics/filling-areas/XFillArcs.html">XFillArcs()</A></B>	<TD><B><A HREF="#PolyFillArc">PolyFillArc</A></B>
+<TR><TD><B><A HREF="../graphics/filling-areas/XFillPolygon.html">XFillPolygon()</A></B>	<TD><B><A HREF="#FillPoly">FillPoly</A></B>
+<TR><TD><B><A HREF="../graphics/filling-areas/XFillRectangle.html">XFillRectangle()</A></B>	<TD><B><A HREF="#PolyFillRectangle">PolyFillRectangle</A></B>
+<TR><TD><B><A HREF="../graphics/filling-areas/XFillRectangles.html">XFillRectangles()</A></B>	<TD><B><A HREF="#PolyFillRectangle">PolyFillRectangle</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/XForceScreenSaver.html">XForceScreenSaver()</A></B>	<TD><B><A HREF="#ForceScreenSaver">ForceScreenSaver</A></B>
+<TR><TD><B><A HREF="../color/XFreeColormap.html">XFreeColormap()</A></B>	<TD><B><A HREF="#FreeColormap">FreeColormap</A></B>
+<TR><TD><B><A HREF="../color/XFreeColors.html">XFreeColors()</A></B>	<TD><B><A HREF="#FreeColors">FreeColors</A></B>
+<TR><TD><B><A HREF="../pixmap-and-cursor/XFreeCursor.html">XFreeCursor()</A></B>	<TD><B><A HREF="#FreeCursor">FreeCursor</A></B>
+<TR><TD><B><A HREF="../graphics/font-metrics/XFreeFont.html">XFreeFont()</A></B>	<TD><B><A HREF="#CloseFont">CloseFont</A></B>
+<TR><TD><B><A HREF="../GC/XFreeGC.html">XFreeGC()</A></B>	<TD><B><A HREF="#FreeGC">FreeGC</A></B>
+<TR><TD><B><A HREF="../pixmap-and-cursor/XFreePixmap.html">XFreePixmap()</A></B>	<TD><B><A HREF="#FreePixmap">FreePixmap</A></B>
+<TR><TD><B><A HREF="../window-information/XGetAtomName.html">XGetAtomName()</A></B>	<TD><B><A HREF="#GetAtomName">GetAtomName</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XGetClassHint.html">XGetClassHint()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/XGetFontPath.html">XGetFontPath()</A></B>	<TD><B><A HREF="#GetFontPath">GetFontPath</A></B>
+<TR><TD><B><A HREF="../window-information/XGetGeometry.html">XGetGeometry()</A></B>	<TD><B><A HREF="#GetGeometry">GetGeometry</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XGetIconName.html">XGetIconName()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XGetIconSizes.html">XGetIconSizes()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B>
+<TR><TD><B><A HREF="../graphics/XGetImage.html">XGetImage()</A></B>	<TD><B><A HREF="#GetImage">GetImage</A></B>
+<TR><TD><B><A HREF="../input/XGetInputFocus.html">XGetInputFocus()</A></B>	<TD><B><A HREF="#GetInputFocus">GetInputFocus</A></B>
+<TR><TD><B><A HREF="../input/XGetKeyboardControl.html">XGetKeyboardControl()</A></B>	<TD><B><A HREF="#GetKeyboardControl">GetKeyboardControl</A></B>
+<TR><TD><B><A HREF="../input/XGetKeyboardMapping.html">XGetKeyboardMapping()</A></B>	<TD><B><A HREF="#GetKeyboardMapping">GetKeyboardMapping</A></B>
+<TR><TD><B><A HREF="../input/XGetModifierMapping.html">XGetModifierMapping()</A></B>	<TD><B><A HREF="#GetModifierMapping">GetModifierMapping</A></B>
+<TR><TD><B><A HREF="../event-handling/XGetMotionEvents.html">XGetMotionEvents()</A></B>	<TD><B><A HREF="#GetMotionEvents">GetMotionEvents</A></B>
+<TR><TD><B><A HREF="../input/XGetModifierMapping.html">XGetModifierMapping()</A></B>	<TD><B><A HREF="#GetModifierMapping">GetModifierMapping</A></B>
+<TR><TD><B><A HREF="d/XGetNormalHints.html">XGetNormalHints()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B>
+<TR><TD><B><A HREF="../input/XGetPointerControl.html">XGetPointerControl()</A></B>	<TD><B><A HREF="#GetPointerControl">GetPointerControl</A></B>
+<TR><TD><B><A HREF="../input/XGetPointerMapping.html">XGetPointerMapping()</A></B>	<TD><B><A HREF="#GetPointerMapping">GetPointerMapping</A></B>
+<TR><TD><B><A HREF="../ICC/standard-colormaps/XGetRGBColormaps.html">XGetRGBColormaps()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/XGetScreenSaver.html">XGetScreenSaver()</A></B>	<TD><B><A HREF="#GetScreenSaver">GetScreenSaver</A></B>
+<TR><TD><B><A HREF="../window-information/XGetSelectionOwner.html">XGetSelectionOwner()</A></B>	<TD><B><A HREF="#GetSelectionOwner">GetSelectionOwner</A></B>
+<TR><TD><B><A HREF="d/XGetSizeHints.html">XGetSizeHints()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XGetTextProperty.html">XGetTextProperty()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XGetTransientForHint.html">XGetTransientForHint()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-session-manager/XGetWMClientMachine.html">XGetWMClientMachine()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B>
+<TR><TD VALIGN=top><B><A HREF="../ICC/client-to-window-manager/XGetWMColormapWindows.html">XGetWMColormapWindows()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B><BR>
+	<B><A HREF="#InternAtom">InternAtom</A><BR>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XGetWMHints.html">XGetWMHints()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XGetWMIconName.html">XGetWMIconName()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XGetWMName.html">XGetWMName()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XGetWMNormalHints.html">XGetWMNormalHints()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B>
+<TR><TD VALIGN=top><B><A HREF="../ICC/client-to-window-manager/XGetWMProtocols.html">XGetWMProtocols()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B><BR>
+	<B><A HREF="#InternAtom">InternAtom</A>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XGetWMSizeHints.html">XGetWMSizeHints()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B>
+<TR><TD VALIGN=top><B><A HREF="../window-information/XGetWindowAttributes.html">XGetWindowAttributes()</A></B>	<TD><B><A HREF="#GetWindowAttributes">GetWindowAttributes</A></B><BR>
+	<B><A HREF="#GetGeometry">GetGeometry</A>
+<TR><TD><B><A HREF="../window-information/XGetWindowProperty.html">XGetWindowProperty()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B>
+<TR><TD><B><A HREF="d/XGetZoomHints.html">XGetZoomHints()</A></B>	<TD><B><A HREF="#GetProperty">GetProperty</A></B>
+<TR><TD><B><A HREF="../input/XGrabButton.html">XGrabButton()</A></B>	<TD><B><A HREF="#GrabButton">GrabButton</A></B>
+<TR><TD><B><A HREF="../input/XGrabKey.html">XGrabKey()</A></B>	<TD><B><A HREF="#GrabKey">GrabKey</A></B>
+<TR><TD><B><A HREF="../input/XGrabKeyboard.html">XGrabKeyboard()</A></B>	<TD><B><A HREF="#GrabKeyboard">GrabKeyboard</A></B>
+<TR><TD><B><A HREF="../input/XGrabPointer.html">XGrabPointer()</A></B>	<TD><B><A HREF="#GrabPointer">GrabPointer</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/XGrabServer.html">XGrabServer()</A></B>	<TD><B><A HREF="#GrabServer">GrabServer</A></B>
+<TR><TD VALIGN=top><B><A HREF="../ICC/client-to-window-manager/XIconifyWindow.html">XIconifyWindow()</A></B>	<TD><B><A HREF="#InternAtom">InternAtom</A></B><BR>
+	<B><A HREF="#SendEvent">SendEvent</A>
+<TR><TD><B><A HREF="../event-handling/protocol-errors/InitExtension.html">InitExtension()</A></B>	<TD><B><A HREF="#QueryExtension">QueryExtension</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/XInstallColormap.html">XInstallColormap()</A></B>	<TD><B><A HREF="#InstallColormap">InstallColormap</A></B>
+<TR><TD><B><A HREF="../window-information/XInternAtom.html">XInternAtom()</A></B>			<TD><B><A HREF="#InternAtom">InternAtom</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/XKillClient.html">XKillClient()</A></B>		<TD><B><A HREF="#KillClient">KillClient</A></B>
+<TR><TD><B><A HREF="c/XListExtensions.html">XListExtensions()</A></B>					<TD><B><A HREF="#ListExtensions">ListExtensions</A></B>
+<TR><TD><B><A HREF="../graphics/font-metrics/XListFonts.html">XListFonts()</A></B>			<TD><B><A HREF="#ListFonts">ListFonts</A></B>
+<TR><TD><B><A HREF="../graphics/font-metrics/XListFontsWithInfo.html">XListFontsWithInfo()</A></B>	<TD><B><A HREF="#ListFontsWithInfo">ListFontsWithInfo</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/controlling-host-access/XListHosts.html">XListHosts()</A></B>	<TD><B><A HREF="#ListHosts">ListHosts</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/XListInstalledColormaps.html">XListInstalledColormaps()</A></B>	<TD><B><A HREF="#ListInstalledColormaps">ListInstalledColormaps</A></B>
+<TR><TD><B><A HREF="../window-information/XListProperties.html">XListProperties()</A></B>	<TD><B><A HREF="#ListProperties">ListProperties</A></B>
+<TR><TD><B><A HREF="../graphics/font-metrics/XLoadFont.html">XLoadFont()</A></B>	<TD><B><A HREF="#OpenFont">OpenFont</A></B>
+<TR><TD VALIGN=top><B><A HREF="../graphics/font-metrics/XLoadQueryFont.html">XLoadQueryFont()</A></B>	<TD><B><A HREF="#OpenFont">OpenFont</A></B><BR>
+	<B><A HREF="#QueryFont">QueryFont</A>
+<TR><TD><B><A HREF="../color/XLookupColor.html">XLookupColor()</A></B>	<TD><B><A HREF="#LookupColor">LookupColor</A></B>
+<TR><TD><B><A HREF="../window/XLowerWindow.html">XLowerWindow()</A></B>	<TD><B><A HREF="#ConfigureWindow">ConfigureWindow</A></B>
+<TR><TD VALIGN=top><B><A HREF="../window/XMapRaised.html">XMapRaised()</A></B>	<TD><B><A HREF="#ConfigureWindow">ConfigureWindow</A></B><BR>
+	<B><A HREF="#MapWindow">MapWindow</A>
+<TR><TD><B><A HREF="../window/XMapSubwindows.html">XMapSubwindows()</A></B>	<TD><B><A HREF="#MapSubwindows">MapSubwindows</A></B>
+<TR><TD><B><A HREF="../window/XMapWindow.html">XMapWindow()</A></B>	<TD><B><A HREF="#MapWindow">MapWindow</A></B>
+<TR><TD><B><A HREF="../window/XMoveResizeWindow.html">XMoveResizeWindow()</A></B>	<TD><B><A HREF="#ConfigureWindow">ConfigureWindow</A></B>
+<TR><TD><B><A HREF="../window/XMoveWindow.html">XMoveWindow()</A></B>	<TD><B><A HREF="#ConfigureWindow">ConfigureWindow</A></B>
+<TR><TD><TR><TD><B><A HREF="../display/XNoOp.html">XNoOp()</A></B>	<TD><B><A HREF="#NoOperation">NoOperation</A></B>
+<TR><TD><B><A HREF="../display/opening.html">XOpenDisplay()</A></B>	<TD><B><A HREF="#CreateGC">CreateGC</A></B>
+<TR><TD><B><A HREF="../color/XParseColor.html">XParseColor()</A></B>	<TD><B><A HREF="#LookupColor">LookupColor</A></B>
+<TR><TD><B><A HREF="../graphics/XPutImage.html">XPutImage()</A></B>	<TD><B><A HREF="#PutImage">PutImage</A></B>
+<TR><TD><B><A HREF="../pixmap-and-cursor/XQueryBestCursor.html">XQueryBestCursor()</A></B>	<TD><B><A HREF="#QueryBestSize">QueryBestSize</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XQueryBestSize.html">XQueryBestSize()</A></B>	<TD><B><A HREF="#QueryBestSize">QueryBestSize</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XQueryBestStipple.html">XQueryBestStipple()</A></B>	<TD><B><A HREF="#QueryBestSize">QueryBestSize</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XQueryBestTile.html">XQueryBestTile()</A></B>	<TD><B><A HREF="#QueryBestSize">QueryBestSize</A></B>
+<TR><TD><B><A HREF="../color/XQueryColor.html">XQueryColor()</A></B>	<TD><B><A HREF="#QueryColors ">QueryColors </A></B>
+<TR><TD><B><A HREF="../color/XQueryColors.html">XQueryColors()</A></B>	<TD><B><A HREF="#QueryColors">QueryColors</A></B>
+<TR><TD><TR><TD><B><A HREF="c/XQueryExtension.html">XQueryExtension()</A></B>	<TD><B><A HREF="#QueryExtension">QueryExtension</A></B>
+<TR><TD><B><A HREF="../graphics/font-metrics/XQueryFont.html">XQueryFont()</A></B>	<TD><B><A HREF="#QueryFont">QueryFont</A></B>
+<TR><TD><B><A HREF="../input/XQueryKeymap.html">XQueryKeymap()</A></B>	<TD><B><A HREF="#QueryKeymap">QueryKeymap</A></B>
+<TR><TD><B><A HREF="../window-information/XQueryPointer.html">XQueryPointer()</A></B>	<TD><B><A HREF="#QueryPointer">QueryPointer</A></B>
+<TR><TD><B><A HREF="../graphics/font-metrics/XQueryTextExtents.html">XQueryTextExtents()</A></B>	<TD><B><A HREF="#QueryTextExtents">QueryTextExtents</A></B>
+<TR><TD><B><A HREF="../graphics/font-metrics/XQueryTextExtents16.html">XQueryTextExtents16()</A></B>	<TD><B><A HREF="#QueryTextExtents">QueryTextExtents</A></B>
+<TR><TD><B><A HREF="../window-information/XQueryTree.html">XQueryTree()</A></B>	<TD><B><A HREF="#QueryTree">QueryTree</A></B>
+<TR><TD><B><A HREF="../window/XRaiseWindow.html">XRaiseWindow()</A></B>	<TD><B><A HREF="#ConfigureWindow">ConfigureWindow</A></B>
+<TR><TD VALIGN=top><B><A HREF="../utilities/XReadBitmapFile.html">XReadBitmapFile()</A></B>	<TD><B><A HREF="#CreateGC">CreateGC</A></B><BR>
+	<B><A HREF="#CreatePixmap">CreatePixmap</A><BR>
+	<B><A HREF="#FreeGC">FreeGC</A><BR>
+	<B><A HREF="#PutImage">PutImage</A>
+<TR><TD><B><A HREF="../pixmap-and-cursor/XRecolorCursor.html">XRecolorCursor()</A></B>	<TD><B><A HREF="#RecolorCursor">RecolorCursor</A></B>
+<TR><TD VALIGN=top><B><A HREF="../ICC/client-to-window-manager/XReconfigureWMWindow.html">XReconfigureWMWindow()</A></B>	<TD><B><A HREF="#ConfigureWindow">ConfigureWindow</A></B><BR>
+	<B><A HREF="#SendEvent">SendEvent</A>
+<TR><TD><B><A HREF="../window-and-session-manager/XRemoveFromSaveSet.html">XRemoveFromSaveSet()</A></B>	<TD><B><A HREF="#ChangeSaveSet">ChangeSaveSet</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/controlling-host-access/XRemoveHost.html">XRemoveHost()</A></B>	<TD><B><A HREF="#ChangeHosts">ChangeHosts</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/controlling-host-access/XRemoveHosts.html">XRemoveHosts()</A></B>	<TD><B><A HREF="#ChangeHosts">ChangeHosts</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/XReparentWindow.html">XReparentWindow()</A></B>	<TD><B><A HREF="#ReparentWindow">ReparentWindow</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/XResetScreenSaver.html">XResetScreenSaver()</A></B>	<TD><B><A HREF="#ForceScreenSaver">ForceScreenSaver</A></B>
+<TR><TD><B><A HREF="../window/XResizeWindow.html">XResizeWindow()</A></B>	<TD><B><A HREF="#ConfigureWindow ">ConfigureWindow </A></B>
+<TR><TD><B><A HREF="../window/XRestackWindows.html">XRestackWindows()</A></B>	<TD><B><A HREF="#ConfigureWindow">ConfigureWindow</A></B>
+<TR><TD><B><A HREF="../utilities/XRotateBuffers.html">XRotateBuffers()</A></B>	<TD><B><A HREF="#RotateProperties">RotateProperties</A></B>
+<TR><TD><B><A HREF="../window-information/XRotateWindowProperties.html">XRotateWindowProperties()</A></B>	<TD><B><A HREF="#RotateProperties">RotateProperties</A></B>
+<TR><TD><B><A HREF="../event-handling/XSelectInput.html">XSelectInput()</A></B>	<TD><B><A HREF="#ChangeWindowAttributes">ChangeWindowAttributes</A></B>
+<TR><TD><B><A HREF="../event-handling/XSendEvent.html">XSendEvent()</A></B>	<TD><B><A HREF="#SendEvent">SendEvent</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/controlling-host-access/XSetAccessControl.html">XSetAccessControl()</A></B>	<TD><B><A HREF="#SetAccessControl">SetAccessControl</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XSetArcMode.html">XSetArcMode()</A></B>	<TD><B><A HREF="#ChangeGC">ChangeGC</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XSetBackground.html">XSetBackground()</A></B>	<TD><B><A HREF="#ChangeGC ">ChangeGC </A></B>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XSetClassHint.html">XSetClassHint()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XSetClipMask.html">XSetClipMask()</A></B>	<TD><B><A HREF="#ChangeGC">ChangeGC</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XSetClipOrigin.html">XSetClipOrigin()</A></B>	<TD><B><A HREF="#ChangeGC">ChangeGC</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XSetClipRectangles.html">XSetClipRectangles()</A></B>	<TD><B><A HREF="#SetClipRectangles">SetClipRectangles</A></B>
+<TR><TD><B><A HREF="../display/XSetCloseDownMode.html">XSetCloseDownMode()</A></B>	<TD><B><A HREF="#SetCloseDownMode">SetCloseDownMode</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-session-manager/XSetCommand.html">XSetCommand()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XSetDashes.html">XSetDashes()</A></B>	<TD><B><A HREF="#SetDashes">SetDashes</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XSetFillRule.html">XSetFillRule()</A></B>	<TD><B><A HREF="#ChangeGC">ChangeGC</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XSetFillStyle.html">XSetFillStyle()</A></B>	<TD><B><A HREF="#ChangeGC">ChangeGC</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XSetFont.html">XSetFont()</A></B>	<TD><B><A HREF="#ChangeGC ">ChangeGC </A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/XSetFontPath.html">XSetFontPath()</A></B>	<TD><B><A HREF="#SetFontPath">SetFontPath</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XSetForeground.html">XSetForeground()</A></B>	<TD><B><A HREF="#ChangeGC ">ChangeGC </A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XSetFunction.html">XSetFunction()</A></B>	<TD><B><A HREF="#ChangeGC ">ChangeGC </A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XSetGraphicsExposures.html">XSetGraphicsExposures()</A></B>	<TD><B><A HREF="#ChangeGC">ChangeGC</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XSetIconName.html">XSetIconName()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XSetIconSizes.html">XSetIconSizes()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="../input/XSetInputFocus.html">XSetInputFocus()</A></B>	<TD><B><A HREF="#SetInputFocus">SetInputFocus</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XSetLineAttributes.html">XSetLineAttributes()</A></B>	<TD><B><A HREF="#ChangeGC">ChangeGC</A></B>
+<TR><TD><B><A HREF="../input/XSetModifierMapping.html">XSetModifierMapping()</A></B>	<TD><B><A HREF="#SetModifierMapping">SetModifierMapping</A></B>
+<TR><TD><B><A HREF="d/XSetNormalHints.html">XSetNormalHints()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XSetPlaneMask.html">XSetPlaneMask()</A></B>	<TD><B><A HREF="#ChangeGC ">ChangeGC </A></B>
+<TR><TD><B><A HREF="../input/XSetPointerMapping.html">XSetPointerMapping()</A></B>	<TD><B><A HREF="#SetPointerMapping">SetPointerMapping</A></B>
+<TR><TD><B><A HREF="../ICC/standard-colormaps/XSetRGBColormaps.html">XSetRGBColormaps()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/XSetScreenSaver.html">XSetScreenSaver()</A></B>	<TD><B><A HREF="#SetScreenSaver">SetScreenSaver</A></B>
+<TR><TD><B><A HREF="../window-information/XSetSelectionOwner.html">XSetSelectionOwner()</A></B>	<TD><B><A HREF="#SetSelectionOwner">SetSelectionOwner</A></B>
+<TR><TD><B><A HREF="d/XSetSizeHints.html">XSetSizeHints()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="d/XSetStandardProperties.html">XSetStandardProperties()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XSetState.html">XSetState()</A></B>	<TD><B><A HREF="#ChangeGC">ChangeGC</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XSetStipple.html">XSetStipple()</A></B>	<TD><B><A HREF="#ChangeGC">ChangeGC</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XSetSubwindowMode.html">XSetSubwindowMode()</A></B>	<TD><B><A HREF="#ChangeGC">ChangeGC</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XSetTextProperty.html">XSetTextProperty()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XSetTile.html">XSetTile()</A></B>	<TD><B><A HREF="#ChangeGC">ChangeGC</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XSetTransientForHint.html">XSetTransientForHint()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="../GC/convenience-functions/XSetTSOrigin.html">XSetTSOrigin()</A></B>	<TD><B><A HREF="#ChangeGC">ChangeGC</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-session-manager/XSetWMClientMachine.html">XSetWMClientMachine()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD VALIGN=top><B><A HREF="../ICC/client-to-window-manager/XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B><BR>
+	<B><A HREF="#InternAtom">InternAtom</A>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XSetWMHints.html">XSetWMHints()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XSetWMIconName.html">XSetWMIconName()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XSetWMName.html">XSetWMName()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XSetWMNormalHints.html">XSetWMNormalHints()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XSetWMProperties.html">XSetWMProperties()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD VALIGN=top><B><A HREF="../ICC/client-to-window-manager/XSetWMProtocols.html">XSetWMProtocols()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B><BR>
+	<B><A HREF="#InternAtom">InternAtom</A>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XSetWMSizeHints.html">XSetWMSizeHints()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="../window/XSetWindowBackground.html">XSetWindowBackground()</A></B>	<TD><B><A HREF="#ChangeWindowAttributes">ChangeWindowAttributes</A></B>
+<TR><TD><B><A HREF="../window/XSetWindowBackgroundPixmap.html">XSetWindowBackgroundPixmap()</A></B>	<TD><B><A HREF="#ChangeWindowAttributes">ChangeWindowAttributes</A></B>
+<TR><TD><B><A HREF="../window/XSetWindowBorder.html">XSetWindowBorder()</A></B>	<TD><B><A HREF="#ChangeWindowAttributes">ChangeWindowAttributes</A></B>
+<TR><TD><B><A HREF="../window/XSetWindowBorderPixmap.html">XSetWindowBorderPixmap()</A></B>	<TD><B><A HREF="#ChangeWindowAttributes">ChangeWindowAttributes</A></B>
+<TR><TD><B><A HREF="../window/XSetWindowBorderWidth.html">XSetWindowBorderWidth()</A></B>	<TD><B><A HREF="#ConfigureWindow">ConfigureWindow</A></B>
+<TR><TD><B><A HREF="../window/XSetWindowColormap.html">XSetWindowColormap()</A></B>	<TD><B><A HREF="#ChangeWindowAttributes">ChangeWindowAttributes</A></B>
+<TR><TD><B><A HREF="d/XSetZoomHints.html">XSetZoomHints()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="../utilities/XStoreBuffer.html">XStoreBuffer()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="../utilities/XStoreBytes.html">XStoreBytes()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="../color/XStoreColor.html">XStoreColor()</A></B>	<TD><B><A HREF="#StoreColors ">StoreColors </A></B>
+<TR><TD><B><A HREF="../color/XStoreColors.html">XStoreColors()</A></B>	<TD><B><A HREF="#StoreColors">StoreColors</A></B>
+<TR><TD><B><A HREF="../ICC/client-to-window-manager/XStoreName.html">XStoreName()</A></B>	<TD><B><A HREF="#ChangeProperty">ChangeProperty</A></B>
+<TR><TD><B><A HREF="../color/XStoreNamedColor.html">XStoreNamedColor()</A></B>	<TD><B><A HREF="#StoreNamedColor">StoreNamedColor</A></B>
+<TR><TD><B><A HREF="../event-handling/XSync.html">XSync()</A></B>	<TD><B><A HREF="#GetInputFocus">GetInputFocus</A></B>
+<TR><TD><B><A HREF="../event-handling/protocol-errors/XSynchronize.html">XSynchronize()</A></B>	<TD><B><A HREF="#GetInputFocus">GetInputFocus</A></B>
+<TR><TD><B><A HREF="../window-information/XTranslateCoordinates.html">XTranslateCoordinates()</A></B>	<TD><B><A HREF="#TranslateCoordinates">TranslateCoordinates</A></B>
+<TR><TD><B><A HREF="../window/XUndefineCursor.html">XUndefineCursor()</A></B>	<TD><B><A HREF="#ChangeWindowAttributes">ChangeWindowAttributes</A></B>
+<TR><TD><B><A HREF="../input/XUngrabButton.html">XUngrabButton()</A></B>	<TD><B><A HREF="#UngrabButton">UngrabButton</A></B>
+<TR><TD><B><A HREF="../input/XUngrabKey.html">XUngrabKey()</A></B>	<TD><B><A HREF="#UngrabKey">UngrabKey</A></B>
+<TR><TD><B><A HREF="../input/XUngrabKeyboard.html">XUngrabKeyboard()</A></B>	<TD><B><A HREF="#UngrabKeyboard">UngrabKeyboard</A></B>
+<TR><TD><B><A HREF="../input/XUngrabPointer.html">XUngrabPointer()</A></B>	<TD><B><A HREF="#UngrabPointer">UngrabPointer</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/XUngrabServer.html">XUngrabServer()</A></B>	<TD><B><A HREF="#UngrabServer">UngrabServer</A></B>
+<TR><TD><B><A HREF="../window-and-session-manager/XUninstallColormap.html">XUninstallColormap()</A></B>	<TD><B><A HREF="#UninstallColormap">UninstallColormap</A></B>
+<TR><TD><B><A HREF="../graphics/font-metrics/XUnloadFont.html">XUnloadFont()</A></B>	<TD><B><A HREF="#CloseFont">CloseFont</A></B>
+<TR><TD><B><A HREF="../window/XUnmapSubwindows.html">XUnmapSubwindows()</A></B>	<TD><B><A HREF="#UnmapSubwindows">UnmapSubwindows</A></B>
+<TR><TD><B><A HREF="../window/XUnmapWindow.html">XUnmapWindow()</A></B>	<TD><B><A HREF="#UnmapWindow">UnmapWindow</A></B>
+<TR><TD><B><A HREF="../input/XWarpPointer.html">XWarpPointer()</A></B>	<TD><B><A HREF="#WarpPointer">WarpPointer</A></B>
+<TR><TD VALIGN=top><B><A HREF="../ICC/client-to-window-manager/XWithdrawWindow.html">XWithdrawWindow()</A></B>	<TD><B><A HREF="#SendEvent">SendEvent</A></B><BR>
+	<B><A HREF="#UnmapWindow">UnmapWindow</A>
+<TR><TD COLSPAN=2><HR>
+</TABLE>
+
+<P>
+
+The following table lists each X protocol request (in alphabetical
+order) and the Xlib functions that reference it.
+
+<TABLE>
+<TR><TD COLSPAN=2><HR>
+<TR><TD><B>Protocol Request	<TD><B>Xlib Function
+<TR><TD COLSPAN=2><HR>
+<TR><TD><A NAME="AllocColor"><B>AllocColor</B></A>	<TD><B><A HREF="../color/XAllocColor.html">XAllocColor()</A></B>
+<TR><TD><A NAME="AllocColorCells"><B>AllocColorCells</B></A>	<TD><B><A HREF="../color/XAllocColorCells.html">XAllocColorCells()</A></B>
+<TR><TD><A NAME="AllocColorPlanes"><B>AllocColorPlanes</B></A>	<TD><B><A HREF="../color/XAllocColorPlanes.html">XAllocColorPlanes()</A></B>
+<TR><TD><A NAME="AllocNamedColor"><B>AllocNamedColor</B></A>	<TD><B><A HREF="../color/XAllocNamedColor.html">XAllocNamedColor()</A></B>
+<TR><TD><A NAME="AllowEvents"><B>AllowEvents</B></A>	<TD><B><A HREF="../input/XAllowEvents.html">XAllowEvents()</A></B>
+<TR><TD><A NAME="Bell"><B>Bell</B></A>	<TD><B><A HREF="../input/XBell.html">XBell()</A></B>
+<TR><TD VALIGN=top><A NAME="SetAccessControl"><B>SetAccessControl</B></A>	<TD><B><A HREF="../window-and-session-manager/controlling-host-access/XDisableAccessControl.html">XDisableAccessControl()</A></B><BR>
+	<B><A HREF="../window-and-session-manager/controlling-host-access/XEnableAccessControl.html">XEnableAccessControl()</A></B><BR>
+	<B><A HREF="../window-and-session-manager/controlling-host-access/XSetAccessControl.html">XSetAccessControl()</A></B><BR>
+<TR><TD><A NAME="ChangeActivePointerGrab"><B>ChangeActivePointerGrab</B></A>	<TD><B><A HREF="../input/XChangeActivePointerGrab.html">XChangeActivePointerGrab()</A></B>
+<TR><TD><A NAME="SetCloseDownMode"><B>SetCloseDownMode</B></A>	<TD><B><A HREF="../display/XSetCloseDownMode.html">XSetCloseDownMode()</A></B>
+<TR><TD VALIGN=top><A NAME="ChangeGC"><B>ChangeGC</B></A>	<TD><B><A HREF="../GC/XChangeGC.html">XChangeGC()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XSetArcMode.html">XSetArcMode()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XSetBackground.html">XSetBackground()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XSetClipMask.html">XSetClipMask()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XSetClipOrigin.html">XSetClipOrigin()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XSetFillRule.html">XSetFillRule()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XSetFillStyle.html">XSetFillStyle()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XSetFont.html">XSetFont()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XSetForeground.html">XSetForeground()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XSetFunction.html">XSetFunction()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XSetGraphicsExposures.html">XSetGraphicsExposures()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XSetLineAttributes.html">XSetLineAttributes()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XSetPlaneMask.html">XSetPlaneMask()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XSetState.html">XSetState()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XSetStipple.html">XSetStipple()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XSetSubwindowMode.html">XSetSubwindowMode()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XSetTile.html">XSetTile()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XSetTSOrigin.html">XSetTSOrigin()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="ChangeHosts"><B>ChangeHosts</B></A>	<TD><B><A HREF="../window-and-session-manager/controlling-host-access/XAddHost.html">XAddHost()</A></B><BR>
+	<B><A HREF="../window-and-session-manager/controlling-host-access/XAddHosts.html">XAddHosts()</A></B><BR>
+	<B><A HREF="../window-and-session-manager/controlling-host-access/XRemoveHost.html">XRemoveHost()</A></B><BR>
+	<B><A HREF="../window-and-session-manager/controlling-host-access/XRemoveHosts.html">XRemoveHosts()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="ChangeKeyboardControl"><B>ChangeKeyboardControl</B></A>	<TD><B><A HREF="../input/XAutoRepeatOff.html">XAutoRepeatOff()</A></B><BR>
+	<B><A HREF="../input/XAutoRepeatOn.html">XAutoRepeatOn()</A></B><BR>
+	<B><A HREF="../input/XChangeKeyboardControl.html">XChangeKeyboardControl()</A></B><BR>
+<TR><TD><A NAME="ChangeKeyboardMapping"><B>ChangeKeyboardMapping</B></A>	<TD><B><A HREF="../input/XChangeKeyboardMapping.html">XChangeKeyboardMapping()</A></B>
+<TR><TD><A NAME="ChangePointerControl"><B>ChangePointerControl</B></A>	<TD><B><A HREF="../input/XChangePointerControl.html">XChangePointerControl()</A></B>
+<TR><TD VALIGN=top><A NAME="ChangeProperty"><B>ChangeProperty</B></A>	<TD><B><A HREF="../window-information/XChangeProperty.html">XChangeProperty()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XSetClassHint.html">XSetClassHint()</A></B><BR>
+	<B><A HREF="../ICC/client-to-session-manager/XSetCommand.html">XSetCommand()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XSetIconName.html">XSetIconName()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XSetIconSizes.html">XSetIconSizes()</A></B><BR>
+	<B><A HREF="d/XSetNormalHints.html">XSetNormalHints()</A></B><BR>
+	<B><A HREF="../ICC/standard-colormaps/XSetRGBColormaps.html">XSetRGBColormaps()</A></B><BR>
+	<B><A HREF="d/XSetSizeHints.html">XSetSizeHints()</A></B><BR>
+	<B><A HREF="d/XSetStandardProperties.html">XSetStandardProperties()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XSetTextProperty.html">XSetTextProperty()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XSetTransientForHint.html">XSetTransientForHint()</A></B><BR>
+	<B><A HREF="../ICC/client-to-session-manager/XSetWMClientMachine.html">XSetWMClientMachine()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XSetWMHints.html">XSetWMHints()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XSetWMIconName.html">XSetWMIconName()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XSetWMName.html">XSetWMName()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XSetWMNormalHints.html">XSetWMNormalHints()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XSetWMProperties.html">XSetWMProperties()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XSetWMProtocols.html">XSetWMProtocols()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XSetWMSizeHints.html">XSetWMSizeHints()</A></B><BR>
+	<B><A HREF="d/XSetZoomHints.html">XSetZoomHints()</A></B><BR>
+	<B><A HREF="../utilities/XStoreBuffer.html">XStoreBuffer()</A></B><BR>
+	<B><A HREF="../utilities/XStoreBytes.html">XStoreBytes()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XStoreName.html">XStoreName()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="ChangeSaveSet"><B>ChangeSaveSet</B></A>	<TD><B><A HREF="../window-and-session-manager/XAddToSaveSet.html">XAddToSaveSet()</A></B><BR>
+	<B><A HREF="../window-and-session-manager/XChangeSaveSet.html">XChangeSaveSet()</A></B><BR>
+	<B><A HREF="../window-and-session-manager/XRemoveFromSaveSet.html">XRemoveFromSaveSet()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="ChangeWindowAttributes"><B>ChangeWindowAttributes</B></A>	<TD><B><A HREF="../window/XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B><BR>
+	<B><A HREF="../window/XDefineCursor.html">XDefineCursor()</A></B><BR>
+	<B><A HREF="../event-handling/XSelectInput.html">XSelectInput()</A></B><BR>
+	<B><A HREF="../window/XSetWindowBackground.html">XSetWindowBackground()</A></B><BR>
+	<B><A HREF="../window/XSetWindowBackgroundPixmap.html">XSetWindowBackgroundPixmap()</A></B><BR>
+	<B><A HREF="../window/XSetWindowBorder.html">XSetWindowBorder()</A></B><BR>
+	<B><A HREF="../window/XSetWindowBorderPixmap.html">XSetWindowBorderPixmap()</A></B><BR>
+	<B><A HREF="../window/XSetWindowColormap.html">XSetWindowColormap()</A></B><BR>
+	<B><A HREF="../window/XUndefineCursor.html">XUndefineCursor()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="CirculateWindow"><B>CirculateWindow</B></A>	<TD><B><A HREF="../window/XCirculateSubwindowsDown.html">XCirculateSubwindowsDown()</A></B><BR>
+	<B><A HREF="../window/XCirculateSubwindowsUp.html">XCirculateSubwindowsUp()</A></B><BR>
+	<B><A HREF="../window/XCirculateSubwindows.html">XCirculateSubwindows()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="ClearArea"><B>ClearArea</B></A>	<TD><B><A HREF="../graphics/XClearArea.html">XClearArea()</A></B><BR>
+	<B><A HREF="../graphics/XClearWindow.html">XClearWindow()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="CloseFont"><B>CloseFont</B></A>	<TD><B><A HREF="../graphics/font-metrics/XFreeFont.html">XFreeFont()</A></B><BR>
+	<B><A HREF="../graphics/font-metrics/XUnloadFont.html">XUnloadFont()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="ConfigureWindow"><B>ConfigureWindow</B></A>	<TD><B><A HREF="../window/XConfigureWindow.html">XConfigureWindow()</A></B><BR>
+	<B><A HREF="../window/XLowerWindow.html">XLowerWindow()</A></B><BR>
+	<B><A HREF="../window/XMapRaised.html">XMapRaised()</A></B><BR>
+	<B><A HREF="../window/XMoveResizeWindow.html">XMoveResizeWindow()</A></B><BR>
+	<B><A HREF="../window/XMoveWindow.html">XMoveWindow()</A></B><BR>
+	<B><A HREF="../window/XRaiseWindow.html">XRaiseWindow()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XReconfigureWMWindow.html">XReconfigureWMWindow()</A></B><BR>
+	<B><A HREF="../window/XResizeWindow.html">XResizeWindow()</A></B><BR>
+	<B><A HREF="../window/XRestackWindows.html">XRestackWindows()</A></B><BR>
+	<B><A HREF="../window/XSetWindowBorderWidth.html">XSetWindowBorderWidth()</A></B><BR>
+<TR><TD><A NAME="ConvertSelection"><B>ConvertSelection</B></A>	<TD><B><A HREF="../window-information/XConvertSelection.html">XConvertSelection()</A></B>
+<TR><TD><A NAME="CopyArea"><B>CopyArea</B></A>	<TD><B><A HREF="../graphics/XCopyArea.html">XCopyArea()</A></B>
+<TR><TD><A NAME="CopyColormapAndFree"><B>CopyColormapAndFree</B></A>	<TD><B><A HREF="../color/XCopyColormapAndFree.html">XCopyColormapAndFree()</A></B>
+<TR><TD><A NAME="CopyGC"><B>CopyGC</B></A>	<TD><B><A HREF="../GC/XCopyGC.html">XCopyGC()</A></B>
+<TR><TD><A NAME="CopyPlane"><B>CopyPlane</B></A>	<TD><B><A HREF="../graphics/XCopyPlane.html">XCopyPlane()</A></B>
+<TR><TD><A NAME="CreateColormap"><B>CreateColormap</B></A>	<TD><B><A HREF="../color/XCreateColormap.html">XCreateColormap()</A></B>
+<TR><TD><A NAME="CreateCursor"><B>CreateCursor</B></A>	<TD><B><A HREF="../pixmap-and-cursor/XCreatePixmapCursor.html">XCreatePixmapCursor()</A></B>
+<TR><TD VALIGN=top><A NAME="CreateGC"><B>CreateGC</B></A>	<TD><B><A HREF="../GC/XCreateGC.html">XCreateGC()</A></B><BR>
+	<B><A HREF="../utilities/XCreateBitmapFromData.html">XCreateBitmapFromData()</A></B><BR>
+	<B>XCreatePixmapFromData()</B>
+	<B><A HREF="../display/opening.html">XOpenDisplay()</A></B><BR>
+	<B><A HREF="../utilities/XReadBitmapFile.html">XReadBitmapFile()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="CreateGlyphCursor"><B>CreateGlyphCursor</B></A>	<TD><B><A HREF="../pixmap-and-cursor/XCreateFontCursor.html">XCreateFontCursor()</A></B><BR>
+	<B><A HREF="../pixmap-and-cursor/XCreateGlyphCursor.html">XCreateGlyphCursor()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="CreatePixmap"><B>CreatePixmap</B></A>	<TD><B><A HREF="../pixmap-and-cursor/XCreatePixmap.html">XCreatePixmap()</A></B><BR>
+	<B><A HREF="../utilities/XCreateBitmapFromData.html">XCreateBitmapFromData()</A></B><BR>
+	<B>XCreatePixmapFromData()</B>
+	<B><A HREF="../utilities/XReadBitmapFile.html">XReadBitmapFile()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="CreateWindow"><B>CreateWindow</B></A>	<TD><B><A HREF="../window/XCreateWindow.html">XCreateSimpleWindow()</A></B><BR>
+	<B><A HREF="../window/XCreateWindow.html">XCreateWindow()</A></B><BR>
+<TR><TD><A NAME="DeleteProperty"><B>DeleteProperty</B></A>	<TD><B><A HREF="../window-information/XDeleteProperty.html">XDeleteProperty()</A></B>
+<TR><TD><A NAME="DestroySubwindows"><B>DestroySubwindows</B></A>	<TD><B><A HREF="../window/XDestroySubWindows.html">XDestroySubwindows()</A></B>
+<TR><TD><A NAME="DestroyWindow"><B>DestroyWindow</B></A>	<TD><B><A HREF="../window/XDestroyWindow.html">XDestroyWindow()</A></B>
+<TR><TD><A NAME="FillPoly"><B>FillPoly</B></A>	<TD><B><A HREF="../graphics/filling-areas/XFillPolygon.html">XFillPolygon()</A></B>
+<TR><TD VALIGN=top><A NAME="ForceScreenSaver"><B>ForceScreenSaver</B></A>	<TD><B><A HREF="../window-and-session-manager/XActivateScreenSaver.html">XActivateScreenSaver()</A></B><BR>
+	<B><A HREF="../window-and-session-manager/XForceScreenSaver.html">XForceScreenSaver()</A></B><BR>
+	<B><A HREF="../window-and-session-manager/XResetScreenSaver.html">XResetScreenSaver()</A></B><BR>
+<TR><TD><A NAME="FreeColormap"><B>FreeColormap</B></A>	<TD><B><A HREF="../color/XFreeColormap.html">XFreeColormap()</A></B>
+<TR><TD><A NAME="FreeColors"><B>FreeColors</B></A>	<TD><B><A HREF="../color/XFreeColors.html">XFreeColors()</A></B>
+<TR><TD><A NAME="FreeCursor"><B>FreeCursor</B></A>	<TD><B><A HREF="../pixmap-and-cursor/XFreeCursor.html">XFreeCursor()</A></B>
+<TR><TD VALIGN=top><A NAME="FreeGC"><B>FreeGC</B></A>	<TD><B><A HREF="../GC/XFreeGC.html">XFreeGC()</A></B><BR>
+	<B><A HREF="../utilities/XCreateBitmapFromData.html">XCreateBitmapFromData()</A></B><BR>
+	<B>XCreatePixmapFromData()</B>
+	<B><A HREF="../utilities/XReadBitmapFile.html">XReadBitmapFile()</A></B><BR>
+<TR><TD><A NAME="FreePixmap"><B>FreePixmap</B></A>	<TD><B><A HREF="../pixmap-and-cursor/XFreePixmap.html">XFreePixmap()</A></B>
+<TR><TD><A NAME="GetAtomName"><B>GetAtomName</B></A>	<TD><B><A HREF="../window-information/XGetAtomName.html">XGetAtomName()</A></B>
+<TR><TD><A NAME="GetFontPath"><B>GetFontPath</B></A>	<TD><B><A HREF="../window-and-session-manager/XGetFontPath.html">XGetFontPath()</A></B>
+<TR><TD VALIGN=top><A NAME="GetGeometry"><B>GetGeometry</B></A>	<TD><B><A HREF="../window-information/XGetGeometry.html">XGetGeometry()</A></B><BR>
+	<B><A HREF="../window-information/XGetWindowAttributes.html">XGetWindowAttributes()</A></B><BR>
+<TR><TD><A NAME="GetImage"><B>GetImage</B></A>	<TD><B><A HREF="../graphics/XGetImage.html">XGetImage()</A></B>
+<TR><TD VALIGN=top><A NAME="GetInputFocus"><B>GetInputFocus</B></A>	<TD><B><A HREF="../input/XGetInputFocus.html">XGetInputFocus()</A></B><BR>
+	<B><A HREF="../event-handling/XSync.html">XSync()</A></B><BR>
+	<B><A HREF="../event-handling/protocol-errors/XSynchronize.html">XSynchronize()</A></B><BR>
+<TR><TD><A NAME="GetKeyboardControl"><B>GetKeyboardControl</B></A>	<TD><B><A HREF="../input/XGetKeyboardControl.html">XGetKeyboardControl()</A></B>
+<TR><TD><A NAME="GetKeyboardMapping"><B>GetKeyboardMapping</B></A>	<TD><B><A HREF="../input/XGetKeyboardMapping.html">XGetKeyboardMapping()</A></B>
+<TR><TD><A NAME="GetModifierMapping"><B>GetModifierMapping</B></A>	<TD><B><A HREF="../input/XGetModifierMapping.html">XGetModifierMapping()</A></B>
+<TR><TD><A NAME="GetMotionEvents"><B>GetMotionEvents</B></A>	<TD><B><A HREF="../event-handling/XGetMotionEvents.html">XGetMotionEvents()</A></B>
+<TR><TD><A NAME="GetPointerControl"><B>GetPointerControl</B></A>	<TD><B><A HREF="../input/XGetPointerControl.html">XGetPointerControl()</A></B>
+<TR><TD><A NAME="GetPointerMapping"><B>GetPointerMapping</B></A>	<TD><B><A HREF="../input/XGetPointerMapping.html">XGetPointerMapping()</A></B>
+<TR><TD VALIGN=top><A NAME="GetProperty"><B>GetProperty</B></A>	<TD><B><A HREF="../utilities/XFetchBytes.html">XFetchBytes()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XFetchName.html">XFetchName()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XGetClassHint.html">XGetClassHint()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XGetIconName.html">XGetIconName()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XGetIconSizes.html">XGetIconSizes()</A></B><BR>
+	<B><A HREF="d/XGetNormalHints.html">XGetNormalHints()</A></B><BR>
+	<B><A HREF="../ICC/standard-colormaps/XGetRGBColormaps.html">XGetRGBColormaps()</A></B><BR>
+	<B><A HREF="d/XGetSizeHints.html">XGetSizeHints()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XGetTextProperty.html">XGetTextProperty()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XGetTransientForHint.html">XGetTransientForHint()</A></B><BR>
+	<B><A HREF="../ICC/client-to-session-manager/XGetWMClientMachine.html">XGetWMClientMachine()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XGetWMColormapWindows.html">XGetWMColormapWindows()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XGetWMHints.html">XGetWMHints()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XGetWMIconName.html">XGetWMIconName()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XGetWMName.html">XGetWMName()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XGetWMNormalHints.html">XGetWMNormalHints()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XGetWMProtocols.html">XGetWMProtocols()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XGetWMSizeHints.html">XGetWMSizeHints()</A></B><BR>
+	<B><A HREF="../window-information/XGetWindowProperty.html">XGetWindowProperty()</A></B><BR>
+	<B><A HREF="d/XGetZoomHints.html">XGetZoomHints()</A></B><BR>
+<TR><TD><A NAME="GetSelectionOwner"><B>GetSelectionOwner</B></A>	<TD><B><A HREF="../window-information/XGetSelectionOwner.html">XGetSelectionOwner()</A></B>
+<TR><TD><A NAME="GetWindowAttributes"><B>GetWindowAttributes</B></A>	<TD><B><A HREF="../window-information/XGetWindowAttributes.html">XGetWindowAttributes()</A></B>
+<TR><TD><A NAME="GrabButton"><B>GrabButton</B></A>	<TD><B><A HREF="../input/XGrabButton.html">XGrabButton()</A></B>
+<TR><TD><A NAME="GrabKey"><B>GrabKey</B></A>	<TD><B><A HREF="../input/XGrabKey.html">XGrabKey()</A></B>
+<TR><TD><A NAME="GrabKeyboard"><B>GrabKeyboard</B></A>	<TD><B><A HREF="../input/XGrabKeyboard.html">XGrabKeyboard()</A></B>
+<TR><TD><A NAME="GrabPointer"><B>GrabPointer</B></A>	<TD><B><A HREF="../input/XGrabPointer.html">XGrabPointer()</A></B>
+<TR><TD><A NAME="GrabServer"><B>GrabServer</B></A>	<TD><B><A HREF="../window-and-session-manager/XGrabServer.html">XGrabServer()</A></B>
+<TR><TD><A NAME="ImageText16"><B>ImageText16</B></A>	<TD><B><A HREF="../graphics/drawing-text/XDrawImageString16.html">XDrawImageString16()</A></B>
+<TR><TD><A NAME="ImageText8"><B>ImageText8</B></A>	<TD><B><A HREF="../graphics/drawing-text/XDrawImageString.html">XDrawImageString()</A></B>
+<TR><TD><A NAME="InstallColormap"><B>InstallColormap</B></A>	<TD><B><A HREF="../window-and-session-manager/XInstallColormap.html">XInstallColormap()</A></B>
+<TR><TD VALIGN=top><A NAME="InternAtom"><B>InternAtom</B></A>	<TD><B><A HREF="../ICC/client-to-window-manager/XGetWMColormapWindows.html">XGetWMColormapWindows()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XGetWMProtocols.html">XGetWMProtocols()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XIconifyWindow.html">XIconifyWindow()</A></B><BR>
+	<B><A HREF="../window-information/XInternAtom.html">XInternAtom()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XSetWMProtocols.html">XSetWMProtocols()</A></B><BR>
+<TR><TD><A NAME="KillClient"><B>KillClient</B></A>	<TD><B><A HREF="../window-and-session-manager/XKillClient.html">XKillClient()</A></B>
+<TR><TD><A NAME="ListExtensions"><B>ListExtensions</B></A>	<TD><B><A HREF="c/XListExtensions.html">XListExtensions()</A></B>
+<TR><TD><A NAME="ListFonts"><B>ListFonts</B></A>	<TD><B><A HREF="../graphics/font-metrics/XListFonts.html">XListFonts()</A></B>
+<TR><TD><A NAME="ListFontsWithInfo"><B>ListFontsWithInfo</B></A>	<TD><B><A HREF="../graphics/font-metrics/XListFontsWithInfo.html">XListFontsWithInfo()</A></B>
+<TR><TD><A NAME="ListHosts"><B>ListHosts</B></A>	<TD><B><A HREF="../window-and-session-manager/controlling-host-access/XListHosts.html">XListHosts()</A></B>
+<TR><TD><A NAME="ListInstalledColormaps"><B>ListInstalledColormaps</B></A>	<TD><B><A HREF="../window-and-session-manager/XListInstalledColormaps.html">XListInstalledColormaps()</A></B>
+<TR><TD><A NAME="ListProperties"><B>ListProperties</B></A>	<TD><B><A HREF="../window-information/XListProperties.html">XListProperties()</A></B>
+<TR><TD VALIGN=top><A NAME="LookupColor"><B>LookupColor</B></A>	<TD><B><A HREF="../color/XLookupColor.html">XLookupColor()</A></B><BR>
+	<B><A HREF="../color/XParseColor.html">XParseColor()</A></B><BR>
+<TR><TD><A NAME="MapSubwindows"><B>MapSubwindows</B></A>	<TD><B><A HREF="../window/XMapSubwindows.html">XMapSubwindows()</A></B>
+<TR><TD VALIGN=top><A NAME="MapWindow"><B>MapWindow</B></A>	<TD><B><A HREF="../window/XMapRaised.html">XMapRaised()</A></B><BR>
+	<B><A HREF="../window/XMapWindow.html">XMapWindow()</A></B><BR>
+<TR><TD><A NAME="NoOperation"><B>NoOperation</B></A>	<TD><B><A HREF="../display/XNoOp.html">XNoOp()</A></B>
+<TR><TD VALIGN=top><A NAME="OpenFont"><B>OpenFont</B></A>	<TD><B><A HREF="../graphics/font-metrics/XLoadFont.html">XLoadFont()</A></B><BR>
+	<B><A HREF="../graphics/font-metrics/XLoadQueryFont.html">XLoadQueryFont()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="PolyArc"><B>PolyArc</B></A>	<TD><B><A HREF="../graphics/drawing/XDrawArc.html">XDrawArc()</A></B><BR>
+	<B><A HREF="../graphics/drawing/XDrawArcs.html">XDrawArcs()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="PolyFillArc"><B>PolyFillArc</B></A>	<TD><B><A HREF="../graphics/filling-areas/XFillArc.html">XFillArc()</A></B><BR>
+	<B><A HREF="../graphics/filling-areas/XFillArcs.html">XFillArcs()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="PolyFillRectangle"><B>PolyFillRectangle</B></A>	<TD><B><A HREF="../graphics/filling-areas/XFillRectangle.html">XFillRectangle()</A></B><BR>
+	<B><A HREF="../graphics/filling-areas/XFillRectangles.html">XFillRectangles()</A></B><BR>
+<TR><TD><A NAME="PolyLine"><B>PolyLine</B></A>	<TD><B><A HREF="../graphics/drawing/XDrawLines.html">XDrawLines()</A></B>
+<TR><TD VALIGN=top><A NAME="PolyPoint"><B>PolyPoint</B></A>	<TD><B><A HREF="../graphics/drawing/XDrawPoint.html">XDrawPoint()</A></B><BR>
+	<B><A HREF="../graphics/drawing/XDrawPoints.html">XDrawPoints()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="PolyRectangle"><B>PolyRectangle</B></A>	<TD><B><A HREF="../graphics/drawing/XDrawRectangle.html">XDrawRectangle()</A></B><BR>
+	<B><A HREF="../graphics/drawing/XDrawRectangles.html">XDrawRectangles()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="PolySegment"><B>PolySegment</B></A>	<TD><B><A HREF="../graphics/drawing/XDrawLine.html">XDrawLine()</A></B><BR>
+	<B><A HREF="../graphics/drawing/XDrawSegments.html">XDrawSegments()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="PolyText16"><B>PolyText16</B></A>	<TD><B><A HREF="../graphics/drawing-text/XDrawString16.html">XDrawString16()</A></B><BR>
+	<B><A HREF="../graphics/drawing-text/XDrawText16.html">XDrawText16()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="PolyText8"><B>PolyText8</B></A>	<TD><B><A HREF="../graphics/drawing-text/XDrawString.html">XDrawString()</A></B><BR>
+	<B><A HREF="../graphics/drawing-text/XDrawText.html">XDrawText()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="PutImage"><B>PutImage</B></A>	<TD><B><A HREF="../graphics/XPutImage.html">XPutImage()</A></B><BR>
+	<B><A HREF="../utilities/XCreateBitmapFromData.html">XCreateBitmapFromData()</A></B><BR>
+	<B>XCreatePixmapFromData()</B>
+	<B><A HREF="../utilities/XReadBitmapFile.html">XReadBitmapFile()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="QueryBestSize"><B>QueryBestSize</B></A>	<TD><B><A HREF="../pixmap-and-cursor/XQueryBestCursor.html">XQueryBestCursor()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XQueryBestSize.html">XQueryBestSize()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XQueryBestStipple.html">XQueryBestStipple()</A></B><BR>
+	<B><A HREF="../GC/convenience-functions/XQueryBestTile.html">XQueryBestTile()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="QueryColors"><B>QueryColors</B></A>	<TD><B><A HREF="../color/XQueryColor.html">XQueryColor()</A></B><BR>
+	<B><A HREF="../color/XQueryColors.html">XQueryColors()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="QueryExtension"><B>QueryExtension</B></A>	<TD><B><A HREF="c/XInitExtension.html">XInitExtension()</A></B><BR>
+	<B><A HREF="c/XQueryExtension.html">XQueryExtension()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="QueryFont"><B>QueryFont</B></A>	<TD><B><A HREF="../graphics/font-metrics/XLoadQueryFont.html">XLoadQueryFont()</A></B><BR>
+	<B><A HREF="../graphics/font-metrics/XQueryFont.html">XQueryFont()</A></B><BR>
+<TR><TD><A NAME="QueryKeymap"><B>QueryKeymap</B></A>	<TD><B><A HREF="../input/XQueryKeymap.html">XQueryKeymap()</A></B>
+<TR><TD><A NAME="QueryPointer"><B>QueryPointer</B></A>	<TD><B><A HREF="../window-information/XQueryPointer.html">XQueryPointer()</A></B>
+<TR><TD VALIGN=top><A NAME="QueryTextExtents"><B>QueryTextExtents</B></A>	<TD><B><A HREF="../graphics/font-metrics/XQueryTextExtents.html">XQueryTextExtents()</A></B><BR>
+	<B><A HREF="../graphics/font-metrics/XQueryTextExtents16.html">XQueryTextExtents16()</A></B><BR>
+<TR><TD><A NAME="QueryTree"><B>QueryTree</B></A>	<TD><B><A HREF="../window-information/XQueryTree.html">XQueryTree()</A></B>
+<TR><TD><A NAME="RecolorCursor"><B>RecolorCursor</B></A>	<TD><B><A HREF="../pixmap-and-cursor/XRecolorCursor.html">XRecolorCursor()</A></B>
+<TR><TD><A NAME="ReparentWindow"><B>ReparentWindow</B></A>	<TD><B><A HREF="../window-and-session-manager/XReparentWindow.html">XReparentWindow()</A></B>
+<TR><TD VALIGN=top><A NAME="RotateProperties"><B>RotateProperties</B></A>	<TD><B><A HREF="../utilities/XRotateBuffers.html">XRotateBuffers()</A></B><BR>
+	<B><A HREF="../window-information/XRotateWindowProperties.html">XRotateWindowProperties()</A></B><BR>
+<TR><TD VALIGN=top><A NAME="SendEvent"><B>SendEvent</B></A>	<TD><B><A HREF="../ICC/client-to-window-manager/XIconifyWindow.html">XIconifyWindow()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XReconfigureWMWindow.html">XReconfigureWMWindow()</A></B><BR>
+	<B><A HREF="../event-handling/XSendEvent.html">XSendEvent()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XWithdrawWindow.html">XWithdrawWindow()</A></B><BR>
+<TR><TD><A NAME="SetClipRectangles"><B>SetClipRectangles</B></A>	<TD><B><A HREF="../GC/convenience-functions/XSetClipRectangles.html">XSetClipRectangles()</A></B>
+<TR><TD><A NAME="SetCloseDownMode"><B>SetCloseDownMode</B></A>	<TD><B><A HREF="../display/XSetCloseDownMode.html">XSetCloseDownMode()</A></B>
+<TR><TD><A NAME="SetDashes"><B>SetDashes</B></A>	<TD><B><A HREF="../GC/convenience-functions/XSetDashes.html">XSetDashes()</A></B>
+<TR><TD><A NAME="SetFontPath"><B>SetFontPath</B></A>	<TD><B><A HREF="../window-and-session-manager/XSetFontPath.html">XSetFontPath()</A></B>
+<TR><TD><A NAME="SetInputFocus"><B>SetInputFocus</B></A>	<TD><B><A HREF="../input/XSetInputFocus.html">XSetInputFocus()</A></B>
+<TR><TD><A NAME="SetModifierMapping"><B>SetModifierMapping</B></A>	<TD><B><A HREF="../input/XSetModifierMapping.html">XSetModifierMapping()</A></B>
+<TR><TD><A NAME="SetPointerMapping"><B>SetPointerMapping</B></A>	<TD><B><A HREF="../input/XSetPointerMapping.html">XSetPointerMapping()</A></B>
+<TR><TD VALIGN=top><A NAME="SetScreenSaver"><B>SetScreenSaver</B></A>	<TD><B><A HREF="../window-and-session-manager/XGetScreenSaver.html">XGetScreenSaver()</A></B><BR>
+	<B><A HREF="../window-and-session-manager/XSetScreenSaver.html">XSetScreenSaver()</A></B><BR>
+<TR><TD><A NAME="SetSelectionOwner"><B>SetSelectionOwner</B></A>	<TD><B><A HREF="../window-information/XSetSelectionOwner.html">XSetSelectionOwner()</A></B>
+<TR><TD VALIGN=top><A NAME="StoreColors"><B>StoreColors</B></A>	<TD><B><A HREF="../color/XStoreColor.html">XStoreColor()</A></B><BR>
+	<B><A HREF="../color/XStoreColors.html">XStoreColors()</A></B><BR>
+<TR><TD><A NAME="StoreNamedColor"><B>StoreNamedColor</B></A>	<TD><B><A HREF="../color/XStoreNamedColor.html">XStoreNamedColor()</A></B>
+<TR><TD><A NAME="TranslateCoordinates"><B>TranslateCoordinates</B></A>	<TD><B><A HREF="../window-information/XTranslateCoordinates.html">XTranslateCoordinates()</A></B>
+<TR><TD><A NAME="UngrabButton"><B>UngrabButton</B></A>	<TD><B><A HREF="../input/XUngrabButton.html">XUngrabButton()</A></B>
+<TR><TD><A NAME="UngrabKey"><B>UngrabKey</B></A>	<TD><B><A HREF="../input/XUngrabKey.html">XUngrabKey()</A></B>
+<TR><TD><A NAME="UngrabKeyboard"><B>UngrabKeyboard</B></A>	<TD><B><A HREF="../input/XUngrabKeyboard.html">XUngrabKeyboard()</A></B>
+<TR><TD><A NAME="UngrabPointer"><B>UngrabPointer</B></A>	<TD><B><A HREF="../input/XUngrabPointer.html">XUngrabPointer()</A></B>
+<TR><TD><A NAME="UngrabServer"><B>UngrabServer</B></A>	<TD><B><A HREF="../window-and-session-manager/XUngrabServer.html">XUngrabServer()</A></B>
+<TR><TD><A NAME="UninstallColormap"><B>UninstallColormap</B></A>	<TD><B><A HREF="../window-and-session-manager/XUninstallColormap.html">XUninstallColormap()</A></B>
+<TR><TD><A NAME="UnmapSubwindows"><B>UnmapSubwindows</B></A>	<TD><B><A HREF="../window/XUnmapSubwindows.html">XUnmapSubwindows()</A></B>
+<TR><TD VALIGN=top><A NAME="UnmapWindow"><B>UnmapWindow</B></A>	<TD><B><A HREF="../window/XUnmapWindow.html">XUnmapWindow()</A></B><BR>
+	<B><A HREF="../ICC/client-to-window-manager/XWithdrawWindow.html">XWithdrawWindow()</A></B><BR>
+<TR><TD><A NAME="WarpPointer"><B>WarpPointer</B></A>	<TD><B><A HREF="../input/XWarpPointer.html">XWarpPointer()</A></B>
+</TABLE>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

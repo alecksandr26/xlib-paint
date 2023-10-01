@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>Chapter 10: Events</H1>
+
+A client application communicates with the X server through the connection you
+establish with the 
+<B><A HREF="../display/opening.html">XOpenDisplay()</A></B>
+<!.IN "XOpenDisplay">
+function.
+A client application sends requests to the X server over this connection.
+<!.IN "Requests" "" "@DEF@">
+These requests are made by the Xlib functions that are 
+called in the client application.
+Many Xlib functions cause the X server to generate events,
+and the user's typing or moving the pointer can generate events asynchronously.
+The X server returns events to the client on the same connection.
+
+<P>
+
+This chapter discusses the following topics associated with events:
+
+<UL>
+<P><LI>
+<A HREF="types.html">Event types</A>
+
+<P><LI>
+<A HREF="structures.html">Event structures</A>
+
+<P><LI>
+<A HREF="mask.html">Event mask</A>
+
+<P><LI>
+<A HREF="processing-overview.html">Event processing</A>
+
+</UL>
+
+<P>
+
+Functions for handling events are dealt with in the next chapter.
+
+<H5 ALIGN=right><I>Next: <A HREF="types.html">Event Types</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

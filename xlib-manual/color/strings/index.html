@@ -1,0 +1,87 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Color Strings</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>6.2 Color Strings</H1>
+
+Xlib provides a mechanism for using string names for colors.
+A color string may either contain an abstract color name
+or a numerical color specification.
+Color strings are case-insensitive.
+
+<P>
+
+Color strings are used in the following functions:
+
+<UL>
+
+
+<P><LI>
+<B><A HREF="../XAllocNamedColor.html">XAllocNamedColor()</A></B>
+
+<P><LI>
+<B><A HREF="../XcmsAllocNamedColor.html">XcmsAllocNamedColor()</A></B>
+
+<P><LI>
+<B><A HREF="../XLookupColor.html">XLookupColor()</A></B>
+
+<P><LI>
+<B><A HREF="../XcmsLookupColor.html">XcmsLookupColor()</A></B>
+
+<P><LI>
+<B><A HREF="../XParseColor.html">XParseColor()</A></B>
+
+<P><LI>
+<B><A HREF="../XStoreNamedColor.html">XStoreNamedColor()</A></B>
+
+</UL>
+
+<P>
+
+Xlib supports the use of abstract color names, for example, red or blue.
+A value for this abstract name is obtained by searching one or more color
+name databases.
+Xlib first searches zero or more client-side databases;
+the number, location, and content of these databases is
+implementation dependent and might depend on the current locale.
+If the name is not found, Xlib then looks for the color in the
+X server's database.
+If the color name is not in the Host Portable Character Encoding
+the result is implementation dependent.
+
+<P>
+
+A numerical color specification
+consists of a color space name and a set of values in the following syntax:
+
+<P>
+
+<CODE>
+<I>&lt;color_space_name&gt;</I>:<I>&lt;value&gt;/.../&lt;value&gt;</I>
+</CODE>
+
+<P>
+
+The following are examples of valid color strings.
+
+<P>
+
+<CODE><PRE>
+"CIEXYZ:0.3227/0.28133/0.2493"
+"RGBi:1.0/0.0/0.0"
+"rgb:00/ff/00"
+"CIELuv:50.0/0.0/0.0"
+</CODE></PRE>
+
+<P>
+
+The syntax and semantics of numerical specifications are given
+for each standard color space in the following sections.
+
+<H5 ALIGN=right><I>Next: <A HREF="rgb.html">RGB Device String Specification</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,127 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XcmsStoreColor</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XcmsStoreColor</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Color" "storing">
+<!.IN "XcmsStoreColor" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="conversion-contexts-and-gamut-mapping.html#cmsStatus">Status</A></B> XcmsStoreColor(<B>display</B>, <B>colormap</B>, <B>color</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="./#colormap">Colormap</A> <B>colormap</B>;
+      <A HREF="structures.html#XcmsColor">XcmsColor</A> *<B>color</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>colormap</B>
+<TD> Specifies the colormap.
+
+<TR><TD> <B>color</B>
+<TD> Specifies the color cell and the color to store.
+Values specified in this
+<A HREF="structures.html#XcmsColor">XcmsColor</A>
+structure remain unchanged upon return.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XcmsStoreColor()</B>
+function converts the color specified in the
+<A HREF="structures.html#XcmsColor">XcmsColor</A>
+structure into RGB values.
+It then uses this RGB specification in an
+<A HREF="structures.html">XColor</A>
+structure, whose three flags 
+(<B>DoRed</B>, 
+<B>DoGreen</B>,
+and
+<B>DoBlue</B>)
+are set, in a call to
+<B><A HREF="XStoreColor.html">XStoreColor()</A></B>
+to change the color cell specified by the pixel member of the
+<A HREF="structures.html#XcmsColor">XcmsColor</A>
+structure.
+This pixel value must be a valid index for the specified colormap,
+and the color cell specified by the pixel value must be a read/write cell.
+If the pixel value is not a valid index, a
+<B>BadValue</B>
+error results.
+If the color cell is unallocated or is allocated read-only, a
+<B>BadAccess</B>
+error results.
+If the colormap is an installed map for its screen, 
+the changes are visible immediately.
+
+<P>
+
+Note that 
+<B><A HREF="XStoreColor.html">XStoreColor()</A></B>
+has no return value; therefore, an
+<B><A HREF="conversion-contexts-and-gamut-mapping.html#cmsStatus">XcmsSuccess</A></B>
+return value from this function indicates that the conversion 
+to RGB succeeded and the call to
+<B><A HREF="XStoreColor.html">XStoreColor()</A></B>
+was made.
+To obtain the actual color stored, use
+<B><A HREF="XcmsQueryColor.html">XcmsQueryColor()</A></B>.
+Due to the screen's hardware limitations or gamut compression,
+the color stored in the colormap may not be identical
+to the color specified.
+
+<P>
+
+<B>XcmsStoreColor()</B>
+can generate
+<B>BadAccess</B> ,
+<B>BadColor</B> ,
+and
+<B>BadValue</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAccess</B>
+<TD> A client attempted to free a color map entry that
+it did not already allocate.
+<TR><TD><B>BadAccess</B>
+<TD> A client attempted to store into a read-only color
+     map entry.
+
+<TR><TD><B>BadColor</B>
+<TD>  A value for a Colormap argument does not name a
+      defined Colormap.
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XcmsAllocColor.html">XcmsAllocColor()</A></B>,
+<B><A HREF="XcmsQueryColor.html">XcmsQueryColor()</A></B>,
+<B><A HREF="XcmsStoreColors.html">XcmsStoreColors()</A></B>,
+"<A HREF="modifying-and-querying-cells.html">Modifying and Querying Colormap Cells</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

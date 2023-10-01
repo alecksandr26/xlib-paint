@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Graphics Context Functions</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>Chapter 7: Graphics Context Functions</H1>
+
+A number of resources are used when performing graphics operations in X.
+Most information about performing graphics (for example, foreground
+color, background color, line style, and so on) is stored in
+resources called graphics contexts (GC).
+<!.IN "Graphics context">
+Most graphics operations (see "<A HREF="../graphics/">Graphics Functions</A>") take a 
+GC as an argument.
+Although in theory the X protocol permits sharing of GCs between applications, 
+it is expected that applications will use their own
+GCs when performing operations. 
+Sharing of GCs is highly discouraged because the library may cache GC state.
+
+<P>
+
+Graphics operations can be performed to either windows or pixmaps, 
+which collectively are called drawables.
+<!.IN "Root">
+Each drawable exists on a single screen.
+A GC is created for a specific screen and drawable depth
+and can only be used with drawables of matching
+screen and depth.
+
+<P>
+
+This chapter discusses how to:
+
+<UL>
+
+<P><LI>
+<A HREF="manipulating.html">Manipulate graphics context/state</A>
+
+<P><LI>
+<A HREF="convenience-functions/">Use GC convenience functions</A>
+
+</UL>
+
+<H5 ALIGN=right><I>Next: <A HREF="manipulating.html">Manipulating Graphics Context/State</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

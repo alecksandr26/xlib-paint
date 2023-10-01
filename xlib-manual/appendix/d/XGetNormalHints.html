@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XGetNormalHints</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XGetNormalHints</H1>
+
+This function has been superseded by
+<B><A HREF="../../ICC/client-to-window-manager/XGetWMNormalHints.html">XGetWMNormalHints()</A></B>.
+
+<H2>Syntax</H2>
+
+<!.IN "XGetNormalHints" "" "@DEF@">
+
+<CODE><PRE>
+<B>Status</B> XGetNormalHints(<B>display</B>, <B>w</B>, <B>hints_return</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      <A HREF="../../ICC/client-to-window-manager/wm-normal-hints.html#XSizeHints">XSizeHints</A> *<B>hints_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>hints_return</B>
+<TD> Returns the size hints for the window in its normal state.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XGetNormalHints()</B>
+function returns the size hints for a window in its normal state.
+It returns a nonzero status if it succeeds or zero if
+the application specified no normal size hints for this window.
+
+<P>
+
+<B>XGetNormalHints()</B>
+can generate a
+<B>BadWindow</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+
+</TABLE>
+
+<H2>See also</H2>
+<B><A HREF="../../ICC/client-to-window-manager/XGetWMNormalHints.html">XGetWMNormalHints()</A></B>,
+"<A HREF="d.html">Compatibility Functions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

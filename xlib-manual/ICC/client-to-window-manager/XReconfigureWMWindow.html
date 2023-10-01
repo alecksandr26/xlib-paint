@@ -1,0 +1,99 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XReconfigureWMWindow</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XReconfigureWMWindow</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XReconfigureWMWindow" "" "@DEF@">
+
+<CODE><PRE>
+<B><A HREF="../../introduction/errors.html#Status">Status</A></B> XReconfigureWMWindow(<B>display</B>, <B>w</B>, <B>screen_number</B>, <B>value_mask</B>, <B>values</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      int <B>screen_number</B>;
+      unsigned int <B>value_mask</B>;
+      <A HREF="../../window/configure.html#XWindowChanges">XWindowChanges</A> *<B>values</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>screen_number</B>
+<TD> Specifies the appropriate screen number on the host server.
+
+<TR><TD> <B>value_mask</B>
+<TD> Specifies which values are to be set using information in
+the values structure.
+This mask is the bitwise inclusive OR of the valid configure window values bits.
+
+<TR><TD> <B>values</B>
+<TD> Specifies the 
+<A HREF="../../window/configure.html#XWindowChanges">XWindowChanges</A> 
+structure.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The 
+<B>XReconfigureWMWindow()</B>
+function issues a 
+<B>ConfigureWindow</B>
+request on the specified top-level window.
+If the stacking mode is changed and the request fails with a 
+<B>BadMatch</B> 
+error, 
+the error is trapped by Xlib and a synthetic 
+<B>ConfigureRequestEvent</B>
+containing the same configuration parameters is sent to the root 
+of the specified window.
+Window managers may elect to receive this event 
+and treat it as a request to reconfigure the indicated window.
+It returns a nonzero status if the request or event is successfully sent;
+otherwise, it returns a zero status.
+
+<P>
+
+<B>XReconfigureWMWindow()</B>
+can generate
+<B>BadValue</B> 
+and 
+<B>BadWindow</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../../window/XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>,
+<B><A HREF="../../window/XConfigureWindow.html">XConfigureWindow()</A></B>,
+<B><A HREF="../../window/XCreateWindow.html">XCreateWindow()</A></B>,
+<B><A HREF="../../window/XDestroyWindow.html">XDestroyWindow()</A></B>,
+<B><A HREF="XIconifyWindow.html">XIconifyWindow()</A></B>,
+<B><A HREF="../../window/XMapWindow.html">XMapWindow()</A></B>,
+<B><A HREF="../../window/XRaiseWindow.html">XRaiseWindow()</A></B>,
+<B><A HREF="../../window/XUnmapWindow.html">XUnmapWindow()</A></B>,
+<B><A HREF="XWithdrawWindow.html">XWithdrawWindow()</A></B>,
+"<A HREF="manipulating-top-level-windows.html">Manipulating Top-Level Windows</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

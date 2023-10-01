@@ -1,0 +1,41 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Using Window Manager Convenience Functions</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>14.1.13 Using Window Manager Convenience Functions</H1>
+
+The 
+<B><A HREF="XmbSetWMProperties.html">XmbSetWMProperties()</A></B>
+function stores the standard set of window manager properties,
+with text properties in standard encodings
+for internationalized text communication.
+The standard window manager properties for a given window are
+<A HREF="/gui/x/icccm/sec-4.html#WM_NAME">WM_NAME</A>, 
+<A HREF="/gui/x/icccm/sec-4.html#WM_ICON_NAME">WM_ICON_NAME</A>, 
+<A HREF="/gui/x/icccm/sec-4.html#WM_HINTS">WM_HINTS</A>, 
+<A HREF="/gui/x/icccm/sec-4.html#WM_NORMAL_HINTS">WM_NORMAL_HINTS</A>, 
+<A HREF="/gui/x/icccm/sec-4.html#WM_CLASS">WM_CLASS</A>,
+<A HREF="/gui/x/icccm/sec-C.html#s-C.1.1">WM_COMMAND</A>, 
+<A HREF="/gui/x/icccm/sec-C.html#s-C.1.2">WM_CLIENT_MACHINE</A>, and WM_LOCALE_NAME.
+
+<P>
+
+To set a window's standard window manager properties
+with strings in client-specified encodings, use
+<B><A HREF="XSetWMProperties.html">XSetWMProperties()</A></B>.
+The standard window manager properties for a given window are
+<A HREF="/gui/x/icccm/sec-4.html#WM_NAME">WM_NAME</A>, 
+<A HREF="/gui/x/icccm/sec-4.html#WM_ICON_NAME">WM_ICON_NAME</A>, 
+<A HREF="/gui/x/icccm/sec-4.html#WM_HINTS">WM_HINTS</A>, 
+<A HREF="/gui/x/icccm/sec-4.html#WM_NORMAL_HINTS">WM_NORMAL_HINTS</A>, 
+<A HREF="/gui/x/icccm/sec-4.html#WM_CLASS">WM_CLASS</A>,
+<A HREF="/gui/x/icccm/sec-C.html#s-C.1.1">WM_COMMAND</A>, and 
+<A HREF="/gui/x/icccm/sec-C.html#s-C.1.2">WM_CLIENT_MACHINE</A>.
+
+<H5 ALIGN=right><I>Next: <A HREF="../client-to-session-manager/">Client to Session Manager Communication</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

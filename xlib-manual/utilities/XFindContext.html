@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XFindContext</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XFindContext</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XFindContext" "" "@DEF@">
+
+<CODE><PRE>
+int XFindContext(<B>display</B>, <B>rid</B>, <B>context</B>, <B>data_return</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      XID <B>rid</B>;
+      XContext <B>context</B>;
+      XPointer *<B>data_return</B>;	
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>rid</B>
+<TD> Specifies the resource ID with which the data is associated.
+
+<TR><TD> <B>context</B>
+<TD> Specifies the context type to which the data belongs.
+
+<TR><TD> <B>data_return</B>
+<TD> Returns the data.
+
+</TABLE>
+
+<H2>Description</H2>
+
+Because it is a return value,
+the data is a pointer.
+The
+<B>XFindContext()</B>
+function returns a nonzero error code if an error has occurred
+and zero otherwise.
+Possible errors are
+<B>XCNOENT</B>
+(context-not-found).
+
+<H2>See also</H2>
+
+<B><A HREF="XDeleteContext.html">XDeleteContext()</A></B>,
+<B><A HREF="XSaveContext.html">XSaveContext()</A></B>,
+<B><A HREF="XUniqueContext.html">XUniqueContext()</A></B>,
+"<A HREF="context-manager.html">Using the Context Manager</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

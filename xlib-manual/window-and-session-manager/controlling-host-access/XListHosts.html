@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XListHosts</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XListHosts</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XListHosts" "" "@DEF@">
+
+<CODE><PRE>
+<A HREF="hosts.html">XHostAddress</A> *XListHosts(<B>display</B>, <B>nhosts_return</B>, <B>state_return</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      int *<B>nhosts_return</B>;
+      Bool *<B>state_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>nhosts_return</B>
+<TD> Returns the number of hosts currently in the access control list.
+
+<TR><TD> <B>state_return</B>
+<TD> Returns the state of the access control.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XListHosts()</B>
+function returns the current access control list as well as whether the use 
+of the list at connection setup was enabled or disabled.
+<B>XListHosts()</B>
+allows a program to find out what machines can make connections.
+It also returns a pointer to a list of host structures that
+were allocated by the function. 
+When no longer needed,
+this memory should be freed by calling
+<B><A HREF="../../display/XFree.html">XFree()</A></B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XAddHost.html">XAddHost()</A></B>,
+<B><A HREF="XAddHosts.html">XAddHosts()</A></B>,
+<B><A HREF="XDisableAccessControl.html">XDisableAccessControl()</A></B>,
+<B><A HREF="XEnableAccessControl.html">XEnableAccessControl()</A></B>,
+<B><A HREF="../../display/XFree.html">XFree()</A></B>
+<B><A HREF="XRemoveHost.html">XRemoveHost()</A></B>,
+<B><A HREF="XRemoveHosts.html">XRemoveHosts()</A></B>,
+<B><A HREF="XSetAccessControl.html">XSetAccessControl()</A></B>,
+"<A HREF="hosts.html">Adding, Getting, or Removing Hosts</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

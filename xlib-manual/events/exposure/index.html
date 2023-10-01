@@ -1,0 +1,29 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Exposure Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.9 Exposure Events</H1>
+
+The X protocol does not guarantee to preserve the contents of window 
+regions when
+the windows are obscured or reconfigured.
+Some implementations may preserve the contents of windows.
+Other implementations are free to destroy the contents of windows
+when exposed.
+X expects client applications to assume the responsibility for
+restoring the contents of an exposed window region. 
+(An exposed window region describes a formerly obscured window whose 
+region becomes visible.) 
+Therefore, the X server sends 
+<B><A HREF="expose.html">Expose</A></B> 
+events describing the window and the region of the window that has been exposed.
+A naive client application usually redraws the entire window. 
+A more sophisticated client application redraws only the exposed region.
+
+<H5 ALIGN=right><I>Next: <A HREF="expose.html">Expose Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

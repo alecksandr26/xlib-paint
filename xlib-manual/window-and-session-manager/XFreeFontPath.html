@@ -1,0 +1,47 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XFreeFontPath</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XFreeFontPath</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XFreeFontPath" "" "@DEF@">
+
+<CODE><PRE>
+XFreeFontPath(<B>list</B>)
+      char **<B>list</B>;
+
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>list</B>
+<TD> Specifies the array of strings you want to free.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XFreeFontPath()</B>
+function
+frees the data allocated by
+<B><A HREF="XGetFontPath.html">XGetFontPath()</A></B>.
+
+<H2>See also</H2>
+
+<B><A HREF="XSetFontPath.html">XSetFontPath()</A></B>,
+<B><A HREF="XGetFontPath.html">XGetFontPath()</A></B>,
+<B><A HREF="../graphics/font-metrics/XListFonts.html">XListFonts()</A></B>,
+<B><A HREF="../graphics/font-metrics/XLoadFont.html">XLoadFont()</A></B>,
+"<A HREF="font-search-path.html">Setting and Retrieving the Font Search Path</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

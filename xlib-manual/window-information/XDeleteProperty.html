@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XDeleteProperty</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XDeleteProperty</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Property" "deleting">
+<!.IN "XDeleteProperty" "" "@DEF@">
+
+<CODE><PRE>
+XDeleteProperty(<B>display</B>, <B>w</B>, <B>property</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="../window/">Window</A> <B>w</B>;
+      <A HREF="properties-and-atoms.html">Atom</A> <B>property</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window whose property you want to delete.
+
+<TR><TD> <B>property</B>
+<TD> Specifies the property name.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XDeleteProperty()</B>
+function deletes the specified property only if the
+property was defined on the specified window
+and causes the X server to generate a
+<B><A HREF="../events/PropertyNotify.html">PropertyNotify</A></B>
+event on the window unless the property does not exist.
+
+<P>
+
+<B>XDeleteProperty()</B>
+can generate
+<B>BadAtom</B>
+and
+<B>BadWindow</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAtom</B>
+<TD> A value for an Atom argument does not name a
+     defined Atom.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeProperty.html">XChangeProperty()</A></B>,
+<B><A HREF="XGetWindowProperty.html">XGetWindowProperty()</A></B>,
+<B><A HREF="XListProperties.html">XListProperties()</A></B>,
+<B><A HREF="XRotateWindowProperties.html">XRotateWindowProperties()</A></B>,
+"<A HREF="obtain-properties.html">Obtaining and Changing Window Properties</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

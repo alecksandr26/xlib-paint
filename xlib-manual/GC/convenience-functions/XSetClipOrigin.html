@@ -1,0 +1,81 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSetClipOrigin</TITLE>
+</HEAD>
+
+<BODY>
+<!.IN "XSetClipOrigin" "" "@DEF@">
+<H1 ALIGN=center>XSetClipOrigin</H1>
+
+<H2>Syntax</H2>
+
+<CODE><PRE>
+XSetClipOrigin(<B>display</B>, <B>gc</B>, <B>clip_x_origin</B>, <B>clip_y_origin</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="../manipulating.html">GC</A> <B>gc</B>;
+      int <B>clip_x_origin</B>, <B>clip_y_origin</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>clip_x_origin</B><BR>
+	<B>clip_y_origin</B>
+<TD> Specify the x and y coordinates of the clip-mask origin.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The clip-mask origin is interpreted relative to the origin of whatever 
+destination drawable is specified in the graphics request.
+
+<P>
+
+<B>XSetClipOrigin()</B>
+can generate
+<B>BadAlloc</B>
+and
+<B>BadGC</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../../my-own/gcontext.html">GContext</A></B>
+	argument does not name a defined 
+	<B><A HREF="../../my-own/gcontext.html">GContext</A></B>.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../XCreateGC.html">XCreateGC()</A></B>,
+<B><A HREF="../../graphics/drawing/XDrawRectangle.html">XDrawRectangle()</A></B>,
+<B><A HREF="XQueryBestSize.html">XQueryBestSize()</A></B>,
+<B><A HREF="XSetArcMode.html">XSetArcMode()</A></B>,
+<B><A HREF="XSetClipMask.html">XSetClipMask()</A></B>,
+<B><A HREF="XSetClipRectangles.html">XSetClipRectangles()</A></B>,
+<B><A HREF="XSetFillStyle.html">XSetFillStyle()</A></B>,
+<B><A HREF="XSetFont.html">XSetFont()</A></B>,
+<B><A HREF="XSetLineAttributes.html">XSetLineAttributes()</A></B>,
+<B><A HREF="XSetState.html">XSetState()</A></B>,
+<B><A HREF="XSetTile.html">XSetTile()</A></B>,
+"<A HREF="clip-region.html">Setting the Clip Region</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

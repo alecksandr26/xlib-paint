@@ -1,0 +1,76 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Window Attributes: Border</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>3.2.2 Border Attribute</H1>
+
+Only
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+windows can have a border.
+You can set the border of an
+<B><A HREF="../create.html#InputClass">InputOutput</A></B>
+window by using a pixel or a pixmap.
+
+<P>
+
+The border-pixmap attribute of a window specifies the pixmap to be used 
+for a window's border.
+The border-pixel attribute of a window specifies a pixmap of undefined size 
+filled with that pixel be used for a window's border. 
+Range checking is not performed on the background pixel;
+it simply is truncated to the appropriate number of bits.
+The border tile origin is always the same as the background tile origin.
+
+<P>
+
+You can also set the border-pixmap to a pixmap of any size (some may be faster
+than others) or to
+<B>CopyFromParent</B>
+(default).
+You can set the border-pixel to any pixel value (no default).
+
+<P>
+
+If you set a border-pixmap, 
+it overrides the default.
+The border-pixmap and the window must have the same depth,
+or a
+<B>BadMatch</B>
+error results.
+If you set the border-pixmap to 
+<B>CopyFromParent</B>,
+the parent window's border-pixmap is copied.
+Subsequent changes to the parent window's border attribute do not affect 
+the child window.
+However, the child window must have the same depth as the parent window,
+or a
+<B>BadMatch</B>
+error results.
+
+<P>
+
+The border-pixmap can be freed immediately if no further explicit reference
+is made to it.
+If you later draw into the pixmap used for the border,
+what happens is undefined because the
+X implementation is free either to make a copy of the pixmap or
+to use the same pixmap.
+If you specify a border-pixel, 
+it overrides either the default border-pixmap
+or any value you may have set in the border-pixmap.
+All pixels in the window's border will be set to the border-pixel.
+Setting a new border, whether by setting border-pixel or by setting
+border-pixmap, overrides any previous border.
+
+<P>
+
+Output to a window is always clipped to the inside of the window. 
+Therefore, graphics operations never affect the window border.
+
+<H5 ALIGN=right><I>Next: <A HREF="gravity.html">Gravity Attribute</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

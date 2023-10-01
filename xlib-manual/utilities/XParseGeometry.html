@@ -1,0 +1,101 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XParseGeometry</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XParseGeometry</H1>
+
+<H2>Syntax</H2>
+
+<CODE><PRE>
+int XParseGeometry(<B>parsestring</B>, <B>x_return</B>, <B>y_return</B>, <B>width_return</B>, <B>height_return</B>)
+      char *<B>parsestring</B>;
+      int *<B>x_return</B>, *<B>y_return</B>; 
+      unsigned int *<B>width_return</B>, *<B>height_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>parsestring</B>
+<TD> Specifies the string you want to parse.
+
+<TR><TD> <B>x_return</B><BR>
+	<B>y_return</B>
+<TD> Return the x and y offsets.
+
+<TR><TD> <B>width_return</B><BR>
+	<B>height_return</B>
+<TD> Return the width and height determined.
+
+</TABLE>
+
+<H2>Description</H2>
+
+By convention,
+X applications use a standard string to indicate window size and placement.
+<B>XParseGeometry()</B>
+makes it easier to conform to this standard because it allows you
+to parse the standard window geometry.
+Specifically, this function lets you parse strings of the form:
+
+<P>
+
+<BLOCKQUOTE><I>
+[=][&lt;<B>width</B>&gt;{xX}&lt;<B>height</B>&gt;][{+-}&lt;<B>xoffset</B>&gt;{+-}&lt;<B>yoffset</B>&gt;] 
+</I></BLOCKQUOTE>
+
+<P>
+
+The fields map into the arguments associated with this function.
+(Items enclosed in &lt;&gt; are integers, items in [] are optional, and
+items enclosed in {} indicate ``choose one of.''
+Note that the brackets should not appear in the actual string.)
+If the string is not in the Host Portable Character Encoding,
+the result is implementation dependent.
+
+<P>
+
+The
+<B>XParseGeometry()</B>
+function returns a bitmask that indicates which of the four values (width,
+height, xoffset, and yoffset) were actually found in the string 
+and whether the x and y values are negative. 
+By convention, -0 is not equal to +0, because the user needs to
+be able to say ``position the window relative to the right or bottom edge.''
+For each value found, the corresponding argument is updated.
+For each value not found, the argument is left unchanged.
+The bits are represented by
+<B>XValue</B>, 
+<B>YValue</B>, 
+<B>WidthValue</B>, 
+<B>HeightValue</B>,
+<B>XNegative</B>, 
+or
+<B>YNegative</B>
+and are defined in 
+<B><TT>X11/Xutil.h.</TT></B>
+They will be set whenever one of the values is defined 
+or one of the signs is set.
+
+<P>
+
+If the function returns either the 
+<B>XValue</B> 
+or 
+<B>YValue</B> 
+flag,
+you should place the window at the requested position.
+
+<H2>See also</H2>
+
+<B><A HREF="XWMGeometry.html">XWMGeometry()</A></B>,
+<B><A HREF="../ICC/client-to-window-manager/XSetWMProperties.html">XSetWMProperties()</A></B>,
+"<A HREF="parsing-window-geometry.html">Parsing the Window Geometry</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,202 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XFillPolygon</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XFillPolygon</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "Polygons" "filling">
+<!.IN "Filling" "polygon">
+<!.IN "XFillPolygon" "" "@DEF@">
+
+<CODE><PRE>
+XFillPolygon(<B>display</B>, <B>d</B>, <B>gc</B>, <B>points</B>, <B>npoints</B>, <B>shape</B>, <B>mode</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Drawable <B>d</B>;
+      <A HREF="../../GC/manipulating.html">GC</A> <B>gc</B>;
+      <A HREF="../drawing/#XPoint">XPoint</A> *<B>points</B>;
+      int <B>npoints</B>;
+      int <B>shape</B>; 
+      int <B>mode</B>; 
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>d</B>
+<TD> Specifies the drawable. 
+
+<TR><TD> <B>gc</B>
+<TD> Specifies the GC.
+
+<TR><TD> <B>points</B>
+<TD> Specifies an array of points.
+
+<TR><TD> <B>npoints</B>
+<TD> Specifies the number of points in the array.
+
+<TR><TD> <B>shape</B>
+<TD> Specifies a shape that helps the server to improve performance.
+You can pass 
+<B>Complex</B>, 
+<B>Convex</B>, 
+or 
+<B>Nonconvex</B>.
+
+<TR><TD> <B>mode</B>
+<TD> Specifies the coordinate mode. 
+You can pass
+<B>CoordModeOrigin</B>
+or
+<B>CoordModePrevious</B>.
+
+</TABLE>
+
+<H2>Description</H2>
+
+<B>XFillPolygon()</B>
+fills the region closed by the specified path.
+The path is closed
+automatically if the last point in the list does not coincide with the
+first point.
+<B>XFillPolygon()</B>
+does not draw a pixel of the region more than once.
+<B>CoordModeOrigin</B>
+treats all coordinates as relative to the origin,
+and
+<B>CoordModePrevious</B>
+treats all coordinates after the first as relative to the previous point.
+
+<P>
+
+Depending on the specified shape, the following occurs: 
+
+<UL>
+
+
+<P><LI>
+If shape is
+.PN Complex , 
+the path may self-intersect. 
+Note that contiguous coincident points in the path are not treated 
+as self-intersection.
+
+<P><LI>
+If shape is
+<B>Convex</B> , 
+for every pair of points inside the polygon,
+the line segment connecting them does not intersect the path.
+If known by the client,
+specifying 
+<B>Convex</B> 
+can improve performance.  
+If you specify
+<B>Convex</B> 
+for a path that is not convex, 
+the graphics results are undefined.
+
+<P><LI>
+If shape is
+<B>Nonconvex</B> , 
+the path does not self-intersect, but the shape is not
+wholly convex. 
+If known by the client, 
+specifying 
+<B>Nonconvex</B> 
+instead of
+<B>Complex</B> 
+may improve performance.  
+If you specify
+<B>Nonconvex</B> 
+for a self-intersecting path, the graphics results are undefined.
+
+</UL>
+
+<P>
+
+
+The <A HREF="../../GC/manipulating.html#fill-rule">fill-rule</A> of the GC controls the filling behavior of 
+self-intersecting polygons.
+
+<P>
+
+This function uses these GC components: 
+<A HREF="../../GC/manipulating.html#function">function</A>, 
+<A HREF="../../GC/manipulating.html#plane-mask">plane-mask</A>,
+<A HREF="../../GC/manipulating.html#fill-style">fill-style</A>,
+<A HREF="../../GC/manipulating.html#fill-rule">fill-rule</A>,
+<A HREF="../../GC/manipulating.html#subwindow-mode">subwindow-mode</A>,
+<A HREF="../../GC/manipulating.html#clip-mask">clip-x-origin</A>,
+<A HREF="../../GC/manipulating.html#clip-mask">clip-y-origin</A>,
+and
+<A HREF="../../GC/manipulating.html#clip-mask">clip-mask</A>.
+It also uses these GC mode-dependent components: 
+<A HREF="../../GC/manipulating.html#foreground">foreground</A>,
+<A HREF="../../GC/manipulating.html#background">background</A>,
+<A HREF="../../GC/manipulating.html#tile">tile</A>,
+<A HREF="../../GC/manipulating.html#stipple">stipple</A>,
+<A HREF="../../GC/manipulating.html#tile">tile-stipple-x-origin</A>, 
+and
+<A HREF="../../GC/manipulating.html#tile">tile-stipple-y-origin</A>.
+
+<P>
+
+<B>XFillPolygon()</B>
+can generate
+<B>BadDrawable</B>,
+<B>BadGC</B>,
+<B>BadMatch</B>,
+and
+<B>BadValue</B> 
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadDrawable</B>
+<TD>A value for a Drawable argument does not name a
+    defined Window or Pixmap.
+
+<TR><TD><B>BadGC</B>
+<TD>A value for a <B><A HREF="../GContext.html">GContext</A></B> 
+	argument does not name a defined 
+	<B><A HREF="../GContext.html">GContext</A></B>.
+
+<TR><TD><B>BadMatch</B>
+<TD>An
+<B><A HREF="../window/create.html#InputClass">InputOnly</A></B>
+window is used as a Drawable.
+<TR><TD><B>BadMatch</B>
+<TD>Some argument or pair of arguments has the correct type and range but fails
+    to match in some other way required by the request.
+
+<TR><TD><B>BadValue</B>
+<TD> Some numeric value falls outside the range of values accepted by the request.
+     Unless a specific range is specified for an argument, the full range defined
+     by the argument's type is accepted.  Any argument defined as a set of
+     alternatives can generate this error.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../drawing/XDrawArc.html">XDrawArc()</A></B>,
+<B><A HREF="../drawing/XDrawPoint.html">XDrawPoint()</A></B>,
+<B><A HREF="../drawing/XDrawRectangle.html">XDrawRectangle()</A></B>
+<B><A HREF="XFillArc.html">XFillArc()</A></B>,
+<B><A HREF="XFillArcs.html">XFillArcs()</A></B>,
+<B><A HREF="XFillRectangle.html">XFillRectangle()</A></B>,
+<B><A HREF="XFillRectangles.html">XFillRectangles()</A></B>,
+"<A HREF="polygon.html">Filling a Single Polygon</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

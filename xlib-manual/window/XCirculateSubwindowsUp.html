@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XCirculateSubwindowsUp</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XCirculateSubwindowsUp</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XCirculateSubwindowsUp" "" "@DEF@">
+
+<CODE><PRE>
+XCirculateSubwindowsUp(<B>display</B>, <B>w</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XCirculateSubwindowsUp()</B>
+function raises the lowest mapped child of the specified window that
+is partially
+or completely
+occluded by another child.
+Completely unobscured children are not affected.
+This is a convenience function equivalent to
+<B><A HREF="XCirculateSubwindows.html">XCirculateSubwindows()</A></B>
+with
+<B>RaiseLowest</B>
+specified.
+
+<P>
+
+<B>XCirculateSubwindowsUp()</B>
+can generate a
+<B>BadWindow</B>
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="../XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>,
+<B><A HREF="XCirculateSubwindows.html">XCirculateSubwindows()</A></B>,
+<B><A HREF="XCirculateSubwindowsDown.html">XCirculateSubwindowsDown()</A></B>,
+<B><A HREF="XCirculateSubwindowsUp.html">XCirculateSubwindowsUp()</A></B>,
+<B><A HREF="XConfigureWindow.html">XConfigureWindow()</A></B>,
+<B><A HREF="XCreateWindow.html">XCreateWindow()</A></B>,
+<B><A HREF="XDestroyWindow.html">XDestroyWindow()</A></B>,
+<B><A HREF="XLowerWindow.html">XLowerWindow()</A></B>,
+<B><A HREF="XMapWindow.html">XMapWindow()</A></B>,
+<B><A HREF="XRaiseWindow.html">XRaiseWindow()</A></B>,
+<B><A HREF="XRestackWindows.html">XRestackWindows()</A></B>,
+"<A HREF="stacking-order.html">Changing Window Stacking Order</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

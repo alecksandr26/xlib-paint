@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: ClientMessage Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.13.1 ClientMessage Events</H1>
+
+<!.IN "Events" "ClientMessage">
+<!.IN "ClientMessage" "" "@DEF@">
+
+The X server generates
+<B>ClientMessage</B>
+events only when a client calls the function
+<B><A HREF="../../event-handling/XSendEvent.html">XSendEvent()</A></B>.
+
+<A NAME="XClientMessageEvent"></A>
+<P>
+
+The structure for this event type contains:
+
+<P>
+
+<!.IN "XClientMessageEvent" "" "@DEF@">
+
+<PRE><CODE>
+typedef struct {
+	int type;			/* ClientMessage */
+	unsigned long serial;		/* # of last request processed by server */
+	Bool send_event;		/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;		/* Display the event was read from */
+	Window window;
+	Atom message_type;
+	int format;
+	union {
+		char b[20];
+		short s[10];
+		long l[5];
+	        } data;
+} XClientMessageEvent;
+</PRE></CODE>
+
+<P>
+
+The <B>message_type</B> member is set to an atom that indicates how the data 
+should be interpreted by the receiving client.
+The <B>format</B> member is set to 8, 16, or 32 and specifies whether the data
+should be viewed as a list of bytes, shorts, or longs.
+The <B>data</B> member is a union that contains the members <B>b</B>, <B>s</B>, and <B>l</B>.
+The <B>b</B>, <B>s</B>, and <B>l</B> members represent data of 20 8-bit values, 
+10 16-bit values, and 5 32-bit values.
+Particular message types might not make use of all these values.
+The X server places no interpretation on the values in the <B>window</B>,
+<B>message_type</B>, or <B>data</B> members.
+
+<H5 ALIGN=right><I>Next: <A HREF="property.html">PropertyNotify Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

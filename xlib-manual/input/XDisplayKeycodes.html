@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XDisplayKeycodes</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XDisplayKeycodes</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XDisplayKeycodes" "" "@DEF@">
+
+<CODE><PRE>
+XDisplayKeycodes(<B>display</B>, <B>min_keycodes_return</B>, <B>max_keycodes_return</B>)
+        <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+        int *<B>min_keycodes_return</B>, *<B>max_keycodes_return</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>min_keycodes_return</B>
+<TD> Returns the minimum number of KeyCodes.
+
+<TR><TD> <B>max_keycodes_return</B>
+<TD> Returns the maximum number of KeyCodes.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XDisplayKeycodes()</B>
+function returns the min-keycodes and max-keycodes supported by the
+specified display.
+The minimum number of KeyCodes returned is never less than 8,
+and the maximum number of KeyCodes returned is never greater than 255.
+Not all KeyCodes in this range are required to have corresponding keys.
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeKeyboardMapping.html">XChangeKeyboardMapping()</A></B>,
+<B><A HREF="XDeleteModifiermapEntry.html">XDeleteModifiermapEntry()</A></B>,
+<B><A HREF="../display/XFree.html">XFree()</A></B>,
+<B><A HREF="XFreeModifiermap.html">XFreeModifiermap()</A></B>,
+<B><A HREF="XGetKeyboardMapping.html">XGetKeyboardMapping()</A></B>,
+<B><A HREF="XGetModifierMapping.html">XGetModifierMapping()</A></B>,
+<B><A HREF="XInsertModifiermapEntry.html">XInsertModifiermapEntry()</A></B>,
+<B><A HREF="XNewModifiermap.html">XNewModifiermap()</A></B>,
+<B><A HREF="XSetModifierMapping.html">XSetModifierMapping()</A></B>,
+<B><A HREF="XSetPointerMapping.html">XSetPointerMapping()</A></B>,
+"<A HREF="keyboard-encoding.html">Keyboard Encoding</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

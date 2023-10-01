@@ -1,0 +1,88 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XRaiseWindow</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XRaiseWindow</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XRaiseWindow" "" "@DEF@">
+
+<CODE><PRE>
+XRaiseWindow(<B>display</B>, <B>w</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XRaiseWindow()</B>
+function
+raises the specified window to the top of the stack so that no sibling window
+obscures it.
+If the windows are regarded as overlapping sheets of paper stacked 
+on a desk,
+then raising a window is analogous to moving the sheet to the top of
+the stack but leaving its x and y location on the desk constant.
+Raising a mapped window may generate 
+<B><A HREF="../events/exposure/expose.html">Expose</A></B>
+events for the window and any mapped subwindows that were formerly obscured.  
+
+<P>
+
+If the override-redirect attribute of the window is 
+<B>False</B>
+and some
+other client has selected 
+<B><A HREF="../events/processing-overview.html#SubstructureRedirectMask">SubstructureRedirectMask</A></B> 
+on the parent, the X server generates a
+<B><A HREF="../events/structure-control/configure.html">ConfigureRequest</A></B> 
+event, and no processing is performed.
+Otherwise, the window is raised.
+
+<P>
+
+<B>XRaiseWindow()</B>
+can generate a
+<B>BadWindow</B>
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XChangeWindowAttributes.html">XChangeWindowAttributes()</A></B>,
+<B><A HREF="XCirculateSubwindows.html">XCirculateSubwindows()</A></B>,
+<B><A HREF="XCirculateSubwindowsDown.html">XCirculateSubwindowsDown()</A></B>,
+<B><A HREF="XCirculateSubwindowsUp.html">XCirculateSubwindowsUp()</A></B>,
+<B><A HREF="XConfigureWindow.html">XConfigureWindow()</A></B>,
+<B><A HREF="XCreateWindow.html">XCreateWindow()</A></B>,
+<B><A HREF="XDestroyWindow.html">XDestroyWindow()</A></B>,
+<B><A HREF="XLowerWindow.html">XLowerWindow()</A></B>,
+<B><A HREF="XMapWindow.html">XMapWindow()</A></B>,
+<B><A HREF="XRestackWindows.html">XRestackWindows()</A></B>,
+"<A HREF="stacking-order.html">Changing Window Stacking Order</A>"
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

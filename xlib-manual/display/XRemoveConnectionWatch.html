@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XRemoveConnectionWatch</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XRemoveConnectionWatch</H1>
+
+<!.IN "XRemoveConnectionWatch" "" "@DEF@">
+
+<H2>Syntax</H2>
+
+<CODE><PRE>
+<B><A HREF="../introduction/errors.html#Status">Status</A></B> XRemoveConnectionWatch(<B>display</B>, <B>procedure</B>, <B>client_data</B>)
+      <A HREF="opening.html#Display">Display</A> *<B>display</B>;
+      <A HREF="XAddConnectionWatch.html#XWatchProc">XWatchProc</A> <B>procedure</B>;
+      XPointer <B>client_data</B>;
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>procedure</B>
+<TD> Specifies the procedure to be called.
+
+<TR><TD> <B>client_data</B>
+<TD> Specifies the additional client data.
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XRemoveConnectionWatch()</B>
+function removes a previously registered connection watch procedure.
+The client_data must match the client_data used when the procedure
+was initially registered.
+
+<H2>See also</H2>
+
+<B><A HREF="XAddConnectionWatch.html">XAddConnectionWatch()</A></B>, 
+<B><A HREF="XProcessInternalConnection.html">XProcessInternalConnection()</A></B>,
+<B><A HREF="XInternalConnectionNumbers.html">XInternalConnectionNumbers()</A></B>,
+"<A HREF="internal-connections.html">Internal Connections</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

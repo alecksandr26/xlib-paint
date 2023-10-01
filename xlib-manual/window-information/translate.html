@@ -1,0 +1,29 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Translating Screen Coordinates</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>4.2 Translating Screen Coordinates</H1>
+
+Applications sometimes
+need to perform a coordinate transformation from the coordinate
+space of one window to another window or need to determine which
+window the pointing device is in.
+<B><A HREF="XTranslateCoordinates.html">XTranslateCoordinates()</A></B>
+and
+<B><A HREF="XQueryPointer.html">XQueryPointer()</A></B>
+fulfill these needs (and avoid any race conditions) by
+asking the X server to perform these operations.
+
+<P>
+
+To obtain the screen coordinates of the pointer
+or to determine the pointer coordinates relative to a specified window, use 
+<B><A HREF="XQueryPointer.html">XQueryPointer()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="properties-and-atoms.html">Properties and Atoms</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

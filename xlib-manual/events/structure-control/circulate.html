@@ -1,0 +1,86 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: CirculateRequest Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.11.1 CirculateRequest Events</H1>
+
+<!.IN "Events" "CirculateRequest">
+<!.IN "CirculateRequest" "" "@DEF@">
+
+The X server can report
+<B>CirculateRequest</B>
+events to clients wanting information about 
+when another client initiates a circulate window request 
+on a specified window.
+The X server generates this event type whenever a client initiates a circulate
+window request on a window and a subwindow actually needs to be restacked. 
+The client initiates a circulate window request on the window by calling
+<B><A HREF="../../window/XCirculateSubwindows.html">XCirculateSubwindows()</A></B>,
+<B><A HREF="../../window/XCirculateSubwindowsUp.html">XCirculateSubwindowsUp()</A></B>,
+or
+<B><A HREF="../../window/XCirculateSubwindowsDown.html">XCirculateSubwindowsDown()</A></B>.
+
+<P>
+
+To receive
+<B>CirculateRequest</B>
+events, set the
+<B>SubstructureRedirectMask</B>
+in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the window. 
+Then, in the future,
+the circulate window request for the specified window is not executed,
+and thus, any subwindow's position in the stack is not changed.
+For example, suppose a client application calls
+<B><A HREF="../../window/XCirculateSubwindowsUp.html">XCirculateSubwindowsUp()</A></B>
+to raise a subwindow to the top of the stack.
+If you had selected
+<B>SubstructureRedirectMask</B>
+on the window, the X server reports to you a
+<B>CirculateRequest</B>
+event and does not raise the subwindow to the top of the stack.
+
+<A NAME="XCirculateRequestEvent"></A>
+<P>
+
+The structure for this event type contains:
+
+<P>
+
+<!.IN "XCirculateRequestEvent" "" "@DEF@">
+
+<CODE><PRE>
+
+typedef struct {
+	int type;		/* CirculateRequest */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a SendEvent request */
+	Display *display;	/* Display the event was read from */
+	Window parent;
+	Window window;
+	int place;		/* PlaceOnTop, PlaceOnBottom */
+} XCirculateRequestEvent;
+</PRE></CODE>
+
+<P>
+
+The <B>parent</B> member is set to the parent window.
+The <B>window</B> member is set to the subwindow to be restacked.
+The <B>place</B> member is set to what the new position in the stacking order should be
+and is either
+<B>PlaceOnTop</B>
+or
+<B>PlaceOnBottom</B>.
+If it is
+<B>PlaceOnTop</B>,
+the subwindow should be on top of all siblings.
+If it is
+<B>PlaceOnBottom</B>,
+the subwindow should be below all siblings.
+
+<H5 ALIGN=right><I>Next: <A HREF="configure.html">ConfigureRequest Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

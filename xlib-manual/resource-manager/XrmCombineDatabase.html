@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XrmCombineDatabase</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XrmCombineDatabase</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XrmCombineDatabase" "" "@DEF@">
+
+<CODE><PRE>
+void XrmCombineDatabase(<B>source_db</B>, <B>target_db</B>, <B>override</B>)
+      <B><A HREF="creating-and-storing-databases.html">XrmDatabase</A></B> <B>source_db</B>, *<B>target_db</B>;
+      Bool <B>override</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>source_db</B>
+<TD> Specifies the resource database that is to be merged into the target database.
+
+<TR><TD> <B>target_db</B>
+<TD> Specifies the resource database into which the source 
+database is to be merged.
+
+<TR><TD> <B>override</B>
+<TD> Specifies whether source entries override target ones.
+
+</TABLE>
+
+<H2>Description</H2>
+ 
+The
+<B>XrmCombineDatabase()</B>
+function merges the contents of one database into another.
+If the same specifier is used for an entry in both databases,
+the entry in the source_db will replace the entry in the target_db
+if override is
+<B>True</B>;
+otherwise, the entry in source_db is discarded.
+If target_db contains NULL,
+<B>XrmCombineDatabase()</B>
+simply stores source_db in it.
+Otherwise, source_db is destroyed by the merge, but the database pointed
+to by target_db is not destroyed.
+The database entries are merged without changing values or types,
+regardless of the locales of the databases.
+The locale of the target database is not modified.
+
+<H2>See also</H2>
+
+<B><A HREF="XrmCombineFileDatabase.html">XrmCombineFileDatabase()</A></B>,
+<B><A HREF="XrmGetResource.html">XrmGetResource()</A></B>,
+<B><A HREF="XrmInitialize.html">XrmInitialize()</A></B>,
+<B><A HREF="XrmMergeDatabases.html">XrmMergeDatabases()</A></B>,
+<B><A HREF="XrmPutResource.html">XrmPutResource()</A></B>,
+"<A HREF="merging-databases.html">Merging Resource Databases</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

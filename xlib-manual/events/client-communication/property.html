@@ -1,0 +1,83 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: PropertyNotify Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.13.2 PropertyNotify Events</H1>
+
+<!.IN "Events" "PropertyNotify">
+<!.IN "PropertyNotify" "" "@DEF@">
+
+The X server can report
+<B>PropertyNotify</B>
+events to clients wanting information about property changes 
+for a specified window.
+
+<P>
+
+To receive
+<B>PropertyNotify</B>
+events, set the
+<B>PropertyChangeMask</B>
+bit in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the window. 
+
+<A NAME="XPropertyEvent"></A>
+<P>
+
+The structure for this event type contains:
+
+<P>
+
+<!.IN "XPropertyEvent" "" "@DEF@">
+
+<PRE><CODE>
+typedef struct {
+	int type;		/* PropertyNotify */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Window window;
+	Atom atom;
+	Time time;
+	int state;		/* PropertyNewValue or PropertyDelete */
+} XPropertyEvent;
+</PRE></CODE>
+
+<P>
+
+The <B>window</B> member is set to the window whose associated 
+property was changed.
+The <B>atom</B> member is set to the property's atom and indicates which
+property was changed or desired.
+The <B>time</B> member is set to the server time when the property was changed.
+The <B>state</B> member is set to indicate whether the property was changed 
+to a new value or deleted and can be
+<B>PropertyNewValue</B>
+or
+<B>PropertyDelete</B>.
+The <B>state</B> member is set to
+<B>PropertyNewValue</B>
+when a property of the window is changed using
+<B><A HREF="../../window-information/XChangeProperty.html">XChangeProperty()</A></B>
+or
+<B><A HREF="../../window-information/XRotateWindowProperties.html">XRotateWindowProperties()</A></B>
+(even when adding zero-length data using
+<B><A HREF="../../window-information/XChangeProperty.html">XChangeProperty()</A></B>)
+and when replacing all or part of a property with identical data using
+<B><A HREF="../../window-information/XChangeProperty.html">XChangeProperty()</A></B>
+or 
+<B><A HREF="../../window-information/XRotateWindowProperties.html">XRotateWindowProperties()</A></B>.
+The <B>state</B> member is set to
+<B>PropertyDelete</B>
+when a property of the window is deleted using
+<B><A HREF="../../window-information/XDeleteProperty.html">XDeleteProperty()</A></B>
+or, if the delete argument is 
+<B>True</B>,
+<B><A HREF="../../window-information/XGetWindowProperty.html">XGetWindowProperty()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="selection-clear.html">SelectionClear Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

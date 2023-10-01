@@ -1,0 +1,78 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: DestroyNotify Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.10.4 DestroyNotify Events</H1>
+
+<!.IN "Events" "DestroyNotify">
+<!.IN "DestroyNotify" "" "@DEF@">
+The X server can report
+<B>DestroyNotify</B>
+events to clients wanting information about which windows are destroyed.
+The X server generates this event whenever a client application destroys a 
+window by calling
+<B><A HREF="../../window/XDestroyWindow.html">XDestroyWindow()</A></B>
+or
+<B><A HREF="../../window/XDestroySubWindows.html">XDestroySubwindows()</A></B>.
+
+<P>
+
+The ordering of the 
+<B>DestroyNotify</B> 
+events is such that for any given window, 
+<B>DestroyNotify</B>
+is generated on all inferiors of the window
+before being generated on the window itself.  
+The X protocol does not constrain the ordering among
+siblings and across subhierarchies.
+
+<P>
+
+To receive 
+<B>DestroyNotify</B>
+events, set the
+<B>StructureNotifyMask</B>
+bit in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the window or the
+<B>SubstructureNotifyMask</B>
+bit in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the parent window
+(in which case, destroying any child generates an event).
+
+<A NAME="XDestroyWindowEvent"></A>
+<P>
+
+The structure for this event type contains:
+
+<P>
+
+<!.IN "XDestroyWindowEvent" "" "@DEF@">
+
+<PRE><CODE>
+
+typedef struct {
+	int type;		/* DestroyNotify */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Window event;
+	Window window;
+} XDestroyWindowEvent;
+
+</CODE></PRE>
+
+<P>
+
+The <B>event</B> member is set either to the destroyed window or to its parent,
+depending on whether
+<B>StructureNotify</B>
+or 
+<B>SubstructureNotify</B>
+was selected.
+The <B>window</B> member is set to the window that is destroyed.
+
+<H5 ALIGN=right><I>Next: <A HREF="gravity.html">GravityNotify Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

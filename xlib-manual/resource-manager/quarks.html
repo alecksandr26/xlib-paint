@@ -1,0 +1,110 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Quarks</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>15.3 Quarks</H1>
+
+Most uses of the resource manager involve defining names,
+classes, and representation types as string constants.
+However, always referring to strings in the resource manager can be slow,
+because it is so heavily used in some toolkits.
+To solve this problem, 
+a shorthand for a string is used in place of the string
+in many of the resource manager functions.
+Simple comparisons can be performed rather than string comparisons.
+The shorthand name for a string is called a quark and is the
+type 
+<B>XrmQuark</B> .
+On some occasions,
+you may want to allocate a quark that has no string equivalent.
+
+<P>
+
+A quark is to a string what an atom is to a string in the server,
+but its use is entirely local to your application.
+
+<P>
+
+To allocate a new quark, use
+<B><A HREF="XrmUniqueQuark.html">XrmUniqueQuark()</A></B>.
+
+<P>
+
+Each name, class, and representation type is typedef'd as an
+<B>XrmQuark</B>.
+
+<A NAME="XrmQuark"></A>
+<P>
+
+<PRE><CODE>
+typedef int XrmQuark, *XrmQuarkList;
+typedef XrmQuark XrmName;
+typedef XrmQuark XrmClass;
+typedef XrmQuark XrmRepresentation;
+#define NULLQUARK ((XrmQuark) 0)
+</PRE></CODE>
+
+<P>
+
+Lists are represented as null-terminated arrays of quarks.
+The size of the array must be large enough for the number of components used.
+
+<A NAME="XrmNameList"></A>
+<P>
+
+<PRE><CODE>
+typedef XrmQuarkList XrmNameList;
+typedef XrmQuarkList XrmClassList;
+</PRE></CODE>
+
+<P>
+
+To convert a string to a quark, use
+<B><A HREF="XrmStringToQuark.html">XrmStringToQuark()</A></B>
+or
+<B><A HREF="XrmPermStringToQuark.html">XrmPermStringToQuark()</A></B>.
+
+<P>
+
+To convert a quark to a string, use 
+<B><A HREF="XrmQuarkToString.html">XrmQuarkToString()</A></B>.
+
+<P>
+
+To convert a string with one or more components to a quark list, use
+<B><A HREF="XrmStringToQuarkList.html">XrmStringToQuarkList()</A></B>.
+
+<A NAME="XrmBindingList"></A>
+<P>
+
+A binding list is a list of type
+<B>XrmBindingList</B>
+and indicates if components of name or class lists are bound tightly or loosely
+(that is, if wildcarding of intermediate components is specified).
+
+<P>
+
+<PRE><CODE>
+typedef enum {XrmBindTightly, XrmBindLoosely} XrmBinding, *XrmBindingList;
+</PRE></CODE>
+
+<P>
+
+<B>XrmBindTightly</B>
+indicates that a period separates the components, and
+<B>XrmBindLoosely</B>
+indicates that an asterisk separates the components.
+
+<P>
+
+To convert a string with one or more components to a binding list
+and a quark list, use
+<B><A HREF="XrmStringToBindingQuarkList.html">XrmStringToBindingQuarkList()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="creating-and-storing-databases.html">Creating and Storing Databases</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

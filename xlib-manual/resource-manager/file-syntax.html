@@ -1,0 +1,100 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Resource File Syntax</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>15.1 Resource File Syntax</H1>
+
+The syntax of a resource file is a sequence of resource lines
+terminated by newline characters or the end of the file.
+The syntax of an individual resource line is:
+
+<P>
+
+<PRE><CODE>
+ResourceLine	=	Comment | IncludeFile | ResourceSpec | &lt;empty line&gt;
+Comment		=	"!" {&lt;any character except null or newline&gt;}
+IncludeFile	=	"#" WhiteSpace "include" WhiteSpace FileName WhiteSpace
+FileName	=	&lt;valid filename for operating system&gt;
+ResourceSpec	=	WhiteSpace ResourceName WhiteSpace ":" WhiteSpace Value
+ResourceName	=	[Binding] {Component Binding} ComponentName
+Binding		=	"." | "*"
+WhiteSpace	=	{&lt;space&gt; | &lt;horizontal tab&gt;}
+Component	=	"?" | ComponentName
+ComponentName	=	NameChar {NameChar}
+NameChar	=	"a"-"z" | "A"-"Z" | "0"-"9" | "_" | "-"
+Value		=	{&lt;any character except null or unescaped newline&gt;}
+</PRE></CODE>
+
+<P>
+
+Elements separated by vertical bar (|) are alternatives.
+Curly braces ({...}) indicate zero or more repetitions
+of the enclosed elements.
+Square brackets ([...]) indicate that the enclosed element is optional.
+Quotes ("...") are used around literal characters.
+
+<P>
+
+IncludeFile lines are interpreted by replacing the line with the
+contents of the specified file.
+The word ``include'' must be in lowercase.
+The file name is interpreted relative to the directory of the file in
+which the line occurs (for example, if the file name contains no
+directory or contains a relative directory specification).
+
+<P>
+
+If a ResourceName contains a contiguous sequence of two or more Binding
+characters, the sequence will be replaced with single ``.'' character
+if the sequence contains only ``.'' characters;
+otherwise, the sequence will be replaced with a single ``*'' character.
+
+<P>
+
+A resource database never contains more than one entry for a given
+ResourceName.  If a resource file contains multiple lines with the
+same ResourceName, the last line in the file is used.
+
+<P>
+
+Any white space characters before or after the name or colon in a ResourceSpec
+are ignored.
+To allow a Value to begin with white space,
+the two-character sequence ``\<I>space</I>'' (backslash followed by space)
+is recognized and replaced by a space character,
+and the two-character sequence ``\<I>tab</I>''
+(backslash followed by horizontal tab)
+is recognized and replaced by a horizontal tab character.
+To allow a Value to contain embedded newline characters,
+the two-character sequence ``\n'' is recognized and replaced by a
+newline character.
+To allow a Value to be broken across multiple lines in a text file,
+the two-character sequence ``\<I>newline</I>''
+(backslash followed by newline) is
+recognized and removed from the value.
+To allow a Value to contain arbitrary character codes,
+the four-character sequence ``\<I>nnn</I>'',
+where each <I>n</I> is a digit character in the range of ``0''-``7'',
+is recognized and replaced with a single byte that contains
+the octal value specified by the sequence.
+Finally, the two-character sequence ``\\'' is recognized
+and replaced with a single backslash.
+
+<P>
+
+As an example of these sequences,
+the following resource line contains a value consisting of four
+characters: a backslash, a null, a ``z'', and a newline:
+
+<BLOCKQUOTE><PRE>
+magic.values: \\\000\
+z\n
+</PRE></BLOCKQUOTE>
+
+<H5 ALIGN=right><I>Next: <A HREF="matching-rules.html">Resource Manager Matching Rules</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,121 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Standard Colormap Properties and Atoms</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>14.3.1 Standard Colormap Properties and Atoms</H1>
+
+<!.IN "Standard Colormaps">
+<!.IN "Colormaps" "standard">
+Several standard colormaps are available.  
+Each standard colormap is defined by a property, 
+and each such property is identified by an atom.  
+The following list names the atoms and describes the colormap
+associated with each one.
+The
+<B><TT>X11/Xatom.h</TT></B>
+header file contains the definitions for each of the following atoms,
+which are prefixed with XA_.
+
+<DL>
+<DT>RGB_DEFAULT_MAP
+<DD>
+This atom names a property.
+The value of the property is an array of
+<B><A HREF="./#XStandardColormap">XStandardColormap</A></B>
+structures.
+Each entry in the array describes an RGB subset of the default color
+map for the Visual specified by visual_id.
+
+<P>
+
+Some applications only need a few RGB colors and
+may be able to allocate them from the system default colormap.
+This is the ideal situation because the fewer colormaps that are
+active in the system the more applications are displayed
+with correct colors at all times.
+
+<P>
+
+A typical allocation for the RGB_DEFAULT_MAP on 8-plane displays
+is 6 reds, 6 greens, and 6 blues.  
+This gives 216 uniformly distributed colors 
+(6 intensities of 36 different hues) and still leaves 40 elements 
+of a 256-element colormap available for special-purpose colors 
+for text, borders, and so on.
+
+<P>
+<DT>RGB_BEST_MAP
+<DD>
+This atom names a property.
+The value of the property is an 
+<B><A HREF="./#XStandardColormap">XStandardColormap</A></B> .
+
+<P>
+
+The property defines the best RGB colormap available on
+the screen.
+(Of course, this is a subjective evaluation.)
+Many image processing and three-dimensional applications need to
+use all available colormap cells and to distribute as many
+perceptually distinct colors as possible over those cells.
+This implies that there may be more green values available than
+red, as well as more green or red than blue.
+
+<P>
+
+For an 8-plane 
+<B><A HREF="../../window/visual-types.html">PseudoColor</A></B> 
+visual, 
+RGB_BEST_MAP is likely to be a 3/3/2 allocation.  
+For a 24-plane 
+<B><A HREF="../../window/visual-types.html">DirectColor</A></B> 
+visual, 
+RGB_BEST_MAP is normally an 8/8/8 allocation.  
+
+<P>
+<DT>RGB_RED_MAP
+<DT>RGB_GREEN_MAP
+<DT>RGB_BLUE_MAP
+<DD>
+These atoms name properties.
+The value of each property is an
+<B><A HREF="./#XStandardColormap">XStandardColormap</A></B>. 
+
+<P>
+
+The properties define all-red, all-green, and all-blue
+colormaps, respectively.  
+These maps are used by applications that want to make color-separated 
+images.  
+For example, a user might generate a full-color image 
+on an 8-plane display both by rendering an image three times 
+(once with high color resolution in red, once with green, 
+and once with blue) and by multiply-exposing a single frame in a camera.
+
+<P>
+<DT>RGB_GRAY_MAP
+<DD>
+This atom names a property.
+The value of the property is an 
+<B><A HREF="./#XStandardColormap">XStandardColormap</A></B> .
+
+<P>
+
+The property describes the best 
+<B><A HREF="../../window/visual-types.html">GrayScale</A></B> 
+colormap available on the screen.  
+As previously mentioned, 
+only the <B>colormap</B>, <B>red_max</B>, <B>red_mult</B>, and <B>base_pixel</B>members of the
+<B><A HREF="./#XStandardColormap">XStandardColormap</A></B> 
+structure are used for 
+<B><A HREF="../../window/visual-types.html">GrayScale</A></B> 
+colormaps.
+</DL>
+
+<H5 ALIGN=right><I>Next: <A HREF="setting-and-obtaining.html">Setting and Obtaining Standard Colormaps</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,194 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XmbSetWMProperties</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XmbSetWMProperties</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XmbSetWMProperties" "" "@DEF@">
+
+<CODE><PRE>
+void XmbSetWMProperties(<B>display</B>, <B>w</B>, <B>window_name</B>, <B>icon_name</B>, <B>argv</B>, <B>argc</B>,
+                      <B>normal_hints</B>, <B>wm_hints</B>, <B>class_hints</B>)
+      <A HREF="../../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      char *<B>window_name</B>;
+      char *<B>icon_name</B>;
+      char *<B>argv</B>[];
+      int <B>argc</B>;
+      <A HREF="wm-normal-hints.html#XSizeHints">XSizeHints</A> *<B>normal_hints</B>;
+      <A HREF="wm-hints.html#XWMHints">XWMHints</A> *<B>wm_hints</B>;
+      <A HREF="wm-class.html#XClassHint">XClassHint</A> *<B>class_hints</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window.
+
+<TR><TD> <B>window_name</B>
+<TD> Specifies the window name,
+which should be a null-terminated string.
+
+<TR><TD> <B>icon_name</B>
+<TD> Specifies the icon name,
+which should be a null-terminated string.
+
+<TR><TD> <B>argv</B>
+<TD> Specifies the application's argument list.
+
+<TR><TD> <B>argc</B>
+<TD> Specifies the number of arguments.
+
+<TR><TD> <B>hints</B>
+<TD> Specifies the size hints for the window in its normal state.
+
+<TR><TD> <B>wm_hints</B>
+<TD> Specifies the
+<B><A HREF="wm-hints.html#XWMHints">XWMHints</A></B>
+structure to be used.
+
+<TR><TD> <B>class_hints</B>
+<TD> Specifies the
+<A HREF="wm-class.html#XClassHint">XClassHint</A>
+structure to be used.
+
+</TABLE>
+
+<H2>Description</H2>
+
+The
+<B>XmbSetWMProperties()</B>
+convenience function provides a simple programming interface 
+for setting those essential window properties that are used 
+for communicating with other clients
+(particularly window and session managers).
+
+<P>
+
+If the window_name argument is non-NULL,
+<B>XmbSetWMProperties()</B>
+sets the <A HREF="/gui/x/icccm/sec-4.html#WM_NAME">WM_NAME</A> property.
+If the icon_name argument is non-NULL,
+<B>XmbSetWMProperties()</B>
+sets the <A HREF="/gui/x/icccm/sec-4.html#WM_ICON_NAME">WM_ICON_NAME</A> property.
+The window_name and icon_name arguments are null-terminated strings
+in the encoding of the current locale.
+If the arguments can be fully converted to the STRING encoding,
+the properties are created with type ``STRING''; 
+otherwise, the arguments are converted to Compound Text, 
+and the properties are created with type ``COMPOUND_TEXT''.
+
+<P>
+
+If the normal_hints argument is non-NULL,
+<B>XmbSetWMProperties()</B>
+calls
+<B><A HREF="XSetWMNormalHints.html">XSetWMNormalHints()</A></B>,
+which sets the <A HREF="/gui/x/icccm/sec-4.html#WM_NORMAL_HINTS">WM_NORMAL_HINTS</A> property (see section "<A HREF="wm-normal-hints.html">Setting and Reading the WM_NORMAL_HINTS Property</A>").
+If the wm_hints argument is non-NULL, 
+<B>XmbSetWMProperties()</B>
+calls
+<B><A HREF="XSetWMHints.html">XSetWMHints()</A></B>,
+which sets the <A HREF="/gui/x/icccm/sec-4.html#WM_HINTS">WM_HINTS</A> property (see section "<A HREF="wm-hints.html">Setting and Reading the WM_HINTS Property</A>").
+
+<P>
+
+If the argv argument is non-NULL,
+<B>XmbSetWMProperties()</B>
+sets the <A HREF="/gui/x/icccm/sec-C.html#s-C.1.1">WM_COMMAND</A> property from argv and argc.
+An argc of zero indicates a zero-length command.
+
+<P>
+
+The hostname of the machine is stored using 
+<B><A HREF="../client-to-session-manager/XSetWMClientMachine.html">XSetWMClientMachine()</A></B>
+(see section "<A HREF="../client-to-session-manager/wm-client-machine.html">Setting and Reading the WM_CLIENT_MACHINE Property</A>").
+
+<P>
+
+If the class_hints argument is non-NULL,
+<B>XmbSetWMProperties()</B>
+sets the <A HREF="/gui/x/icccm/sec-4.html#WM_CLASS">WM_CLASS</A> property.
+If the res_name member in the 
+<A HREF="wm-class.html#XClassHint">XClassHint</A>
+structure is set to the NULL pointer and the RESOURCE_NAME
+environment variable is set,
+the value of the environment variable is substituted for res_name.
+If the res_name member is NULL,
+the environment variable is not set, and argv and argv[0] are set,
+then the value of argv[0], stripped of any directory prefixes,
+is substituted for res_name.
+
+<P>
+
+It is assumed that the supplied class_hints.res_name and argv,
+the RESOURCE_NAME environment variable, and the hostname of the machine
+are in the encoding of the locale announced for the LC_CTYPE category
+(on POSIX-compliant systems, the LC_CTYPE, else LANG environment variable).
+The corresponding <A HREF="/gui/x/icccm/sec-4.html#WM_CLASS">WM_CLASS</A>, <A HREF="/gui/x/icccm/sec-C.html#s-C.1.1">WM_COMMAND</A>, and 
+<A HREF="/gui/x/icccm/sec-C.html#s-C.1.2">WM_CLIENT_MACHINE</A> properties
+are typed according to the local host locale announcer.
+No encoding conversion is performed prior to storage in the properties.
+
+<P>
+
+For clients that need to process the property text in a locale,
+<B>XmbSetWMProperties()</B>
+sets the WM_LOCALE_NAME property to be the name of the current locale.
+The name is assumed to be in the Host Portable Character Encoding
+and is converted to STRING for storage in the property.
+
+<P>
+
+<B>XmbSetWMProperties()</B>
+can generate
+<B>BadAlloc</B>
+and
+<B>BadWindow</B>
+errors.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadAlloc</B>
+<TD> The server failed to allocate the requested
+     source or server memory.
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+<B><A HREF="XAllocClassHint.html">XAllocClassHint()</A></B>,
+<B><A HREF="XAllocIconSize.html">XAllocIconSize()</A></B>,
+<B><A HREF="XAllocSizeHints.html">XAllocSizeHints()</A></B>,
+<B><A HREF="XAllocWMHints.html">XAllocWMHints()</A></B>,
+<B><A HREF="../../utilities/XParseGeometry.html">XParseGeometry()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetCommand.html">XSetCommand()</A></B>,
+<B><A HREF="XSetTransientForHint.html">XSetTransientForHint()</A></B>,
+<B><A HREF="XSetTextProperty.html">XSetTextProperty()</A></B>,
+<B><A HREF="../client-to-session-manager/XSetWMClientMachine.html">XSetWMClientMachine()</A></B>,
+<B><A HREF="XSetWMColormapWindows.html">XSetWMColormapWindows()</A></B>,
+<B><A HREF="XSetWMIconName.html">XSetWMIconName()</A></B>,
+<B><A HREF="XSetWMName.html">XSetWMName()</A></B>,
+<B><A HREF="XSetWMProperties.html">XSetWMProperties()</A></B>,
+<B><A HREF="XSetWMProtocols.html">XSetWMProtocols()</A></B>,
+<B><A HREF="XStringListToTextProperty.html">XStringListToTextProperty()</A></B>,
+<B><A HREF="XTextPropertyToStringList.html">XTextPropertyToStringList()</A></B>,
+"<A HREF="using-convenience-functions.html">Using Window Manager Convenience Functions</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

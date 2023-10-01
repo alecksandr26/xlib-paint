@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: Setting and Reading the WM_CLASS Property</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>14.1.8 Setting and Reading the WM_CLASS Property</H1>
+
+Xlib provides functions that you can use to set and get 
+the <A HREF="/gui/x/icccm/sec-4.html#WM_CLASS">WM_CLASS</A> property for a given window.
+These functions use the
+<B>XClassHint</B>
+structure, which is defined in the
+<B><TT>X11/Xutil.h</TT></B>
+header file.
+
+<P>
+
+To allocate an
+<B>XClassHint</B>
+structure, use
+<B><A HREF="XAllocClassHint.html">XAllocClassHint()</A></B>.
+
+<P>
+
+The
+<B>XClassHint</B>
+contains:
+
+<A NAME="XClassHint"></A>
+<P>
+
+<!.IN "XClassHint" "" "@DEF@">
+<PRE><CODE>
+typedef struct {
+	char *res_name;
+	char *res_class;
+} XClassHint;
+</PRE></CODE>
+
+<P>
+
+The <B>res_name</B> member contains the application name, 
+and the <B>res_class</B> member contains the application class. 
+Note that the name set in this property may differ from the name set as <A HREF="/gui/x/icccm/sec-4.html#WM_NAME">WM_NAME</A>.
+That is, <A HREF="/gui/x/icccm/sec-4.html#WM_NAME">WM_NAME</A> specifies what should be displayed in the title bar and,
+therefore, can contain temporal information (for example, the name of
+a file currently in an editor's buffer).
+On the other hand, 
+the name specified as part of <A HREF="/gui/x/icccm/sec-4.html#WM_CLASS">WM_CLASS</A> is the formal name of the application
+that should be used when retrieving the application's resources from the 
+resource database.
+
+<P>
+
+To set a window's <A HREF="/gui/x/icccm/sec-4.html#WM_CLASS">WM_CLASS</A> property, use
+<B><A HREF="XSetClassHint.html">XSetClassHint()</A></B>.
+
+<P>
+
+To read a window's <A HREF="/gui/x/icccm/sec-4.html#WM_CLASS">WM_CLASS</A> property, use
+<B><A HREF="XGetClassHint.html">XGetClassHint()</A></B>.
+
+<H5 ALIGN=right><I>Next: <A HREF="wm-transient-for.html">Setting and Reading the WM_TRANSIENT_FOR Property</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

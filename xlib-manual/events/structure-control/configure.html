@@ -1,0 +1,102 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: ConfigureRequest Events</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>10.11.2 ConfigureRequest Events</H1>
+
+<!.IN "Events" "ConfigureRequest">
+<!.IN "ConfigureRequest" "" "@DEF@">
+
+The X server can report
+<B>ConfigureRequest</B>
+events to clients wanting information about when a different client initiates 
+a configure window request on any child of a specified window. 
+The configure window request attempts to 
+reconfigure a window's size, position, border, and stacking order.
+The X server generates this event whenever a different client initiates
+a configure window request on a window by calling
+<B><A HREF="../../window/XConfigureWindow.html">XConfigureWindow()</A></B>,
+<B><A HREF="../../window/XLowerWindow.html">XLowerWindow()</A></B>,
+<B><A HREF="../../window/XRaiseWindow.html">XRaiseWindow()</A></B>,
+<B><A HREF="../../window/XMapRaised.html">XMapRaised()</A></B>,
+<B><A HREF="../../window/XMoveResizeWindow.html">XMoveResizeWindow()</A></B>,
+<B><A HREF="../../window/XMoveWindow.html">XMoveWindow()</A></B>,
+<B><A HREF="../../window/XResizeWindow.html">XResizeWindow()</A></B>,
+<B><A HREF="../../window/XRestackWindows.html">XRestackWindows()</A></B>,
+or
+<B><A HREF="../../window/XSetWindowBorderWidth.html">XSetWindowBorderWidth()</A></B>.
+
+<P>
+
+To receive
+<B>ConfigureRequest</B>
+events, set the
+<B>SubstructureRedirectMask</B>
+bit in the <A HREF="../../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of the window. 
+<B>ConfigureRequest</B>
+events are generated when a
+<B><A HREF="../../appendix/a.html#ConfigureWindow">ConfigureWindow</A></B>
+protocol request is issued on a child window by another client.
+For example, suppose a client application calls
+<B><A HREF="../../window/XLowerWindow.html">XLowerWindow()</A></B>
+to lower a window.
+If you had selected
+<B>SubstructureRedirectMask</B>
+on the parent window and if the <A HREF="../../window/attributes/override-redirect.html">override-redirect</A> attribute 
+of the window is set to
+<B>False</B>,
+the X server reports a
+<B>ConfigureRequest</B>
+event to you and does not lower the specified window.
+
+<A NAME="XConfigureRequestEvent"></A>
+<P>
+
+The structure for this event type contains:
+
+<P>
+
+<!.IN "XConfigureRequestEvent" "" "@DEF@">
+
+<PRE><CODE>
+
+typedef struct {
+	int type;		/* ConfigureRequest */
+	unsigned long serial;	/* # of last request processed by server */
+	Bool send_event;	/* true if this came from a <B><A HREF="../../appendix/a.html#SendEvent">SendEvent</A></B> request */
+	Display *display;	/* Display the event was read from */
+	Window parent;
+	Window window;
+	int x, y;
+	int width, height;
+	int border_width;
+	Window above;
+	int detail;		/* Above, Below, TopIf, BottomIf, Opposite */
+	unsigned long value_mask;
+} XConfigureRequestEvent;
+</PRE></CODE>
+
+<P>
+
+The <B>parent</B> member is set to the parent window.
+The <B>window</B> member is set to the window whose size, position, border width, 
+and/or stacking order is to be reconfigured.
+The <B>value_mask</B> member indicates which components were specified in the
+<B><A HREF="../../appendix/a.html#ConfigureWindow">ConfigureWindow</A></B>
+protocol request.
+The corresponding values are reported as given in the request.
+The remaining values are filled in from the current geometry of the window,
+except in the case of <B>above</B> (sibling) and <B>detail</B> (stack-mode),
+which are reported as
+<B>None</B>
+and
+<B>Above</B>,
+respectively, if they are not given in the request.
+
+<H5 ALIGN=right><I>Next: <A HREF="map.html">MapRequest Events</A></I></H5>
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>

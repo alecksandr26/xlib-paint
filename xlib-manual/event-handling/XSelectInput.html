@@ -1,0 +1,117 @@
+<HTML>
+<HEAD>
+<TITLE>Xlib Programming Manual: XSelectInput</TITLE>
+</HEAD>
+
+<BODY>
+<H1 ALIGN=center>XSelectInput</H1>
+
+<H2>Syntax</H2>
+
+<!.IN "XSelectInput" "" "@DEF@">
+
+<CODE><PRE>
+XSelectInput(<B>display</B>, <B>w</B>, <B>event_mask</B>)
+      <A HREF="../display/opening.html#Display">Display</A> *<B>display</B>;
+      Window <B>w</B>;
+      long <B>event_mask</B>;
+
+</PRE></CODE>
+
+<H2>Arguments</H2>
+
+<TABLE>
+
+<TR><TD> <B>display</B>
+<TD> Specifies the connection to the X server.
+
+<TR><TD> <B>w</B>
+<TD> Specifies the window whose events you are interested in.
+
+<TR><TD> <B>event_mask</B>
+<TD> Specifies the event mask.
+
+</TABLE>
+
+<H2>Description</H2>
+ 
+The
+<B>XSelectInput()</B>
+function requests that the X server report the events associated with the 
+specified event mask.
+Initially, X will not report any of these events.
+Events are reported relative to a window.
+If a window is not interested in a device event, it usually propagates to
+the closest ancestor that is interested,
+unless the do_not_propagate mask prohibits it.
+<!.IN "Event" "propagation">
+
+<P>
+
+Setting the <A HREF="../window/attributes/event-and-do-not-propagate.html">event-mask</A> attribute of a window overrides any previous call
+for the same window but not for other clients.
+Multiple clients can select for the same events on the same window
+with the following restrictions:
+
+<UL>
+
+
+<P><LI>
+Multiple clients can select events on the same window because their event masks
+are disjoint.
+When the X server generates an event, it reports it
+to all interested clients.
+
+<P><LI>
+Only one client at a time can select
+<B><A HREF="../events/structure-control/circulate.html">CirculateRequest</A></B>,
+<B><A HREF="../events/structure-control/configure.html">ConfigureRequest</A></B>,
+or
+<B><A HREF="../events/structure-control/map.html">MapRequest</A></B>
+events, which are associated with
+the event mask
+<B><A HREF="../events/processing-overview.html#SubstructureRedirectMask">SubstructureRedirectMask</A></B>. 
+
+<P><LI>
+Only one client at a time can select
+a
+<B><A HREF="../events/structure-control/resize.html">ResizeRequest</A></B>
+event, which is associated with
+the event mask
+<B><A HREF="../events/processing-overview.html#ResizeRedirectMask">ResizeRedirectMask</A></B>. 
+
+<P><LI>
+Only one client at a time can select a 
+<B><A HREF="../events/keyboard-pointer/keyboard-pointer.html">ButtonPress</A></B> 
+event, which is associated with
+the event mask
+<B><A HREF="../events/processing-overview.html#ButtonPressMask">ButtonPressMask</A></B>.
+
+</UL>
+
+<P>
+
+The server reports the event to all interested clients.
+
+<P>
+
+<B>XSelectInput()</B>
+can generate a
+<B>BadWindow</B> 
+error.
+
+<H2>Diagnostics</H2>
+
+<TABLE>
+
+<TR><TD><B>BadWindow</B>
+<TD>A value for a Window argument does not name a defined Window.
+</TABLE>
+
+<H2>See also</H2>
+
+"<A HREF="selecting.html">Selecting Events</A>".
+
+<HR><ADDRESS><A HREF="http://tronche.com/">Christophe Tronche</A>, <A HREF="mailto:ch.tronche@computer.org">ch.tronche@computer.org</A></ADDRESS>
+</BODY>
+</HTML>
