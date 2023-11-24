@@ -1,6 +1,9 @@
 # For binaries
 bin/*
 
+# For the manual
+xlib-manual/*
+
 # For uploading to AUR
 upload/
 
