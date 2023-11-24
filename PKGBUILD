@@ -45,8 +45,9 @@ build() {
 	    echo "[1m[32m==>[0m[1m Compiling package..."
 	    make compile
 	    mkdir -p $srcdir/$pkgname-$pkgver
-	    mkdir -p $srcdir/$pkgname-$pkgver/bin
-	    cp bin/main $srcdir/$pkgname-$pkgver/bin/paint
+	    mkdir -p $srcdir/$pkgname-$pkgver/build
+
+	    cp build/paint.out $srcdir/$pkgname-$pkgver/build/paint.out
 	else
 	    echo "[1m[32m==>[0m[1m Error source code $pkgname not found..."
 	    exit 1
@@ -64,5 +65,5 @@ package() {
     mkdir -p $pkgdir/usr/bin
     
     # Install into the package the program
-    cp -r bin/* $pkgdir/usr/bin/
+    cp build/paint.out $pkgdir/usr/bin/paint
 }

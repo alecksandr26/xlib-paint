@@ -19,7 +19,7 @@ int main(void)
 	
 	
 	ATTACH_EXTRA_COMPILE_FLAGS("-I/usr/include/freetype2 -DTESTING_PAINT");
-	ATTACH_EXTRA_LINKING_FLAGS("lib/libpaint.a -lX11 -lXft");
+	ATTACH_EXTRA_LINKING_FLAGS("build/lib/libpaint.a -lX11 -lXft");
 	
 	RUN();
 	return 0;

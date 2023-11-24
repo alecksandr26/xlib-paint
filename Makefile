@@ -21,37 +21,37 @@ M_FLAGS = -f --config .makepkg.conf --skipinteg --noextract
 
 SRC_DIR = src
 INLCUDE_DIR = include
-OBJ_DIR = obj
 TEST_DIR = test
-BIN_DIR = bin
 BUILD_DIR = build
-LIB_DIR = lib
-PROGNAME = panit
-MAIN = $(addprefix $(BIN_DIR)/, main)
+PROGNAME = paint.out
+
+MAIN = $(addprefix $(BUILD_DIR)/, $(PROGNAME))
+OBJ_DIR = $(addprefix $(BUILD_DIR)/, obj)
+LIB_DIR = $(addprefix $(BUILD_DIR)/, lib)
 
 OBJS = $(addprefix $(OBJ_DIR)/, window.o graphics.o main.o colors.o tools.o canvas.o kbinds.o)
-LIB = $(addprefix $(LIB_DIR)/, libpaint.a)
+LIBS = $(addprefix $(LIB_DIR)/, libpaint.a)
 TESTRUNNER = testrunner.out
 
 .PHONY: all clean run test
-all: $(OBJ_DIR) $(OBJS) $(LIB_DIR) $(LIB) $(BIN_DIR) $(MAIN) $(TESTRUNNER)
+all: $(BUILD_DIR) $(OBJ_DIR) $(OBJS) $(LIB_DIR) $(LIBS) $(MAIN) $(TESTRUNNER)
 
 $(OBJ_DIR):
-	mkdir -p $@
-
-$(BIN_DIR):
 	mkdir -p $@
 
 $(LIB_DIR):
 	mkdir -p $@
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+$(BUILD_DIR):
+	mkdir -p $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(C) $(C_FLAGS) -c $< -o $@ $(C_LIB_FLAGS)
 
-$(LIB): $(filter-out obj/main.o, $(OBJS)) | $(LIB_DIR)
+$(LIBS): $(filter-out obj/main.o, $(OBJS))
 	$(AR) $@ $^
 
-$(MAIN): $(OBJ_DIR)/main.o $(LIB)  | $(BIN_DIR) 
+$(MAIN): $(OBJ_DIR)/main.o $(LIBS)
 	$(C) $(C_FLAGS) $^ -o $@ $(C_LIB_FLAGS)
 
 run: $(MAIN)
@@ -64,7 +64,7 @@ prof: $(MAIN)
 	$(PF) $(PF_FLAGS) ./$<
 
 $(TESTRUNNER): C_FLAGS = $(C_TEST_FLAGS)
-$(TESTRUNNER): $(basename $(TESTRUNNER)).c $(LIB)
+$(TESTRUNNER): $(basename $(TESTRUNNER)).c $(LIBS)
 	$(C) $(C_FALGS) $< -o $@ $(C_TEST_LIB_FLAGS)
 
 test: $(TESTRUNNER)
@@ -72,7 +72,7 @@ test: $(TESTRUNNER)
 
 clean:
 ifneq ("$(wildcard $(OBJ_DIR)/*.o)", "")
-	rm -r $(wildcard $(OBJ_DIR)/*.o)
+	rm $(wildcard $(OBJ_DIR)/*.o)
 endif
 
 ifneq ("$(wildcard $(OBJ_DIR))", "")
@@ -83,24 +83,29 @@ ifneq ("$(wildcard $(MAIN))", "")
 	rm $(MAIN)
 endif
 
-ifneq ("$(wildcard $(BIN_DIR))", "")
-	rmdir $(BIN_DIR)
-endif
-
 ifneq ("$(wildcard $(PROGNAME)*)", "")
 	rm $(PROGNAME)*
 endif
 
 ifneq ("$(wildcard $(LIB_DIR)/*.a)", "")
-	rm -r $(LIB_DIR)/
+	rm $(wildcard $(LIB_DIR)/*.a)
+endif
+
+ifneq ("$(wildcard $(LIB_DIR))", "")
+	rmdir $(LIB_DIR)
 endif
 
 ifneq ("$(wildcard $(TESTRUNNER))", "")
 	rm $(TESTRUNNER)
 endif
 
+clean-build:
+ifneq ("$(wildcard $(BUILD_DIR))", "")
+	rm -r $(BUILD_DIR)
+endif
+
 compile: C_FLAGS = $(C_COMPILE_FLAGS)
-compile: clean $(OBJ_DIR) $(OBJS) $(BIN_DIR) $(MAIN)
+compile: clean $(BUILD_DIR) $(OBJ_DIR) $(OBJS) $(LIB_DIR) $(LIBS) $(MAIN)
 
 pkg:
 	$(M) $(M_FLAGS)	
